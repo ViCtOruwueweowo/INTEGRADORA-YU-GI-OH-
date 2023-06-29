@@ -17,21 +17,18 @@ if($id == '' ||$token == ''){
         $sql= $con->prepare("SELECT count(id_car) FROM cartas where id_car=?");
         $sql->execute([$id]);
         if($sql->fetchColumn() > 0){
-            $sql= $con->prepare("SELECT cartas.nombre_c as nombre,
-            rareza.rareza, car_rar.p_price as price, car_rar.p_tcg as tcg
-            from
-            cartas inner join car_rar
+            $sql= $con->prepare("SELECT * FROM cartas inner join car_rar
             on cartas.id_car=car_rar.id_carar left join rareza
-            on car_rar.id_rar=rareza.id_ra  where cartas.id_car=?
+            on car_rar.id_rar=rareza.id_ra   where cartas.id_car=?
             LIMIT 1");
 
 
             $sql->execute([$id]);
             $row = $sql->fetch(PDO::FETCH_ASSOC);
-            $nombre =$row['nombre'];
+            $nombre =$row['nombre_c'];
             $rareza=$row['rareza'];
-            $price=$row['price'];
-            $tcg=$row['tcg'];
+            $price=$row['p_price'];
+            $tcg=$row['p_tcg'];
             $dir_images = 'imagenes/productos/' .$id. '/';
             $rutaImg = $dir_images .'principal.jpg';
 
@@ -77,35 +74,35 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
     <title>Detalles</title>
     <link rel="stylesheet" href="../../css/bootstrap.min.css">
     <script src="../../js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../../css/index2.css">
+
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">WorkStack</a>
+      <a class="navbar-brand" href="index.php">WorkStack</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2" aria-controls="offcanvasNavbar2" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasNavbar2" aria-labelledby="offcanvasNavbar2Label">
         <div class="offcanvas-header">
-          <h5 class="offcanvas-title" id="offcanvasNavbar2Label">Mis Atajos</h5>
+          <h5 class="offcanvas-title" id="offcanvasNavbar2Label"><b>Mis Atajos</b></h5>
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
           <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+          
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="index.php">Inicio</a>
+              <a class="nav-link " aria-current="page" href="calendario.php"><b>Calendario</b></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link " aria-current="page" href="calendario.php">Calendario</a>
+              <a class="nav-link " aria-current="page" href="funciones/listarPersonasConBusqueda.php"><b>Inventario</b></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link " aria-current="page" href="funciones/listarPersonasConBusqueda.php">Inventario</a>
+              <a class="nav-link " aria-current="page" href="empleados.php"><b>Empleados</b></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link " aria-current="page" href="empleados.php">Empleados</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link " aria-current="page" href="agenda.php">Agenda</a>
+              <a class="nav-link " aria-current="page" href="agenda.php"><b>Agenda</b></a>
             </li>
           </ul>
           <form class="d-flex mt-3 mt-lg-0" role="search">

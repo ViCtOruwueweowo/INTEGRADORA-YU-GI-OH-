@@ -40,7 +40,8 @@ if ($busqueda === null) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="../../../css/bootstrap.min.css">
- 
+    <link rel="stylesheet" href="../../../css/index2.css">
+
     <title>Inventario</title>
 
     </head>
@@ -50,35 +51,33 @@ if ($busqueda === null) {
   <!-- Fixed navbar -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">WorkStack</a>
+      <a class="navbar-brand" href="../index.php">WorkStack</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2" aria-controls="offcanvasNavbar2" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasNavbar2" aria-labelledby="offcanvasNavbar2Label">
         <div class="offcanvas-header">
-          <h5 class="offcanvas-title" id="offcanvasNavbar2Label">Mis Atajos</h5>
+          <h5 class="offcanvas-title" id="offcanvasNavbar2Label"><b>Mis Atajos</b></h5>
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
           <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+           
             <li class="nav-item">
-              <a class="nav-link " aria-current="page" href="../index.php">Inicio</a>
+              <a class="nav-link " aria-current="page" href="../calendario.php"><b>Calendario</b></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link " aria-current="page" href="../calendario.php">Calendario</a>
+              <a class="nav-link active" aria-current="page" href="listarPersonasConBusqueda.php"><b>Inventario</b></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="funciones/listarPersonasConBusqueda.php">Inventario</a>
+              <a class="nav-link " aria-current="page" href="../empleados.php"><b>Empleados</b></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link " aria-current="page" href="../empleados.php">Empleados</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link " aria-current="page" href="../agenda.php">Agenda</a>
+              <a class="nav-link " aria-current="page" href="../agenda.php"><b>Agenda</b></a>
             </li>
           </ul>
           <form class="d-flex mt-3 mt-lg-0" role="search">
-            <a href="../../index.php" class="btn btn-outline-success">Cerrar Sesion</a>
+            <a href="../../../index.php" class="btn btn-outline-success">Cerrar Sesion</a>
           </form>
         </div>
       </div>
@@ -105,17 +104,19 @@ if ($busqueda === null) {
   <div class="form-group mx-sm-3 mb-2">
     
   <div class="row">
-    <div class="col col-lg-6">
+    <div class="col col-lg-6 text-center" >
     <input name="busqueda" type="text" class="form-control"  placeholder="Buscar">
     </div>
     <div class="col col-lg-6">
     <button type="submit" class="btn btn-primary mb-2">Buscar ahora</button>
-
+    <a href="agregar.php" class="btn btn-outline-success mb-2">Agregar</a>
+    <a href="editar.php" class="btn btn-outline-success mb-2">Editar</a>
     </div>
   </div>
 </form>
-<table class="table table-hover">
-  <thead class="table-dark table-hover">
+<br>
+<table class="table table-dark table-striped table-hover">
+  <thead >
 			<tr>
       <th>Nombre</th>
 				<th>Tipo</th>
@@ -129,12 +130,12 @@ if ($busqueda === null) {
 			
 			<?php while ($resultado = $sentencia->fetchObject()) {?>
 			<tr>
-      <td><?php echo $resultado->nombre_c ?></td>
-				<td><?php echo $resultado->tipo_c ?></td>
-				<td><?php echo $resultado->rareza ?></td>
-        <td><?php echo $resultado->cantidad ?></td>
-				<td><a href="<?php echo $resultado->p_tcg ?>">Link Directo</a></td>
-				<td><a href="<?php echo $resultado->p_price ?>">Link Directo</a></td>
+      <td style="color:whitesmoke;"><?php echo $resultado->nombre_c ?></td>
+				<td style="color:whitesmoke;"><?php echo $resultado->tipo_c ?></td>
+				<td style="color:whitesmoke;"><?php echo $resultado->rareza ?></td>
+        <td style="color:whitesmoke;"><?php echo $resultado->cantidad ?></td>
+				<td style="color:whitesmoke;"><a href="<?php echo $resultado->p_tcg ?>">Link Directo</a></td>
+				<td style="color:whitesmoke;"><a href="<?php echo $resultado->p_price ?>">Link Directo</a></td>
 			</tr>
 			<?php }?>
 		</tbody>
@@ -149,5 +150,6 @@ if ($busqueda === null) {
  
     <!-- JavaScript -->
     
-    <script src="../../../js/bootstrap.min.js"></script>  </body>
+<script src="../../../js/bootstrap.min.js"></script> 
+ </body>
 </html>

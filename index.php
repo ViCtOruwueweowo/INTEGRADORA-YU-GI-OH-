@@ -8,6 +8,7 @@
     <!--Links-->
     <link rel="stylesheet" href="css/estilo.css">
         <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/index2.css">
     <script src="js/bootstrap.js">  </script>
 </head>
 <body>
@@ -15,7 +16,7 @@
     <div class="container-fluid h-custom">
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col-md-9 col-lg-6 col-xl-5">
-          <img src="img/mamaste.jpg"   class="img-fluid" alt="Sample image">
+          <img src="img/puto.png"   class="img-fluid" alt="Sample image">
         </div>
    
         <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
@@ -23,21 +24,21 @@
           <form>
             <!-- Parte del correo -->
             <div class="form-outline mb-4">
-              <input type="email" id="" class="form-control form-control-lg"
-                placeholder="Ingresar Correo Electronico" />
-              <label class="form-label" for="">Correo Electronico</label>
+              <input type="usser" id="" class="form-control form-control-lg"
+                placeholder="Ingresar Usuario Registrador. . ." />
+              <label class="form-label" for="" style="color:gold"><b>Usuario</b></label>
             </div>
 
             <!-- Parte de la contraseña -->
             <div class="form-outline mb-3">
               <input type="password" id="" class="form-control form-control-lg"
-                placeholder="Ingresar Contraseña" />
-              <label class="form-label" for="">Contraseña</label>
+                placeholder="Ingresar Contraseña. . ." />
+              <label class="form-label" for="" style="color:gold"><b>Contraseña</b></label>
             </div>
 
             <div class="text-center text-lg-start mt-4 pt-2">
-            <a href="views/administrador/index.php"><button type="button" class="btn btn-warning btn-lg"
-        style="padding-left: 2.5rem; padding-right: 2.5rem;">Iniciar Sesion</button></a>
+            <a href="views/administrador/index.php"><button type="button" class="btn btn-outline-danger btn-lg"
+        style="padding-left: 2.5rem; padding-right: 2.5rem;"><b>Iniciar Sesion</b></button></a>
             </div>
 
           </form>
