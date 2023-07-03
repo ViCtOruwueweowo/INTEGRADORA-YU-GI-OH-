@@ -1,11 +1,12 @@
 <?php
 require '../../config/config.php';
 require '../../config/database.php';
-
-$consulta = "SELECT id_car, nombre_c,imagen_c,tipo_c FROM cartas ";
-
+$db = new Database();
+$con = $db->conectar();
+$sql = $con->prepare("SELECT id_car, nombre_c,imagen_c,tipo_c FROM cartas ");
+$sql->execute();
+$resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
