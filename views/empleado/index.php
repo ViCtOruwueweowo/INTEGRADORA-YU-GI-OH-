@@ -24,7 +24,7 @@
       </ul>
 
       <div class="col-md-3 text-end">
-<a href="../../index.php"><button type="button" class="btn btn-primary">Cerrar Sesion</button></a>
+<a href="../../config/cerrarSesion.php"><button type="button" class="btn btn-primary">Cerrar Sesion</button></a>
       </div>
     </header>
   </div>

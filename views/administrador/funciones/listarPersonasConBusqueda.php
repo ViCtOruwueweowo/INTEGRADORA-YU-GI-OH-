@@ -8,7 +8,7 @@ on cartas.id_car=car_rar.id_carar left join rareza
 on car_rar.id_rar=rareza.id_ra ORDER BY cartas.tipo_c DESC";
 
 # Vemos si hay búsqueda
-$busqueda = null;
+$busqueda = null; 
 if (isset($_GET["busqueda"])) {
     # Y si hay, búsqueda, entonces cambiamos la consulta
     # Nota: no concatenamos porque queremos prevenir inyecciones SQL

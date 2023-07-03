@@ -1,11 +1,9 @@
 <?php
 require '../../config/config.php';
 require '../../config/database.php';
-$db = new Database ; 
-$con = $db->conectar();
-$sql = $con->prepare("SELECT id_car, nombre_c,imagen_c,tipo_c FROM cartas ");
-$sql->execute();
-$resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+$consulta = "SELECT id_car, nombre_c,imagen_c,tipo_c FROM cartas ";
+
 ?>
 
 <!DOCTYPE html>
@@ -59,7 +57,7 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
         </li>
           </ul>
           <form class="d-flex mt-3 mt-lg-0" role="search">
-            <a href="../../index.php" class="btn btn-outline-success">Cerrar Sesion</a>
+            <a href="../../config/cerrarSesion.php" class="btn btn-outline-success">Cerrar Sesion</a>
           </form>
         </div>
       </div>
