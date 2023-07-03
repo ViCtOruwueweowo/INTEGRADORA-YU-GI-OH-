@@ -31,19 +31,31 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
         </div>
         <div class="offcanvas-body">
           <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-          
             <li class="nav-item">
               <a class="nav-link " aria-current="page" href="calendario.php"><b>Calendario</b></a>
             </li>
+            <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <b>Inventario</b>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="funciones/listarPersonasConBusqueda.php"><b>Inventario Carta</b></a></li>
+            <li><a class="dropdown-item" href="funciones/listarPersonasConBusqueda2.php"><b>Inventario Productos</b></a></li>
+          </ul>
+        </li>
+         
             <li class="nav-item">
-              <a class="nav-link " aria-current="page" href="funciones/listarPersonasConBusqueda.php"><b>Inventario</b></a>
+              <a class="nav-link " aria-current="page" href="empleados.php"><b>Empleados</b></a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="empleados.php"><b>Empleados</b></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link " aria-current="page" href="agenda.php"><b>Agenda</b></a>
-            </li>
+            <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <b>Agenda</b>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="acreedores.php"><b>Mis Acreedores</b></a></li>
+            <li><a class="dropdown-item" href="deudores.php"><b>Mis Deudores</b></a></li>
+          </ul>
+        </li>
           </ul>
           <form class="d-flex mt-3 mt-lg-0" role="search">
             <a href="../../index.php" class="btn btn-outline-success">Cerrar Sesion</a>
@@ -51,15 +63,15 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
         </div>
       </div>
     </div>
-</nav>
+  </nav>
 
 <br>
 <br>
 <div class="container">
   <div class="row">
     <div class="col col-lg-12">
-    <a href="funciones/agregarempleado.php" type="button" class="btn btn-outline-primary btn-lg">Agregar Nuevo Empleado</a>  
-    <a href="funciones/editarempleado.php" type="button" class="btn btn-outline-info btn-lg">Editar Empleado Existente</a>
+    <a href="funciones/agregarempleado.php" type="button" class="btn btn-primary btn-lg">Agregar Nuevo Empleado</a>  
+    <a href="funciones/editarempleado.php" type="button" class="btn btn-info btn-lg">Editar Empleado Existente</a>
 <br>
 <br>
     </div>
@@ -98,5 +110,7 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
 
 
   <script src="../../js/bootstrap.min.js"></script>
+  <script src="../../js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>

@@ -3,9 +3,7 @@
 include_once "base_de_datos.php";
 
 # Por defecto hacemos la consulta de todas las personas
-$consulta = "SELECT * FROM cartas inner join car_rar
-on cartas.id_car=car_rar.id_carar left join rareza
-on car_rar.id_rar=rareza.id_ra ORDER BY cartas.tipo_c DESC";
+$consulta = "SELECT * FROM productos";
 
 # Vemos si hay búsqueda
 $busqueda = null;
@@ -13,9 +11,7 @@ if (isset($_GET["busqueda"])) {
     # Y si hay, búsqueda, entonces cambiamos la consulta
     # Nota: no concatenamos porque queremos prevenir inyecciones SQL
     $busqueda = $_GET["busqueda"];
-    $consulta = "SELECT * FROM cartas inner join car_rar
-    on cartas.id_car=car_rar.id_carar left join rareza
-    on car_rar.id_rar=rareza.id_ra  WHERE cartas.nombre_c LIKE ?";
+    $consulta = "SELECT * FROM productos  WHERE productos.nom_p LIKE ?";
 }
 # Preparar sentencia e indicar que vamos a usar un cursor
 $sentencia = $base_de_datos->prepare($consulta, [
@@ -49,8 +45,7 @@ if ($busqueda === null) {
     
     <header>
   <!-- Fixed navbar -->
-    <!-- Fixed navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
     <div class="container-fluid">
       <a class="navbar-brand" href="../index.php">WorkStack</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2" aria-controls="offcanvasNavbar2" aria-label="Toggle navigation">
@@ -112,7 +107,7 @@ if ($busqueda === null) {
  
  
  <br>
-<form class="form-inline" action="listarPersonasConBusqueda.php" method="GET">
+<form class="form-inline" action="listarPersonasConBusqueda2.php" method="GET">
   <div class="form-group mx-sm-3 mb-2">
     
   <div class="row">
@@ -131,23 +126,19 @@ if ($busqueda === null) {
   <thead >
 			<tr>
       <th>Nombre</th>
-				<th>Tipo</th>
-				<th>Rareza</th>
-        <th>Cantidad</th>
-				<th>Tcg</th>
-				<th>Price</th>
+				<th>Existencias</th>
+				<th>Descripcion</th>
+        <th>Precio</th>
 			</tr>
 		</thead>
 		<tbody>
 			
 			<?php while ($resultado = $sentencia->fetchObject()) {?>
 			<tr>
-      <td style="color:whitesmoke;"><?php echo $resultado->nombre_c ?></td>
-				<td style="color:whitesmoke;"><?php echo $resultado->tipo_c ?></td>
-				<td style="color:whitesmoke;"><?php echo $resultado->rareza ?></td>
-        <td style="color:whitesmoke;"><?php echo $resultado->cantidad ?></td>
-				<td style="color:whitesmoke;"><a href="<?php echo $resultado->p_tcg ?>">Link Directo</a></td>
-				<td style="color:whitesmoke;"><a href="<?php echo $resultado->p_price ?>">Link Directo</a></td>
+      <td style="color:whitesmoke;"><?php echo $resultado->nom_p ?></td>
+				<td style="color:whitesmoke;"><?php echo $resultado->existencias ?></td>
+				<td style="color:whitesmoke;"><?php echo $resultado->notas_prod ?></td>
+        <td style="color:whitesmoke;"><?php echo $resultado->precio ?></td>
 			</tr>
 			<?php }?>
 		</tbody>
@@ -158,7 +149,7 @@ if ($busqueda === null) {
  </div>
  </div>
  </main>
-    <!-- Aquí va el contenido de tu web -->
+  
  
     <!-- JavaScript -->
     

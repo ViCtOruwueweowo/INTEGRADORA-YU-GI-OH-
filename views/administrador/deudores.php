@@ -1,16 +1,23 @@
+<?php
+require '../../config/database.php';
+$db = new Database ;
+$con = $db->conectar();
+$sql = $con->prepare("SELECT * FROM cartas");
+$sql->execute();
+$resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
+?>
+ 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calendario</title>
-    <link rel="stylesheet" href="../../css/bootstrap.min.css">
-    <script src="../../js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="../../css/index2.css">
-
+    <title>Deudores</title>
 </head>
-<body bgcolor="#e7e7e7">
+<body>
+<link rel="stylesheet" href="../../css/index2.css">
+
+<link rel="stylesheet" href="../../css/bootstrap.min.css">
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
     <div class="container-fluid">
       <a class="navbar-brand" href="index.php">WorkStack</a>
@@ -57,31 +64,6 @@
       </div>
     </div>
   </nav>
-  <br>
- <div class="container">
- <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
-    <script>
-
-      document.addEventListener('DOMContentLoaded', function() {
-        var calendarEl = document.getElementById('calendar');
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-          initialView: 'dayGridMonth',
-          locale:"es",
-          headerToolbar:{
-            left:'prev,next today',
-            center:'title',
-            right:'dayGridMonth timeGridDay'
-          }
-        });
-        calendar.render();
-      });
-
-      
-    </script>
-  </head>
-  <body>
-    <div id='calendar' style="background-color:#212529;color:white"></div>
- </div>
- <script src="../../js/bootstrap.bundle.min.js"></script>
+  <script src="../../js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
