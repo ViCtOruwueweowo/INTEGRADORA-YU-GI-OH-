@@ -15,7 +15,6 @@ if($_POST)
     $pase = 0;
     while($renglon=$usuario->fetch(PDO::FETCH_ASSOC))
     {
-        if()
     }
     if($usuario)
     {
