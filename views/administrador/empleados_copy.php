@@ -7,8 +7,9 @@ $sql = $con->prepare("SELECT nombre_user, f_nacimiento,apellidos_user, tel_user,
 $sql0 = $con->prepare("SELECT nombre_user, f_nacimiento,apellidos_user, tel_user,  direccion_user FROM usuarios where tipo_usuario='2' and estado='0'");
 
 $sql->execute();
+$sql0->execute();
 $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
-$resultado0 = $sql->fetchAll(PDO::FETCH_ASSOC);
+$resultado0 = $sql0->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="en"> 
@@ -16,7 +17,7 @@ $resultado0 = $sql->fetchAll(PDO::FETCH_ASSOC);
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Empleados</title>
+    <title>Empleados copia</title>
     <link rel="stylesheet" href="../../css/bootstrap.min.css">
     <link rel="stylesheet" href="../../css/index2.css">
 
@@ -71,12 +72,15 @@ $resultado0 = $sql->fetchAll(PDO::FETCH_ASSOC);
 
 <br>
 <br>
-<div class="container">
+<div class="container"> 
+
+<form class="form-inline" method="POST">
   <div class="row">
     <div class="col col-lg-12">
     <a href="funciones/agregarempleado.php" type="button" class="btn btn-primary btn-lg">Agregar Nuevo Empleado</a>  
     <a href="funciones/editarempleado.php" type="button" class="btn btn-info btn-lg">Editar Empleado Existente</a>
-    <button href="" name="inactivos" type="button" class="btn btn-outline-info btn-lg">Mostrar empleados inactivos</button>
+    <button href="" name="filtrar" type="submit" class="btn btn-outline-info btn-lg">Mostrar empleados inactivos</button>
+    </form>
 <br>
 <br>
     </div>
@@ -94,10 +98,7 @@ $resultado0 = $sql->fetchAll(PDO::FETCH_ASSOC);
       <th scope="col">Direccion</th>
 
     </tr>
-  </thead>
-
-
-
+  </thead> 
   <tbody>
     <?php foreach($resultado as $fila): ?>
     <tr>
@@ -110,8 +111,8 @@ $resultado0 = $sql->fetchAll(PDO::FETCH_ASSOC);
     </tr>
       <?php endforeach; ?>
       
-
   </tbody>
+  
 </table>
     </div>
   </div>

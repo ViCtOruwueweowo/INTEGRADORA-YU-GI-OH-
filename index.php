@@ -26,7 +26,7 @@
     }
     else
     {
-        ?>
+        ?> 
 
   <section class="vh-100">
     <div class="container-fluid h-custom">
