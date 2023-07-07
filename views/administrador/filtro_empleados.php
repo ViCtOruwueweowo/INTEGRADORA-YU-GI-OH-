@@ -4,7 +4,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     try {
         // Preparar la consulta SQL filtrada
-        $stmt = $conexion->prepare("SELECT * FROM usuarios WHERE columna LIKE :filtro");
+        $stmt = $conexio->prepare("SELECT * FROM usuarios WHERE columna LIKE :filtro");
         $stmt->bindValue(':filtro', "%$filtro%", PDO::PARAM_STR);
         $stmt->execute();
 

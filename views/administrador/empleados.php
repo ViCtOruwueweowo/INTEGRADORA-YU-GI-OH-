@@ -69,16 +69,131 @@ $resultado0 = $sql->fetchAll(PDO::FETCH_ASSOC);
     </div>
   </nav>
 
-<br>
+
 <br>
 <div class="container">
   <div class="row">
     <div class="col col-lg-12">
+<<<<<<< HEAD
     <a href="funciones/agregarempleado.php" type="button" class="btn btn-primary btn-lg">Agregar Nuevo Empleado</a>  
     <a href="funciones/editarempleado.php" type="button" class="btn btn-info btn-lg">Editar Empleado Existente</a>
     <button href="" name="inactivos" type="button" class="btn btn-outline-info btn-lg">Mostrar empleados inactivos</button>
 <br>
+=======
+      <!-- Button trigger modal -->
+      <h1 class="text-center">Mis Empleados</h1>
+      <hr>
+<button type="button" class="btn btn-danger  btn-lg" data-bs-toggle="modal" data-bs-target="#Agregar">
+  Agregar Empleado
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="Agregar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Nuevos Empleados</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <form action="funciones/guardar_empleado.php" method="post">
+
+
+<div class="row">
+  <div class="col-12">
+  <label for="nombre_user" class="form-label" >Nombre</label>
+  <input type="text" class="form-control"id="nombre" name="nombre_user" placeholder="Ingresar nombre..">
+  </div>
+  <div class="col-12">
+  <label for="apellidos_user" class="form-label ">Apellidos</label>
+  <input type="text" class="form-control col-lg-6" id="apellidos_user" name="apellidos_user" placeholder="Ingresar apellidos..">
+  </div>
+  <div class="col-6">
+  <label for="telefono" class="form-label ">Telefono</label>
+  <input type="text" class="form-control col-lg-6" id="telefono" name="telefono" placeholder="Ingresar telefono..">
+  </div>
+  <div class="col-6">
+  <label for="fechan" class="form-label ">Fecha De Nacimiento</label>
+  <input type="date" class="form-control col-lg-6" id="fechan" max="2023-01-01" name="fechan">
+  </div>
+  <div class="col-12">
+  <label for="direccion" class="form-label ">Direccion</label>
+  <input type="text" class="form-control col-lg-6" id="direccion" name="direccion" placeholder="Ingresar direccion..">
+  </div>
+  <div class="col-6">
+  <label for="usuario" class="form-label ">Nombre De Usuario</label>
+  <input type="text" class="form-control col-lg-6" id="usuario" name="usuario" placeholder="Ingresar nuevo nombre de usuario..">
+  </div>
+  <div class="col-6">
+  <label for="contraseña" class="form-label ">Contraseña</label>
+  <input type="password" class="form-control col-lg-6" id="contraseña" name="contraseña"placeholder="Ingresar nueva contraseña">
+  </div>
+ </div>
+      </div>
+      <div class="modal-footer">
+        <input type="submit" value="Enviar" class="btn btn-outline-primary btn-lg">
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+   <!-- Button trigger modal -->
+<button type="button" class="btn btn-danger btn-lg" data-bs-toggle="modal" data-bs-target="#exampleModal">
+ Editar Empleados
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Empleados</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <form action="funciones/editar_empleado.php" method="POST">
+   
+   <div class="row ">
+     <div class="col-12 ">
+     <label for="nombre_user">Nombre:</label>
+     <input type="text" class="form-control col-lg-6" id="nombre" name="nombre" required>
+     </div>
+     <div class="col-12 ">
+     <label for="telefono">Telefono:</label>
+     <input type="text" class="form-control col-lg-6" id="telefono" name="telefono">
+     </div>
+     <div class="col-12">
+     <label for="direccion">Direccion:</label>
+     <input type="text" id="direccion" class="form-control" name="direccion">
+     </div>
+     <div class="col-6">
+     <label for="usuario">Usuario:</label>
+     <input type="text" id="usuario" class="form-control" name="usuario">
+     </div>
+     <div class="col-6">
+     <label for="contraseña">Contraseña:</label>
+     <input type="password" id="contraseña" class="form-control" name="contraseña">
+     </div>
+     <div class="col-12">
+     <label for="estado">Estado:</label>
+     <input type="text" id="estado" name="estado" class="form-control">
+     </div>
+     <div class="col-12 d-grid gap-2">
+     </div>
+   </div>
+   
+      </div>
+      <div class="modal-footer">
+        <input type="submit" class="btn btn-primary btn-lg" value="Enviar">
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+<hr>
+>>>>>>> 92a46f7ba71c5a0e0f7e8dd2c226c517fd1728d6
 <br>
+
     </div>
     <div class="col col-md-12 col-lg-12">
 <!--Tabla-->

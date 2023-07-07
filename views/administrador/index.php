@@ -72,6 +72,7 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
 <main>
       <div class="container">
     <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 g-4 ">
+
         <?php foreach($resultado as $row) { ?>
         <div class="col">
           <div class="card shadow-sm " style="background-color:#212529;">
@@ -82,18 +83,19 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
               $imagen="imagenes/no image.png";
             }
             ?>
+            
             <img  src="<?php echo $imagen; ?>">
             <div class="card-body" >
               <h6 class="card-title text-center" style="color:white;"><?php echo $row ['nombre_c']; ?></h6>
               <div  class="d-flex justify-content-between align-items-center">
               
-              <a href="details.php?id=<?php echo $row ['id_car']; ?>&token=<?php echo 
+          <a href="details.php?id=<?php echo $row ['id_car']; ?>&token=<?php echo 
              hash_hmac('sha1',$row['id_car'],KEY_TOKEN);?>" class="btn btn-outline-info"  type="button">Detalles</a>
                 
               </div>
-              
+            
               </div>
-              
+            
           </div>
         </div>
         <?php } ?>   

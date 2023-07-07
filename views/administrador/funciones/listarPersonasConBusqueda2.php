@@ -91,7 +91,98 @@ if ($busqueda === null) {
       </div>
     </div>
   </nav>
+<br>
+<!-- Begin page content -->
+<div class="container">
+  <div class="row">
+    <div class="col-12 text-center">
+      <h1>Mis Productos</h1>
+    </div>
+    <hr>
+    <div class="col">
+  <!--Agregar Inicio--->
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-danger btn-lg" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Agregar Producto
+</button>
 
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar Productos</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <form action="producto_g.php" method="POST">
+      <label for="nom_p">Nombre:</label>
+      <input type="text" class="form-control col-lg-6" id="nom_p" name="nom_p" required>
+      <label for="existencias">Existencias:</label>
+      <input type="text" class="form-control col-lg-6" id="existencias" name="existencias">
+      <label for="precio">precio</label>
+      <input type="text" id="precio" class="form-control" name="precio">
+      <label for="imagen_p">imagen</label>
+      <input type="text" id="imagen_p" class="form-control" name="imagen_p">
+      <label for="notas_prod">notas</label>
+      <input type="text" id="notas_prod" class="form-control" name="notas_prod">
+    
+      
+      </div>
+      <div class="modal-footer">
+      <input type="submit" class="btn btn-primary btn-lg" value="Enviar">
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+ <!--Agregar Fin--->
+    </div>
+    <div class="col">
+   <!--Editar Inicio--->
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-danger btn-lg" data-bs-toggle="modal" data-bs-target="#edit">
+ Editar Producto
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modificar Productos</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+     
+    
+  <form action="producto_e.php" method="POST">
+      <label for="nom_p">Nombre:</label>
+      <input type="text" class="form-control col-lg-6" id="nom_p" name="nom_p" required>
+      <label for="existencias">Existencias:</label>
+      <input type="text" class="form-control col-lg-6" id="existencias" name="existencias">
+      <label for="precio">precio</label>
+      <input type="text" id="precio" class="form-control" name="precio">
+      <label for="imagen_p">imagen</label>
+      <input type="text" id="imagen_p" class="form-control" name="imagen_p">
+      <label for="notas_prod">notas</label>
+      <input type="text" id="notas_prod" class="form-control" name="notas_prod">
+       
+       
+      </div>
+      <div class="modal-footer">
+      <input type="submit" class="btn btn-primary btn-lg" value="Enviar">
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+ <!--Agregar Fin--->
+
+    </div>
+  </div>
+  <hr>
+</div>
 <!-- Begin page content -->
 
 <main role="main" class="flex-shrink-0">
@@ -116,8 +207,6 @@ if ($busqueda === null) {
     </div>
     <div class="col col-lg-6">
     <button type="submit" class="btn btn-primary mb-2">Buscar ahora</button>
-    <a href="agregar.php" class="btn btn-primary mb-2">Agregar</a>
-    <a href="editar.php" class="btn btn-primary mb-2">Editar</a>
     </div>
   </div>
 </form>
@@ -126,21 +215,22 @@ if ($busqueda === null) {
   <thead >
 			<tr>
       <th>Nombre</th>
-				<th>Existencias</th>
-				<th>Descripcion</th>
-        <th>Precio</th>
+      <th>existencias</th>
+				<th>Notas</th>
+				<th>Precio</th>
 			</tr>
 		</thead>
 		<tbody>
 			
-			<?php while ($resultado = $sentencia->fetchObject()) {?>
-			<tr>
-      <td style="color:whitesmoke;"><?php echo $resultado->nom_p ?></td>
-				<td style="color:whitesmoke;"><?php echo $resultado->existencias ?></td>
-				<td style="color:whitesmoke;"><?php echo $resultado->notas_prod ?></td>
-        <td style="color:whitesmoke;"><?php echo $resultado->precio ?></td>
-			</tr>
-			<?php }?>
+	
+    <?php while ($resultado = $sentencia->fetchObject()) {?>
+  <tr>
+  <td style="color:whitesmoke;"><?php echo $resultado->nom_p ?></td>
+    <td style="color:whitesmoke;"><?php echo $resultado->existencias ?></td>
+    <td style="color:whitesmoke;"><?php echo $resultado->notas_prod ?></td>
+    <td style="color:whitesmoke;"><?php echo $resultado->precio ?></td>
+  </tr>
+  <?php }?>
 		</tbody>
 	</table>
   
@@ -149,9 +239,8 @@ if ($busqueda === null) {
  </div>
  </div>
  </main>
-  
  
-    <!-- JavaScript -->
+<!-- JavaScript -->
     
 <script src="../../../js/bootstrap.min.js"></script> 
 <script src="../../../js/bootstrap.bundle.min.js"></script>
