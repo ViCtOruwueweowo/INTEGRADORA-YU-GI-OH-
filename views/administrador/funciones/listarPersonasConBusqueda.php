@@ -130,6 +130,7 @@ if ($busqueda === null) {
 <table class="table table-dark table-striped table-hover">
   <thead >
 			<tr>
+      <th>Imagen</th>
       <th>Nombre</th>
 				<th>Tipo</th>
 				<th>Rareza</th>
@@ -142,6 +143,7 @@ if ($busqueda === null) {
 			
 			<?php while ($resultado = $sentencia->fetchObject()) {?>
 			<tr>
+      <td style="color:whitesmoke;"><img src="<?php echo $resultado->imagen_c ?>"></td>
       <td style="color:whitesmoke;"><?php echo $resultado->nombre_c ?></td>
 				<td style="color:whitesmoke;"><?php echo $resultado->tipo_c ?></td>
 				<td style="color:whitesmoke;"><?php echo $resultado->rareza ?></td>

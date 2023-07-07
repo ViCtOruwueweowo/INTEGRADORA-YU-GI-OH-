@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guardar Empleado</title>
+    <title>Agregar Productos</title>
+    <link rel="stylesheet" href="../../../css/bootstrap.min.css">
 </head>
 <body>
+<div class="container " style="width:70% ">
 <?php
 // Establecer la conexión a la base de datos
 $servername = "localhost";
@@ -19,20 +21,20 @@ if ($conn->connect_error) {
 }
 
 // Obtener los datos del formulario
-$nombre_user = $_POST['nombre_user'];
-$apellidos_user = $_POST['apellidos_user'];
-$tel_user = $_POST['telefono'];
-$f_nacimiento = $_POST['fechan'];
-$direccion_user = $_POST['direccion'];
-$usuario = $_POST['usuario'];
-$contraseña = $_POST['contraseña'];
-$tipo_usuario = 2;
-$estado = 1;
+$nom_p= $_POST['nom_p'];
+$existencias= $_POST['existencias'];
+$precio = $_POST['precio'];
+$imagen_p = $_POST['imagen_p'];
+$notas_prod = $_POST['notas_prod'];
+
 
 // Insertar los datos en la base de datos
-$sql = "INSERT INTO usuarios (nombre_user, apellidos_user, tel_user,f_nacimiento,direccion_user,usuario,contraseña,tipo_usuario,estado) VALUES ('$nombre_user', '$apellidos_user', '$tel_user','$f_nacimiento','$direccion_user','$usuario','$contraseña','$tipo_usuario','$estado')";
+$sql = "INSERT INTO productos (nom_p, existencias, precio,imagen_p ,notas_prod) VALUES ('$nom_p', '$existencias', '$precio','$imagen_p','$notas_prod')";
 if ($conn->query($sql) === TRUE) {
-    echo "Datos agregados correctamente";
+    echo "<div class='alert alert-success text-center'  role='alert'>
+   <a href='listarPersonasConBusqueda2.php'> <h4 class='alert-heading'>¡Hecho!</h4>
+    <p>Un Producto Ha Sido Agregado De Forma Exitosa</p> </a>
+  </div>";
 } else {
     echo "Error al agregar los datos: " . $conn->error;
 }
@@ -40,6 +42,6 @@ if ($conn->query($sql) === TRUE) {
 // Cerrar la conexión a la base de datos
 $conn->close();
 ?>
-
+</div>
 </body>
 </html>

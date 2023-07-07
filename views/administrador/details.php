@@ -28,9 +28,11 @@ if($id == '' ||$token == ''){
             $nombre =$row['nombre_c'];
             $rareza=$row['rareza'];
             $price=$row['p_price'];
+            $img=$row['imagen_c'];
             $tcg=$row['p_tcg'];
-            $dir_images = 'imagenes/productos/' .$id. '/';
-            $rutaImg = $dir_images .'principal.jpg';
+            $dir_images = 'imagenes/productos/' .$img. '/.jpg';
+            
+            $rutaImg = $dir_images;
 
                 if(!file_exists($rutaImg)){
                     $rutaImg='imagenes/no imagen.png';

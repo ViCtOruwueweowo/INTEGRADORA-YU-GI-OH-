@@ -2,7 +2,7 @@
 require '../../config/database.php';
 $db = new Database ;
 $con = $db->conectar();
-$sql = $con->prepare("SELECT * FROM cartas");
+$sql = $con->prepare("SELECT * FROM clientes inner join acreedor on clientes.id_cli=acreedor.id_clientu");
 $sql->execute();
 $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
 ?>
@@ -64,6 +64,79 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
       </div>
     </div>
   </nav>
+
+ <br>
+
+  <div class="container text-center">
+ <h1>   Mis Acreedores</h1>
+    <hr>
+   <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+ Agregar Nuevo Cliente
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Nuevo Cliente</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <form action="funciones/agregar_nuevocliente.php" method="post">
+
+
+<div class="row">
+  <div class="col-12">
+  <label for="nom_cli" class="form-label" ><h4><b>Nombre</b></h4></label>
+  <input type="text" class="form-control"id="nombre" name="nom_cli" placeholder="Ingresar nombre..">
+  </div>
+  <div class="col-12">
+  <label for="tel_cli" class="form-label "><h4><b>Apellidos</b></h4></label>
+  <input type="text" class="form-control col-lg-6" id="telefono" name="tel_cli" placeholder="Ingresar apellidos..">
+  </div>
+ </div>
+ <br>
+ 
+ <input type="submit" value="Enviar" class="btn btn-primary btn-lg">
+</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+    <hr>
+  <table class="table table-dark table-striped table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Cliente</th>
+      <th scope="col">Descuento</th>
+      <th scope="col">Inicio</th>
+      <th scope="col">Final</th>
+      <th scope="col">Notas</th>
+    </tr>
+  </thead>
+  <tbody>
+  <?php foreach($resultado as $row) { ?>
+    <tr>
+      <th><?php echo $row ['nom_cli'] ?></th>
+      <td><?php echo $row ['descuento'] ?></td>
+      <td><?php echo $row ['f_inicioacreed'] ?></td>
+      <td><?php echo $row ['f_finalacreed'] ?></td>
+      <td><?php echo $row ['notas_ac'] ?></td>
+      <?php } ?>
+    </tr>
+   
+  </tbody>
+</table>
+
+  </div>
+
+  
   <script src="../../js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
