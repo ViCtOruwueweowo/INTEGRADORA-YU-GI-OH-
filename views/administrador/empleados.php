@@ -74,18 +74,13 @@ $resultado0 = $sql->fetchAll(PDO::FETCH_ASSOC);
 <div class="container">
   <div class="row">
     <div class="col col-lg-12">
-<<<<<<< HEAD
-    <a href="funciones/agregarempleado.php" type="button" class="btn btn-primary btn-lg">Agregar Nuevo Empleado</a>  
-    <a href="funciones/editarempleado.php" type="button" class="btn btn-info btn-lg">Editar Empleado Existente</a>
-    <button href="" name="inactivos" type="button" class="btn btn-outline-info btn-lg">Mostrar empleados inactivos</button>
-<br>
-=======
       <!-- Button trigger modal -->
       <h1 class="text-center">Mis Empleados</h1>
       <hr>
 <button type="button" class="btn btn-danger  btn-lg" data-bs-toggle="modal" data-bs-target="#Agregar">
   Agregar Empleado
 </button>
+
 
 <!-- Modal -->
 <div class="modal fade" id="Agregar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -97,6 +92,7 @@ $resultado0 = $sql->fetchAll(PDO::FETCH_ASSOC);
       </div>
       <div class="modal-body">
       <form action="funciones/guardar_empleado.php" method="post">
+        
 
 
 <div class="row">
@@ -190,8 +186,9 @@ $resultado0 = $sql->fetchAll(PDO::FETCH_ASSOC);
     </div>
   </div>
 </div>
+<button href="" name="inactivos" type="button" class="btn btn-outline-info btn-lg">Mostrar empleados inactivos</button>
 <hr>
->>>>>>> 92a46f7ba71c5a0e0f7e8dd2c226c517fd1728d6
+
 <br>
 
     </div>
