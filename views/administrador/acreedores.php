@@ -63,7 +63,7 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
         </div>
       </div>
     </div>
-  </nav>
+  </nav> 
 
  <br>
 
@@ -83,7 +83,7 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
         <h1 class="modal-title fs-5" id="exampleModalLabel">Nuevo Cliente</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body"> 
       <form action="funciones/agregar_nuevocliente.php" method="post">
 
 
@@ -93,7 +93,7 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
   <input type="text" class="form-control"id="nombre" name="nom_cli" placeholder="Ingresar nombre..">
   </div>
   <div class="col-12">
-  <label for="tel_cli" class="form-label "><h4><b>Apellidos</b></h4></label>
+  <label for="tel_cli" class="form-label "><h4><b>Teléfono</b></h4></label>
   <input type="text" class="form-control col-lg-6" id="telefono" name="tel_cli" placeholder="Ingresar apellidos..">
   </div>
  </div>
@@ -102,10 +102,7 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
  <input type="submit" value="Enviar" class="btn btn-primary btn-lg">
 </form>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
+
     </div>
   </div>
 </div>

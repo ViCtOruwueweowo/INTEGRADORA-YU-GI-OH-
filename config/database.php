@@ -1,7 +1,7 @@
 <?php
-class Database 
+class Database  
 {
-
+ 
     private $hostname = "localhost";
     private $database = "workstack";
     private $username = "root";
@@ -28,3 +28,6 @@ class Database
     }
 
 }
+
+
+

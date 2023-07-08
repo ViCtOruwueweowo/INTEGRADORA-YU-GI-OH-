@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head> 
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,20 +13,7 @@
 </head>
 
 <body>
-<?php
-    session_start();
-    if (isset($_SESSION["usuario"]))
-    {
-        echo "<div class='alert 'alert-warning'>
-        <h2 align='center'> Ya existe una sesion activa, usuario: ".$_SESSION["usuario"]."</h2>";
-        echo "<h3 align-'center'>
-        <a href='config/cerrarSesion.php'>[Cerrar Sesion]</a>
-        </h3>
-        </div>";
-    }
-    else
-    {
-        ?> 
+
 
   <section class="vh-100">
     <div class="container-fluid h-custom">
@@ -36,17 +23,18 @@
         </div>
         <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
             <!--Recuerda todo va dentro de un formulario-->
-          <form action="views/administrador/index.php" method="post">
+          <!-- <form action="views/administrador/index.php" method="post"> -->
+          <form action="config/validar_login.php" method="post">
             <!-- Parte del usuario -->
             <div class="form-outline mb-4">
               <input type="text" class="form-control form-control-lg"
-                placeholder="Ingresar su nombre de usuario..." name="usuario"/>
+                placeholder="Ingresar su nombre de usuario..." name="usuario" required/>
               <label class="form-label" for="" style="color:blue"><b>Usuario</b></label>
             </div>
             <!-- Parte de la contraseña -->
             <div class="form-outline mb-3">
               <input type="password" class="form-control form-control-lg"
-                placeholder="Ingrese su contraseña..." name="contraseña"/>
+                placeholder="Ingrese su contraseña..." name="contraseña" required/>
               <label class="form-label" for="" style="color:blue"><b>Contraseña</b></label>
             </div>
 
@@ -59,9 +47,7 @@
     </div>
    
   </section>
-  <?php
-    }
-        ?>
+
 </body>
 </html>
 

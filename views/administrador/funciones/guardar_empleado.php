@@ -8,14 +8,34 @@
 <body>
 <?php
 // Establecer la conexión a la base de datos
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "workstack";
+class Database 
+{
 
-$conn = new mysqli($servername, $username, $password, $dbname);
-if ($conn->connect_error) {
-    die("Error de conexión a la base de datos: " . $conn->connect_error);
+    private $hostname = "localhost";
+    private $database = "workstack";
+    private $username = "root";
+    private $password = "";
+    private $charset = "utf8";
+
+    function conectar()
+    {
+        try{
+        $conexion = "mysql:host=". $this->hostname . "; dbname=" . $this->database . "; charset=". $this->charset;
+        $options = [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_EMULATE_PREPARES => false
+        ];
+
+        $pdo = new PDO($conexion, $this->username,  $this->password , $options);
+
+        return $pdo;
+    }catch(PDOException $e){
+
+        echo 'Error conexion:' . $e->getMessage();
+        exit;
+    }
+    }
+
 }
 
 // Obtener los datos del formulario
@@ -31,7 +51,7 @@ $estado = 1;
 
 // Insertar los datos en la base de datos
 $sql = "INSERT INTO usuarios (nombre_user, apellidos_user, tel_user,f_nacimiento,direccion_user,usuario,contraseña,tipo_usuario,estado) VALUES ('$nombre_user', '$apellidos_user', '$tel_user','$f_nacimiento','$direccion_user','$usuario','$contraseña','$tipo_usuario','$estado')";
-if ($conn->query($sql) === TRUE) {
+if ($conexion->query($sql) === TRUE) {
     echo "Datos agregados correctamente";
 } else {
     echo "Error al agregar los datos: " . $conn->error;

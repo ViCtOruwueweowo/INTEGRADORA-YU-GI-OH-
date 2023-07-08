@@ -1,4 +1,12 @@
 <?php
+
+
+
+//ANTES DE QUE ALGUIEN DIGA ALGO MAMAGUEVOS
+//esta página está hecha con el fin de hacer lo del filtro de empleados, aun no me sale y prefiero regarla aquí que en el bueno xd la única forma de acceder aquí por localhost nomás es poniento la ruta, de ahí en más, esta página no se puede acceder por otros medios, está conectada a la bd sí pero no envía, no hace, no nada
+
+
+
 require '../../config/database.php';
 $db = new Database ;
 $con = $db->conectar();
@@ -77,8 +85,8 @@ $resultado0 = $sql0->fetchAll(PDO::FETCH_ASSOC);
 <form class="form-inline" method="POST">
   <div class="row">
     <div class="col col-lg-12">
-    <a href="funciones/agregarempleado.php" type="button" class="btn btn-primary btn-lg">Agregar Nuevo Empleado</a>  
-    <a href="funciones/editarempleado.php" type="button" class="btn btn-info btn-lg">Editar Empleado Existente</a>
+    <a href="funciones/agregarempleado.pphFAKE" type="button" class="btn btn-primary btn-lg">Agregar Nuevo Empleado</a>  
+    <a href="funciones/editarempleado.phpFAKE" type="button" class="btn btn-info btn-lg">Editar Empleado Existente</a>
     <button href="" name="filtrar" type="submit" class="btn btn-outline-info btn-lg">Mostrar empleados inactivos</button>
     </form>
 <br>

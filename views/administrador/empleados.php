@@ -97,7 +97,7 @@ $resultado0 = $sql->fetchAll(PDO::FETCH_ASSOC);
 
 <div class="row">
   <div class="col-12">
-  <label for="nombre_user" class="form-label" >Nombre</label>
+  <label for="nombre_user" class="form-label" >Nombre</label> 
   <input type="text" class="form-control"id="nombre" name="nombre_user" placeholder="Ingresar nombre..">
   </div>
   <div class="col-12">
