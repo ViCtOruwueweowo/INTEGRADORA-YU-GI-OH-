@@ -89,9 +89,8 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
               <h6 class="card-title text-center" style="color:white;"><?php echo $row ['nombre_c']; ?></h6>
               <div  class="d-flex justify-content-between align-items-center">
               
-          <a href="details.php?id=<?php echo $row ['id_car']; ?>&token=<?php echo 
-             hash_hmac('sha1',$row['id_car'],KEY_TOKEN);?>" class="btn btn-outline-info"  type="button">Detalles</a>
-                
+    <!--      <a href="details.php?id=<?php echo $row ['id_car']; ?>&token=<?php echo 
+             hash_hmac('sha1',$row['id_car'],KEY_TOKEN);?>" class="btn btn-outline-info"  type="button">Detalles</a>--->
               </div>
             
               </div>

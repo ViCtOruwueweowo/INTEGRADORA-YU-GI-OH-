@@ -15,32 +15,35 @@ $username = "root";
 $password = "";
 $dbname = "workstack";
 
-$conn = new mysqli($servername, $username, $password, $dbname);
-if ($conn->connect_error) {
-    die("Error de conexión a la base de datos: " . $conn->connect_error);
+try {
+    $pdo = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    die("Error de conexión a la base de datos: " . $e->getMessage());
 }
 
 // Obtener los datos del formulario
-$nom_p= $_POST['nom_p'];
-$existencias= $_POST['existencias'];
+$nom_p = $_POST['nom_p'];
+$existencias = $_POST['existencias'];
 $precio = $_POST['precio'];
 $imagen_p = $_POST['imagen_p'];
 $notas_prod = $_POST['notas_prod'];
 
-
 // Insertar los datos en la base de datos
-$sql = "INSERT INTO productos (nom_p, existencias, precio,imagen_p ,notas_prod) VALUES ('$nom_p', '$existencias', '$precio','$imagen_p','$notas_prod')";
-if ($conn->query($sql) === TRUE) {
-    echo "<div class='alert alert-success text-center'  role='alert'>
-   <a href='listarPersonasConBusqueda2.php'> <h4 class='alert-heading'>¡Hecho!</h4>
-    <p>Un Producto Ha Sido Agregado De Forma Exitosa</p> </a>
-  </div>";
-} else {
-    echo "Error al agregar los datos: " . $conn->error;
+try {
+    $stmt = $pdo->prepare("INSERT INTO productos (nom_p, existencias, precio, imagen_p, notas_prod) VALUES (?, ?, ?, ?, ?)");
+    $stmt->execute([$nom_p, $existencias, $precio, $imagen_p, $notas_prod]);
+    
+    echo "<div class='alert alert-success text-center' role='alert'>
+           <a href='listarPersonasConBusqueda2.php'><h4 class='alert-heading'>¡Hecho!</h4>
+           <p>Un Producto Ha Sido Agregado De Forma Exitosa</p></a>
+          </div>";
+} catch (PDOException $e) {
+    echo "Error al agregar los datos: " . $e->getMessage();
 }
 
 // Cerrar la conexión a la base de datos
-$conn->close();
+$pdo = null;
 ?>
 </div>
 </body>

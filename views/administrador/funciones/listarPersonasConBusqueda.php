@@ -121,8 +121,8 @@ if ($busqueda === null) {
     </div>
     <div class="col col-lg-6">
     <button type="submit" class="btn btn-primary mb-2">Buscar ahora</button>
-    <a href="agregar.php" class="btn btn-primary mb-2">Agregar</a>
-    <a href="editar.php" class="btn btn-primary mb-2">Editar</a>
+    <a href="agregar_car.php" class="btn btn-primary mb-2">Agregar</a>
+    <a href="agregar_rar.php" class="btn btn-primary mb-2">Agregar Rareza</a>
     </div>
   </div>
 </form>
@@ -130,7 +130,7 @@ if ($busqueda === null) {
 <table class="table table-dark table-striped table-hover">
   <thead >
 			<tr>
-      <th>Imagen</th>
+     
       <th>Nombre</th>
 				<th>Tipo</th>
 				<th>Rareza</th>
@@ -143,7 +143,6 @@ if ($busqueda === null) {
 			
 			<?php while ($resultado = $sentencia->fetchObject()) {?>
 			<tr>
-      <td style="color:whitesmoke;"><img src="<?php echo $resultado->imagen_c ?>"></td>
       <td style="color:whitesmoke;"><?php echo $resultado->nombre_c ?></td>
 				<td style="color:whitesmoke;"><?php echo $resultado->tipo_c ?></td>
 				<td style="color:whitesmoke;"><?php echo $resultado->rareza ?></td>

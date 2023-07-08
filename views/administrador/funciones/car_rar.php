@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guardar Empleado</title>
+    <title>Guardar Carta Detallada</title>
+    <link rel="stylesheet" href="../../../css/bootstrap.min.css">
 </head>
 <body>
 <?php
-
 // Establecer la conexión a la base de datos
 $servername = "localhost";
 $username = "root";
@@ -22,22 +22,21 @@ try {
 }
 
 // Obtener los datos del formulario
-$nombre_user = $_POST['nombre_user'];
-$apellidos_user = $_POST['apellidos_user'];
-$tel_user = $_POST['telefono'];
-$f_nacimiento = $_POST['fechan'];
-$direccion_user = $_POST['direccion'];
-$usuario = $_POST['usuario'];
-$contraseña = sha1($_POST['contraseña']);
-$tipo_usuario = 2;
-$estado = 1;
+$id_carar = $_POST['id_carar'];
+$id_rar = $_POST['id_rar'];
+$p_price = $_POST['p_price'];
+$p_tcg = $_POST['p_tcg'];
+$p_beto = $_POST['p_beto'];
+$codigo = $_POST['codigo'];
+$cantidad = $_POST['cantidad'];
 
 // Insertar los datos en la base de datos
 try {
-    $stmt = $pdo->prepare("INSERT INTO usuarios (nombre_user, apellidos_user, tel_user, f_nacimiento, direccion_user, usuario, contraseña, tipo_usuario, estado) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
-    $stmt->execute([$nombre_user, $apellidos_user, $tel_user, $f_nacimiento, $direccion_user, $usuario, $contraseña, $tipo_usuario, $estado]);
-    
-    echo "Datos agregados correctamente";
+    $stmt = $pdo->prepare("INSERT INTO car_rar (id_carar, id_rar, p_price, p_tcg, p_beto, codigo, cantidad) VALUES (?, ?, ?, ?, ?, ?, ?)");
+    $stmt->execute([$id_carar, $id_rar, $p_price, $p_tcg, $p_beto, $codigo, $cantidad]);
+
+    echo "<div class='alert alert-success'>Carta Registrada Por Completo</div>";
+    header("refresh:1 ;listarPersonasConBusqueda.php");
 } catch (PDOException $e) {
     echo "Error al agregar los datos: " . $e->getMessage();
 }

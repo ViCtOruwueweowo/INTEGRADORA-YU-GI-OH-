@@ -5,9 +5,11 @@ $username = "root";
 $password = "";
 $dbname = "workstack";
 
-$conn = new mysqli($servername, $username, $password, $dbname);
-if ($conn->connect_error) {
-    die("Error de conexión a la base de datos: " . $conn->connect_error);
+try {
+    $pdo = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    die("Error de conexión a la base de datos: " . $e->getMessage());
 }
 
 // Obtener los datos del formulario
@@ -15,28 +17,34 @@ $nombre_user = $_POST['nombre'];
 $tel_user = $_POST['telefono'];
 $direccion_user = $_POST['direccion'];
 $usuario = $_POST['usuario'];
-$contraseña =md5($_POST['contraseña']);
+$contraseña = md5($_POST['contraseña']);
 $estado = $_POST['estado'];
 
+// Actualizar los datos en la base de datos
+try {
+    $stmt = $pdo->prepare("UPDATE usuarios SET 
+                            nombre_user = :nombre_user,
+                            tel_user = :tel_user,
+                            direccion_user = :direccion_user,
+                            usuario = :usuario,
+                            contraseña = :contraseña,
+                            estado = :estado
+                            WHERE nombre_user = :nombre_user");
 
-
-// Insertar los datos en la base de datos
-$sql = "UPDATE usuarios SET 
-    nombre_user = '$nombre_user',
-    tel_user = '$tel_user',
-    direccion_user = '$direccion_user',
-    usuario = '$usuario',
-    contraseña = '$contraseña',
-    estado = $estado,
+    $stmt->bindParam(':nombre_user', $nombre_user);
+    $stmt->bindParam(':tel_user', $tel_user);
+    $stmt->bindParam(':direccion_user', $direccion_user);
+    $stmt->bindParam(':usuario', $usuario);
+    $stmt->bindParam(':contraseña', $contraseña);
+    $stmt->bindParam(':estado', $estado);
     
-    estado = '$estado' where nombre_user='$nombre_user'";
+    $stmt->execute();
 
-if ($conn->query($sql) === TRUE) {
     echo "Datos actualizados correctamente";
-} else {
-    echo "Error al actualizar los datos: " . $conn->error;
+} catch (PDOException $e) {
+    echo "Error al actualizar los datos: " . $e->getMessage();
 }
 
 // Cerrar la conexión a la base de datos
-$conn->close();
+$pdo = null;
 ?>
