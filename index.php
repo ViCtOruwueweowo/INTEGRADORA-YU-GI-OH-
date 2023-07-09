@@ -13,7 +13,17 @@
 </head>
 
 <body>
+  <?php
+session_start();
 
+if (isset($_SESSION['usuario'])) {
+  $nombreUsuario = $_SESSION['usuario'];
+
+    echo "Error, ya existe una sesión activa para el usuario: $nombreUsuario.";
+    echo "<a href='config/cerrarSesion.php'>[Cerrar sesión]</a>";
+    exit();
+}
+?>
 
   <section class="vh-100">
     <div class="container-fluid h-custom">

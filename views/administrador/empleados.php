@@ -92,8 +92,6 @@ $resultado0 = $sql->fetchAll(PDO::FETCH_ASSOC);
       </div>
       <div class="modal-body">
       <form action="funciones/guardar_empleado.php" method="post">
-        
-
 
 <div class="row">
   <div class="col-12">

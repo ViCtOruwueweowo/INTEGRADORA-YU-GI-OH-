@@ -1,3 +1,15 @@
+<?php
+session_start();
+
+// Verificar si el usuario no ha iniciado sesión
+if (!isset($_SESSION['usuario'])) {
+  echo "Inicia sesión primero por favor :D";
+  header("refresh:2 ../../index.php");  // Redireccionamos al archivo de inicio de sesión
+  exit();
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
