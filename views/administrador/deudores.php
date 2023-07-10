@@ -56,6 +56,17 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
             <li><a class="dropdown-item" href="deudores.php"><b>Mis Deudores</b></a></li>
           </ul>
         </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <b>Registro</b>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="bitacoras/upd_cartas.php"><b>Actualizaciones En Cartas</b></a></li>
+            <li><a class="dropdown-item" href="bitacoras/upd_productos.php"><b>Actualizaciones En Productos</b></a></li>
+            <li><a class="dropdown-item" href="bitacoras/upd_dc.php"><b>Reporte Deuda Cartas</b></a></li>
+            <li><a class="dropdown-item" href="bitacoras/upd_dp.php"><b>Reporte Deuda Productos</b></a></li>
+          </ul>
+        </li>
           </ul>
           <form class="d-flex mt-3 mt-lg-0" role="search">
             <a href="../../index.php" class="btn btn-outline-success">Cerrar Sesion</a>

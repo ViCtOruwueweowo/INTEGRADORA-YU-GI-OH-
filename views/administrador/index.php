@@ -34,6 +34,9 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
             <li class="nav-item">
               <a class="nav-link " aria-current="page" href="calendario.php"><b>Calendario</b></a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link " aria-current="page" href="empleados.php"><b>Empleados</b></a>
+            </li>
             <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             <b>Inventario</b>
@@ -43,10 +46,6 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
             <li><a class="dropdown-item" href="funciones/listarPersonasConBusqueda2.php"><b>Inventario Productos</b></a></li>
           </ul>
         </li>
-         
-            <li class="nav-item">
-              <a class="nav-link " aria-current="page" href="empleados.php"><b>Empleados</b></a>
-            </li>
             <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             <b>Agenda</b>
@@ -54,6 +53,17 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="acreedores.php"><b>Mis Acreedores</b></a></li>
             <li><a class="dropdown-item" href="deudores.php"><b>Mis Deudores</b></a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <b>Registro</b>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="bitacoras/upd_cartas.php"><b>Actualizaciones En Cartas</b></a></li>
+            <li><a class="dropdown-item" href="bitacoras/upd_productos.php"><b>Actualizaciones En Productos</b></a></li>
+            <li><a class="dropdown-item" href="bitacoras/upd_dc.php"><b>Reporte Deuda Cartas</b></a></li>
+            <li><a class="dropdown-item" href="bitacoras/upd_dp.php"><b>Reporte Deuda Productos</b></a></li>
           </ul>
         </li>
           </ul>
@@ -71,7 +81,7 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
 <div class="container" style="background-color:transparent;border-radius:10px">
 <main>
       <div class="container">
-    <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 g-4 ">
+    <div class="row row-cols-2 row-cols-sm-2 row-cols-md-4 g-4 ">
 
         <?php foreach($resultado as $row) { ?>
         <div class="col">

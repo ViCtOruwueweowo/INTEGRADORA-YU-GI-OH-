@@ -1,12 +1,28 @@
+<?php
+require '../../config/config.php';
+require '../../config/database.php';
+$db = new Database();
+$con = $db->conectar();
+$sql = $con->prepare("SELECT id_car, nombre_c,imagen_c,tipo_c FROM cartas ");
+$sql->execute();
+$resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8"> 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Inicio</title>
     <link rel="stylesheet" href="../../css/bootstrap.min.css">
-    <script src="../../js/bootstrap.min.js"></script>
+<script src="../../js/bootstrap.bundle.min.js"></script>
+<style>
+    .footer {
+      background-color: #f8f9fa;
+      padding: 20px;
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
 <div class="container">
@@ -28,5 +44,40 @@
       </div>
     </header>
   </div>
+
+
+<!--Apartado De Cartas-->
+<div class="container">
+    <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 g-4 ">
+
+        <?php foreach($resultado as $row) { ?>
+        <div class="col">
+          <div class="card shadow-sm " style="background-color:#212529;">
+            <?php
+            $id =$row[('imagen_c')];
+            $imagen = "../administrador/imagenes/productos/".$id.".jpg";
+            if(!file_exists($imagen)){
+              $imagen="imagenes/no image.png";
+            }
+            ?>
+            <img  src="<?php echo $imagen; ?>">
+            <div class="card-body" >
+              <h6 class="card-title text-center" style="color:white;"><?php echo $row ['nombre_c']; ?></h6>
+              <div  class="d-flex justify-content-between align-items-center">
+              </div>
+              </div>
+          </div>
+        </div>
+        <?php } ?>   
+    </div>     
+</div>
+<!--Fin Apartado De Cartas-->
+
+
+<footer class="footer">
+    <div class="container">
+      <p>&copy; 2023 Mi Sitio Web. Todos los derechos reservados.</p>
+    </div>
+  </footer>
 </body>
 </html>
