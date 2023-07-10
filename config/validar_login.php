@@ -17,22 +17,13 @@ if($_POST)
     $query->execute();
     $usuario = $query->fetch(PDO::FETCH_ASSOC);
 
-
-    // if($usuario)
-    // {
-        
-    //    $_SESSION['usuario'] = $usuario["usuario"];
-    //    header("location:../views/administrador/index.php");
-    // }
-
-
-
     if ($usuario && $usuario["estado"] == 1) {
         // Usuario válido y estado es igual a 1
         $_SESSION['usuario'] = $usuario["usuario"];
         if ($usuario["tipo_usuario"] == "1") {
             header("location: ../views/administrador/index.php");
             exit();
+
         } else if ($usuario["tipo_usuario"] == "2") {
             header("location: ../views/empleado/index.php");
         }
@@ -43,8 +34,8 @@ if($_POST)
 
         } elseif ($usuario && $usuario["estado"] != 1) {
             // Usuario válido pero estado no es igual a 1
-            echo "Mmmm, parece que eres un fantasma que vuelve a su hogar porque fuiste dado de baja :O.<br>Si injustamente fuiste enviado aquí y este no es tu destino aún, por favor habla con el Administrador más cercano, gracias :D";
-            header("refresh:3 ../index.php");
+            echo "Mmmm, parece que fuiste dado de baja :O.<br>Por favor habla con el Administrador más cercano para resolver dudas, gracias :D";
+            header("refresh:5 ../index.php");
             exit();
         } else {
         echo "Usuario o contraseña incorrectos, vuelvelo a intentar :D";

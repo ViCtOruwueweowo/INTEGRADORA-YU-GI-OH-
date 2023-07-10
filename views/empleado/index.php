@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
 require '../../config/config.php';
 require '../../config/database.php';
 $db = new Database();
@@ -7,6 +8,19 @@ $sql = $con->prepare("SELECT id_car, nombre_c,imagen_c,tipo_c FROM cartas ");
 $sql->execute();
 $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
 ?>
+=======
+session_start();
+
+// Verificar si el usuario no ha iniciado sesión
+if (!isset($_SESSION['usuario'])) {
+  echo "Inicia sesión primero por favor :D";
+  header("refresh:2 ../../index.php");  // Redireccionamos al archivo de inicio de sesión
+  exit();
+}
+?>
+
+
+>>>>>>> a1c435dd69d2e731d38d0c012b1db6e454666c4b
 <!DOCTYPE html>
 <html lang="en">
 <head>
