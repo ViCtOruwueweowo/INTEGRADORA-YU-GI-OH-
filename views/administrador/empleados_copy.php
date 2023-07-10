@@ -1,7 +1,7 @@
 <?php
 
 
-
+ 
 //ANTES DE QUE ALGUIEN DIGA ALGO MAMAGUEVOS
 //esta página está hecha con el fin de hacer lo del filtro de empleados, aun no me sale y prefiero regarla aquí que en el bueno xd la única forma de acceder aquí por localhost nomás es poniento la ruta, de ahí en más, esta página no se puede acceder por otros medios, está conectada a la bd sí pero no envía, no hace, no nada
 
