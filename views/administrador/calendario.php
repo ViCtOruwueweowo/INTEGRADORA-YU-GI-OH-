@@ -46,6 +46,8 @@
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="funciones/listarPersonasConBusqueda.php"><b>Inventario Carta</b></a></li>
             <li><a class="dropdown-item" href="funciones/listarPersonasConBusqueda2.php"><b>Inventario Productos</b></a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="funciones/detallar.php">Detalle Carta</a></li>
           </ul>
         </li>
             <li class="nav-item dropdown">
@@ -68,7 +70,6 @@
             <li><a class="dropdown-item" href="bitacoras/upd_dp.php"><b>Reporte Deuda Productos</b></a></li>
           </ul>
         </li>
-      
           </ul>
           <form class="d-flex mt-3 mt-lg-0" role="search">
             <a href="../../config/cerrarSesion.php" class="btn btn-outline-success">Cerrar Sesion</a>
@@ -78,11 +79,10 @@
     </div>
   </nav>
 
-
   <body >
     <div class="container">
         
-            <div> <br/><br/> <div id="CalendarioWeb" style="background-color:#212529;color:white;" class="fc fc-media-screen fc-direction-ltr fc-theme-standard "  ></div></div>
+            <div> <br/><br/> <div id="CalendarioWeb" style=" background-color: rgba(0, 0, 0, 0.500);; ;color:white ;font-size:25px" class="fc fc-media-screen fc-direction-ltr  "  ></div></div>
           
     </div>
    

@@ -48,6 +48,8 @@ $resultado0 = $sql->fetchAll(PDO::FETCH_ASSOC);
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="funciones/listarPersonasConBusqueda.php"><b>Inventario Carta</b></a></li>
             <li><a class="dropdown-item" href="funciones/listarPersonasConBusqueda2.php"><b>Inventario Productos</b></a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="funciones/detallar.php">Detalle Carta</a></li>
           </ul>
         </li>
             <li class="nav-item dropdown">
@@ -72,7 +74,7 @@ $resultado0 = $sql->fetchAll(PDO::FETCH_ASSOC);
         </li>
           </ul>
           <form class="d-flex mt-3 mt-lg-0" role="search">
-            <a href="../../index.php" class="btn btn-outline-success">Cerrar Sesion</a>
+            <a href="../../config/cerrarSesion.php" class="btn btn-outline-success">Cerrar Sesion</a>
           </form>
         </div>
       </div>
@@ -160,15 +162,15 @@ $resultado0 = $sql->fetchAll(PDO::FETCH_ASSOC);
    <div class="row ">
      <div class="col-12 ">
      <label for="nombre_user">Nombre:</label>
-     <input type="text" class="form-control col-lg-6" id="nombre" name="nombre" required>
+     <input type="text" class="form-control col-lg-6" id="nombre_user" name="nombre_user" required>
      </div>
      <div class="col-12 ">
-     <label for="telefono">Telefono:</label>
-     <input type="text" class="form-control col-lg-6" id="telefono" name="telefono">
+     <label for="tel_user">Telefono:</label>
+     <input type="text" class="form-control col-lg-6" id="tel_user" name="tel_user">
      </div>
      <div class="col-12">
-     <label for="direccion">Direccion:</label>
-     <input type="text" id="direccion" class="form-control" name="direccion">
+     <label for="direccion_user">Direccion:</label>
+     <input type="text" id="direccion" class="form-control" name="direccion_user">
      </div>
      <div class="col-6">
      <label for="usuario">Usuario:</label>

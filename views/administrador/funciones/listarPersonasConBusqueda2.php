@@ -61,6 +61,9 @@ if ($busqueda === null) {
             <li class="nav-item">
               <a class="nav-link " aria-current="page" href="../calendario.php"><b>Calendario</b></a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link " aria-current="page" href="../empleados.php"><b>Empleados</b></a>
+            </li>
             <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             <b>Inventario</b>
@@ -68,12 +71,10 @@ if ($busqueda === null) {
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="listarPersonasConBusqueda.php"><b>Inventario Carta</b></a></li>
             <li><a class="dropdown-item" href="listarPersonasConBusqueda2.php"><b>Inventario Productos</b></a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="detallar.php">Detalle Carta</a></li>
           </ul>
         </li>
-         
-            <li class="nav-item">
-              <a class="nav-link " aria-current="page" href="../empleados.php"><b>Empleados</b></a>
-            </li>
             <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             <b>Agenda</b>
@@ -83,9 +84,20 @@ if ($busqueda === null) {
             <li><a class="dropdown-item" href="../deudores.php"><b>Mis Deudores</b></a></li>
           </ul>
         </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <b>Registro</b>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="../bitacoras/upd_cartas.php"><b>Actualizaciones En Cartas</b></a></li>
+            <li><a class="dropdown-item" href="../bitacoras/upd_productos.php"><b>Actualizaciones En Productos</b></a></li>
+            <li><a class="dropdown-item" href="../bitacoras/upd_dc.php"><b>Reporte Deuda Cartas</b></a></li>
+            <li><a class="dropdown-item" href="../bitacoras/upd_dp.php"><b>Reporte Deuda Productos</b></a></li>
+          </ul>
+        </li>
           </ul>
           <form class="d-flex mt-3 mt-lg-0" role="search">
-            <a href="../../index.php" class="btn btn-outline-success">Cerrar Sesion</a>
+            <a href="../../config/cerrarSesion.php" class="btn btn-outline-success">Cerrar Sesion</a>
           </form>
         </div>
       </div>
@@ -214,6 +226,7 @@ if ($busqueda === null) {
 <table class="table table-dark table-striped table-hover">
   <thead >
 			<tr>
+      <th>Imagen</th>
       <th>Nombre</th>
       <th>existencias</th>
 				<th>Notas</th>
@@ -225,6 +238,7 @@ if ($busqueda === null) {
 	
     <?php while ($resultado = $sentencia->fetchObject()) {?>
   <tr>
+  <td style="color:whitesmoke;"><?php echo "<img src='../../../imagenes/productos_2/$resultado->imagen_p.webp' style='width:100px'> " ?></td>
   <td style="color:whitesmoke;"><?php echo $resultado->nom_p ?></td>
     <td style="color:whitesmoke;"><?php echo $resultado->existencias ?></td>
     <td style="color:whitesmoke;"><?php echo $resultado->notas_prod ?></td>

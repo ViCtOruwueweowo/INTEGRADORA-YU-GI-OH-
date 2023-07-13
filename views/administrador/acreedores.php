@@ -34,8 +34,6 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
             <li class="nav-item">
               <a class="nav-link " aria-current="page" href="calendario.php"><b>Calendario</b></a>
             </li>
-          
-         
             <li class="nav-item">
               <a class="nav-link " aria-current="page" href="empleados.php"><b>Empleados</b></a>
             </li>
@@ -46,6 +44,8 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="funciones/listarPersonasConBusqueda.php"><b>Inventario Carta</b></a></li>
             <li><a class="dropdown-item" href="funciones/listarPersonasConBusqueda2.php"><b>Inventario Productos</b></a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="funciones/detallar.php">Detalle Carta</a></li>
           </ul>
         </li>
             <li class="nav-item dropdown">
@@ -70,12 +70,12 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
         </li>
           </ul>
           <form class="d-flex mt-3 mt-lg-0" role="search">
-            <a href="../../index.php" class="btn btn-outline-success">Cerrar Sesion</a>
+            <a href="../../config/cerrarSesion.php" class="btn btn-outline-success">Cerrar Sesion</a>
           </form>
         </div>
       </div>
     </div>
-  </nav> 
+  </nav>
 
  <br>
 

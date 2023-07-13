@@ -3,7 +3,7 @@ require '../../config/config.php';
 require '../../config/database.php';
 $db = new Database();
 $con = $db->conectar();
-$id = isset($_GET['id']) ? $_GET['id'] : '';
+$id = isset($_GET['id_car']) ? $_GET['id_car'] : '';
 $token = isset($_GET['token']) ? $_GET['token'] : '';
 
 if($id == '' ||$token == ''){
@@ -30,7 +30,7 @@ if($id == '' ||$token == ''){
             $price=$row['p_price'];
             $img=$row['imagen_c'];
             $tcg=$row['p_tcg'];
-            $dir_images = 'imagenes/productos/' .$img. '/.jpg';
+            $dir_images = '../../imagenes/productos/' .$img. '/jpg';
             
             $rutaImg = $dir_images;
 
@@ -42,7 +42,7 @@ if(file_exists($dir_images))
 {
 $dir= dir($dir_images);
 while(($archivo = $dir->read()) != false ){
-    if($archivo != 'principal.jpg' && (strpos($archivo, 'jpg')||strpos($archivo, 'png'))){
+    if($archivo !=  $img.'.jpg' && (strpos($archivo, 'jpg')||strpos($archivo, 'png'))){
         $images[]=$dir_images . $archivo;
 
     }

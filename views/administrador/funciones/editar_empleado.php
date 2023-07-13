@@ -13,9 +13,9 @@ try {
 }
 
 // Obtener los datos del formulario
-$nombre_user = $_POST['nombre'];
-$tel_user = $_POST['telefono'];
-$direccion_user = $_POST['direccion'];
+$nombre_user = $_POST['nombre_user'];
+$tel_user = $_POST['tel_user'];
+$direccion_user = $_POST['direccion_user'];
 $usuario = $_POST['usuario'];
 $contraseña = md5($_POST['contraseña']);
 $estado = $_POST['estado'];

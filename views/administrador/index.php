@@ -1,10 +1,14 @@
-
 <?php
 require '../../config/config.php';
 require '../../config/database.php';
 $db = new Database();
 $con = $db->conectar();
-$sql = $con->prepare("SELECT id_car, nombre_c,imagen_c,tipo_c FROM cartas ");
+$sql = $con->prepare("SELECT distinct id_car,
+nombre_c, imagen_c
+FROM 
+cartas inner join car_rar on
+cartas.id_car=car_rar.id_carar inner join rareza on
+car_rar.id_rar=rareza.id_ra where rareza.id_ra>='4' ;");
 $sql->execute();
 $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
 
@@ -53,6 +57,8 @@ if (!isset($_SESSION['usuario'])) {
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="funciones/listarPersonasConBusqueda.php"><b>Inventario Carta</b></a></li>
             <li><a class="dropdown-item" href="funciones/listarPersonasConBusqueda2.php"><b>Inventario Productos</b></a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="funciones/detallar.php">Detalle Carta</a></li>
           </ul>
         </li>
             <li class="nav-item dropdown">
@@ -97,7 +103,7 @@ if (!isset($_SESSION['usuario'])) {
           <div class="card shadow-sm " style="background-color:#212529;">
             <?php
             $id =$row[('imagen_c')];
-            $imagen = "imagenes/productos/".$id.".jpg";
+            $imagen = "../../imagenes/productos/".$id.".jpg";
             if(!file_exists($imagen)){
               $imagen="imagenes/no image.png";
             }
@@ -108,8 +114,10 @@ if (!isset($_SESSION['usuario'])) {
               <h6 class="card-title text-center" style="color:white;"><?php echo $row ['nombre_c']; ?></h6>
               <div  class="d-flex justify-content-between align-items-center">
               
-    <!--      <a href="details.php?id=<?php echo $row ['id_car']; ?>&token=<?php echo 
-             hash_hmac('sha1',$row['id_car'],KEY_TOKEN);?>" class="btn btn-outline-info"  type="button">Detalles</a>--->
+       <!--       <a href="details.php?id_car=<?php echo $row ['id_car']; ?>&token=<?php echo 
+             hash_hmac('sha1',$row['id_car'],KEY_TOKEN);?>" class="btn 
+             btn-info">Detalles</a>-->
+            
               </div>
             
               </div>
