@@ -132,8 +132,9 @@ if ($busqueda === null) {
     </div>
     <div class="col col-lg-6">
     <button type="submit" class="btn btn-primary mb-2">Buscar ahora</button>
-    <a href="agregar_car.php" class="btn btn-primary mb-2">Agregar</a>
+    <a href="agregar_car.php" class="btn btn-primary mb-2">Agregar Carta</a>
     <a href="agregar_rar.php" class="btn btn-primary mb-2">Agregar Rareza</a>
+    <a href="modificar_car.php" class="btn btn-primary mb-2">Modificar Cartas</a>
     </div>
   </div>
 </form>

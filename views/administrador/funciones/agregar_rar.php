@@ -100,23 +100,23 @@ echo "</select>";
 ?>
 <div class="mb-3">
   <label for="p_price" class="form-label">Ingresar Link De Price</label>
-  <input type="text" name="p_price" class="form-control" id="exampleFormControlInput1" placeholder="Link Price">
+  <input type="text" name="p_price" class="form-control" id="exampleFormControlInput1" placeholder="Link Price" require>
 </div>
 <div class="mb-3">
   <label for="p_tcg" class="form-label">Ingresar Link De Tcg</label>
-  <input type="text" name="p_tcg" class="form-control" id="exampleFormControlInput1" placeholder="Link Tcg">
+  <input type="text" name="p_tcg" class="form-control" id="exampleFormControlInput1" placeholder="Link Tcg" require>
 </div>
 <div class="mb-3">
   <label for="p_beto" class="form-label">Ingresar Precio En Tienda</label>
-  <input type="text" name="p_beto" class="form-control" id="exampleFormControlInput1" placeholder="Precio Local">
+  <input type="text" name="p_beto" class="form-control" id="exampleFormControlInput1" placeholder="Precio Local" require>
 </div>
 <div class="mb-3">
   <label for="codigo" class="form-label">Ingresar Codigo</label>
-  <input type="text" name="codigo" class="form-control" id="exampleFormControlInput1" placeholder="Codigo">
+  <input type="text" name="codigo" class="form-control" id="exampleFormControlInput1" placeholder="Codigo" require>
 </div>
 <div class="mb-3">
   <label for="cantidad" class="form-label">Ingresar Cantidad</label>
-  <input type="text" name="cantidad" class="form-control" id="exampleFormControlInput1" placeholder="Cantidad">
+  <input type="text" name="cantidad" class="form-control" id="exampleFormControlInput1" placeholder="Cantidad" require>
 </div>
 <div class="col-12">
     <button type="submit" value="Enviar" class="btn btn-primary">Guardar Registro</button>

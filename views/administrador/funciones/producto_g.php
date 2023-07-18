@@ -33,11 +33,20 @@ $notas_prod = $_POST['notas_prod'];
 try {
     $stmt = $pdo->prepare("INSERT INTO productos (nom_p, existencias, precio, imagen_p, notas_prod) VALUES (?, ?, ?, ?, ?)");
     $stmt->execute([$nom_p, $existencias, $precio, $imagen_p, $notas_prod]);
-    
-    echo "<div class='alert alert-success text-center' role='alert'>
-           <a href='listarPersonasConBusqueda2.php'><h4 class='alert-heading'>¡Hecho!</h4>
-           <p>Un Producto Ha Sido Agregado De Forma Exitosa</p></a>
-          </div>";
+    if (isset($_FILES['imagen'])) {
+        $nombreArchivo = $_FILES['imagen']['name'];
+        $archivoTemp = $_FILES['imagen']['tmp_name'];
+        $rutaDestino = "../../../imagenes/productos_2/" . $nombreArchivo;
+
+        if (move_uploaded_file($archivoTemp, $rutaDestino)) {
+            header("refresh:1 ;listarPersonasConBusqueda2.php");
+        } else {
+            echo "Hubo un error al guardar la imagen.";
+        }
+    }
+    echo "<div class='alert alert-success'>
+    <h1 class='text-center'>Datos Actualizados Correctamente</h1>";
+header("refresh:1; listarPersonasConBusqueda2.php");
 } catch (PDOException $e) {
     echo "Error al agregar los datos: " . $e->getMessage();
 }
