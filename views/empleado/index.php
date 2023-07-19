@@ -1,4 +1,24 @@
 <?php
+session_start();
+
+// Verificar si el usuario no ha iniciado sesión
+if (!isset($_SESSION['usuario'])) {
+    echo "Inicia sesión primero por favor :D";
+    header("refresh:5 ../../index.php");  // Redireccionamos al archivo de inicio de sesión
+    exit();
+}
+
+// Verificar si el tipo de usuario no es 2 (Tipo de usuario que puede acceder a esta página, osea empleado)
+if ($_SESSION['tipo_usuario'] !== "2") {
+    echo "Acceso no autorizado. Por favor, inicia sesión con una cuenta válida.";
+    header("refresh:5 ../../index.php");  // Redireccionamos al archivo de inicio de sesión otra vez
+    exit();
+}
+
+$nombreUsuario = $_SESSION['usuario'];
+?>
+
+<?php
 require '../../config/config.php';
 require '../../config/database.php';
 $db = new Database();
@@ -6,13 +26,6 @@ $con = $db->conectar();
 $sql = $con->prepare("SELECT id_car, nombre_c,imagen_c,tipo_c FROM cartas ");
 $sql->execute();
 $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
-
-// Verificar si el usuario no ha iniciado sesión
-if (!isset($_SESSION['usuario'])) {
-  echo "Inicia sesión primero por favor :D";
-  header("refresh:2 ../../index.php");  // Redireccionamos al archivo de inicio de sesión
-  exit();
-}
 ?>
 
 <!DOCTYPE html>
@@ -46,7 +59,10 @@ if (!isset($_SESSION['usuario'])) {
         <li><a href="#" class="nav-link px-2">Inventario</a></li>
         <li><a href="#" class="nav-link px-2">Productos</a></li>
       </ul>
-
+      <?php
+              $nombreUsuario = $_SESSION['usuario'];
+              echo "$nombreUsuario";
+              ?>
       <div class="col-md-3 text-end">
 <a href="../../config/cerrarSesion.php"><button type="button" class="btn btn-primary">Cerrar Sesion</button></a>
       </div>
