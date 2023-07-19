@@ -2,9 +2,11 @@
 include_once "base_de_datos.php";
 
 # Por defecto hacemos la consulta de todas las personas
-$consulta = "SELECT * FROM cartas inner join car_rar
-on cartas.id_car=car_rar.id_carar left join rareza
-on car_rar.id_rar=rareza.id_ra ORDER BY cartas.tipo_c DESC";
+$consulta = "SELECT *
+FROM cartas
+INNER JOIN car_rar ON cartas.id_car = car_rar.id_carar
+LEFT JOIN rareza ON car_rar.id_rar = rareza.id_ra
+ORDER BY cartas.tipo_c DESC;";
 
 # Vemos si hay búsqueda
 $busqueda = null; 
@@ -12,9 +14,12 @@ if (isset($_GET["busqueda"])) {
     # Y si hay, búsqueda, entonces cambiamos la consulta
     # Nota: no concatenamos porque queremos prevenir inyecciones SQL
     $busqueda = $_GET["busqueda"];
-    $consulta = "SELECT * FROM cartas inner join car_rar
-    on cartas.id_car=car_rar.id_carar left join rareza
-    on car_rar.id_rar=rareza.id_ra  WHERE cartas.nombre_c LIKE ?";
+    $consulta = "SELECT *
+    FROM cartas
+    INNER JOIN car_rar ON cartas.id_car = car_rar.id_carar
+    LEFT JOIN rareza ON car_rar.id_rar = rareza.id_ra
+    WHERE cartas.nombre_c LIKE ?;
+    ";
 }
 # Preparar sentencia e indicar que vamos a usar un cursor
 $sentencia = $base_de_datos->prepare($consulta, [

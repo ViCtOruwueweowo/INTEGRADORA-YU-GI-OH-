@@ -2,7 +2,14 @@
 require '../../config/database.php';
 $db = new Database ;
 $con = $db->conectar();
-$sql = $con->prepare("SELECT * FROM cartas");
+$sql = $con->prepare("SELECT
+clientes.nom_cli as CLIENTE, clientes.tel_cli as CONTACTO,
+productos.nom_p as PRODUCTO, deuda_p.precio_p as 'TOTAL DEUDA',deuda_p.abono_p as ABONOS ,deuda_p.f_iniciop as 'INICIO', deuda_p.f_finalp as 'FINAL'
+from
+clientes inner join deuda_p on 
+clientes.id_cli=deuda_p.id_clientep
+inner join productos
+on deuda_p.id_p=productos.id_pro where deuda_p.f_finalp  = '0000-00-00';");
 $sql->execute();
 $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
 ?>
@@ -12,12 +19,12 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Deudores</title>
+    <title>Document</title>
+    <link rel="stylesheet" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/index2.css">
+    <script src="../../js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-<link rel="stylesheet" href="../../css/index2.css">
-<link rel="stylesheet" href="../../css/bootstrap.min.css">
-<!---->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
     <div class="container-fluid">
       <a class="navbar-brand" href="index.php">WorkStack</a>
@@ -54,7 +61,8 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
           </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="acreedores.php"><b>Mis Acreedores</b></a></li>
-            <li><a class="dropdown-item" href="deudores.php"><b>Mis Deudores</b></a></li>
+            <li><a class="dropdown-item" href="deudores_cartas.php"><b>Mis Deudores Cartas</b></a></li>
+            <li><a class="dropdown-item" href="deudores_productos.php"><b>Mis Deudores Productos</b></a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
@@ -76,13 +84,40 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
       </div>
     </div>
   </nav>
-<!---->
-
-<!--Tabla-->
+<!--FIN DEL NAVEGADOR POR AMOR DE DIOS-->
+<br>
 <div class="container">
-  <h1>Mis Deudores</h1>
+<a href="funciones/agregar_dp.php" class="btn btn-primary">Agregar Nuevos Deudores</a>
+<a href="funciones/modificar_dp.php" class="btn btn-primary">Editar Mis Deudores</a>
 </div>
-<!--Fin Tabla--->
-<script src="../../js/bootstrap.bundle.min.js"></script>
+<br>
+<div class="container">
+<table class="table table-dark table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Nombre</th>
+      <th scope="col">Contacto</th>
+      <th scope="col">Producto</th>
+      <th scope="col">Total Deuda</th>
+      <th scope="col">Abonos</th>
+      <th scope="col">Inicio Deuda</th>
+      <th scope="col">Final Deuda</th>
+    </tr>
+  </thead>
+  <tbody>
+  <?php foreach($resultado as $fila): ?>
+    <tr>
+      <td scope="row" style="color:whitesmoke;"> <?php echo $fila ['CLIENTE'] ?></td>
+      <td scope="row" style="color:whitesmoke;"> <?php echo $fila ['CONTACTO'] ?></td>
+      <td scope="row" style="color:whitesmoke;"> <?php echo $fila ['PRODUCTO'] ?></td>
+      <td scope="row" style="color:whitesmoke;"> <?php echo $fila ['TOTAL DEUDA'] ?></td>
+      <td scope="row" style="color:whitesmoke;"> <?php echo $fila ['ABONOS'] ?></td>
+      <td scope="row" style="color:whitesmoke;"> <?php echo $fila ['INICIO'] ?></td>
+      <td scope="row" style="color:whitesmoke;"> <?php echo $fila ['FINAL'] ?></td>
+    </tr>
+      <?php endforeach; ?>
+  </tbody>
+</table>
+</div>
 </body>
 </html>
