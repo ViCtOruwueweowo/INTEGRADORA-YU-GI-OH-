@@ -174,7 +174,7 @@ if (!isset($_SESSION['usuario'])) {
       <br>
     <a class="btn btn-outline-primary" type="button" href="funciones/listarPersonasConBusqueda.php">Mi Inventario</a>
     <br>
-    <a class="btn btn-outline-primary" type="button" href="agenda.php">Mi Agenda</a>
+    <a class="btn btn-outline-primary" type="button" href="acreedores.php">Mi Agenda</a>
     <br>
     <a class="btn btn-outline-primary" type="button" href="empleados.php">Mis Empleados</a>
     <br>

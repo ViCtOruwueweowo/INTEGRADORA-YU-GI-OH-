@@ -3,8 +3,12 @@ require '../../config/config.php';
 require '../../config/database.php';
 $db = new Database();
 $con = $db->conectar();
-$sql = $con->prepare("SELECT id_car, nombre_c,imagen_c,tipo_c FROM cartas ");
-$sql->execute();
+$sql = $con->prepare("SELECT distinct id_car,
+nombre_c, imagen_c
+FROM 
+cartas inner join car_rar on
+cartas.id_car=car_rar.id_carar inner join rareza on
+car_rar.id_rar=rareza.id_ra where rareza.id_ra>'4' ;");$sql->execute();
 $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
 
 // Verificar si el usuario no ha iniciado sesión
@@ -23,14 +27,9 @@ if (!isset($_SESSION['usuario'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio</title>
     <link rel="stylesheet" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/index3.css">
 <script src="../../js/bootstrap.bundle.min.js"></script>
-<style>
-    .footer {
-      background-color: #f8f9fa;
-      padding: 20px;
-      text-align: center;
-    }
-  </style>
+
 </head>
 <body>
 <div class="container">
@@ -60,10 +59,10 @@ if (!isset($_SESSION['usuario'])) {
 
         <?php foreach($resultado as $row) { ?>
         <div class="col">
-          <div class="card shadow-sm " style="background-color:#212529;">
+          <div class="card shadow-sm " style="background-color:#872189;">
             <?php
             $id =$row[('imagen_c')];
-            $imagen = "imagenes/productos/".$id.".jpg";
+            $imagen = "../../imagenes/productos/".$id.".jpg";
             if(!file_exists($imagen)){
               $imagen="imagenes/no image.png";
             }
@@ -81,11 +80,11 @@ if (!isset($_SESSION['usuario'])) {
 </div>
 <!--Fin Apartado De Cartas-->
 
-
-<footer class="footer">
-    <div class="container">
-      <p>&copy; 2023 Mi Sitio Web. Todos los derechos reservados.</p>
-    </div>
-  </footer>
+<br>
+<footer class="footer mt-auto py-3 bg-dark">
+<div class="container text-center">
+<span class="text-center" style="color:white">Aplicacion Desarrollada Unicamente Para Fines De Venta Y Distribucion De Menores.</span>
+</div>
+</footer>
 </body>
 </html>

@@ -45,6 +45,8 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="../funciones/listarPersonasConBusqueda.php"><b>Inventario Carta</b></a></li>
             <li><a class="dropdown-item" href="../funciones/listarPersonasConBusqueda2.php"><b>Inventario Productos</b></a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="../funciones/detallar.php">Detalle Carta</a></li>          
           </ul>
         </li>
             <li class="nav-item dropdown">
@@ -53,7 +55,8 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
           </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="../acreedores.php"><b>Mis Acreedores</b></a></li>
-            <li><a class="dropdown-item" href="../deudores.php"><b>Mis Deudores</b></a></li>
+            <li><a class="dropdown-item" href="../deudores_cartas.php"><b>Mis Deudores Cartas</b></a></li>
+            <li><a class="dropdown-item" href="../deudores_productos.php"><b>Mis Deudores Productos</b></a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">

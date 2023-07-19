@@ -46,7 +46,8 @@
           </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="../acreedores.php"><b>Mis Acreedores</b></a></li>
-            <li><a class="dropdown-item" href="../deudores.php"><b>Mis Deudores</b></a></li>
+            <li><a class="dropdown-item" href="../deudores_cartas.php"><b>Mis Deudores Cartas</b></a></li>
+            <li><a class="dropdown-item" href="../deudores_productos.php"><b>Mis Deudores Productos</b></a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
@@ -62,7 +63,7 @@
         </li>
           </ul>
           <form class="d-flex mt-3 mt-lg-0" role="search">
-            <a href="../../config/cerrarSesion.php" class="btn btn-outline-success">Cerrar Sesion</a>
+            <a href="../../../config/cerrarSesion.php" class="btn btn-outline-success">Cerrar Sesion</a>
           </form>
         </div>
       </div>
