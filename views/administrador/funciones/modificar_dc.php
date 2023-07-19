@@ -6,6 +6,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="../../../css/bootstrap.min.css">
     <link rel="stylesheet" href="../../../css/index2.css">
+    <script src="../../../js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
@@ -44,7 +45,8 @@
           </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="../acreedores.php"><b>Mis Acreedores</b></a></li>
-            <li><a class="dropdown-item" href="../deudores.php"><b>Mis Deudores</b></a></li>
+            <li><a class="dropdown-item" href="../deudores_cartas.php"><b>Mis Deudores Cartas</b></a></li>
+            <li><a class="dropdown-item" href="../deudores_productos.php"><b>Mis Deudores Productos</b></a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
@@ -66,66 +68,78 @@
       </div>
     </div>
   </nav>
-<br>
-<div class="container">
-    <h1 class="text-center">Especificacion Carta</h1>
-    <hr>
-    <form action="car_rar.php" method="post">
-    <label for="id_car" class="form-label">Seleccionar Carta:</label>
-    <?php
+  <br>
+  <?php
 include 'date.php';
-$conexion = new Database();
+$conexion = new database();
 $conexion->conectarDB();
-$consulta = "SELECT*from cartas;";
+
+// Obtener la lista de departamentos para el filtro
+$consulta = "SELECT CONCAT('Cliente:', ' ',clientes.nom_cli,'. ', 'Carta:',' ', cartas.nombre_c, ' ', rareza.rareza) as nombre, deuda_c.id_dc, deuda_c.cantidad_c, deuda_c.precio_c, deuda_c.notas, deuda_c.abono_c FROM deuda_c INNER JOIN clientes ON deuda_c.id_clientec = clientes.id_cli INNER JOIN car_rar ON car_rar.id_cr = deuda_c.cr_fk inner join cartas on car_rar.id_carar=cartas.id_car inner join rareza on car_rar.id_rar=rareza.id_ra";
 $tabla = $conexion->seleccionar($consulta);
-echo "<select name='id_carar' class='form-select'>";
-foreach ($tabla as $row)
-{
-    echo "<option name='id_carar' value='".$row->id_car."'> ".$row->nombre_c."</option>";
+
+// Filtrar el departamento seleccionado
+if (isset($_POST['depa'])) {
+    $depa = $_POST['depa'];
+    $consultaf = "SELECT CONCAT('Cliente:', ' ',clientes.nom_cli,'. ', 'Carta:',' ', cartas.nombre_c, ' ', rareza.rareza) as nombre, deuda_c.id_dc, deuda_c.cantidad_c, deuda_c.precio_c, deuda_c.notas, deuda_c.abono_c FROM deuda_c INNER JOIN clientes ON deuda_c.id_clientec = clientes.id_cli INNER JOIN car_rar ON car_rar.id_cr = deuda_c.cr_fk inner join cartas on car_rar.id_carar=cartas.id_car inner join rareza on car_rar.id_rar=rareza.id_ra WHERE id_dc ='$depa'";
+    $tablaf = $conexion->seleccionar($consultaf);
 }
+?>
+
+<div class="container">
+
+    <form class="row g-3" method="POST">
+        
+        <div class="col-auto">
+        <label class="form-label">Selecciona Una Deuda</label>
+            <br>
+            <select class="form-select" name="depa" aria-label="Default select example">
+                <?php
+                foreach ($tabla as $registro) {
+                    $selected = '';
+                    if (isset($_POST['depa']) && $_POST['depa'] == $registro->id_dc) {
+                        $selected = 'selected';
+                    }
+                    echo "<option value='" . $registro->id_dc . "' $selected>" . $registro->nombre . "</option>";
+                }
+                ?>
+            </select>
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary mb-3">Filtrar</button>
+        </div>
+
+        <?php
+        // Mostrar los campos dentro del formulario principal
+        if (isset($tablaf)) {
+            foreach ($tablaf as $registro) {
+                echo "<input type='hidden' name='id_dc' value='$registro->id_dc'> ";
+                echo "<label for='cantidad_c'>cantidad</label>";
+                echo "<input class='form-control' name='cantidad_c' value='$registro->cantidad_c'> ";
+                echo "<label for='notas'>Notas</label>";
+                echo "<input class='form-control' name='notas' value='$registro->notas'> ";
+                echo "<label for='abono_c'>abono</label>";
+                echo "<input class='form-control' name='abono_c' value='$registro->abono_c'> ";
+                echo "<select class='form-control' name='concepto'>";
+echo "<option value='ENCARGO' " . ($registro->estado == 'ENCARGO' ? 'selected' : '') . ">ENCARGO</option>";
+echo "<option value='DEUDA' " . ($registro->estado == 'DEUDA' ? 'selected' : '') . ">DEUDA</option>";
 echo "</select>";
 
-?>
-    <label for="id_rar" class="form-label">Seleccionar Rareza:</label>
-<?php
-$consulta = "SELECT*from rareza;";
-$tabla = $conexion->seleccionar($consulta);
-echo "<select name='id_rar' class='form-select'>";
-foreach ($tabla as $row)
-{
-    echo "<option name='id_rar' value='".$row->id_ra."'> ".$row->rareza."</option>";
-}
-echo "</select>";
 
-?>
-<div class="mb-3">
-  <label for="p_price" class="form-label">Ingresar Link De Price</label>
-  <input type="text" name="p_price" class="form-control" id="exampleFormControlInput1" placeholder="Link Price" require>
-</div>
-<div class="mb-3">
-  <label for="p_tcg" class="form-label">Ingresar Link De Tcg</label>
-  <input type="text" name="p_tcg" class="form-control" id="exampleFormControlInput1" placeholder="Link Tcg" require>
-</div>
-<div class="mb-3">
-  <label for="p_beto" class="form-label">Ingresar Precio En Tienda</label>
-  <input type="text" name="p_beto" class="form-control" id="exampleFormControlInput1" placeholder="Precio Local" require>
-</div>
-<div class="mb-3">
-  <label for="codigo" class="form-label">Ingresar Codigo</label>
-  <input type="text" name="codigo" class="form-control" id="exampleFormControlInput1" placeholder="Codigo" require>
-</div>
-<div class="mb-3">
-  <label for="cantidad" class="form-label">Ingresar Cantidad</label>
-  <input type="text" name="cantidad" class="form-control" id="exampleFormControlInput1" placeholder="Cantidad" require>
-</div>
-<div class="col-12">
-    <button type="submit" value="Enviar" class="btn btn-primary">Guardar Registro</button>
-  </div>
+
+                
+                
+                
+            }
+        }
+        ?>
+
+        <!-- Botón para enviar los datos al archivo car_rar.php -->
+        <div class="col-12">
+            <button type="submit" formaction="editar_dc.php" class="btn btn-primary">Enviar Datos</button>
+        </div>
     </form>
 </div>
-
-<script src="../../../js/bootstrap.min.js"></script> 
-<script src="../../../js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>

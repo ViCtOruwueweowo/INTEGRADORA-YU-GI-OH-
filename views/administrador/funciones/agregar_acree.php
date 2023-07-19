@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="../../../css/bootstrap.min.css">
+
     <link rel="stylesheet" href="../../../css/index2.css">
+    <link rel="stylesheet" href="../../../css/bootstrap.min.css">
+    <script src="../../../js/bootstrap.bundle.min.js"></script>
+    <title>Document</title>
 </head>
 <body>
-    <!-- Fixed navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
     <div class="container-fluid">
       <a class="navbar-brand" href="../index.php">WorkStack</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2" aria-controls="offcanvasNavbar2" aria-label="Toggle navigation">
@@ -45,7 +46,8 @@
           </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="../acreedores.php"><b>Mis Acreedores</b></a></li>
-            <li><a class="dropdown-item" href="../deudores.php"><b>Mis Deudores</b></a></li>
+            <li><a class="dropdown-item" href="../deudores_cartas.php"><b>Mis Deudores Cartas</b></a></li>
+            <li><a class="dropdown-item" href="../deudores_productos.php"><b>Mis Deudores Productos</b></a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
@@ -67,40 +69,44 @@
       </div>
     </div>
   </nav>
-<br>
 
-<!---->
-   <div class="container">
-<h1>Agregar Carta</h1>
-<hr>
-<form action="guardar_carta.php" method="post" enctype="multipart/form-data">
-<div class="row">
-    <div class="col-12">
-    <label  class="form-label">Ingresar Nombre De La Carta:</label>
-    <input type="text" class="form-control col-lg-6" id="nom_p" name="nombre_c" placeholder="Nombre Carta. . ." require>
+  <br>
+<div class="container">
+  
+    <form action="guardar_acre.php" method="post">
+
+    <label for="id_cr" class="form-label">Seleccionar cliente:</label>
+    <?php
+      include 'date.php';
+      $conexion = new Database();
+      $conexion->conectarDB();
+
+      $consulta = "SELECT clientes.nom_cli as nombre, clientes.id_cli from clientes";
+      $tabla = $conexion->seleccionar($consulta);
+      echo "<select id='id_cli' name='id_cli' class='form-select'>";
+      foreach ($tabla as $row)
+      {
+          echo "<option name='id_cli' value='".$row->id_cli."'>".$row->nombre."</option>";
+      }
+      echo "</select>";
+      ?>
+
+    <div class="mb-3">
+      <label for="descuento" class="form-label">Ingresar descuento</label>
+      <input type="text" name="descuento" class="form-control" id="exampleFormControlInput1" placeholder="descuento">
+    </div>
+    <div class="mb-3">
+      <label for="f_finalacreed" class="form-label">Fecha final</label>
+      <input type="date" name="f_finalacreed" class="form-control" id="exampleFormControlInput1" placeholder="Fecha final">
+    </div>
+    <div class="mb-3">
+      <label for="notas_ac" class="form-label">Notas</label>
+      <input type="text" name="notas_ac" class="form-control" id="exampleFormControlInput1" placeholder="Notas">
     </div>
     <div class="col-12">
-    <label  class="form-label">Ingresar Nombre De La Imagen:</label>
-    <input type="text" class="form-control col-lg-6"  name="imagen_c" placeholder="Nombre Imagen. . ." require>
+      <button type="submit" value="Enviar" class="btn btn-primary">Guardar Registro</button>
     </div>
-    <div class="col-12">
-    <label  class="form-label">Ingresar Tipo De Carta:</label>
-    <input type="text"  class="form-control" name="tipo_c" placeholder="Magia, Trampa, Monstruo. . ." require>
-    </div>
-    <div class="col-12">
-    <label  class="form-label">Ingresar Archivo</label><br>
-    <input type="file" name="imagen" accept=".jpg">
-    </div>
-    
-    <div class="col-12">
-        <br>
-    <input type="submit" class="btn btn-primary btn-lg" value="Subir imagen">
-    </div>
+    </form>
 </div>
-</form>
-   </div>
-   <script src="../../../js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-
-      

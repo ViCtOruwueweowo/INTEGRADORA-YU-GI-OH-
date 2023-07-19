@@ -2,8 +2,13 @@
 require '../../config/database.php';
 $db = new Database ;
 $con = $db->conectar();
-$sql = $con->prepare("SELECT * FROM clientes inner join acreedor on clientes.id_cli=acreedor.id_clientu where f_finalacreed > now();
-");
+$sql = $con->prepare("SELECT clientes.nom_cli as CLIENTE, clientes.tel_cli as TELEFONO,deuda_c.concepto as CONCEPTO, 
+wa.nombre_c as CARTA, wa.rareza as RAREZA, deuda_c.abono_c as ABONO, deuda_c.precio_c as TOTAL,
+wa.codigo as CODIGO, deuda_c.f_inicioc as FINICIO, deuda_c.f_finalc as FFINAL, deuda_c.notas as NOTAS 
+from clientes inner join deuda_c on clientes.id_cli=deuda_c.id_clientec inner join 
+(select car_rar.id_cr, car_rar.id_carar, car_rar.id_rar, car_rar.codigo, cartas.id_car, cartas.nombre_c, rareza.id_ra, 
+rareza.rareza from rareza inner join car_rar on rareza.id_ra=car_rar.id_rar inner join cartas on car_rar.id_carar=cartas.id_car)
+as wa on deuda_c.cr_fk=wa.id_cr where deuda_c.f_finalc = '0000-00-00';");
 $sql->execute();
 $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
 ?>
@@ -13,12 +18,12 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acreedores</title>
+    <title>Deudores</title>
 </head>
 <body>
 <link rel="stylesheet" href="../../css/index2.css">
-
 <link rel="stylesheet" href="../../css/bootstrap.min.css">
+<!---->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
     <div class="container-fluid">
       <a class="navbar-brand" href="index.php">WorkStack</a>
@@ -55,8 +60,7 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
           </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="acreedores.php"><b>Mis Acreedores</b></a></li>
-            <li><a class="dropdown-item" href="deudores_cartas.php"><b>Mis Deudores Cartas</b></a></li>
-            <li><a class="dropdown-item" href="deudores_productos.php"><b>Mis Deudores Productos</b></a></li>
+            <li><a class="dropdown-item" href="deudores.php"><b>Mis Deudores</b></a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
@@ -78,10 +82,11 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
       </div>
     </div>
   </nav>
+<!---->
 <br>
 <div class="container">
-<a href="funciones/agregar_acree.php" class="btn btn-primary">Agregar Nuevos Acreedores</a>
-<a href="funciones/modificar_acreedor.php" class="btn btn-primary">Editar Mis Acreedores</a>
+<a href="funciones/agregar_dc.php" class="btn btn-primary">Agregar Nuevos Deudores</a>
+<a href="funciones/modificar_dc.php" class="btn btn-primary">Editar Mis Deudores</a>
 </div>
 <br>
 <div class="container">
@@ -89,29 +94,32 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
   <thead>
     <tr>
       <th scope="col">Nombre</th>
-      <th scope="col">Telefono</th>
-      <th scope="col">Descuento</th>
-      <th scope="col">Inicio</th>
-      <th scope="col">Final</th>
-      <th scope="col">Notas</th>
+      <th scope="col">Contacto</th>
+      <th scope="col">Carta</th>
+      <th scope="col">Rareza</th>
+      <th scope="col">Total Deuda</th>
+      <th scope="col">Abonos</th>
+      <th scope="col">Inicio Deuda</th>
+      <th scope="col">Final Deuda</th>
     </tr>
   </thead>
   <tbody>
   <?php foreach($resultado as $fila): ?>
     <tr>
-      <td scope="row" style="color:whitesmoke;"> <?php echo $fila ['nom_cli'] ?></td>
-      <td style="color:whitesmoke;"><?php echo $fila ['tel_cli'] ?></td>
-      <td style="color:whitesmoke;"><?php echo $fila ['descuento'] ?>%</td>
-      <td style="color:whitesmoke;"><?php echo $fila ['f_inicioacreed'] ?></td>
-      <td style="color:whitesmoke;"><?php echo $fila ['f_finalacreed'] ?></td>
-      <td style="color:whitesmoke;"><?php echo $fila ['notas_ac'] ?></td>
+      <td scope="row" style="color:whitesmoke;"> <?php echo $fila ['CLIENTE'] ?></td>
+      <td scope="row" style="color:whitesmoke;"> <?php echo $fila ['TELEFONO'] ?></td>
+      <td scope="row" style="color:whitesmoke;"> <?php echo $fila ['CARTA'] ?></td>
+      <td scope="row" style="color:whitesmoke;"> <?php echo $fila ['RAREZA'] ?></td>
+      <td scope="row" style="color:whitesmoke;"> <?php echo $fila ['TOTAL'] ?></td>
+      <td scope="row" style="color:whitesmoke;"> <?php echo $fila ['ABONO'] ?></td>
+      <td scope="row" style="color:whitesmoke;"> <?php echo $fila ['FINICIO'] ?></td>
+      <td scope="row" style="color:whitesmoke;"> <?php echo $fila ['FFINAL'] ?></td>
     </tr>
       <?php endforeach; ?>
   </tbody>
 </table>
 </div>
- 
-  
-  <script src="../../js/bootstrap.bundle.min.js"></script>
+
+<script src="../../js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

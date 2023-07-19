@@ -57,6 +57,8 @@ $resultado0 = $sql->fetchAll(PDO::FETCH_ASSOC);
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="funciones/listarPersonasConBusqueda.php"><b>Inventario Carta</b></a></li>
             <li><a class="dropdown-item" href="funciones/listarPersonasConBusqueda2.php"><b>Inventario Productos</b></a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="funciones/detallar.php">Detalle Carta</a></li>
           </ul>
         </li>
             <li class="nav-item dropdown">
@@ -65,7 +67,8 @@ $resultado0 = $sql->fetchAll(PDO::FETCH_ASSOC);
           </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="acreedores.php"><b>Mis Acreedores</b></a></li>
-            <li><a class="dropdown-item" href="deudores.php"><b>Mis Deudores</b></a></li>
+            <li><a class="dropdown-item" href="deudores_cartas.php"><b>Mis Deudores Cartas</b></a></li>
+            <li><a class="dropdown-item" href="deudores_productos.php"><b>Mis Deudores Productos</b></a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
@@ -123,31 +126,31 @@ $resultado0 = $sql->fetchAll(PDO::FETCH_ASSOC);
 <div class="row">
   <div class="col-12">
   <label for="nombre_user" class="form-label" >Nombre</label> 
-  <input type="text" class="form-control"id="nombre" name="nombre_user" placeholder="Ingresar nombre..">
+  <input type="text" class="form-control"id="nombre" name="nombre_user" placeholder="Ingresar nombre.."required >
   </div>
   <div class="col-12">
   <label for="apellidos_user" class="form-label ">Apellidos</label>
-  <input type="text" class="form-control col-lg-6" id="apellidos_user" name="apellidos_user" placeholder="Ingresar apellidos..">
+  <input type="text" class="form-control col-lg-6" id="apellidos_user" name="apellidos_user" placeholder="Ingresar apellidos.." required>
   </div>
   <div class="col-6">
   <label for="telefono" class="form-label ">Telefono</label>
-  <input type="text" class="form-control col-lg-6" id="telefono" name="telefono" placeholder="Ingresar telefono..">
+  <input type="text" class="form-control col-lg-6" id="telefono" name="telefono" placeholder="Ingresar telefono.." required>
   </div>
   <div class="col-6">
   <label for="fechan" class="form-label ">Fecha De Nacimiento</label>
-  <input type="date" class="form-control col-lg-6" id="fechan" max="2023-01-01" name="fechan">
+  <input type="date" class="form-control col-lg-6" id="fechan" max="2023-01-01" name="fechan" required>
   </div>
   <div class="col-12">
   <label for="direccion" class="form-label ">Direccion</label>
-  <input type="text" class="form-control col-lg-6" id="direccion" name="direccion" placeholder="Ingresar direccion..">
+  <input type="text" class="form-control col-lg-6" id="direccion" name="direccion" placeholder="Ingresar direccion.." required>
   </div>
   <div class="col-6">
   <label for="usuario" class="form-label ">Nombre De Usuario</label>
-  <input type="text" class="form-control col-lg-6" id="usuario" name="usuario" placeholder="Ingresar nuevo nombre de usuario..">
+  <input type="text" class="form-control col-lg-6" id="usuario" name="usuario" placeholder="Ingresar nuevo nombre de usuario.." required>
   </div>
   <div class="col-6">
   <label for="contraseña" class="form-label ">Contraseña</label>
-  <input type="password" class="form-control col-lg-6" id="contraseña" name="contraseña" placeholder="Ingresar nueva contraseña">
+  <input type="password" class="form-control col-lg-6" id="contraseña" name="contraseña"placeholder="Ingresar nueva contraseña">
   </div>
  </div>
       </div>
@@ -177,27 +180,32 @@ $resultado0 = $sql->fetchAll(PDO::FETCH_ASSOC);
    <div class="row ">
      <div class="col-12 ">
      <label for="nombre_user">Nombre:</label>
-     <input type="text" class="form-control col-lg-6" id="nombre" name="nombre" required>
+     <input type="text" class="form-control col-lg-6" id="nombre_user" name="nombre_user" required>
      </div>
      <div class="col-12 ">
-     <label for="telefono">Telefono:</label>
-     <input type="text" class="form-control col-lg-6" id="telefono" name="telefono">
+     <label for="tel_user">Telefono:</label>
+     <input type="text" class="form-control col-lg-6" id="tel_user" name="tel_user" required>
      </div>
      <div class="col-12">
-     <label for="direccion">Direccion:</label>
-     <input type="text" id="direccion" class="form-control" name="direccion">
+     <label for="direccion_user">Direccion:</label>
+     <input type="text" id="direccion" class="form-control" name="direccion_user" required>
      </div>
      <div class="col-6">
      <label for="usuario">Usuario:</label>
-     <input type="text" id="usuario" class="form-control" name="usuario">
+     <input type="text" id="usuario" class="form-control" name="usuario" required>
      </div>
      <div class="col-6">
      <label for="contraseña">Contraseña:</label>
-     <input type="password" id="contraseña" class="form-control" name="contraseña">
+     <input type="password" id="contraseña" class="form-control" name="contraseña" required>
      </div>
      <div class="col-12">
-     <label for="estado">Estado:</label>
-     <input type="text" id="estado" name="estado" class="form-control">
+     <label>
+  <input type="radio" name="estado" value="1">ACTIVO
+</label>
+<br>
+<label>
+  <input type="radio" name="estado" value="0">inactivo
+</label>
      </div>
      <div class="col-12 d-grid gap-2">
      </div>

@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
     <link rel="stylesheet" href="../../../css/bootstrap.min.css">
     <link rel="stylesheet" href="../../../css/index2.css">
+<script src="../../../js/bootstrap.bundle.min.js"></script>
+    <title>Document</title>
 </head>
 <body>
-    <!-- Fixed navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
     <div class="container-fluid">
       <a class="navbar-brand" href="../index.php">WorkStack</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2" aria-controls="offcanvasNavbar2" aria-label="Toggle navigation">
@@ -45,7 +45,8 @@
           </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="../acreedores.php"><b>Mis Acreedores</b></a></li>
-            <li><a class="dropdown-item" href="../deudores.php"><b>Mis Deudores</b></a></li>
+            <li><a class="dropdown-item" href="../deudores_cartas.php"><b>Mis Deudores Cartas</b></a></li>
+            <li><a class="dropdown-item" href="../deudores_productos.php"><b>Mis Deudores Productos</b></a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
@@ -68,39 +69,70 @@
     </div>
   </nav>
 <br>
+<?php
+include 'date.php';
+$conexion = new database();
+$conexion->conectarDB();
 
-<!---->
-   <div class="container">
-<h1>Agregar Carta</h1>
-<hr>
-<form action="guardar_carta.php" method="post" enctype="multipart/form-data">
-<div class="row">
-    <div class="col-12">
-    <label  class="form-label">Ingresar Nombre De La Carta:</label>
-    <input type="text" class="form-control col-lg-6" id="nom_p" name="nombre_c" placeholder="Nombre Carta. . ." require>
+// Obtener la lista de departamentos para el filtro
+$consulta = "SELECT clientes.nom_cli as nombre, acreedor.id_acreedor, acreedor.descuento, acreedor.f_finalacreed, acreedor.notas_ac from acreedor inner join clientes on acreedor.id_clientu=clientes.id_cli";
+$tabla = $conexion->seleccionar($consulta);
+
+// Filtrar el departamento seleccionado
+if (isset($_POST['depa'])) {
+    $depa = $_POST['depa'];
+    $consultaf = "SELECT clientes.nom_cli as nombre, acreedor.id_acreedor, acreedor.descuento, acreedor.f_finalacreed, acreedor.notas_ac from acreedor inner join clientes on acreedor.id_clientu=clientes.id_cli WHERE id_acreedor ='$depa'";
+    $tablaf = $conexion->seleccionar($consultaf);
+}
+?>
+
+<div class="container">
+
+
+    <form class="row g-3" method="POST">
+        <div class="col-auto">
+<h2>Selecciona Un Cliente:</h2>
     </div>
-    <div class="col-12">
-    <label  class="form-label">Ingresar Nombre De La Imagen:</label>
-    <input type="text" class="form-control col-lg-6"  name="imagen_c" placeholder="Nombre Imagen. . ." require>
-    </div>
-    <div class="col-12">
-    <label  class="form-label">Ingresar Tipo De Carta:</label>
-    <input type="text"  class="form-control" name="tipo_c" placeholder="Magia, Trampa, Monstruo. . ." require>
-    </div>
-    <div class="col-12">
-    <label  class="form-label">Ingresar Archivo</label><br>
-    <input type="file" name="imagen" accept=".jpg">
-    </div>
-    
-    <div class="col-12">
-        <br>
-    <input type="submit" class="btn btn-primary btn-lg" value="Subir imagen">
-    </div>
+        <div class="col-auto">
+            <select class="form-select" name="depa" aria-label="Default select example">
+                <?php
+                foreach ($tabla as $registro) {
+                    $selected = '';
+                    if (isset($_POST['depa']) && $_POST['depa'] == $registro->id_acreedor) {
+                        $selected = 'selected';
+                    }
+                    echo "<option value='" . $registro->id_acreedor . "' $selected>" . $registro->nombre . "</option>";
+                }
+                ?>
+            </select>
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary mb-3">Filtrar</button>
+        </div>
+
+        <?php
+        // Mostrar los campos dentro del formulario principal
+        if (isset($tablaf)) {
+            foreach ($tablaf as $registro) {
+                echo "<input type='hidden' name='id_acreedor' value='$registro->id_acreedor'> ";
+                echo "<label for='descuento'>descuento</label>";
+                echo "<input class='form-control' name='descuento' value='$registro->descuento'> ";
+                echo "<label for='f_finalacreed'>Fecha final de credito</label>";
+                echo "<input class='-form-control' type='date' name='f_finalacreed' value='$registro->f_finalacreed'> ";
+                echo "<label for='notas_ac'>Notas</label>";
+                echo "<input class='form-control' name='notas_ac' value='$registro->notas_ac'> ";
+                
+                
+            }
+        }
+        ?>
+
+        <!-- Botón para enviar los datos al archivo car_rar.php -->
+        <div class="col-12">
+            <button type="submit" formaction="mod_acre.php" class="btn btn-primary">Enviar Datos</button>
+        </div>
+    </form>
 </div>
-</form>
-   </div>
-   <script src="../../../js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>
-
-      

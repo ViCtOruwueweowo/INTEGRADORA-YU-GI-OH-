@@ -34,7 +34,7 @@ try {
     if (isset($_FILES['imagen'])) {
         $nombreArchivo = $_FILES['imagen']['name'];
         $archivoTemp = $_FILES['imagen']['tmp_name'];
-        $rutaDestino = "../imagenes/productos/" . $nombreArchivo;
+        $rutaDestino = "../../../imagenes/productos/" . $nombreArchivo;
 
         if (move_uploaded_file($archivoTemp, $rutaDestino)) {
             echo "<div class='alert alert-success'>Carta Guardada Con Éxito</div>";

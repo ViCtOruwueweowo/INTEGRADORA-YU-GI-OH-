@@ -1,11 +1,12 @@
 <?php
-
 include_once "base_de_datos.php";
 
 # Por defecto hacemos la consulta de todas las personas
-$consulta = "SELECT * FROM cartas inner join car_rar
-on cartas.id_car=car_rar.id_carar left join rareza
-on car_rar.id_rar=rareza.id_ra ORDER BY cartas.tipo_c DESC";
+$consulta = "SELECT *
+FROM cartas
+INNER JOIN car_rar ON cartas.id_car = car_rar.id_carar
+LEFT JOIN rareza ON car_rar.id_rar = rareza.id_ra
+ORDER BY cartas.tipo_c DESC;";
 
 # Vemos si hay búsqueda
 $busqueda = null; 
@@ -13,9 +14,12 @@ if (isset($_GET["busqueda"])) {
     # Y si hay, búsqueda, entonces cambiamos la consulta
     # Nota: no concatenamos porque queremos prevenir inyecciones SQL
     $busqueda = $_GET["busqueda"];
-    $consulta = "SELECT * FROM cartas inner join car_rar
-    on cartas.id_car=car_rar.id_carar left join rareza
-    on car_rar.id_rar=rareza.id_ra  WHERE cartas.nombre_c LIKE ?";
+    $consulta = "SELECT *
+    FROM cartas
+    INNER JOIN car_rar ON cartas.id_car = car_rar.id_carar
+    LEFT JOIN rareza ON car_rar.id_rar = rareza.id_ra
+    WHERE cartas.nombre_c LIKE ?;
+    ";
 }
 # Preparar sentencia e indicar que vamos a usar un cursor
 $sentencia = $base_de_datos->prepare($consulta, [
@@ -66,6 +70,9 @@ if ($busqueda === null) {
             <li class="nav-item">
               <a class="nav-link " aria-current="page" href="../calendario.php"><b>Calendario</b></a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link " aria-current="page" href="../empleados.php"><b>Empleados</b></a>
+            </li>
             <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             <b>Inventario</b>
@@ -73,12 +80,10 @@ if ($busqueda === null) {
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="listarPersonasConBusqueda.php"><b>Inventario Carta</b></a></li>
             <li><a class="dropdown-item" href="listarPersonasConBusqueda2.php"><b>Inventario Productos</b></a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="detallar.php">Detalle Carta</a></li>
           </ul>
         </li>
-         
-            <li class="nav-item">
-              <a class="nav-link " aria-current="page" href="../empleados.php"><b>Empleados</b></a>
-            </li>
             <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             <b>Agenda</b>
@@ -88,9 +93,20 @@ if ($busqueda === null) {
             <li><a class="dropdown-item" href="../deudores.php"><b>Mis Deudores</b></a></li>
           </ul>
         </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <b>Registro</b>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="../bitacoras/upd_cartas.php"><b>Actualizaciones En Cartas</b></a></li>
+            <li><a class="dropdown-item" href="../bitacoras/upd_productos.php"><b>Actualizaciones En Productos</b></a></li>
+            <li><a class="dropdown-item" href="../bitacoras/upd_dc.php"><b>Reporte Deuda Cartas</b></a></li>
+            <li><a class="dropdown-item" href="../bitacoras/upd_dp.php"><b>Reporte Deuda Productos</b></a></li>
+          </ul>
+        </li>
           </ul>
           <form class="d-flex mt-3 mt-lg-0" role="search">
-            <a href="../../index.php" class="btn btn-outline-success">Cerrar Sesion</a>
+            <a href="../../config/cerrarSesion.php" class="btn btn-outline-success">Cerrar Sesion</a>
           </form>
         </div>
       </div>
@@ -121,8 +137,9 @@ if ($busqueda === null) {
     </div>
     <div class="col col-lg-6">
     <button type="submit" class="btn btn-primary mb-2">Buscar ahora</button>
-    <a href="agregar_car.php" class="btn btn-primary mb-2">Agregar</a>
+    <a href="agregar_car.php" class="btn btn-primary mb-2">Agregar Carta</a>
     <a href="agregar_rar.php" class="btn btn-primary mb-2">Agregar Rareza</a>
+    <a href="modificar_car.php" class="btn btn-primary mb-2">Modificar Cartas</a>
     </div>
   </div>
 </form>
@@ -130,7 +147,7 @@ if ($busqueda === null) {
 <table class="table table-dark table-striped table-hover">
   <thead >
 			<tr>
-     
+      <th>Imagen</th>
       <th>Nombre</th>
 				<th>Tipo</th>
 				<th>Rareza</th>
@@ -143,7 +160,9 @@ if ($busqueda === null) {
 			
 			<?php while ($resultado = $sentencia->fetchObject()) {?>
 			<tr>
-      <td style="color:whitesmoke;"><?php echo $resultado->nombre_c ?></td>
+        
+        <td style="color:whitesmoke;"><?php echo "<img src='../../../imagenes/productos/$resultado->imagen_c.jpg' style='width:100px'> " ?></td>
+        <td style="color:whitesmoke;"><?php echo $resultado->nombre_c ?></td>
 				<td style="color:whitesmoke;"><?php echo $resultado->tipo_c ?></td>
 				<td style="color:whitesmoke;"><?php echo $resultado->rareza ?></td>
         <td style="color:whitesmoke;"><?php echo $resultado->cantidad ?></td>

@@ -1,15 +1,4 @@
 
-<?php
-
- // Verificar si el usuario no ha iniciado sesión
- // Checa tu variable o las condiciones, alguno está mal
-// if (!isset($_SESSION['usuario'])) {
-//  echo "Inicia sesión primero por favor :D";
-//  header("refresh:2 ../../index.php");  // Redireccionamos al archivo de inicio de sesión
-//  exit();
-//}
-//?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -59,6 +48,8 @@
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="funciones/listarPersonasConBusqueda.php"><b>Inventario Carta</b></a></li>
             <li><a class="dropdown-item" href="funciones/listarPersonasConBusqueda2.php"><b>Inventario Productos</b></a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="funciones/detallar.php">Detalle Carta</a></li>
           </ul>
         </li>
             <li class="nav-item dropdown">
@@ -67,7 +58,8 @@
           </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="acreedores.php"><b>Mis Acreedores</b></a></li>
-            <li><a class="dropdown-item" href="deudores.php"><b>Mis Deudores</b></a></li>
+            <li><a class="dropdown-item" href="deudores_cartas.php"><b>Mis Deudores Cartas</b></a></li>
+            <li><a class="dropdown-item" href="deudores_productos.php"><b>Mis Deudores Productos</b></a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
@@ -81,7 +73,6 @@
             <li><a class="dropdown-item" href="bitacoras/upd_dp.php"><b>Reporte Deuda Productos</b></a></li>
           </ul>
         </li>
-      
           </ul>
           <form class="d-flex mt-3 mt-lg-0" role="search">
             <a href="../../config/cerrarSesion.php" class="btn btn-outline-success">Cerrar Sesion</a>
@@ -90,10 +81,11 @@
       </div>
     </div>
   </nav>
+
   <body >
     <div class="container">
         
-            <div> <br/><br/> <div id="CalendarioWeb" style="background-color:#212529;color:white;" class="fc fc-media-screen fc-direction-ltr fc-theme-standard "  ></div></div>
+            <div> <br/><br/> <div id="CalendarioWeb" style=" background-color: rgba(0, 0, 0, 0.500);; ;color:white ;font-size:25px" class="fc fc-media-screen fc-direction-ltr  "  ></div></div>
           
     </div>
    

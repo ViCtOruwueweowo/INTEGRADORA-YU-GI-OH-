@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Detalle</title>
     <link rel="stylesheet" href="../../../css/bootstrap.min.css">
     <link rel="stylesheet" href="../../../css/index2.css">
+    <link rel="stylesheet" href="../../../css/bootstrap.min.css">
+    <script src="../../../js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-    <!-- Fixed navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
     <div class="container-fluid">
       <a class="navbar-brand" href="../index.php">WorkStack</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2" aria-controls="offcanvasNavbar2" aria-label="Toggle navigation">
@@ -67,40 +68,91 @@
       </div>
     </div>
   </nav>
-<br>
+<?php
+    include 'date.php';
+    $conexion = new database();
+    $conexion->conectarDB();
 
-<!---->
-   <div class="container">
-<h1>Agregar Carta</h1>
-<hr>
-<form action="guardar_carta.php" method="post" enctype="multipart/form-data">
-<div class="row">
-    <div class="col-12">
-    <label  class="form-label">Ingresar Nombre De La Carta:</label>
-    <input type="text" class="form-control col-lg-6" id="nom_p" name="nombre_c" placeholder="Nombre Carta. . ." require>
-    </div>
-    <div class="col-12">
-    <label  class="form-label">Ingresar Nombre De La Imagen:</label>
-    <input type="text" class="form-control col-lg-6"  name="imagen_c" placeholder="Nombre Imagen. . ." require>
-    </div>
-    <div class="col-12">
-    <label  class="form-label">Ingresar Tipo De Carta:</label>
-    <input type="text"  class="form-control" name="tipo_c" placeholder="Magia, Trampa, Monstruo. . ." require>
-    </div>
-    <div class="col-12">
-    <label  class="form-label">Ingresar Archivo</label><br>
-    <input type="file" name="imagen" accept=".jpg">
-    </div>
-    
-    <div class="col-12">
-        <br>
-    <input type="submit" class="btn btn-primary btn-lg" value="Subir imagen">
-    </div>
+    // Para el filtro
+    $consulta = "SELECT id_car, nombre_c FROM cartas";
+    $tabla = $conexion->seleccionar($consulta);
+
+    // Para la tabla
+    $depa = isset($_POST['depa']) ? $_POST['depa'] : '';
+
+    if (!empty($depa)) {
+        $consultaf = "SELECT * FROM cartas 
+                      INNER JOIN car_rar ON cartas.id_car = car_rar.id_carar 
+                      INNER JOIN rareza ON car_rar.id_rar = rareza.id_ra
+                      WHERE id_car = '$depa'";
+        $tablaf = $conexion->seleccionar($consultaf);
+    }
+?>
+
+<br>
+<div class="container">
+    <form class="row g-3" method="POST">
+        <div class="col-auto">
+            <h2>Seleccionar Carta:</h2>
+        </div>
+
+        <div class="col-auto">
+            <select class="form-select" name="depa" aria-label="Default select example">
+              <option value="">Selecciona Una Opcion</option>
+                <?php
+                    foreach($tabla as $registro) {
+                        $selected = ($depa == $registro->id_car) ? 'selected' : '';
+                        echo "<option value='".$registro->id_car."' ".$selected.">".$registro->nombre_c."</option>";
+                    }
+                ?>
+            </select>
+        </div>
+
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary mb-3">Consultar</button>
+        </div>
+    </form>
+
+    <hr>
+
+    <?php
+        if (!empty($depa)) {
+            foreach($tablaf as $registro) {
+                echo "<div class='row' style='background-color: rgba(0, 0, 0, 0.500); color: white'>";
+                echo "<div class='col-6 row-cols-sm-2 row-cols-md-4 g-4'>";
+                echo "<img src='../../../imagenes/productos/$registro->imagen_c.jpg' style='width:270px'>";
+                echo "</div>";
+                echo "<div class='col-6 col-md-6 col-lg-6'>";
+                echo "<h3 class='text-center'>Nombre</h3>";
+                echo "<h4>$registro->nombre_c</h4>";
+                echo "<br>";
+                echo "<h3 class='text-center'>Rareza</h3>";
+                echo "<h4>$registro->rareza</h4>";
+                echo "<br>";
+                echo "<h3 class='text-center'>Precio</h3>";
+                echo "<h4>$$registro->p_beto</h4>";
+                echo "<br>";
+                echo "<div class='row'>";
+                echo "<div class='col-6 col-md-6 col-lg-6'>";
+                echo "<h3 class='text-center'>Precio En TCG</h3>";
+                echo "<div class='d-grid gap-2'>";
+                echo "<a href='$registro->p_tcg' class='btn btn-danger'>Consultar Tcg</a>";
+                echo "</div>";
+                echo "</div>";
+                echo "<div class='col-6 col-md-6 col-lg-6'>";
+                echo "<h3 class='text-center'>Precio En Price</h3>";
+                echo "<div class='d-grid gap-2'>";
+                echo "<a href='$registro->p_price' class='btn btn-danger'>Consultar Price</a>";
+                echo "</div>";
+                echo "</div>";
+                echo "</div>";
+                echo "</div>";
+                echo "</div>";
+                echo "<br>";
+            }
+        }
+    ?>
 </div>
-</form>
-   </div>
-   <script src="../../../js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>
-
-      
