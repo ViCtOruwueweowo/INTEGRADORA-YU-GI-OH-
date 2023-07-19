@@ -1,3 +1,4 @@
+
 <?php
 require '../../config/database.php';
 $db = new Database ;
@@ -9,7 +10,15 @@ $sql0 = $con->prepare("SELECT nombre_user, f_nacimiento,apellidos_user, tel_user
 $sql->execute();
 $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
 $resultado0 = $sql->fetchAll(PDO::FETCH_ASSOC);
-?>
+
+// Verificar si el usuario no ha iniciado sesión
+//if (!isset($_SESSION['usuario'])) {
+//  echo "Inicia sesión primero por favor :D";
+//  header("refresh:2 ../../index.php");  // Redireccionamos al archivo de inicio de sesión
+//  exit();
+//}
+//?>
+
 <!DOCTYPE html>
 <html lang="en"> 
 <head>
@@ -70,13 +79,21 @@ $resultado0 = $sql->fetchAll(PDO::FETCH_ASSOC);
             <li><a class="dropdown-item" href="bitacoras/upd_dp.php"><b>Reporte Deuda Productos</b></a></li>
           </ul>
         </li>
+        <li>
+            <b>
+              <?php
+            //  $nombreUsuario = $_SESSION['usuario'];
+             // echo "$nombreUsuario"; 
+              ?>
+            </b>
+          </li>
           </ul>
           <form class="d-flex mt-3 mt-lg-0" role="search">
-            <a href="../../index.php" class="btn btn-outline-success">Cerrar Sesion</a>
+            <a href="../../config/cerrarSesion.php" class="btn btn-outline-success">Cerrar Sesion</a>
           </form>
         </div>
       </div>
-    </div>
+    </div> 
   </nav>
 
 
@@ -101,7 +118,7 @@ $resultado0 = $sql->fetchAll(PDO::FETCH_ASSOC);
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-      <form action="funciones/guardar_empleado.php" method="post">
+      <form action="funciones/guardar_empleado.php" method="post"> 
 
 <div class="row">
   <div class="col-12">
@@ -130,7 +147,7 @@ $resultado0 = $sql->fetchAll(PDO::FETCH_ASSOC);
   </div>
   <div class="col-6">
   <label for="contraseña" class="form-label ">Contraseña</label>
-  <input type="password" class="form-control col-lg-6" id="contraseña" name="contraseña"placeholder="Ingresar nueva contraseña">
+  <input type="password" class="form-control col-lg-6" id="contraseña" name="contraseña" placeholder="Ingresar nueva contraseña">
   </div>
  </div>
       </div>

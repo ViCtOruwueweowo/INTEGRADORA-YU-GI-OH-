@@ -1,3 +1,4 @@
+
 <?php
 if($_POST)
 {
@@ -11,14 +12,15 @@ if($_POST)
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 
-    $query = $pdo->prepare("SELECT * FROM usuarios WHERE usuario= :u AND contraseña = :p");
+    $query = $pdo->prepare("SELECT * FROM usuarios WHERE usuario= :u");
     $query->bindParam(":u", $u);
-    $query->bindParam(":p", $p );
     $query->execute();
     $usuario = $query->fetch(PDO::FETCH_ASSOC);
-
+ 
     if ($usuario && $usuario["estado"] == 1) {
         // Usuario válido y estado es igual a 1
+        // Verificar la contraseña proporcionada con la almacenada en la base de datos
+        if (password_verify($p, $usuario["contraseña"])) {
         $_SESSION['usuario'] = $usuario["usuario"];
         if ($usuario["tipo_usuario"] == "1") {
             header("location: ../views/administrador/index.php");
@@ -28,9 +30,11 @@ if($_POST)
             header("location: ../views/empleado/index.php");
         }
             exit();
-
-
-
+        } else {
+            echo "Usuario o contraseña incorrectos, vuelve a intentarlo :D";
+            header("refresh:2 ../index.php");
+            exit();
+        }
 
         } elseif ($usuario && $usuario["estado"] != 1) {
             // Usuario válido pero estado no es igual a 1

@@ -1,3 +1,16 @@
+
+<?php
+
+ // Verificar si el usuario no ha iniciado sesión
+ // Checa tu variable o las condiciones, alguno está mal
+// if (!isset($_SESSION['usuario'])) {
+//  echo "Inicia sesión primero por favor :D";
+//  header("refresh:2 ../../index.php");  // Redireccionamos al archivo de inicio de sesión
+//  exit();
+//}
+//?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -77,8 +90,6 @@
       </div>
     </div>
   </nav>
-
-
   <body >
     <div class="container">
         

@@ -7,7 +7,7 @@ class Database
     private $username = "root";
     private $password = "";
     private $charset = "utf8";
-
+ 
     function conectar()
     {
         try{
@@ -20,12 +20,26 @@ class Database
         $pdo = new PDO($conexion, $this->username,  $this->password , $options);
 
         return $pdo;
-    }catch(PDOException $e){
+        }catch(PDOException $e){
 
         echo 'Error conexion:' . $e->getMessage();
         exit;
+        }
     }
+
+    //prueba de esta cosa
+    function desconectarDB()
+    {
+        try
+        {
+            $this->PDOLocal = null;
+        } 
+        catch(PDOException $e)
+        {
+            echo $e->getMessage();
+        }
     }
+    
 }
  
 

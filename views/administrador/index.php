@@ -16,6 +16,8 @@ if (!isset($_SESSION['usuario'])) {
 }
 ?>
 
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,7 +47,7 @@ if (!isset($_SESSION['usuario'])) {
             </li>
             <li class="nav-item">
               <a class="nav-link " aria-current="page" href="empleados.php"><b>Empleados</b></a>
-            </li>
+            </li> 
             <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             <b>Inventario</b>
@@ -75,6 +77,14 @@ if (!isset($_SESSION['usuario'])) {
             <li><a class="dropdown-item" href="bitacoras/upd_dp.php"><b>Reporte Deuda Productos</b></a></li>
           </ul>
         </li>
+        <li>
+            <b>
+              <?php
+              $nombreUsuario = $_SESSION['usuario'];
+              echo "$nombreUsuario";
+              ?>
+            </b>
+          </li>
           </ul>
           <form class="d-flex mt-3 mt-lg-0" role="search">
             <a href="../../config/cerrarSesion.php" class="btn btn-outline-success">Cerrar Sesion</a>
