@@ -6,9 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <!--Links-->
+    <link rel="stylesheet" href="css/index2.css">
     <link rel="stylesheet" href="css/estilo.css">
-        <link rel="stylesheet" href="css/bootstrap.min.css">
-        <link rel="stylesheet" href="css/index2.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
     <script src="js/bootstrap.js">  </script>
 </head>
 
@@ -38,18 +39,20 @@ if (isset($_SESSION['usuario'])) {
             <!-- Parte del usuario -->
             <div class="form-outline mb-4">
               <input type="text" class="form-control form-control-lg"
-                placeholder="Ingresar su nombre de usuario..." name="usuario" required/>
+                name="usuario" required/>
               <label class="form-label" for="" style="color:blue"><b>Usuario</b></label>
             </div>
             <!-- Parte de la contraseña -->
             <div class="form-outline mb-3">
               <input type="password" class="form-control form-control-lg"
-                placeholder="Ingrese su contraseña..." name="contraseña" required/>
+               name="contraseña" required/>
               <label class="form-label" for="" style="color:blue"><b>Contraseña</b></label>
             </div>
 
             <div class="text-center text-lg-start mt-4 pt-2">
-            <input type="submit" class="btn btn-outline-primary btn-lg" style="padding-left: 2.5rem; padding-right: 2.5rem;" value="Iniciar sesión"></input>
+
+            <input type="submit" class="btn btn-2 btn-outline-primary btn-lg" style="padding-left: 2.5rem; padding-right: 2.5rem;" value="Iniciar sesión"></input>
+
             </div>
           </form>
         </div>
