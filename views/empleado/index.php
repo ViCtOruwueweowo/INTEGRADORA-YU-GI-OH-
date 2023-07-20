@@ -1,4 +1,24 @@
 <?php
+session_start();
+
+// Verificar si el usuario no ha iniciado sesión
+if (!isset($_SESSION['usuario'])) {
+    echo "Inicia sesión primero por favor :D";
+    header("refresh:5 ../../index.php");  // Redireccionamos al archivo de inicio de sesión
+    exit();
+}
+
+// Verificar si el tipo de usuario no es 2 (Tipo de usuario que puede acceder a esta página, osea empleado)
+if ($_SESSION['tipo_usuario'] !== "2") {
+    echo "Acceso no autorizado. Por favor, inicia sesión con una cuenta válida.";
+    header("refresh:5 ../../index.php");  // Redireccionamos al archivo de inicio de sesión otra vez
+    exit();
+}
+
+$nombreUsuario = $_SESSION['usuario'];
+?>
+
+<?php
 require '../../config/config.php';
 require '../../config/database.php';
 $db = new Database();
@@ -11,13 +31,6 @@ cartas.id_car=car_rar.id_carar inner join rareza on
 car_rar.id_rar=rareza.id_ra where rareza.id_ra>='4' ;");
 $sql->execute();
 $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
-
-// Verificar si el usuario no ha iniciado sesión
-if (!isset($_SESSION['usuario'])) {
-  echo "Inicia sesión primero por favor :D";
-  header("refresh:2 ../../index.php");  // Redireccionamos al archivo de inicio de sesión
-  exit();
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,6 +51,7 @@ if (!isset($_SESSION['usuario'])) {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
 
+<<<<<<< HEAD
   /* Adjust the color of the offcanvas menu content */
   .offcanvas-header {
     background-color: #333; /* Change this to your desired color */
@@ -73,6 +87,19 @@ if (!isset($_SESSION['usuario'])) {
           <a href="../../config/cerrarSesion.php" class="dropdown-item">Cerrar Sesion</a>
           </ul>
       </li>
+=======
+      <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+        <li><a href="#" class="nav-link px-2 link-secondary">Inicio</a></li>
+        <li><a href="#" class="nav-link px-2">Inventario</a></li>
+        <li><a href="#" class="nav-link px-2">Productos</a></li>
+      </ul>
+      <?php
+              $nombreUsuario = $_SESSION['usuario'];
+              echo "$nombreUsuario";
+              ?>
+      <div class="col-md-3 text-end">
+<a href="../../config/cerrarSesion.php"><button type="button" class="btn btn-primary">Cerrar Sesion</button></a>
+>>>>>>> be694cb3266bb11fd8c8771a7a89866e3bff210d
       </div>
     </div>
   </div>

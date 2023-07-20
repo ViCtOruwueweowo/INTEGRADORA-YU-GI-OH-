@@ -1,4 +1,23 @@
 
+<?php
+session_start();
+
+// Verificar si el usuario no ha iniciado sesión
+if (!isset($_SESSION['usuario'])) {
+    echo "Inicia sesión primero por favor :D";
+    header("refresh:5 ../../index.php");  // Redireccionamos al archivo de inicio de sesión
+    exit();
+}
+
+// Verificar si el tipo de usuario no es 1 (Tipo de usuario que puede acceder a esta página, osea el admin)
+if ($_SESSION['tipo_usuario'] !== "1") { 
+      echo "Acceso no autorizado. Por favor, inicia sesión con una cuenta válida.";
+    header("refresh:5 ../../index.php");  // Redireccionamos al archivo de inicio de sesión
+    exit();
+}
+
+$nombreUsuario = $_SESSION['usuario'];
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -74,6 +93,9 @@
           </ul>
         </li>
           </ul>
+      <b>
+        <?php echo "$nombreUsuario"; ?>
+      </b>
           <form class="d-flex mt-3 mt-lg-0" role="search">
             <a href="../../config/cerrarSesion.php" class="btn btn-outline-success">Cerrar Sesion</a>
           </form>

@@ -1,7 +1,27 @@
 <?php
+session_start();
+
+// Verificar si el usuario no ha iniciado sesión
+if (!isset($_SESSION['usuario'])) {
+    echo "Inicia sesión primero por favor :D";
+    header("refresh:5 ../../index.php");  // Redireccionamos al archivo de inicio de sesión
+    exit();
+}
+
+// Verificar si el tipo de usuario no es 1 (Tipo de usuario que puede acceder a esta página, osea el admin)
+if ($_SESSION['tipo_usuario'] !== "1") { 
+      echo "Acceso no autorizado. Por favor, inicia sesión con una cuenta válida.";
+    header("refresh:5 ../../index.php");  // Redireccionamos al archivo de inicio de sesión
+    exit();
+}
+
+$nombreUsuario = $_SESSION['usuario'];
+?>
+
+<?php
 require '../../config/config.php';
 require '../../config/database.php';
-$db = new Database();
+$db = new Database(); 
 $con = $db->conectar();
 $sql = $con->prepare("SELECT distinct id_car,
 nombre_c, imagen_c
@@ -12,14 +32,7 @@ car_rar.id_rar=rareza.id_ra where rareza.id_ra>='4' ;");
 $sql->execute();
 $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
 
-// Verificar si el usuario no ha iniciado sesión
-if (!isset($_SESSION['usuario'])) {
-  echo "Inicia sesión primero por favor :D";
-  header("refresh:2 ../../index.php");  // Redireccionamos al archivo de inicio de sesión
-  exit();
-}
 ?>
-
 
 
 <!DOCTYPE html>

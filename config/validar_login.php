@@ -2,7 +2,6 @@
 <?php
 if($_POST)
 {
-    session_start();
     require('database.php');
     $u = $_POST['usuario'];
     $p = $_POST['contraseña'];
@@ -21,7 +20,12 @@ if($_POST)
         // Usuario válido y estado es igual a 1
         // Verificar la contraseña proporcionada con la almacenada en la base de datos
         if (password_verify($p, $usuario["contraseña"])) {
+            session_start();
         $_SESSION['usuario'] = $usuario["usuario"];
+
+        $_SESSION['tipo_usuario'] = $usuario["tipo_usuario"];
+
+
         if ($usuario["tipo_usuario"] == "1") {
             header("location: ../views/administrador/index.php");
             exit();
