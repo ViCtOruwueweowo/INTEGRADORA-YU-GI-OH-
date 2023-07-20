@@ -23,13 +23,26 @@ $nombreUsuario = $_SESSION['usuario'];
 require '../../config/database.php';
 $db = new Database ;
 $con = $db->conectar();
-$sql = $con->prepare("SELECT nombre_user, f_nacimiento,apellidos_user, tel_user,  direccion_user FROM usuarios where tipo_usuario='2' and estado='1'");
 
-$sql0 = $con->prepare("SELECT nombre_user, f_nacimiento,apellidos_user, tel_user,  direccion_user FROM usuarios where tipo_usuario='2' and estado='0'");
 
-$sql->execute();
-$resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
-$resultado0 = $sql->fetchAll(PDO::FETCH_ASSOC);
+// Verificar si se ha enviado el formulario para mostrar empleados inactivos
+if (isset($_POST['filtro_inactivos'])) {
+  $sql = $con->prepare("SELECT nombre_user, f_nacimiento, apellidos_user, tel_user, direccion_user FROM usuarios WHERE tipo_usuario='2' AND estado='0'");
+  $sql->execute();
+  $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+// Esto es para que me enseñe los activos de nuevo porque luego se petatean xd
+} elseif (isset($_POST['filtro_activos'])) {
+  $sql = $con->prepare("SELECT nombre_user, f_nacimiento, apellidos_user, tel_user, direccion_user FROM usuarios WHERE tipo_usuario='2' AND estado='1'");
+  $sql->execute();
+  $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+} else {
+  // Ejecutamos la consulta original para mostrar empleados activos por defecto
+  $sql = $con->prepare("SELECT nombre_user, f_nacimiento, apellidos_user, tel_user, direccion_user FROM usuarios WHERE tipo_usuario='2' AND estado='1'");
+  $sql->execute();
+  $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
+}
 ?>
 
 <!DOCTYPE html>
@@ -117,6 +130,8 @@ $resultado0 = $sql->fetchAll(PDO::FETCH_ASSOC);
       <!-- Button trigger modal -->
       <h1 class="text-center">Mis Empleados</h1>
       <hr>
+      
+<div class="d-flex gap-2">
 <button type="button" class="btn btn-danger  btn-lg" data-bs-toggle="modal" data-bs-target="#Agregar">
   Agregar Empleado
 </button>
@@ -184,6 +199,7 @@ $resultado0 = $sql->fetchAll(PDO::FETCH_ASSOC);
         <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Empleados</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
+      
       <div class="modal-body">
       <form action="funciones/editar_empleado.php" method="POST">
    
@@ -229,51 +245,50 @@ $resultado0 = $sql->fetchAll(PDO::FETCH_ASSOC);
     </div>
   </div>
 </div>
-<button href="" name="inactivos" type="button" class="btn btn-outline-info btn-lg">Mostrar empleados inactivos</button>
+
+<!-- Formulario para que amarre el filtro -->
+<form id="filtroEmpleadosInactivosForm" method="post">
+  <button name="filtro_inactivos" type="submit" class="btn btn-outline-info btn-lg">Mostrar empleados inactivos</button>
+</form>
+
+<form id="filtroEmpleadosActivosForm" method="post">
+  <button name="filtro_activos" type="submit" class="btn btn-outline-info btn-lg">Mostrar empleados activos</button>
+</form>
+</div>
 <hr>
 
-<br>
-
-    </div>
-    <div class="col col-md-12 col-lg-12">
+</div>
+<div class="col col-md-12 col-lg-12">
 <!--Tabla-->
 <div class="container">
 <table class="table table-dark table-striped">
-  <thead >
+  <thead>
     <tr>
-
       <th scope="col">Nombre</th>
       <th scope="col">Apellidos</th>
       <th scope="col">Fecha de nacimiento</th>
       <th scope="col">Telefono</th>
       <th scope="col">Direccion</th>
-
     </tr>
   </thead>
-
-
-
   <tbody>
-    <?php foreach($resultado as $fila): ?>
-    <tr>
-      <td scope="row" style="color:whitesmoke;"> <?php echo $fila ['nombre_user'] ?></td>
-      <td style="color:whitesmoke;"><?php echo $fila ['apellidos_user'] ?></td>
-      <td style="color:whitesmoke;"><?php echo $fila ['f_nacimiento'] ?></td>
-      <td style="color:whitesmoke;"><?php echo $fila ['tel_user'] ?></td>
-      <td style="color:whitesmoke;"><?php echo $fila ['direccion_user'] ?></td>
-</td>
-    </tr>
-      <?php endforeach; ?>
-      
-
+    <?php foreach ($resultado as $fila): ?>
+      <tr>
+        <td scope="row" style="color:whitesmoke;"><?php echo $fila['nombre_user'] ?></td>
+        <td style="color:whitesmoke;"><?php echo $fila['apellidos_user'] ?></td>
+        <td style="color:whitesmoke;"><?php echo $fila['f_nacimiento'] ?></td>
+        <td style="color:whitesmoke;"><?php echo $fila['tel_user'] ?></td>
+        <td style="color:whitesmoke;"><?php echo $fila['direccion_user'] ?></td>
+      </tr>
+    <?php endforeach; ?>
   </tbody>
 </table>
-    </div>
-  </div>
+</div>
+</div>
 </div>
 
-
-
+<hr>
+<br>
   <script src="../../js/bootstrap.min.js"></script>
   <script src="../../js/bootstrap.bundle.min.js"></script>
 
