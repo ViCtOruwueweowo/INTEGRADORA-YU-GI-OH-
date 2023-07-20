@@ -8,7 +8,8 @@ nombre_c, imagen_c
 FROM 
 cartas inner join car_rar on
 cartas.id_car=car_rar.id_carar inner join rareza on
-car_rar.id_rar=rareza.id_ra where rareza.id_ra>'4' ;");$sql->execute();
+car_rar.id_rar=rareza.id_ra where rareza.id_ra>='4' ;");
+$sql->execute();
 $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
 
 // Verificar si el usuario no ha iniciado sesión
@@ -18,48 +19,74 @@ if (!isset($_SESSION['usuario'])) {
   exit();
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8"> 
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio</title>
-    <link rel="stylesheet" href="../../css/bootstrap.min.css">
-    <link rel="stylesheet" href="../../css/index3.css">
+<meta charset="UTF-8"> 
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inicio</title>
+<link rel="stylesheet" href="../../css/bootstrap.min.css">
 <script src="../../js/bootstrap.bundle.min.js"></script>
-
+<link rel="stylesheet" href="../../css/index3.css">
 </head>
 <body>
-<div class="container">
-    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-      <div class="col-md-3 mb-2 mb-md-0">
-        <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
-          <svg class="bi" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
-        </a>
-      </div>
+<style>
+  /* Custom CSS for the transparent navigation bar with shadow */
+  .navbar {
+    background-color: transparent !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
 
-      <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-        <li><a href="#" class="nav-link px-2 link-secondary">Inicio</a></li>
-        <li><a href="#" class="nav-link px-2">Inventario</a></li>
-        <li><a href="#" class="nav-link px-2">Productos</a></li>
-      </ul>
+  /* Adjust the color of the offcanvas menu content */
+  .offcanvas-header {
+    background-color: #333; /* Change this to your desired color */
+  }
 
-      <div class="col-md-3 text-end">
-<a href="../../config/cerrarSesion.php"><button type="button" class="btn btn-primary">Cerrar Sesion</button></a>
+  /* Set the text color to black */
+  .navbar-dark .navbar-nav .nav-link {
+    color: #000;
+  }
+</style>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="index.php" style="color:#000">WorkStack</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2" aria-controls="offcanvasNavbar2" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasNavbar2" aria-labelledby="offcanvasNavbar2Label">
+    <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasNavbar2Label">Mis Atajos</h5>
+    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+     <div class="offcanvas-body">
+        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+          <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="calendario.php">Calendario</a>
+          </li>
+          <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <?php $nombreUsuario = $_SESSION['usuario']; echo "$nombreUsuario";?>
+          </a>
+          <ul class="dropdown-menu">
+          <a href="../../config/cerrarSesion.php" class="dropdown-item">Cerrar Sesion</a>
+          </ul>
+      </li>
       </div>
-    </header>
+    </div>
   </div>
+</nav>
 
+<!--Contenido Del Index Del EMPLEADO--->
 
-<!--Apartado De Cartas-->
+<br>
 <div class="container">
-    <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 g-4 ">
+<div class="row row-cols-2 row-cols-sm-2 row-cols-md-4 g-4 ">
 
         <?php foreach($resultado as $row) { ?>
         <div class="col">
-          <div class="card shadow-sm " style="background-color:#872189;">
+          <div class="card shadow-sm " style="background-color:#212529;">
             <?php
             $id =$row[('imagen_c')];
             $imagen = "../../imagenes/productos/".$id.".jpg";
@@ -67,24 +94,19 @@ if (!isset($_SESSION['usuario'])) {
               $imagen="imagenes/no image.png";
             }
             ?>
-            <img  src="<?php echo $imagen; ?>">
+            <img src="<?php echo $imagen; ?>" class="img-fluid" alt="...">
             <div class="card-body" >
               <h6 class="card-title text-center" style="color:white;"><?php echo $row ['nombre_c']; ?></h6>
               <div  class="d-flex justify-content-between align-items-center">
+    
               </div>
+            
               </div>
+            
           </div>
         </div>
         <?php } ?>   
-    </div>     
+    </div> 
 </div>
-<!--Fin Apartado De Cartas-->
-
-<br>
-<footer class="footer mt-auto py-3 bg-dark">
-<div class="container text-center">
-<span class="text-center" style="color:white">Aplicacion Desarrollada Unicamente Para Fines De Venta Y Distribucion De Menores.</span>
-</div>
-</footer>
 </body>
 </html>
