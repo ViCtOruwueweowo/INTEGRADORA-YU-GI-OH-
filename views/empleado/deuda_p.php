@@ -1,18 +1,27 @@
 <?php
+require '../../config/database.php';
+$db = new Database ;
+$con = $db->conectar();
+$sql = $con->prepare("SELECT
+clientes.nom_cli as CLIENTE, clientes.tel_cli as CONTACTO,
+productos.nom_p as PRODUCTO, deuda_p.precio_p as 'TOTAL DEUDA',deuda_p.abono_p as ABONOS ,deuda_p.f_iniciop as 'INICIO', deuda_p.f_finalp as 'FINAL'
+from
+clientes inner join deuda_p on 
+clientes.id_cli=deuda_p.id_clientep
+inner join productos
+on deuda_p.id_p=productos.id_pro where deuda_p.f_finalp  = '0000-00-00';");
+$sql->execute();
+$resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
+?>
+  
+<?php
 session_start();
 
 // Verificar si el usuario no ha iniciado sesión
 if (!isset($_SESSION['usuario'])) {
-    echo "Inicia sesión primero por favor :D";
-    header("refresh:5 ../../index.php");  // Redireccionamos al archivo de inicio de sesión
-    exit();
-}
-
-// Verificar si el tipo de usuario no es 2 (Tipo de usuario que puede acceder a esta página, osea empleado)
-if ($_SESSION['tipo_usuario'] !== "2") {
-    echo "Acceso no autorizado. Por favor, inicia sesión con una cuenta válida.";
-    header("refresh:5 ../../index.php");  // Redireccionamos al archivo de inicio de sesión otra vez
-    exit();
+  echo "Inicia sesión primero por favor :D";
+  header("refresh:2 ../../index.php");  // Redireccionamos al archivo de inicio de sesión
+  exit();
 }
 
 $nombreUsuario = $_SESSION['usuario'];
@@ -23,11 +32,12 @@ $nombreUsuario = $_SESSION['usuario'];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../../css/index3.css">
     <link rel="stylesheet" href="../../css/bootstrap.min.css">
-    <script src="../../js/bootstrap.bundle.min.js"></script>
+<script src="../../js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" href="../../css/index3.css">
 </head>
 <body>
+    
 <style>
   /* Custom CSS for the transparent navigation bar with shadow */
   .navbar {
@@ -62,7 +72,10 @@ $nombreUsuario = $_SESSION['usuario'];
      <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
           <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="calendario.php">Calendario</a>
+          <a type="button" class="nav-link" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+ Calendario
+</a>
+
           </li>
           <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -73,9 +86,19 @@ $nombreUsuario = $_SESSION['usuario'];
           <a href="funciones/listarPersonasConBusqueda2.php" class="dropdown-item">Productos</a>
           </ul>
       </li>
+      <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Mi Agenda
+          </a>
+          <ul class="dropdown-menu">
+          <a href="ac.php" class="dropdown-item">Acreedores</a>
+          <a href="deuda_c.php" class="dropdown-item">Deudores Cartas</a>
+          <a href="deuda_p.php" class="dropdown-item">Deudores Productos</a>
+          </ul>
+      </li>
      <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          <?php echo "$nombreUsuario";?>
+          <?php $nombreUsuario = $_SESSION['usuario']; echo "$nombreUsuario";?>
           </a>
           <ul class="dropdown-menu">
           <a href="../../config/cerrarSesion.php" class="dropdown-item">Cerrar Sesion</a>
@@ -84,5 +107,35 @@ $nombreUsuario = $_SESSION['usuario'];
     </div>
   </div>
 </nav>
+
+<br>
+<div class="container">
+<table class="table table-dark table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Nombre</th>
+      <th scope="col">Contacto</th>
+      <th scope="col">Producto</th>
+      <th scope="col">Total Deuda</th>
+      <th scope="col">Abonos</th>
+      <th scope="col">Inicio Deuda</th>
+      <th scope="col">Final Deuda</th>
+    </tr>
+  </thead>
+  <tbody>
+  <?php foreach($resultado as $fila): ?>
+    <tr>
+      <td scope="row" style="color:whitesmoke;"> <?php echo $fila ['CLIENTE'] ?></td>
+      <td scope="row" style="color:whitesmoke;"> <?php echo $fila ['CONTACTO'] ?></td>
+      <td scope="row" style="color:whitesmoke;"> <?php echo $fila ['PRODUCTO'] ?></td>
+      <td scope="row" style="color:whitesmoke;"> <?php echo $fila ['TOTAL DEUDA'] ?></td>
+      <td scope="row" style="color:whitesmoke;"> <?php echo $fila ['ABONOS'] ?></td>
+      <td scope="row" style="color:whitesmoke;"> <?php echo $fila ['INICIO'] ?></td>
+      <td scope="row" style="color:whitesmoke;"> <?php echo $fila ['FINAL'] ?></td>
+    </tr>
+      <?php endforeach; ?>
+  </tbody>
+</table>
+</div>
 </body>
 </html>

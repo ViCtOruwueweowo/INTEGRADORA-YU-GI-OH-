@@ -17,21 +17,6 @@ if ($_SESSION['tipo_usuario'] !== "2") {
 
 $nombreUsuario = $_SESSION['usuario'];
 ?>
-
-<?php
-require '../../config/config.php';
-require '../../config/database.php';
-$db = new Database();
-$con = $db->conectar();
-$sql = $con->prepare("SELECT distinct id_car,
-nombre_c, imagen_c
-FROM 
-cartas inner join car_rar on
-cartas.id_car=car_rar.id_carar inner join rareza on
-car_rar.id_rar=rareza.id_ra where rareza.id_ra>='4' ;");
-$sql->execute();
-$resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -50,8 +35,6 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
     background-color: transparent !important;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
-
-<<<<<<< HEAD
   /* Adjust the color of the offcanvas menu content */
   .offcanvas-header {
     background-color: #333; /* Change this to your desired color */
@@ -59,27 +42,53 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
 
   /* Set the text color to black */
   .navbar-dark .navbar-nav .nav-link {
-    color: #000;
+    color: whitesmoke;
+    font-size: 20px;
+    font-family: 'Times New Roman', Times, serif;
   }
 </style>
-
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
   <div class="container-fluid">
-    <a class="navbar-brand" href="index.php" style="color:#000">WorkStack</a>
+    <a class="navbar-brand" href="index.php" style="  color: whitesmoke;
+    font-size: 20px;
+    font-family: 'Times New Roman', Times, serif;">WorkStack</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2" aria-controls="offcanvasNavbar2" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
     </button>
     <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasNavbar2" aria-labelledby="offcanvasNavbar2Label">
-    <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="offcanvasNavbar2Label">Mis Atajos</h5>
+    <div class="offcanvas-header" >
+    <h5 class="offcanvas-title" id="offcanvasNavbar2Label" >Mis Atajos</h5>
     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
      <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
           <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="calendario.php">Calendario</a>
+          <a type="button" class="nav-link" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+ Calendario
+</a>
+
           </li>
           <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style=" background-color: transparent !important;
+">
+        Mi Inventario
+          </a>
+          <ul class="dropdown-menu" >
+          <a href="funciones/listarPersonasConBusqueda.php" class="dropdown-item">Cartas</a>
+          <a href="funciones/listarPersonasConBusqueda2.php" class="dropdown-item">Productos</a>
+          </ul>
+      </li>
+      <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Mi Agenda
+          </a>
+          <ul class="dropdown-menu">
+          <a href="ac.php" class="dropdown-item">Acreedores</a>
+          <a href="deuda_c.php" class="dropdown-item">Deudores Cartas</a>
+          <a href="deuda_p.php" class="dropdown-item">Deudores Productos</a>
+          </ul>
+      </li>
+     <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
           <?php $nombreUsuario = $_SESSION['usuario']; echo "$nombreUsuario";?>
           </a>
@@ -87,20 +96,6 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
           <a href="../../config/cerrarSesion.php" class="dropdown-item">Cerrar Sesion</a>
           </ul>
       </li>
-=======
-      <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-        <li><a href="#" class="nav-link px-2 link-secondary">Inicio</a></li>
-        <li><a href="#" class="nav-link px-2">Inventario</a></li>
-        <li><a href="#" class="nav-link px-2">Productos</a></li>
-      </ul>
-      <?php
-              $nombreUsuario = $_SESSION['usuario'];
-              echo "$nombreUsuario";
-              ?>
-      <div class="col-md-3 text-end">
-<a href="../../config/cerrarSesion.php"><button type="button" class="btn btn-primary">Cerrar Sesion</button></a>
->>>>>>> be694cb3266bb11fd8c8771a7a89866e3bff210d
-      </div>
     </div>
   </div>
 </nav>
@@ -108,12 +103,29 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
 <!--Contenido Del Index Del EMPLEADO--->
 
 <br>
+
+<!--Todo Mi Apartado De Cartas-->
 <div class="container">
-<div class="row row-cols-2 row-cols-sm-2 row-cols-md-4 g-4 ">
+<?php
+require '../../config/config.php';
+require '../../config/database.php';
+$db = new Database();
+$con = $db->conectar();
+$sql = $con->prepare("SELECT distinct id_car,
+nombre_c, imagen_c
+FROM 
+cartas inner join car_rar on
+cartas.id_car=car_rar.id_carar inner join rareza on
+car_rar.id_rar=rareza.id_ra where rareza.id_ra>='4' ;");
+$sql->execute();
+$resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
+?>
+<div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 g-4 ">
 
         <?php foreach($resultado as $row) { ?>
         <div class="col">
-          <div class="card shadow-sm " style="background-color:#212529;">
+          <div class="card shadow-sm " style=" background-color: transparent !important;
+    box-shadow: 0 2px 4px rgba(10, 2, 1, 55);">
             <?php
             $id =$row[('imagen_c')];
             $imagen = "../../imagenes/productos/".$id.".jpg";
@@ -123,17 +135,64 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
             ?>
             <img src="<?php echo $imagen; ?>" class="img-fluid" alt="...">
             <div class="card-body" >
-              <h6 class="card-title text-center" style="color:white;"><?php echo $row ['nombre_c']; ?></h6>
+              <h6 class="card-title text-center" style="color:white; font-size:12px;    font-family: 'Times New Roman', Times, serif;"><?php echo $row ['nombre_c']; ?></h6>
               <div  class="d-flex justify-content-between align-items-center">
-    
+              
               </div>
             
               </div>
             
           </div>
         </div>
-        <?php } ?>   
+        <?php 
+      
+           } $db->desconectarDB();  ?>   
     </div> 
 </div>
+
+<br>
+
+<!-- Modal -->
+<?php
+
+$db = new Database();
+$con = $db->conectar();
+$sql = $con->prepare("SELECT * FROM calendario");
+$sql->execute();
+$resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
+?>
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Eventos Para El Mes</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <table class="table table-dark table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Evento</th>
+      <th scope="col">Notas</th>
+      <th scope="col">Inicio</th>
+    
+    </tr>
+  </thead>
+  <tbody>
+  <?php foreach($resultado as $fila): ?>
+    <tr>
+      <td scope="row" style="color:whitesmoke;"> <?php echo $fila ['title'] ?></td>
+      <td style="color:whitesmoke;"><?php echo $fila ['descripcion'] ?></td>
+      <td style="color:whitesmoke;"><?php echo $fila ['start'] ?></td>
+    </tr>
+      <?php endforeach; ?>
+  </tbody>
+</table>
+      </div>
+  
+    </div>
+  </div>
+</div>
+  </div>
 </body>
 </html>

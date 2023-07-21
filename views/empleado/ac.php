@@ -1,3 +1,4 @@
+
 <?php
 session_start();
 
@@ -8,14 +9,24 @@ if (!isset($_SESSION['usuario'])) {
     exit();
 }
 
-// Verificar si el tipo de usuario no es 2 (Tipo de usuario que puede acceder a esta página, osea empleado)
-if ($_SESSION['tipo_usuario'] !== "2") {
-    echo "Acceso no autorizado. Por favor, inicia sesión con una cuenta válida.";
-    header("refresh:5 ../../index.php");  // Redireccionamos al archivo de inicio de sesión otra vez
+// Verificar si el tipo de usuario no es 1 (Tipo de usuario que puede acceder a esta página, osea el admin)
+if ($_SESSION['tipo_usuario'] !== "2") { 
+      echo "Acceso no autorizado. Por favor, inicia sesión con una cuenta válida.";
+    header("refresh:5 ../../index.php");  // Redireccionamos al archivo de inicio de sesión
     exit();
 }
 
 $nombreUsuario = $_SESSION['usuario'];
+?>
+
+<?php
+require '../../config/database.php';
+$db = new Database ;
+$con = $db->conectar();
+$sql = $con->prepare("SELECT * FROM clientes inner join acreedor on clientes.id_cli=acreedor.id_clientu where f_finalacreed > now();
+");
+$sql->execute();
+$resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,9 +34,9 @@ $nombreUsuario = $_SESSION['usuario'];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../../css/index3.css">
     <link rel="stylesheet" href="../../css/bootstrap.min.css">
-    <script src="../../js/bootstrap.bundle.min.js"></script>
+<script src="../../js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" href="../../css/index3.css">
 </head>
 <body>
 <style>
@@ -62,7 +73,10 @@ $nombreUsuario = $_SESSION['usuario'];
      <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
           <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="calendario.php">Calendario</a>
+          <a type="button" class="nav-link" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+ Calendario
+</a>
+
           </li>
           <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -73,9 +87,19 @@ $nombreUsuario = $_SESSION['usuario'];
           <a href="funciones/listarPersonasConBusqueda2.php" class="dropdown-item">Productos</a>
           </ul>
       </li>
+      <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Mi Agenda
+          </a>
+          <ul class="dropdown-menu">
+          <a href="ac.php" class="dropdown-item">Acreedores</a>
+          <a href="deuda_c.php" class="dropdown-item">Deudores Cartas</a>
+          <a href="deuda_p.php" class="dropdown-item">Deudores Productos</a>
+          </ul>
+      </li>
      <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          <?php echo "$nombreUsuario";?>
+          <?php $nombreUsuario = $_SESSION['usuario']; echo "$nombreUsuario";?>
           </a>
           <ul class="dropdown-menu">
           <a href="../../config/cerrarSesion.php" class="dropdown-item">Cerrar Sesion</a>
@@ -84,5 +108,32 @@ $nombreUsuario = $_SESSION['usuario'];
     </div>
   </div>
 </nav>
+<br>
+<div class="container">
+<table class="table table-dark table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Nombre</th>
+      <th scope="col">Telefono</th>
+      <th scope="col">Descuento</th>
+      <th scope="col">Inicio</th>
+      <th scope="col">Final</th>
+      <th scope="col">Notas</th>
+    </tr>
+  </thead>
+  <tbody>
+  <?php foreach($resultado as $fila): ?>
+    <tr>
+      <td scope="row" style="color:whitesmoke;"> <?php echo $fila ['nom_cli'] ?></td>
+      <td style="color:whitesmoke;"><?php echo $fila ['tel_cli'] ?></td>
+      <td style="color:whitesmoke;"><?php echo $fila ['descuento'] ?>%</td>
+      <td style="color:whitesmoke;"><?php echo $fila ['f_inicioacreed'] ?></td>
+      <td style="color:whitesmoke;"><?php echo $fila ['f_finalacreed'] ?></td>
+      <td style="color:whitesmoke;"><?php echo $fila ['notas_ac'] ?></td>
+    </tr>
+      <?php endforeach; ?>
+  </tbody>
+</table>
+</div>
 </body>
 </html>
