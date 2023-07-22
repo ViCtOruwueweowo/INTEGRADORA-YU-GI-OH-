@@ -54,9 +54,28 @@ if (isset($_POST['filtro_inactivos'])) {
     <title>Empleados</title>
     <link rel="stylesheet" href="../../css/bootstrap.min.css">
     <link rel="stylesheet" href="../../css/index2.css">
-
+    <script src="../../js/bootstrap.min.js"></script>
+  <script src="../../js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
+<style>
+  /* Custom CSS for the transparent navigation bar with shadow */
+  .navbar {
+    background-color: transparent !important;
+    box-shadow: 0 10px 6px rgba(0, 0, 0, 0.1);
+  }
+  /* Adjust the color of the offcanvas menu content */
+  .offcanvas-header {
+    background-color: #333; /* Change this to your desired color */
+  }
+
+  /* Set the text color to black */
+  .navbar-dark .navbar-nav .nav-link {
+    color: whitesmoke;
+    font-size: 20px;
+    font-family: 'Times New Roman', Times, serif;
+  }
+</style>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
     <div class="container-fluid">
       <a class="navbar-brand" href="index.php">WorkStack</a>
@@ -108,31 +127,30 @@ if (isset($_POST['filtro_inactivos'])) {
             <li><a class="dropdown-item" href="bitacoras/upd_dp.php"><b>Reporte Deuda Productos</b></a></li>
           </ul>
         </li>
-        <li>
-            <b>
-        <?php echo "$nombreUsuario"; ?>
-      </b>
-          </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <?php $nombreUsuario = $_SESSION['usuario']; echo "$nombreUsuario";?>
+          </a>
+          <ul class="dropdown-menu">
+          <a href="../../config/cerrarSesion.php" class="dropdown-item">Cerrar Sesion</a>
           </ul>
-          <form class="d-flex mt-3 mt-lg-0" role="search">
-            <a href="../../config/cerrarSesion.php" class="btn btn-outline-success">Cerrar Sesion</a>
-          </form>
+      </li>
+          </ul>
         </div>
       </div>
     </div> 
   </nav>
 
 
+
+
+  <br>
+<div class="container text-center">
+<h1 style="color:white">Mis Empleados</h1>
 <br>
-<div class="container">
   <div class="row">
-    <div class="col col-lg-12">
-      <!-- Button trigger modal -->
-      <h1 class="text-center">Mis Empleados</h1>
-      <hr>
-      
-<div class="d-flex gap-2">
-<button type="button" class="btn btn-danger  btn-lg" data-bs-toggle="modal" data-bs-target="#Agregar">
+    <div class="col">
+    <button type="button" class="btn btn-outline-warning  btn-lg" data-bs-toggle="modal" data-bs-target="#Agregar">
   Agregar Empleado
 </button>
 
@@ -186,8 +204,10 @@ if (isset($_POST['filtro_inactivos'])) {
     </div>
   </div>
 </div>
-   <!-- Button trigger modal -->
-<button type="button" class="btn btn-danger btn-lg" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    </div>
+
+    <div class="col">
+    <button type="button" class="btn btn-outline-warning btn-lg" data-bs-toggle="modal" data-bs-target="#exampleModal">
  Editar Empleados
 </button>
 
@@ -245,19 +265,29 @@ if (isset($_POST['filtro_inactivos'])) {
     </div>
   </div>
 </div>
+    </div>
 
-<!-- Formulario para que amarre el filtro -->
+
+   <div class="col">
+      <!-- Formulario para que amarre el filtro -->
 <form id="filtroEmpleadosInactivosForm" method="post">
-  <button name="filtro_inactivos" type="submit" class="btn btn-outline-info btn-lg">Mostrar empleados inactivos</button>
+  <button name="filtro_inactivos" type="submit" type="button" class="btn btn-outline-warning  btn-lg">Empleados inactivos</button>
 </form>
+</div>
 
+<div class="col">
 <form id="filtroEmpleadosActivosForm" method="post">
-  <button name="filtro_activos" type="submit" class="btn btn-outline-info btn-lg">Mostrar empleados activos</button>
+  <button name="filtro_activos" type="submit" class="btn btn-outline-warning  btn-lg">Empleados activos</button>
 </form>
 </div>
-<hr>
 
+ 
+   </div>
+  </div>
 </div>
+  
+<br>
+<div class="table-responsive">
 <div class="col col-md-12 col-lg-12">
 <!--Tabla-->
 <div class="container">
@@ -286,11 +316,6 @@ if (isset($_POST['filtro_inactivos'])) {
 </div>
 </div>
 </div>
-
-<hr>
-<br>
-  <script src="../../js/bootstrap.min.js"></script>
-  <script src="../../js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>

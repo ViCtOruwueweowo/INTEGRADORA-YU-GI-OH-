@@ -5,8 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../../../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../../css/index2.css">
 </head>
 <body>
+<style>
+        #contendor{
+            width: 40%;
+            margin: auto;
+        }
+        body{
+            margin-top: 250px;
+        }
+    </style>
 <?php
 // Establecer la conexión a la base de datos
 $host = "localhost";
@@ -37,8 +47,18 @@ try {
         $rutaDestino = "../../../imagenes/productos/" . $nombreArchivo;
 
         if (move_uploaded_file($archivoTemp, $rutaDestino)) {
-            echo "<div class='alert alert-success'>Carta Guardada Con Éxito</div>";
-            header("refresh:1 ;agregar_rar.php");
+            echo "<div class='container' id='contenedor'>
+            <div class='alert alert-success text-center' role='alert'>
+           <h1 style='text-aling:center'>¡Exito, La Accion Fue Realizada Sin Problemas, Buen Trabajo!</h1>
+           <br>
+           <div class='spinner-border text-dark' role='status'>
+        <span class='visually-hidden'>Loading...</span>
+        </div>
+        <br>
+           <h6>Espera Estas Siendo Redirigido</h6>
+          </div>
+          </div>   ";  
+            header("refresh:3 ;agregar_rar.php");
         } else {
             echo "Hubo un error al guardar la imagen.";
         }

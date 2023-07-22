@@ -35,6 +35,25 @@ $nombreUsuario = $_SESSION['usuario'];
     <script src="../../../js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
+  
+<style>
+  /* Custom CSS for the transparent navigation bar with shadow */
+  .navbar {
+    background-color: transparent !important;
+    box-shadow: 0 10px 6px rgba(0, 0, 0, 0.1);
+  }
+  /* Adjust the color of the offcanvas menu content */
+  .offcanvas-header {
+    background-color: #333; /* Change this to your desired color */
+  }
+
+  /* Set the text color to black */
+  .navbar-dark .navbar-nav .nav-link {
+    color: whitesmoke;
+    font-size: 20px;
+    font-family: 'Times New Roman', Times, serif;
+  }
+</style>
 <!--Cabecera-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
     <div class="container-fluid">
@@ -101,14 +120,14 @@ $nombreUsuario = $_SESSION['usuario'];
 <!--Cabecera-->
 <br>
 <!--Creacion De La Tabla-->
-<div class="container">
+<div class="container" style="color: white;">
 <h1 class="text-center">Reporte Actualizacion Cartas</h1>
 <hr>
 
+<div class="table-responsive">
 <table class="table table-dark table-striped">
 <thead>
     <tr>
-      <th scope="col">#</th>
       <th scope="col">Fecha Actualizacion</th>
       <th scope="col">Carta</th>
       <th scope="col">Rareza</th>
@@ -121,7 +140,6 @@ $nombreUsuario = $_SESSION['usuario'];
   <tbody>
   <?php foreach($resultado as $fila): ?>
     <tr>
-      <td scope="col" style="color:whitesmoke;"> <?php echo $fila ['no'] ?></td>
       <td style="color:whitesmoke;"><?php echo $fila ['fecha'] ?></td>
       <td style="color:whitesmoke;"><?php echo $fila ['nombre_c'] ?></td>
       <td style="color:whitesmoke;"><?php echo $fila ['rareza'] ?></td>
@@ -134,6 +152,7 @@ $nombreUsuario = $_SESSION['usuario'];
       <?php endforeach; ?>
   </tbody>
 </table>
+</div>
 <!---->
 
 </div>

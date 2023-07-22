@@ -1,4 +1,22 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/index2.css">
+</head>
+<body>
+<style>
+        #contendor{
+            width: 40%;
+            margin: auto;
+        }
+        body{
+            margin-top: 250px;
+        }
+    </style>
 <?php
 if($_POST)
 {
@@ -35,20 +53,52 @@ if($_POST)
         }
             exit();
         } else {
-            echo "Usuario o contraseña incorrectos, vuelve a intentarlo :D";
-            header("refresh:2 ../index.php");
+            echo "<div class='container' id='contenedor'>
+            <div class='alert alert-warning text-center' role='alert'>
+           <h1 style='text-aling:center'>¡Ups, Algo Salio Mal, Usuario O Contraseña Incorrectos, Verifica Tu Informacion!</h1>
+           <br>
+           <div class='spinner-border text-dark' role='status'>
+        <span class='visually-hidden'>Loading...</span>
+      </div>
+      <br>
+           <h6>Espera Estas Siendo Redirigido</h6>
+          </div>
+          </div>   ";                 header("refresh:5 ../index.php");
             exit();
         }
 
         } elseif ($usuario && $usuario["estado"] != 1) {
             // Usuario válido pero estado no es igual a 1
-            echo "Mmmm, parece que fuiste dado de baja :O.<br>Por favor habla con el Administrador más cercano para resolver dudas, gracias :D";
-            header("refresh:5 ../index.php");
+            echo "<div class='container' id='contenedor'>
+            <div class='alert alert-danger text-center' role='alert'>
+           <h1 style='text-aling:center'>¡Ups, Algo Salio Mal, Parece Ser Que No Estas Registrado Comunicate Con El Administrador Mas Cercano!</h1>
+           <br>
+           <div class='spinner-border text-dark' role='status'>
+        <span class='visually-hidden'>Loading...</span>
+      </div>
+      <br>
+           <h6>Espera Estas Siendo Redirigido</h6>
+          </div>
+          </div>   ";     
+                 header("refresh:5 ../index.php");
             exit();
         } else {
-        echo "Usuario o contraseña incorrectos, vuelvelo a intentar :D";
-        header("refresh:2 ../index.php");
+            echo "<div class='container' id='contenedor'>
+            <div class='alert alert-danger text-center' role='alert'>
+           <h1 style='text-aling:center'>¡Ups, Algo Salio Mal, Usuario O Contraseña Incorrectos, Verifica Tu Informacion!</h1>
+           <br>
+           <div class='spinner-border text-dark' role='status'>
+        <span class='visually-hidden'>Loading...</span>
+      </div>
+      <br>
+           <h6>Espera Estas Siendo Redirigido</h6>
+          </div>
+          </div>   ";     
+        header("refresh:5 ../index.php");
         exit();
     }
 }
 ?>
+
+</body>
+</html>

@@ -24,6 +24,25 @@ $nombreUsuario = $_SESSION['usuario'];
     <script src="../../../js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
+  
+<style>
+  /* Custom CSS for the transparent navigation bar with shadow */
+  .navbar {
+    background-color: transparent !important;
+    box-shadow: 0 10px 6px rgba(0, 0, 0, 0.1);
+  }
+  /* Adjust the color of the offcanvas menu content */
+  .offcanvas-header {
+    background-color: #333; /* Change this to your desired color */
+  }
+
+  /* Set the text color to black */
+  .navbar-dark .navbar-nav .nav-link {
+    color: whitesmoke;
+    font-size: 20px;
+    font-family: 'Times New Roman', Times, serif;
+  }
+</style>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
     <div class="container-fluid">
       <a class="navbar-brand" href="../index.php">WorkStack</a>
@@ -75,13 +94,16 @@ $nombreUsuario = $_SESSION['usuario'];
             <li><a class="dropdown-item" href="../bitacoras/upd_dp.php"><b>Reporte Deuda Productos</b></a></li>
           </ul>
         </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <?php $nombreUsuario = $_SESSION['usuario']; echo "$nombreUsuario";?>
+          </a>
+          <ul class="dropdown-menu">
+          <a href="../../config/cerrarSesion.php" class="dropdown-item">Cerrar Sesion</a>
           </ul>
-          <b>
-        <?php echo "$nombreUsuario"; ?>
-      </b>
-          <form class="d-flex mt-3 mt-lg-0" role="search">
-            <a href="../../../config/cerrarSesion.php" class="btn btn-outline-success">Cerrar Sesion</a>
-          </form>
+      </li>
+          </ul>
+        
         </div>
       </div>
     </div>
@@ -108,7 +130,7 @@ $nombreUsuario = $_SESSION['usuario'];
 ?>
 
 <br>
-<div class="container">
+<div class="container" style="color: white;">
     <form class="row g-3" method="POST">
         <div class="col-auto">
             <h2>Seleccionar Carta:</h2>

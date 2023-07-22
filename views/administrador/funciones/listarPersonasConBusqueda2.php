@@ -57,6 +57,24 @@ $nombreUsuario = $_SESSION['usuario'];
     </head>
     <body>
     
+<style>
+  /* Custom CSS for the transparent navigation bar with shadow */
+  .navbar {
+    background-color: transparent !important;
+    box-shadow: 0 10px 6px rgba(0, 0, 0, 0.1);
+  }
+  /* Adjust the color of the offcanvas menu content */
+  .offcanvas-header {
+    background-color: #333; /* Change this to your desired color */
+  }
+
+  /* Set the text color to black */
+  .navbar-dark .navbar-nav .nav-link {
+    color: whitesmoke;
+    font-size: 20px;
+    font-family: 'Times New Roman', Times, serif;
+  }
+</style>
     <header>
   <!-- Fixed navbar -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
@@ -110,13 +128,16 @@ $nombreUsuario = $_SESSION['usuario'];
             <li><a class="dropdown-item" href="../bitacoras/upd_dp.php"><b>Reporte Deuda Productos</b></a></li>
           </ul>
         </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <?php $nombreUsuario = $_SESSION['usuario']; echo "$nombreUsuario";?>
+          </a>
+          <ul class="dropdown-menu">
+          <a href="../../config/cerrarSesion.php" class="dropdown-item">Cerrar Sesion</a>
           </ul>
-          <b>
-        <?php echo "$nombreUsuario"; ?>
-      </b>
-          <form class="d-flex mt-3 mt-lg-0" role="search">
-            <a href="../../../config/cerrarSesion.php" class="btn btn-outline-success">Cerrar Sesion</a>
-          </form>
+      </li>
+          </ul>
+         
         </div>
       </div>
     </div>
@@ -135,24 +156,36 @@ $nombreUsuario = $_SESSION['usuario'];
 
 <div class="row">
  <div class="col-md-12">   
- 
- 
  <br>
 <form class="form-inline" action="listarPersonasConBusqueda2.php" method="GET">
-  <div class="form-group mx-sm-3 mb-2">
+  <div class="form-group">
     
+
+
   <div class="row">
-    <div class="col col-lg-6 text-center" >
+
+  <div class="col col-12 col-lg-6 text-center" >
     <input name="busqueda" type="text" class="form-control"  placeholder="Buscar">
     </div>
-    <div class="col col-lg-6">
-    <button type="submit" class="btn btn-primary mb-2">Buscar ahora</button>
-    <a href="form_agregar_p.php" class="btn btn-primary mb-2">Agregar Productos</a>
-    <a href="form_modificar_p.php" class="btn btn-primary mb-2">Modificar Productos</a>
+
+
+  
+    <div class="col col-sm-3 col-lg-2">
+    <button type="submit" class="btn btn-warning btn-md">Buscar ahora</button>
     </div>
-  </div>
+
+<div class="col col-sm-3 col-lg-2">
+<a href="form_agregar_p.php" class="btn btn-warning mb-2">Agregar Productos</a>
+</div>
+<div class="col col-sm-3 col-lg-2">
+<a href="form_modificar_p.php" class="btn btn-warning mb-2">Modificar Productos</a>
+</div>
+
+
+</div>
 </form>
 <br>
+<div class="table-responsive">
 <table class="table table-dark table-striped table-hover">
   <thead >
 			<tr>
@@ -178,6 +211,7 @@ $nombreUsuario = $_SESSION['usuario'];
 		</tbody>
 	</table>
   
+</div>
 </div>
 
  </div>

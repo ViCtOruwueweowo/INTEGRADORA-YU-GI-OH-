@@ -1,24 +1,19 @@
-
 <?php
 session_start();
-
 // Verificar si el usuario no ha iniciado sesión
 if (!isset($_SESSION['usuario'])) {
     echo "Inicia sesión primero por favor :D";
     header("refresh:5 ../../index.php");  // Redireccionamos al archivo de inicio de sesión
     exit();
 }
-
 // Verificar si el tipo de usuario no es 1 (Tipo de usuario que puede acceder a esta página, osea el admin)
 if ($_SESSION['tipo_usuario'] !== "1") { 
       echo "Acceso no autorizado. Por favor, inicia sesión con una cuenta válida.";
     header("refresh:5 ../../index.php");  // Redireccionamos al archivo de inicio de sesión
     exit();
 }
-
 $nombreUsuario = $_SESSION['usuario'];
 ?>
-
 <?php
 require '../../config/database.php';
 $db = new Database ;
@@ -28,18 +23,36 @@ $sql = $con->prepare("SELECT * FROM clientes inner join acreedor on clientes.id_
 $sql->execute();
 $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acreedores</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Acreedores</title>
+<link rel="stylesheet" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/index2.css">
+    <script src="../../js/bootstrap.min.js"></script>
+  <script src="../../js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-<link rel="stylesheet" href="../../css/index2.css">
+<style>
+  /* Custom CSS for the transparent navigation bar with shadow */
+  .navbar {
+    background-color: transparent !important;
+    box-shadow: 0 10px 6px rgba(0, 0, 0, 0.1);
+  }
+  /* Adjust the color of the offcanvas menu content */
+  .offcanvas-header {
+    background-color: #333; /* Change this to your desired color */
+  }
 
-<link rel="stylesheet" href="../../css/bootstrap.min.css">
+  /* Set the text color to black */
+  .navbar-dark .navbar-nav .nav-link {
+    color: whitesmoke;
+    font-size: 20px;
+    font-family: 'Times New Roman', Times, serif;
+  }
+</style>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
     <div class="container-fluid">
       <a class="navbar-brand" href="index.php">WorkStack</a>
@@ -91,17 +104,20 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
             <li><a class="dropdown-item" href="bitacoras/upd_dp.php"><b>Reporte Deuda Productos</b></a></li>
           </ul>
         </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <?php $nombreUsuario = $_SESSION['usuario']; echo "$nombreUsuario";?>
+          </a>
+          <ul class="dropdown-menu">
+          <a href="../../config/cerrarSesion.php" class="dropdown-item">Cerrar Sesion</a>
           </ul>
-          <b>
-        <?php echo "$nombreUsuario"; ?>
-      </b>
-          <form class="d-flex mt-3 mt-lg-0" role="search">
-            <a href="../../config/cerrarSesion.php" class="btn btn-outline-success">Cerrar Sesion</a>
-          </form>
+      </li>
+          </ul>
         </div>
       </div>
-    </div>
+    </div> 
   </nav>
+
 <br>
 <div class="container">
 <a href="funciones/agregar_acree.php" class="btn btn-primary">Agregar Nuevos Acreedores</a>
@@ -109,6 +125,7 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
 </div>
 <br>
 <div class="container">
+<div class="table-responsive">
 <table class="table table-dark table-striped">
   <thead>
     <tr>
@@ -134,8 +151,6 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
   </tbody>
 </table>
 </div>
- 
-  
-  <script src="../../js/bootstrap.bundle.min.js"></script>
+</div>
 </body>
 </html>

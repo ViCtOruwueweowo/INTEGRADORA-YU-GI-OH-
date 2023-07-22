@@ -33,6 +33,25 @@ $nombreUsuario = $_SESSION['usuario'];
     <script src="../../../js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
+  
+<style>
+  /* Custom CSS for the transparent navigation bar with shadow */
+  .navbar {
+    background-color: transparent !important;
+    box-shadow: 0 10px 6px rgba(0, 0, 0, 0.1);
+  }
+  /* Adjust the color of the offcanvas menu content */
+  .offcanvas-header {
+    background-color: #333; /* Change this to your desired color */
+  }
+
+  /* Set the text color to black */
+  .navbar-dark .navbar-nav .nav-link {
+    color: whitesmoke;
+    font-size: 20px;
+    font-family: 'Times New Roman', Times, serif;
+  }
+</style>
 <!--Cabecera-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
     <div class="container-fluid">
@@ -99,10 +118,11 @@ $nombreUsuario = $_SESSION['usuario'];
 <!--Cabecera-->
 <br>
 <!--Creacion De La Tabla-->
-<div class="container">
+<div class="container" style="color: white;">
 <h1 class="text-center">Reporte Deuda Cartas</h1>
 <hr>
 
+<div class="table-responsive">
 <table class="table table-dark table-striped">
 <thead>
     <tr>
@@ -130,6 +150,7 @@ $nombreUsuario = $_SESSION['usuario'];
       <?php endforeach; ?>
   </tbody>
 </table>
+</div>
 <!---->
 
 </div>

@@ -36,7 +36,24 @@ $nombreUsuario = $_SESSION['usuario'];
 <body>
 <link rel="stylesheet" href="../../css/index2.css">
 <link rel="stylesheet" href="../../css/bootstrap.min.css">
-<!---->
+<!----><style>
+  /* Custom CSS for the transparent navigation bar with shadow */
+  .navbar {
+    background-color: transparent !important;
+    box-shadow: 0 10px 6px rgba(0, 0, 0, 0.1);
+  }
+  /* Adjust the color of the offcanvas menu content */
+  .offcanvas-header {
+    background-color: #333; /* Change this to your desired color */
+  }
+
+  /* Set the text color to black */
+  .navbar-dark .navbar-nav .nav-link {
+    color: whitesmoke;
+    font-size: 20px;
+    font-family: 'Times New Roman', Times, serif;
+  }
+</style>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
     <div class="container-fluid">
       <a class="navbar-brand" href="index.php">WorkStack</a>
@@ -73,7 +90,8 @@ $nombreUsuario = $_SESSION['usuario'];
           </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="acreedores.php"><b>Mis Acreedores</b></a></li>
-            <li><a class="dropdown-item" href="deudores.php"><b>Mis Deudores</b></a></li>
+            <li><a class="dropdown-item" href="deudores_cartas.php"><b>Mis Deudores Cartas</b></a></li>
+            <li><a class="dropdown-item" href="deudores_productos.php"><b>Mis Deudores Productos</b></a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
@@ -87,16 +105,18 @@ $nombreUsuario = $_SESSION['usuario'];
             <li><a class="dropdown-item" href="bitacoras/upd_dp.php"><b>Reporte Deuda Productos</b></a></li>
           </ul>
         </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <?php $nombreUsuario = $_SESSION['usuario']; echo "$nombreUsuario";?>
+          </a>
+          <ul class="dropdown-menu">
+          <a href="../../config/cerrarSesion.php" class="dropdown-item">Cerrar Sesion</a>
           </ul>
-          <b>
-        <?php echo "$nombreUsuario"; ?>
-      </b>
-          <form class="d-flex mt-3 mt-lg-0" role="search">
-            <a href="../../config/cerrarSesion.php" class="btn btn-outline-success">Cerrar Sesion</a>
-          </form>
+      </li>
+          </ul>
         </div>
       </div>
-    </div>
+    </div> 
   </nav>
 <!---->
 <br>
@@ -106,6 +126,7 @@ $nombreUsuario = $_SESSION['usuario'];
 </div>
 <br>
 <div class="container">
+<div class="table-responsive">
 <table class="table table-dark table-striped">
   <thead>
     <tr>
@@ -134,6 +155,7 @@ $nombreUsuario = $_SESSION['usuario'];
       <?php endforeach; ?>
   </tbody>
 </table>
+</div>
 </div>
 
 <script src="../../js/bootstrap.bundle.min.js"></script>
