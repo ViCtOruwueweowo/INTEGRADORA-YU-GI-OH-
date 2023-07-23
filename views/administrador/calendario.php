@@ -116,6 +116,9 @@ $nombreUsuario = $_SESSION['usuario'];
   <body >
     
     <div class="container">
+  <body > 
+    <div class="container">
+
         
             <div> <br/><br/> <div id="CalendarioWeb" style=" background-color: rgba(0, 0, 0, 0.500);; ;color:white ;font-size:25px" class="fc fc-media-screen fc-direction-ltr  "  ></div></div>
           
@@ -433,3 +436,5 @@ function EnviarInformacion(accion,objEvento,modal){
 
 </body>
 </html>
+
+
