@@ -38,8 +38,18 @@ $nombreUsuario = $_SESSION['usuario'];
     <script src="js/es.js"></script>
     <script src="js/bootstrap-clockpicker.js"></script>
     <link rel="stylesheet" href="css/bootstrap-clockpicker.css">
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <style>
+      .fc th{
+        padding: 10px 0px;
+        vertical-align: middle;
+        background: #00205E;
+
+      }
+    </style>
+    
 </head>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
     <div class="container-fluid">
@@ -105,6 +115,7 @@ $nombreUsuario = $_SESSION['usuario'];
   </nav>
 
   <body >
+    
     <div class="container">
         
             <div> <br/><br/> <div id="CalendarioWeb" style=" background-color: rgba(0, 0, 0, 0.500);; ;color:white ;font-size:25px" class="fc fc-media-screen fc-direction-ltr  "  ></div></div>
@@ -115,103 +126,186 @@ $nombreUsuario = $_SESSION['usuario'];
    
 <script>
     $(document).ready(function(){
+        // Variable global para almacenar el identificador del evento porque luego agarra el que le da su gana o de plano ninguno y así no juego yo eh tampoco vamos a ser maldosos con uno :c
+  var selectedEventId = null;
+
+        // Función para limpiar los campos del modal
+  function limpiarModal() {
+    $('#tituloEvento').html('');
+    $('#txtID').val('');
+    $('#txtFecha').val('');
+    $('#txtTitulo').val('');
+    $('#txtDescripcion').val('');
+    $('#txtColor').val('#ff0000');
+    $('#txtFechaFin').val('');
+  }
+
         $('#CalendarioWeb').fullCalendar({
             header:{
-                left:'today,prev,next', 
+                left:'today, prev,next', 
                 center:'title',
-                right:'month,basicWeek'
-            }, dayClick:function(date,jsEvent,view){
-
-                $('#btnAgregar').prop("disabled",false);
-                $('#btnModificar').prop("disabled",true);
-                $('#btnEliminar').prop("disabled",true);
-
-
-                limpiarFormulario();
-                $('#txtFecha').val(date.format());
-                $("#ModalEventos").modal();
-
-            }, 
-             events:'eventos.php',
+                right:'month, basicWeek'
             
+            },
+             dayClick:function(date,jsEvent,view){
+              $('#btnAgregar').prop("disabled",false);
+              $('#btnModificar').prop("disabled",true);
+              $('#btnEliminar').prop("disabled",true);
+
+              limpiarModal();
+              $('#txtFecha').val(date.format());
+              $("#ModalEventos").modal();
+
+
+             },
+             events:'http://localhost/INTEGRAL/INTEGRADORA-YU-GI-OH-/views/administrador/eventos.php',
+
+
            eventClick:function(calEvent,jsEvent,view){
+            console.log('Evento clickeado', calEvent);
+            if (calEvent.id === selectedEventId) {
+        // El clic proviene de la misma cintilla de color, mostrar información del evento
+
+        // Mostrar la fecha de inicio en el modal
+        var fechaInicio = moment(calEvent.start).format('YYYY-MM-DD');
+        $('#txtFecha').val(fechaInicio);
+
+          // Mostrar la fecha de inicio seleccionada en el campo "Fecha de Inicio Seleccionada"
+          $('#fechaInicioSeleccionada').text(fechaInicio);
+
+          // Ajustar la fecha de fin para que no sea menor que la fecha de inicio
+          $('#txtFechaFin').attr('min', fechaInicio);
+          var fechaFin = moment(calEvent.end).format('YYYY-MM-DD');
+          $('#txtFechaFin').val(fechaFin);
 
 
-                $('#btnAgregar').prop("disabled",true);
-                $('#btnModificar').prop("disabled",false);
-                $('#btnEliminar').prop("disabled",false);
+            limpiarModal();
 
-                // H2
-                $('#tituloEvento').html(calEvent.title);
-                
-               // Mostrar la información del evento en los inputs
-                $('#txtDescripcion').val(calEvent.descripcion);
-                $('#txtID').val(calEvent.id);
-                $('#txtTitulo').val(calEvent.title);
-                $('#txtColor').val(calEvent.color);
-                
-                FechaHora= calEvent.start._i.split(" ");
-                $('#txtFecha').val(FechaHora[0]);
-                
-               
-                $("#ModalEventos").modal();
+            $('#btnAgregar').prop("disabled",true);
+              $('#btnModificar').prop("disabled",false);
+              $('#btnEliminar').prop("disabled",false);
 
-           }, 
-           editable:true, 
+
+            // H2
+            $('#tituloEvento').html(calEvent.title);
+
+            //Mostrar la info del evento en los inputs
+            $('#txtDescripcion').val(calEvent.descripcion);
+            $('#txtID').val(calEvent.id);
+            $('#txtTitulo').val(calEvent.title);
+            $('#txtColor').val(calEvent.color);
+            $('#txtFecha').val(calEvent.start.format());
+            $('#txtFechaFin').val(calEvent.end.format());
+ 
+
+            $("#ModalEventos").modal();
+
+
+          } else {
+        // El clic proviene de otra cintilla de color, actualizar el identificador y no hacer nada
+        selectedEventId = calEvent.id;
+        }
+           },
+           editable:false,
            eventDrop:function(calEvent){
-                $('#txtID').val(calEvent.id);
-                $('#txtTitulo').val(calEvent.title);
-                $('#txtColor').val(calEvent.color);
-                $('#txtDescripcion').val(calEvent.descripcion);
+        // Actualizar la fecha de inicio con la nueva fecha inicial después de ser arrastrada
+        var newStartDate = calEvent.start.format();
+        var newEndDate = calEvent.end.format();
+        ActualizarFechasEnDB(calEvent.id, newStartDate, newEndDate);
 
-                var fechaHora=calEvent.start.format().split("T");
-                $('#txtFecha').val(fechaHora[0]);
-				$('#txtHora').val(fechaHora[1]);
+            
+            $('#txtID').val(calEvent.id);
+            $('#txtTitulo').val(calEvent.title);
+            $('#txtColor').val(calEvent.color);
+            $('#txtDescripcion').val(calEvent.descripcion);
 
-                RecolectarDatosGUI();
-                EnviarInformacion('modificar',NuevoEvento,true);
+            var fecha=calEvent.start.format();
+            $('#txtFecha').val(calEvent.start.format());
 
-           }
-        });
+            RecolectarDatosGUI();
+            EnviarInformacion('modificar',NuevoEvento,true); 
 
+
+
+        }
     });
 
+    function ActualizarFechasEnDB(eventId, newStartDate, newEndDate) {
+    // Crear un objeto con los datos del evento para enviar en la solicitud AJAX
+    var eventoActualizado = {
+      id: calEvent.id,
+    title: calEvent.title,
+    descripcion: calEvent.descripcion,
+    color: calEvent.color,
+    textColor: calEvent.textColor,
+    start: calEvent.start.format(),
+    end: calEvent.end.format(),
+    };
+
+    // Realizar la solicitud AJAX para actualizar las fechas en la base de datos
+    $.ajax({
+      type: 'POST',
+      url: 'eventos.php?accion=modificar', // Reemplaza esto con la URL que maneje la actualización en tu servidor
+      data: {
+            id: eventId,
+            start: newStartDate,
+            end: newEndDate
+        },
+        success: function (response) {
+            console.log('Evento actualizado en la base de datos:', response);
+        },
+        error: function (xhr, status, error) {
+            console.log(xhr.responseText);
+            console.log(status);
+            console.log(error);
+            alert('Error al actualizar el evento en la base de datos.');
+        },
+    });
+  }
+});
 </script>
-<!-- Modal(Agregar, m¡Modificar, Eliminar) -->
+
+<!-- Modal(Agregar, Modificar, Eliminar) -->
 <div class="modal fade" id="ModalEventos" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="tituloEvento"></h5>
+          
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-         <input type="hidden" id="txtID" name="txtID">
-           <input type="hidden" id="txtFecha" name="txtFecha" />
 
-          <div class="form-row">
-                <div class="form-group col-md-8">
-                    <label>Título:</label>
-                    <input type="text" id="txtTitulo" class="form-control" placeholder="Título del evento" >
-                </div>
-                <div class="form-group col-md-4">
-                        <label >Hora del evento:</label>
-                       
-                        <div class="input-group clockpicker" data-autoclose="true">
-                                <input type="text" id="txtHora" value="10:30" class="form-control" />
-                        </div>                        
-                </div>
-            </div>
-            <div class="form-group" >
-                    <label >Descripción:</label>
-                    <textarea  id="txtDescripcion" rows="3" class="form-control"></textarea>
-                </div>
-                <div class="form-group" >   
-                        <label >Color:</label>
-                        <input type="color" value="#ff0000"id="txtColor" class="form-control" style="height:36px;">
-                </div>
+          <input type="hidden" id="txtID" name="txtID">
+
+        <div class="form-row">
+
+          <!-- tal vez agregue otra variable de fecha para la final-->
+          <div class="form-group col-md-12">
+            <label>Título: </label>
+            <input type="text" id="txtTitulo" class="form-control" placeholder="Título del evento" required>
+          </div>
+          <div class="form-group col-md-6">
+            Fecha de inicio: 
+          <input type="date" id="txtFecha" name="txtFecha" readonly>
+          </div>
+          <div class="form-group col-md-6">
+          Fecha Fin: <input type="date" id="txtFechaFin" class="form-control" name="txtFechaFin" required /><br/>
+          </div>
+          
+          
+        </div>
+        <div class="form-group">
+        <label>Descripcion: </label>
+        <textarea id="txtDescripcion" rows="3" class="form-control" required></textarea>
+          </div>
+          <div class="form-group">
+          <label>Color: </label>
+          <input type="color" value="#ff0000" id="txtColor" class="form-control" style="height:36px;">
+          </div>
+   
         </div>
         <div class="modal-footer">
 
@@ -224,69 +318,121 @@ $nombreUsuario = $_SESSION['usuario'];
     </div>
   </div>
 <script>
-var NuevoEvento; 
-    
- $('#btnAgregar').click(function(){
-   
-     RecolectarDatosGUI();
-     EnviarInformacion('agregar',NuevoEvento);
-});
+  function validarCampos() {
+  var titulo = $('#txtTitulo').val().trim();
+  var fechaInicio = $('#txtFecha').val().trim();
+  var fechaFin = $('#txtFechaFin').val().trim();
+
+  if (titulo.trim() === '' || fechaInicio.trim() === '' || fechaFin.trim() === '') {
+    alert('Debes llenar todos los campos obligatorios que son: Título y fecha de finalización, para guardar este evento.');
+    return false;
+  }
+  return true;
+}
+
+function validarFechas() {
+    var fechaInicio = moment($('#txtFecha').val());
+    var fechaFin = moment($('#txtFechaFin').val());
+
+    if (fechaFin.isBefore(fechaInicio)) {
+      alert('La fecha final no puede ser menor que la fecha de inicio.');
+      return false;
+    }
+
+    return true;
+  }
+  
+  function validarRangoFechas() {
+    var fechaInicio = moment($('#txtFecha').val());
+    var fechaFin = moment($('#txtFechaFin').val());
+
+    var diffDays = fechaFin.diff(fechaInicio, 'days');
+
+    if (diffDays > 366) {
+      alert('El rango de fechas no puede ser mayor a 1 año.');
+      return false;
+    }
+
+    return true;
+  }
+
+var NuevoEvento;
+
+$('#btnAgregar').click(function () {
+    if (validarCampos() && validarFechas() && validarRangoFechas()) {
+      RecolectarDatosGUI();
+      EnviarInformacion('agregar', NuevoEvento);
+    }
+  });
 $('#btnEliminar').click(function(){
-     RecolectarDatosGUI();
-     EnviarInformacion('eliminar',NuevoEvento);
+  RecolectarDatosGUI();
+  EnviarInformacion('eliminar',NuevoEvento);
 });
-$('#btnModificar').click(function(){
-     RecolectarDatosGUI();
-     EnviarInformacion('modificar',NuevoEvento);
-});
+$('#btnModificar').click(function () {
+    if (validarCampos() && validarFechas() && validarRangoFechas()) {
+      RecolectarDatosGUI();
+      EnviarInformacion('modificar', NuevoEvento);
+    }
+  });
 
-
-    
 function RecolectarDatosGUI(){
-    NuevoEvento= {
-         id:$('#txtID').val(),
-         title:$('#txtTitulo').val(), 
-         start:$('#txtFecha').val()+" "+$('#txtHora').val(), 
-         color:$('#txtColor').val(),
-         descripcion:$('#txtDescripcion').val(),
-         textColor:"#FFFFFF", 
-         end:$('#txtFecha').val()+" "+$('#txtHora').val() 
-        }; 
-    
+  var fechaInicio = $('#txtFecha').val();
+  var fechaFin = $('#txtFechaFin').val();
+
+  // Verificar si la fecha de inicio y fin son iguales
+  if (fechaInicio === fechaFin) {
+    // Sumar un día a la fecha de fin
+    var nuevaFechaFin = moment(fechaFin).add(1, 'days').format('YYYY-MM-DD');
+    $('#txtFechaFin').val(nuevaFechaFin);
+  }
+
+  NuevoEvento= {
+    id: $('#txtID').val(),
+    title: $('#txtTitulo').val(),
+    start: fechaInicio,
+    end: $('#txtFechaFin').val(),
+    color: $('#txtColor').val(),
+    descripcion: $('#txtDescripcion').val(),
+    textColor: "#FFFFFF",
+  };
 }
+
 function EnviarInformacion(accion,objEvento,modal){
-        $.ajax({
-            type:'POST', 
-            url:'eventos.php?accion='+accion, 
-            data:objEvento, 
-            success:function(msg){
-             if(msg){
-                $('#CalendarioWeb').fullCalendar('refetchEvents');  
-                if(!modal){
-                    $("#ModalEventos").modal('toggle');
-                }
-                
+  $.ajax({
+    type:'POST',
+    url:'eventos.php?accion='+accion,
+    data: {
+      id: objEvento.id,
+      title: objEvento.title,
+      descripcion: objEvento.descripcion,
+      color: objEvento.color,
+      textColor: objEvento.textColor,
+      start: objEvento.start,
+      end: objEvento.end
+    },
+    success:function(msg){
+      if(msg){
+        $('#CalendarioWeb').fullCalendar('refetchEvents');
+        if(!modal){
+          $("#ModalEventos").modal('toggle');
+        }
 
-             }
-            }, 
-            error:function(){
-                alert("Hay un error ..");
-            }
 
-        });
-
-}
-
-$('.clockpicker').clockpicker();
-function limpiarFormulario(){
-                $('#txtID').val('');
-                $('#txtTitulo').val('Evento..');
-                $('#txtColor').val('');
-                $('#txtDescripcion').val('');
-
-}
+      }
+    },
+    error: function(xhr, status, error) {
+      console.log(xhr.responseText); // Imprimir la respuesta del servidor en la consola
+      console.log(status); // Imprimir el estado de la solicitud en la consola
+      console.log(error); // Imprimir el error en la consola
+      alert("Hay un error en la solicitud, puede ser que el nombre ya esté en uso o que estés insertando en una fecha anterior a este mes...");
+    }
+    
+  });  
+};
 
 </script>
-<script src="../../js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>
+
+
