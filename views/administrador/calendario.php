@@ -103,9 +103,13 @@ $nombreUsuario = $_SESSION['usuario'];
           </ul>
         </li>
           </ul>
-      <b>
+          <li>
+        <a class="nav-link " aria-current="page">
+            <b>
         <?php echo "$nombreUsuario"; ?>
       </b>
+        </a>
+          </li>
           <form class="d-flex mt-3 mt-lg-0" role="search">
             <a href="../../config/cerrarSesion.php" class="btn btn-outline-success">Cerrar Sesion</a>
           </form>
@@ -114,13 +118,12 @@ $nombreUsuario = $_SESSION['usuario'];
     </div>
   </nav>
 
-  <body >
-    
+  <body > 
     <div class="container">
+
         
-            <div> <br/><br/> <div id="CalendarioWeb" style=" background-color: rgba(0, 0, 0, 0.500);; ;color:white ;font-size:25px" class="fc fc-media-screen fc-direction-ltr  "  ></div></div>
-          
-    </div>
+            <div>  <div id="CalendarioWeb" style=" background-color: rgba(0, 0, 0, 0.500);; ;color:white ;font-size:25px" class="fc fc-media-screen fc-direction-ltr  "  ></div></div>
+
    
 
    

@@ -5,8 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guardar Carta Detallada</title>
     <link rel="stylesheet" href="../../../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../../css/index2.css">
+
 </head>
 <body>
+<style>
+        #contendor{
+            width: 40%;
+            margin: auto;
+        }
+        body{
+            margin-top: 250px;
+        }
+    </style>
 <?php
 // Establecer la conexión a la base de datos
 $servername = "localhost";
@@ -35,8 +46,17 @@ try {
     $stmt = $pdo->prepare("INSERT INTO car_rar (id_carar, id_rar, p_price, p_tcg, p_beto, codigo, cantidad) VALUES (?, ?, ?, ?, ?, ?, ?)");
     $stmt->execute([$id_carar, $id_rar, $p_price, $p_tcg, $p_beto, $codigo, $cantidad]);
 
-    echo "<div class='alert alert-success'>Carta Registrada Por Completo</div>";
-    header("refresh:1 ;listarPersonasConBusqueda.php");
+    echo "<div class='container' id='contenedor'>
+    <div class='alert alert-success text-center' role='alert'>
+   <h1 style='text-aling:center'>¡Exito, La Accion Fue Realizada Sin Problemas, Buen Trabajo!</h1>
+   <br>
+   <div class='spinner-border text-dark' role='status'>
+<span class='visually-hidden'>Loading...</span>
+</div>
+<br>
+   <h6>Espera Estas Siendo Redirigido</h6>
+  </div>
+  </div>   ";      header("refresh:1 ;listarPersonasConBusqueda.php");
 } catch (PDOException $e) {
     echo "Error al agregar los datos: " . $e->getMessage();
 }

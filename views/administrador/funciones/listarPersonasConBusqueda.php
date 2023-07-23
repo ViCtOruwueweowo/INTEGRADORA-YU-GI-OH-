@@ -6,7 +6,8 @@ $consulta = "SELECT *
 FROM cartas
 INNER JOIN car_rar ON cartas.id_car = car_rar.id_carar
 LEFT JOIN rareza ON car_rar.id_rar = rareza.id_ra
-ORDER BY cartas.tipo_c DESC;";
+ORDER BY cartas.tipo_c DESC
+LIMIT 0;";
 
 # Vemos si hay búsqueda
 $busqueda = null; 
@@ -60,9 +61,27 @@ $nombreUsuario = $_SESSION['usuario'];
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="../../../css/bootstrap.min.css">
     <link rel="stylesheet" href="../../../css/index2.css">
+    <title>Cartas</title>
 
-    <title>Inventario</title>
+    <style>
+  /* Custom CSS for the transparent navigation bar with shadow */
+  .navbar {
+    background-color: transparent !important;
+    box-shadow: 0 10px 6px rgba(0, 0, 0, 0.1);
+  }
+  /* Adjust the color of the offcanvas menu content */
+  .offcanvas-header {
+    background-color: #333; /* Change this to your desired color */
+  }
 
+  /* Set the text color to black */
+  .navbar-dark .navbar-nav .nav-link {
+    color: whitesmoke;
+    font-size: 20px;
+    font-family: 'Times New Roman', Times, serif;
+  }
+
+</style>
     </head>
     <body>
     
@@ -120,13 +139,18 @@ $nombreUsuario = $_SESSION['usuario'];
             <li><a class="dropdown-item" href="../bitacoras/upd_dp.php"><b>Reporte Deuda Productos</b></a></li>
           </ul>
         </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <?php $nombreUsuario = $_SESSION['usuario']; echo "$nombreUsuario";?>
+          </a>
+          <ul class="dropdown-menu">
+          <a href="../../config/cerrarSesion.php" class="dropdown-item">Cerrar Sesion</a>
           </ul>
-          <b>
-        <?php echo "$nombreUsuario"; ?>
-      </b>
-          <form class="d-flex mt-3 mt-lg-0" role="search">
-            <a href="../../../config/cerrarSesion.php" class="btn btn-outline-success">Cerrar Sesion</a>
-          </form>
+      </li>
+          </ul>
+  
+       
         </div>
       </div>
     </div>
@@ -148,22 +172,35 @@ $nombreUsuario = $_SESSION['usuario'];
  
  <br>
 <form class="form-inline" action="listarPersonasConBusqueda.php" method="GET">
-  <div class="form-group mx-sm-3 mb-2">
+  <div class="form-group ">
     
   <div class="row">
-    <div class="col col-lg-6 text-center" >
-    <input name="busqueda" type="text" class="form-control"  placeholder="Buscar">
+    <div class="col col-12 col-lg-4 text-center" >
+    <input name="busqueda"  type="text" class="form-control "  placeholder="Buscar">
     </div>
-    <div class="col col-lg-6">
-    <button type="submit" class="btn btn-primary mb-2">Buscar ahora</button>
-    <a href="agregar_car.php" class="btn btn-primary mb-2">Agregar Carta</a>
-    <a href="agregar_rar.php" class="btn btn-primary mb-2">Agregar Rareza</a>
-    <a href="modificar_car.php" class="btn btn-primary mb-2">Modificar Cartas</a>
+
+    <div class="col col-sm-3 col-lg-2">
+    <button type="submit" class="btn btn-warning btn-md">Buscar ahora</button>
+    </div>
+
+    <div class="col col-sm-3 col-lg-2">
+    <a href="agregar_car.php" class="btn btn-warning mb-2">Agregar Carta</a>
+    </div>
+
+    <div class="col col-sm-3 col-lg-2">
+    <a href="agregar_rar.php" class="btn btn-warning mb-2">Agregar Rareza</a>
+    </div>
+
+    <div class="col col-sm-3 col-lg-2">
+    <a href="modificar_car.php" class="btn btn-warning mb-2">Modificar Carta</a>
+    </div>
+
     </div>
   </div>
 </form>
 <br>
-<table class="table table-dark table-striped table-hover">
+<div class="table-responsive">
+<table class="table table-dark">
   <thead >
 			<tr>
       <th>Imagen</th>
@@ -180,17 +217,25 @@ $nombreUsuario = $_SESSION['usuario'];
 			<?php while ($resultado = $sentencia->fetchObject()) {?>
 			<tr>
         
-        <td style="color:whitesmoke;"><?php echo "<img src='../../../imagenes/productos/$resultado->imagen_c.jpg' style='width:100px'> " ?></td>
-        <td style="color:whitesmoke;"><?php echo $resultado->nombre_c ?></td>
-				<td style="color:whitesmoke;"><?php echo $resultado->tipo_c ?></td>
-				<td style="color:whitesmoke;"><?php echo $resultado->rareza ?></td>
-        <td style="color:whitesmoke;"><?php echo $resultado->cantidad ?></td>
-				<td style="color:whitesmoke;"><a href="<?php echo $resultado->p_tcg ?>">Link Directo</a></td>
-				<td style="color:whitesmoke;"><a href="<?php echo $resultado->p_price ?>">Link Directo</a></td>
+        <td style="color:whitesmoke;background-color: rgba(0, 0, 0, .550);
+    box-shadow: 0 4px 5px rgba(10, 2, 1, 55);"><?php echo "<img src='../../../imagenes/productos/$resultado->imagen_c.jpg' style='width:100px'> " ?></td>
+        <td style="color:whitesmoke;background-color: rgba(0, 0, 0, .550);
+    box-shadow: 0 4px 5px rgba(10, 2, 1, 55);"><?php echo $resultado->nombre_c ?></td>
+				<td style="color:whitesmoke;background-color: rgba(0, 0, 0, .550);
+    box-shadow: 0 4px 5px rgba(10, 2, 1, 55);"><?php echo $resultado->tipo_c ?></td>
+				<td style="color:whitesmoke;background-color: rgba(0, 0, 0, .550);
+    box-shadow: 0 4px 5px rgba(10, 2, 1, 55);"><?php echo $resultado->rareza ?></td>
+        <td style="color:whitesmoke;background-color: rgba(0, 0, 0, .550);
+    box-shadow: 0 4px 5px rgba(10, 2, 1, 55);"><?php echo $resultado->cantidad ?></td>
+				<td style="color:whitesmoke;background-color: rgba(0, 0, 0, .550);
+    box-shadow: 0 4px 5px rgba(10, 2, 1, 55);"><a href="<?php echo $resultado->p_tcg ?>">Link Directo</a></td>
+				<td style="color:whitesmoke;background-color: rgba(0, 0, 0, .550);
+    box-shadow: 0 4px 5px rgba(10, 2, 1, 55);"><a href="<?php echo $resultado->p_price ?>">Link Directo</a></td>
 			</tr>
 			<?php }?>
 		</tbody>
 	</table>
+</div>
   
 </div>
 
