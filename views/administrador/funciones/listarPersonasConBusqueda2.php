@@ -3,7 +3,7 @@
 include_once "base_de_datos.php";
 
 # Por defecto hacemos la consulta de todas las personas
-$consulta = "SELECT * FROM productos";
+$consulta = "SELECT * FROM productos LIMIT 0;";
 
 # Vemos si hay búsqueda
 $busqueda = null;
@@ -11,7 +11,7 @@ if (isset($_GET["busqueda"])) {
     # Y si hay, búsqueda, entonces cambiamos la consulta
     # Nota: no concatenamos porque queremos prevenir inyecciones SQL
     $busqueda = $_GET["busqueda"];
-    $consulta = "SELECT * FROM productos  WHERE productos.nom_p LIKE ?";
+    $consulta = "SELECT * FROM productos  WHERE productos.nom_p LIKE ? ";
 }
 # Preparar sentencia e indicar que vamos a usar un cursor
 $sentencia = $base_de_datos->prepare($consulta, [
@@ -186,7 +186,7 @@ $nombreUsuario = $_SESSION['usuario'];
 </form>
 <br>
 <div class="table-responsive">
-<table class="table table-dark table-striped table-hover">
+<table class="table table-dark table-hover">
   <thead >
 			<tr>
       <th>Imagen</th>
@@ -201,11 +201,16 @@ $nombreUsuario = $_SESSION['usuario'];
 	
     <?php while ($resultado = $sentencia->fetchObject()) {?>
   <tr>
-  <td style="color:whitesmoke;"><?php echo "<img src='../../../imagenes/productos_2/$resultado->imagen_p.webp' style='width:100px'> " ?></td>
-  <td style="color:whitesmoke;"><?php echo $resultado->nom_p ?></td>
-    <td style="color:whitesmoke;"><?php echo $resultado->existencias ?></td>
-    <td style="color:whitesmoke;"><?php echo $resultado->notas_prod ?></td>
-    <td style="color:whitesmoke;"><?php echo $resultado->precio ?></td>
+  <td style="color:whitesmoke;background-color: rgba(0, 0, 0, .550);
+    box-shadow: 0 4px 5px rgba(10, 2, 1, 55);"><?php echo "<img src='../../../imagenes/productos_2/$resultado->imagen_p.webp' style='width:100px'> " ?></td>
+  <td style="color:whitesmoke;background-color: rgba(0, 0, 0, .550);
+    box-shadow: 0 4px 5px rgba(10, 2, 1, 55);"><?php echo $resultado->nom_p ?></td>
+    <td style="color:whitesmoke;background-color: rgba(0, 0, 0, .550);
+    box-shadow: 0 4px 5px rgba(10, 2, 1, 55);"><?php echo $resultado->existencias ?></td>
+    <td style="color:whitesmoke;background-color: rgba(0, 0, 0, .550);
+    box-shadow: 0 4px 5px rgba(10, 2, 1, 55);"><?php echo $resultado->notas_prod ?></td>
+    <td style="color:whitesmoke;background-color: rgba(0, 0, 0, .550);
+    box-shadow: 0 4px 5px rgba(10, 2, 1, 55);"><?php echo $resultado->precio ?></td>
   </tr>
   <?php }?>
 		</tbody>

@@ -45,11 +45,35 @@ if($_POST)
 
 
         if ($usuario["tipo_usuario"] == "1") {
-            header("location: ../views/administrador/index.php");
+            echo "<div class='container' id='contenedor'>
+            <div class='alert alert-success text-center' role='alert'>
+           <h1 style='text-aling:center'>¡Bienvenido De Nuevo!</h1>
+           <h2>Que Tengas Buen Dia, No Olvides Cerrar Tu Cuenta Cuando Termines.
+           <br>
+           <div class='spinner-border text-dark' role='status'>
+        <span class='visually-hidden'>Loading...</span>
+      </div>
+      <br>
+           <h6>Espera Estas Siendo Redirigido</h6>
+          </div>
+          </div>   "; 
+            header("refresh:3 ../views/administrador/index.php");
             exit();
 
         } else if ($usuario["tipo_usuario"] == "2") {
-            header("location: ../views/empleado/index.php");
+            echo "<div class='container' id='contenedor'>
+            <div class='alert alert-success text-center' role='alert'>
+           <h1 style='text-aling:center'>¡Bienvenido De Nuevo!</h1>
+           <h2>Que Tengas Buen Dia, No Olvides Cerrar Tu Cuenta Cuando Termines.
+           <br>
+           <div class='spinner-border text-dark' role='status'>
+        <span class='visually-hidden'>Loading...</span>
+      </div>
+      <br>
+           <h6>Espera Estas Siendo Redirigido</h6>
+          </div>
+          </div>   "; 
+            header("refresh:3 ../views/empleado/index.php");
         }
             exit();
         } else {
@@ -63,7 +87,7 @@ if($_POST)
       <br>
            <h6>Espera Estas Siendo Redirigido</h6>
           </div>
-          </div>   ";                 header("refresh:5 ../index.php");
+          </div>   ";                 header("refresh:3 ../index.php");
             exit();
         }
 
@@ -80,7 +104,7 @@ if($_POST)
            <h6>Espera Estas Siendo Redirigido</h6>
           </div>
           </div>   ";     
-                 header("refresh:5 ../index.php");
+                 header("refresh:3 ../index.php");
             exit();
         } else {
             echo "<div class='container' id='contenedor'>
@@ -94,7 +118,7 @@ if($_POST)
            <h6>Espera Estas Siendo Redirigido</h6>
           </div>
           </div>   ";     
-        header("refresh:5 ../index.php");
+        header("refresh:3 ../index.php");
         exit();
     }
 }

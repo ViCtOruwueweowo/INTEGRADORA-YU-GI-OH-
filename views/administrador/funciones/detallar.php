@@ -148,7 +148,7 @@ $nombreUsuario = $_SESSION['usuario'];
             </select>
         </div>
 
-        <div class="col-auto">
+        <div class="col-auto text-center">
             <button type="submit" class="btn btn-primary mb-3">Consultar</button>
         </div>
     </form>
@@ -158,9 +158,10 @@ $nombreUsuario = $_SESSION['usuario'];
     <?php
         if (!empty($depa)) {
             foreach($tablaf as $registro) {
-                echo "<div class='row' style='background-color: rgba(0, 0, 0, 0.500); color: white'>";
+                echo "<div class='row' style='text-aling:center;background-color: rgba(0, 0, 0, .550);
+                box-shadow: 0 4px 5px rgba(10, 2, 1, 55); color: white'>";
                 echo "<div class='col-6 row-cols-sm-2 row-cols-md-4 g-4'>";
-                echo "<img src='../../../imagenes/productos/$registro->imagen_c.jpg' style='width:270px'>";
+                echo "<img src='../../../imagenes/productos/$registro->imagen_c.jpg' style='width:270px;text-aling:center'>";
                 echo "</div>";
                 echo "<div class='col-6 col-md-6 col-lg-6'>";
                 echo "<h3 class='text-center'>Nombre</h3>";

@@ -6,7 +6,8 @@ $consulta = "SELECT *
 FROM cartas
 INNER JOIN car_rar ON cartas.id_car = car_rar.id_carar
 LEFT JOIN rareza ON car_rar.id_rar = rareza.id_ra
-ORDER BY cartas.tipo_c DESC;";
+ORDER BY cartas.tipo_c DESC
+LIMIT 0;";
 
 # Vemos si hay búsqueda
 $busqueda = null; 
@@ -79,6 +80,7 @@ $nombreUsuario = $_SESSION['usuario'];
     font-size: 20px;
     font-family: 'Times New Roman', Times, serif;
   }
+
 </style>
     </head>
     <body>
@@ -198,7 +200,7 @@ $nombreUsuario = $_SESSION['usuario'];
 </form>
 <br>
 <div class="table-responsive">
-<table class="table table-dark table-striped table-hover">
+<table class="table table-dark">
   <thead >
 			<tr>
       <th>Imagen</th>
@@ -215,13 +217,20 @@ $nombreUsuario = $_SESSION['usuario'];
 			<?php while ($resultado = $sentencia->fetchObject()) {?>
 			<tr>
         
-        <td style="color:whitesmoke;"><?php echo "<img src='../../../imagenes/productos/$resultado->imagen_c.jpg' style='width:100px'> " ?></td>
-        <td style="color:whitesmoke;"><?php echo $resultado->nombre_c ?></td>
-				<td style="color:whitesmoke;"><?php echo $resultado->tipo_c ?></td>
-				<td style="color:whitesmoke;"><?php echo $resultado->rareza ?></td>
-        <td style="color:whitesmoke;"><?php echo $resultado->cantidad ?></td>
-				<td style="color:whitesmoke;"><a href="<?php echo $resultado->p_tcg ?>">Link Directo</a></td>
-				<td style="color:whitesmoke;"><a href="<?php echo $resultado->p_price ?>">Link Directo</a></td>
+        <td style="color:whitesmoke;background-color: rgba(0, 0, 0, .550);
+    box-shadow: 0 4px 5px rgba(10, 2, 1, 55);"><?php echo "<img src='../../../imagenes/productos/$resultado->imagen_c.jpg' style='width:100px'> " ?></td>
+        <td style="color:whitesmoke;background-color: rgba(0, 0, 0, .550);
+    box-shadow: 0 4px 5px rgba(10, 2, 1, 55);"><?php echo $resultado->nombre_c ?></td>
+				<td style="color:whitesmoke;background-color: rgba(0, 0, 0, .550);
+    box-shadow: 0 4px 5px rgba(10, 2, 1, 55);"><?php echo $resultado->tipo_c ?></td>
+				<td style="color:whitesmoke;background-color: rgba(0, 0, 0, .550);
+    box-shadow: 0 4px 5px rgba(10, 2, 1, 55);"><?php echo $resultado->rareza ?></td>
+        <td style="color:whitesmoke;background-color: rgba(0, 0, 0, .550);
+    box-shadow: 0 4px 5px rgba(10, 2, 1, 55);"><?php echo $resultado->cantidad ?></td>
+				<td style="color:whitesmoke;background-color: rgba(0, 0, 0, .550);
+    box-shadow: 0 4px 5px rgba(10, 2, 1, 55);"><a href="<?php echo $resultado->p_tcg ?>">Link Directo</a></td>
+				<td style="color:whitesmoke;background-color: rgba(0, 0, 0, .550);
+    box-shadow: 0 4px 5px rgba(10, 2, 1, 55);"><a href="<?php echo $resultado->p_price ?>">Link Directo</a></td>
 			</tr>
 			<?php }?>
 		</tbody>
