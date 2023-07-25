@@ -106,7 +106,7 @@ $nombreUsuario = $_SESSION['usuario'];
     </div>
   </nav>
 <br>
-<div class="container" style="color: white;">
+<div class="container" style="color: white;background-color: rgba(0, 0, 0, .550);">
     <h1 class="text-center">Especificacion Carta</h1>
     <hr>
     <form action="car_rar.php" method="post">

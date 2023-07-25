@@ -8,7 +8,7 @@ wa.codigo as CODIGO, deuda_c.f_inicioc as FINICIO, deuda_c.f_finalc as FFINAL, d
 from clientes inner join deuda_c on clientes.id_cli=deuda_c.id_clientec inner join 
 (select car_rar.id_cr, car_rar.id_carar, car_rar.id_rar, car_rar.codigo, cartas.id_car, cartas.nombre_c, rareza.id_ra, 
 rareza.rareza from rareza inner join car_rar on rareza.id_ra=car_rar.id_rar inner join cartas on car_rar.id_carar=cartas.id_car)
-as wa on deuda_c.cr_fk=wa.id_cr where deuda_c.f_finalc = '0000-00-00';");
+as wa on deuda_c.cr_fk=wa.id_cr where deuda_c.f_finalc = '0000-00-00'  ORDER BY clientes.nom_cli DESC;");
 $sql->execute();
 $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
 ?>
@@ -69,7 +69,7 @@ $nombreUsuario = $_SESSION['usuario'];
     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
      <div class="offcanvas-body">
-        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+        <ul class="navbar-nav justify-content-right flex-grow-1 pe-3">
           <li class="nav-item">
           <a type="button" class="nav-link" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
  Calendario
@@ -108,7 +108,8 @@ $nombreUsuario = $_SESSION['usuario'];
 </nav>
 <br>
 <div class="container">
-<table class="table table-dark table-striped">
+<div class="table-responsive">
+<table class="table table-dark table-striped ">
   <thead>
     <tr>
       <th scope="col">Nombre</th>
@@ -133,9 +134,54 @@ $nombreUsuario = $_SESSION['usuario'];
       <td scope="row" style="color:whitesmoke;"> <?php echo $fila ['FINICIO'] ?></td>
       <td scope="row" style="color:whitesmoke;"> <?php echo $fila ['FFINAL'] ?></td>
     </tr>
+      <?php endforeach; $db->desconectarDB(); ?>
+  </tbody>
+</table>
+</div>
+<?php
+
+$db = new Database();
+$con = $db->conectar();
+$sql = $con->prepare("SELECT title, descripcion, color, textColor, start, end
+FROM calendario
+WHERE MONTH(start) = MONTH(CURRENT_DATE) OR 
+      (MONTH(start) < MONTH(CURRENT_DATE) AND MONTH(end) >= MONTH(CURRENT_DATE));");
+$sql->execute();
+$resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
+?>
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Eventos Para El Mes</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <table class="table table-dark table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Evento</th>
+      <th scope="col">Notas</th>
+      <th scope="col">Inicio</th>
+      <th scope="col">Fin</th>
+    </tr>
+  </thead>
+  <tbody>
+  <?php foreach($resultado as $fila): ?>
+    <tr>
+      <td scope="row" style="color:whitesmoke;"> <?php echo $fila ['title'] ?></td>
+      <td style="color:whitesmoke;"><?php echo $fila ['descripcion'] ?></td>
+      <td style="color:whitesmoke;"><?php echo $fila ['start'] ?></td>
+      <td style="color:whitesmoke;"><?php echo $fila ['end'] ?></td>
+    </tr>
       <?php endforeach; ?>
   </tbody>
 </table>
+      </div>
+  
+    </div>
+  </div>
+</div>
 </div>
 </body>
 </html>l

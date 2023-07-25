@@ -51,7 +51,7 @@ $nombreUsuario = $_SESSION['usuario'];
     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
      <div class="offcanvas-body">
-        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+        <ul class="navbar-nav justify-content-right flex-grow-1 pe-3">
           <li class="nav-item">
           <a class="nav-link" aria-current="page" href="../calendario.php">Calendario</a>
           </li>
@@ -102,7 +102,8 @@ if (isset($_POST['depa'])) {
 }
 ?>
 <br>
-<div class="container" style="color:white">
+<div class="container" style="color:whitesmoke;background-color: rgba(0, 0, 0, .550);
+    box-shadow: 0 4px 5px rgba(10, 2, 1, 55);text-align:center;color:white">
     <h1 style="text-align: center;">Actualizar Datos</h1>
 <br>
     <form class="row g-3" method="POST">
@@ -130,16 +131,16 @@ if (isset($_POST['depa'])) {
         // Mostrar los campos dentro del formulario principal
         if (isset($tablaf)) {
             foreach ($tablaf as $registro) {
-                echo "<input type='hidden' name='id_cr' value='$registro->id_cr'> ";
+                echo "<input type='hidden' name='id_cr' 'required' required value='$registro->id_cr'> ";
                 echo "<label for='cantidad'>cantidad</label>";
-                echo "<input class='form-control' name='cantidad'  value='$registro->cantidad'> ";
+                echo "<input class='form-control' name='cantidad' 'required'  value='$registro->cantidad'> ";
             }
         }
         ?>
 
         <!-- Botón para enviar los datos al archivo car_rar.php -->
         <div class="col-12">
-            <button type="submit" formaction="mod_car2.php" class="btn btn-primary">Enviar Datos</button>
+            <button type="submit" formaction="mod_car2.php" class="btn btn-primary" >Enviar Datos</button>
         </div>
     </form>
 </div>

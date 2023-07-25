@@ -51,10 +51,11 @@ $nombreUsuario = $_SESSION['usuario'];
     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
      <div class="offcanvas-body">
-        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+        <ul class="navbar-nav justify-content-right flex-grow-1 pe-3">
           <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="../calendario.php">Calendario</a>
-          </li>
+          <a type="button" class="nav-link" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+ Calendario
+</a>          </li>
           <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
         Mi Inventario
@@ -86,28 +87,28 @@ $nombreUsuario = $_SESSION['usuario'];
   </div>
 </nav>
 
-<br>
 
+<br>
 
 <?php
 include 'date.php';
 $conexion = new database();
 $conexion->conectarDB();
 
-// Obtener la lista de departamentos para el filtro
-$consulta = "SELECT * from productos";
+// Obtener la lista de productos para el filtro
+$consulta = "SELECT * FROM productos";
 $tabla = $conexion->seleccionar($consulta);
 
-// Filtrar el departamento seleccionado
+// Filtrar el producto seleccionado
 if (isset($_POST['depa'])) {
     $depa = $_POST['depa'];
-    $consultaf = "SELECT * from productos WHERE id_pro ='$depa'";
+    $consultaf = "SELECT * FROM productos WHERE id_pro ='$depa'";
     $tablaf = $conexion->seleccionar($consultaf);
 }
 ?>
 
-<div class="container" style="color:white">
-    <h1 class="text-center" >Departamento filtrado</h1>
+<div class="container" style="color: whitesmoke; background-color: rgba(0, 0, 0, .550);
+    box-shadow: 0 4px 5px rgba(10, 2, 1, 55); text-align: left; color: white">
 
     <form class="row g-3" method="POST">
         <div class="col-auto">
@@ -117,10 +118,7 @@ if (isset($_POST['depa'])) {
             <select class="form-select" name="depa" aria-label="Default select example">
                 <?php
                 foreach ($tabla as $registro) {
-                    $selected = '';
-                    if (isset($_POST['depa']) && $_POST['depa'] == $registro->id_pro) {
-                        $selected = 'selected';
-                    }
+                    $selected = (isset($_POST['depa']) && $_POST['depa'] == $registro->id_pro) ? 'selected' : '';
                     echo "<option value='" . $registro->id_pro . "' $selected>" . $registro->nom_p . "</option>";
                 }
                 ?>
@@ -130,13 +128,13 @@ if (isset($_POST['depa'])) {
             <button type="submit" class="btn btn-primary mb-3">Filtrar</button>
         </div>
 
+        <!-- Mostrar los campos dentro del formulario principal -->
         <?php
-        // Mostrar los campos dentro del formulario principal
         if (isset($tablaf)) {
             foreach ($tablaf as $registro) {
                 echo "<input type='hidden' name='id_pro' value='$registro->id_pro'> ";
-                echo "<label for='existencias'>existencias</label>";
-                echo "<input class='form-control' name='existencias' value='$registro->existencias'> ";   
+                echo "<label for='existencias'>Existencias</label>";
+                echo "<input class='form-control' name='existencias' value='$registro->existencias' required> ";
             }
         }
         ?>
@@ -146,7 +144,50 @@ if (isset($_POST['depa'])) {
             <button type="submit" formaction="mod_pro2.php" class="btn btn-primary">Enviar Datos</button>
         </div>
     </form>
+
 </div>
 
+<!-- Agregar estilos y scripts para el modal -->
+<link rel="stylesheet" href="ruta/estilos/bootstrap.min.css">
+<script src="ruta/scripts/bootstrap.min.js"></script>
+
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Eventos Para El Mes</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-dark table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">Evento</th>
+                        <th scope="col">Notas</th>
+                        <th scope="col">Inicio</th>
+                        <th scope="col">Fin</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                    $consulta_eventos = "SELECT * FROM calendario";
+                    $eventos = $conexion->seleccionar($consulta_eventos);
+                    foreach ($eventos as $fila):
+                        ?>
+                        <tr>
+                            <td scope="row" style="color: whitesmoke;"><?php echo $fila['title'] ?></td>
+                            <td style="color: whitesmoke;"><?php echo $fila['descripcion'] ?></td>
+                            <td style="color: whitesmoke;"><?php echo $fila['start'] ?></td>
+    <td style="color:whitesmoke;"><?php echo $fila['end'] ?></td>
+  </tr>
+      <?php endforeach; ?>
+  </tbody>
+</table>
+      </div>
+  
+    </div>
+  </div>
+</div>
 </body>
 </html>

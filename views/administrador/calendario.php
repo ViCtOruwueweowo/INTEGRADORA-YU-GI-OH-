@@ -30,7 +30,6 @@ $nombreUsuario = $_SESSION['usuario'];
     <script src="js/moment.min.js"></script>
     <link rel="stylesheet" href="../../css/bootstrap.min.css">
     <link rel="stylesheet" href="../../css/index2.css">
-
     <!--  Full Calendar -->
     <link rel="stylesheet" href="css/fullcalendar.min.css">
     <script src="js/fullcalendar.min.js"></script>
@@ -39,36 +38,43 @@ $nombreUsuario = $_SESSION['usuario'];
     <link rel="stylesheet" href="css/bootstrap-clockpicker.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-
     <style>
-      .fc th{
-        padding: 10px 0px;
-        vertical-align: middle;
-        background: #00205E;
+  /* Custom CSS for the transparent navigation bar with shadow */
+  .navbar {
+    background-color: transparent !important;
+    box-shadow: 0 10px 6px rgba(0, 0, 0, 0.1);
+  }
+  /* Adjust the color of the offcanvas menu content */
+  .offcanvas-header {
+    background-color: #333; /* Change this to your desired color */
+  }
 
-      }
-    </style>
-    
-</head>
+  /* Set the text color to black */
+  .navbar-dark .navbar-nav .nav-link {
+    color: whitesmoke;
+    font-size: 20px;
+    font-family: 'Times New Roman', Times, serif;
+  }
+</style>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
-    <div class="container-fluid">
+    <div class="container-fluid" >
       <a class="navbar-brand" href="index.php">WorkStack</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2" aria-controls="offcanvasNavbar2" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2" aria-controls="offcanvasNavbar2" aria-label="Toggle navigation" >
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasNavbar2" aria-labelledby="offcanvasNavbar2Label">
+      <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasNavbar2" aria-labelledby="offcanvasNavbar2Label" >
         <div class="offcanvas-header">
           <h5 class="offcanvas-title" id="offcanvasNavbar2Label"><b>Mis Atajos</b></h5>
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
-        <div class="offcanvas-body">
-          <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+        <div class="offcanvas-body"  >
+          <ul class="navbar-nav justify-content-right flex-grow-1 pe-3">
             <li class="nav-item">
               <a class="nav-link " aria-current="page" href="calendario.php"><b>Calendario</b></a>
             </li>
             <li class="nav-item">
               <a class="nav-link " aria-current="page" href="empleados.php"><b>Empleados</b></a>
-            </li>
+            </li> 
             <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             <b>Inventario</b>
@@ -101,22 +107,19 @@ $nombreUsuario = $_SESSION['usuario'];
             <li><a class="dropdown-item" href="bitacoras/upd_dp.php"><b>Reporte Deuda Productos</b></a></li>
           </ul>
         </li>
+        <li class="nav-item dropdown responsive">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <?php $nombreUsuario = $_SESSION['usuario']; echo "$nombreUsuario";?>
+          </a>
+          <ul class="dropdown-menu dropdown-responsive">
+          <a href="../../config/cerrarSesion.php" class="dropdown-item dropdown-responsive">Cerrar Sesion</a>
           </ul>
-      <b>
-        <?php echo "$nombreUsuario"; ?>
-      </b>
-          <form class="d-flex mt-3 mt-lg-0" role="search">
-            <a href="../../config/cerrarSesion.php" class="btn btn-outline-success">Cerrar Sesion</a>
-          </form>
+      </li>
+          </ul>
         </div>
       </div>
     </div>
   </nav>
-
-  <body >
-    
-    <div class="container">
-  <body > 
     <div class="container">
 
         
@@ -150,6 +153,7 @@ $nombreUsuario = $_SESSION['usuario'];
             
             },
              dayClick:function(date,jsEvent,view){
+
               $('#btnAgregar').prop("disabled",false);
               $('#btnModificar').prop("disabled",true);
               $('#btnEliminar').prop("disabled",true);
@@ -160,7 +164,9 @@ $nombreUsuario = $_SESSION['usuario'];
 
 
              },
-             events:'http://localhost/INTEGRAL/INTEGRADORA-YU-GI-OH-/views/administrador/eventos.php',
+             events: 'http://localhost/inte_proto/views/administrador/eventos.php',
+
+            // ESTE SOLO SIRVE PARA RICARDO: events:'http://localhost/INTEGRAL/INTEGRADORA-YU-GI-OH-/views/administrador/eventos.php',
 
 
            eventClick:function(calEvent,jsEvent,view){

@@ -76,7 +76,7 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body"  >
-          <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+          <ul class="navbar-nav justify-content-right flex-grow-1 pe-3">
             <li class="nav-item">
               <a class="nav-link " aria-current="page" href="calendario.php"><b>Calendario</b></a>
             </li>
@@ -115,12 +115,12 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
             <li><a class="dropdown-item" href="bitacoras/upd_dp.php"><b>Reporte Deuda Productos</b></a></li>
           </ul>
         </li>
-        <li class="nav-item dropdown">
+        <li class="nav-item dropdown responsive">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
           <?php $nombreUsuario = $_SESSION['usuario']; echo "$nombreUsuario";?>
           </a>
-          <ul class="dropdown-menu">
-          <a href="../../config/cerrarSesion.php" class="dropdown-item">Cerrar Sesion</a>
+          <ul class="dropdown-menu dropdown-responsive">
+          <a href="../../config/cerrarSesion.php" class="dropdown-item dropdown-responsive">Cerrar Sesion</a>
           </ul>
       </li>
           </ul>
@@ -129,18 +129,18 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
     </div>
   </nav>
 <!--cabezera #212529-->
-<br>
+
 <br>
 <!---->
 <div class="container" style="background-color:transparent;border-radius:10px">
 <main>
       <div class="container">
-    <div class="row row-cols-2 row-cols-sm-2 row-cols-md-4 g-4 ">
+      <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 g-4 ">
 
         <?php foreach($resultado as $row) { ?>
         <div class="col">
-          <div class="card shadow-sm "  style=" background-color: rgba(0, 0, 0, .550);
-    box-shadow: 0 4px 5px rgba(10, 2, 1, 55);">
+        <div class="card shadow-sm " style=" background-color: rgba(0, 0, 0, .550);
+    box-shadow: 0 2px 4px rgba(10, 2, 1, 55);">
             <?php
             $id =$row[('imagen_c')];
             $imagen = "../../imagenes/productos/".$id.".jpg";
@@ -149,9 +149,9 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
             }
             ?>
             
-            <img   src="<?php echo $imagen; ?>">
+            <img src="<?php echo $imagen; ?>" class="img-fluid" alt="...">
             <div class="card-body" >
-              <h6 class="card-title text-center" style="color:white; font-size:12px;    font-family: 'Times New Roman', Times, serif;"><?php echo $row ['nombre_c']; ?></h6>
+              <h6 class="card-title text-center"  style="color:white; font-size:19px;    font-family: 'Times New Roman', Times, serif;"><?php echo $row ['nombre_c']; ?></h6>
               <div  class="d-flex justify-content-between align-items-center">
               
        <!--       <a href="details.php?id_car=<?php echo $row ['id_car']; ?>&token=<?php echo 

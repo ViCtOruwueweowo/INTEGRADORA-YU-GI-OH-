@@ -55,7 +55,7 @@
     </div>
   </nav>
 <br>
-<div class="container">
+<div class="container" style="background-color: rgba(0, 0, 0, .550);">
     <h1 class="text-center">Cliente</h1>
     <hr>
     <form action="update_cliente.php" method="post">

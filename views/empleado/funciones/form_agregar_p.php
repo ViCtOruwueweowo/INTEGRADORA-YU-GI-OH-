@@ -51,7 +51,7 @@ $nombreUsuario = $_SESSION['usuario'];
     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
      <div class="offcanvas-body">
-        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+        <ul class="navbar-nav justify-content-right flex-grow-1 pe-3">
           <li class="nav-item">
           <a class="nav-link" aria-current="page" href="../calendario.php">Calendario</a>
           </li>
@@ -86,34 +86,35 @@ $nombreUsuario = $_SESSION['usuario'];
   </div>
 </nav>
 <br>
-<div class="container" style="color:white">
+<div class="container" class="container" style="color:whitesmoke;background-color: rgba(0, 0, 0, .550);
+    box-shadow: 0 4px 5px rgba(10, 2, 1, 55);text-align:left;color:white">
 <h1 style="text-align: center;">Agregar Producto</h1>
 <hr>
 <form action="producto_g.php" method="post" enctype="multipart/form-data">
 <div class="row">
     <div class="col-12">
     <label  class="form-label">Ingresar Nombre Del Producto:</label>
-    <input type="text" class="form-control col-lg-6" id="nom_p" name="nom_p" placeholder="Nombre Producto. . ." require>
+    <input type="text" class="form-control col-lg-6" id="nom_p" name="nom_p" placeholder="Nombre Producto. . ." required>
     </div>
     <div class="col-12">
     <label  class="form-label">Ingresar Existencias Del Producto:</label>
-    <input type="text" class="form-control col-lg-6" id="existencias" name="existencias" placeholder="Ingresar Existencias. . ." require>
+    <input type="text" class="form-control col-lg-6" id="existencias" name="existencias" placeholder="Ingresar Existencias. . ." required>
     </div>
     <div class="col-12">
     <label  class="form-label">Ingresar Precio Del Producto:</label>
-    <input type="text" class="form-control col-lg-6" id="precio" name="precio" placeholder="Ingresar Precio. . ." require>
+    <input type="text" class="form-control col-lg-6" id="precio" name="precio" placeholder="Ingresar Precio. . ." required>
     </div>
     <div class="col-12">
     <label  class="form-label">Ingresar Nombre De La Imagen:</label>
-    <input type="text" class="form-control col-lg-6" id="imagen_p" name="imagen_p" placeholder="Nombre De La Imagen. . ." require>
+    <input type="text" class="form-control col-lg-6" id="imagen_p" name="imagen_p" placeholder="Nombre De La Imagen. . ." required>
     </div>
     <div class="col-12">
     <label  class="form-label">Ingresar Descripcion Del Producto:</label>
-    <input type="text" class="form-control col-lg-6" id="notas_prod" name="notas_prod" placeholder="Detalles. . ." require>
+    <input type="text" class="form-control col-lg-6" id="notas_prod" name="notas_prod" placeholder="Detalles. . ." required>
     </div>
     <div class="col-12">
     <label  class="form-label">Ingresar Archivo</label><br>
-    <input type="file" name="imagen" accept="image/webp">
+    <input type="file" name="imagen" accept="image/webp" required>
     </div>
     
     <div class="col-12">

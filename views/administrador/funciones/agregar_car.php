@@ -109,7 +109,7 @@ $nombreUsuario = $_SESSION['usuario'];
 <br>
 
 <!---->
-   <div class="container" style="color: white;">
+   <div class="container" style="color: white;background-color: rgba(0, 0, 0, .550);">
 <h1 style="text-align: center;">Agregar Carta</h1>
 <hr>
 <form action="guardar_carta.php" method="post" enctype="multipart/form-data">

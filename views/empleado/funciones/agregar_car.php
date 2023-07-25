@@ -54,7 +54,7 @@ $nombreUsuario = $_SESSION['usuario'];
     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
      <div class="offcanvas-body">
-        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+        <ul class="navbar-nav justify-content-right flex-grow-1 pe-3">
           <li class="nav-item">
           <a class="nav-link" aria-current="page" href="../calendario.php">Calendario</a>
           </li>
@@ -92,26 +92,27 @@ $nombreUsuario = $_SESSION['usuario'];
 <br>
 
 <!---->
-   <div class="container" style="color:whitesmoke">
+   <div class="container" style="color:whitesmoke;background-color: rgba(0, 0, 0, .550);
+    box-shadow: 0 4px 5px rgba(10, 2, 1, 55);text-align:left;color:white">
 <h1 style="text-align: center;">Agregar Carta</h1>
 <hr>
 <form action="guardar_carta.php" method="post" enctype="multipart/form-data">
 <div class="row">
     <div class="col-12">
     <label  class="form-label">Ingresar Nombre De La Carta:</label>
-    <input type="text" class="form-control col-lg-6" id="nom_p" name="nombre_c" placeholder="Nombre Carta. . ." require>
+    <input type="text" class="form-control col-lg-6" id="nom_p" name="nombre_c" placeholder="Nombre Carta. . ." required>
     </div>
     <div class="col-12">
     <label  class="form-label">Ingresar Nombre De La Imagen:</label>
-    <input type="text" class="form-control col-lg-6"  name="imagen_c" placeholder="Nombre Imagen. . ." require>
+    <input type="text" class="form-control col-lg-6"  name="imagen_c" placeholder="Nombre Imagen. . ." required>
     </div>
     <div class="col-12">
     <label  class="form-label">Ingresar Tipo De Carta:</label>
-    <input type="text"  class="form-control" name="tipo_c" placeholder="Magia, Trampa, Monstruo. . ." require>
+    <input type="text"  class="form-control" name="tipo_c" placeholder="Magia, Trampa, Monstruo. . ." required>
     </div>
     <div class="col-12">
     <label  class="form-label">Ingresar Archivo</label><br>
-    <input type="file" name="imagen" accept=".jpg">
+    <input type="file" name="imagen" accept=".jpg" required>
     </div>
     
     <div class="col-12">

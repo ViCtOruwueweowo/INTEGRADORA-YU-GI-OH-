@@ -4,7 +4,7 @@ $pdo=new PDO("mysql:dbname=workstack;host=127.0.0.1","root","");
 
 $accion= (isset($_GET['accion']))?$_GET['accion']:'leer';
 
-switch($accion){
+switch($accion){ 
     case 'agregar':
         // Instrucción de agregado
         $sentenciaSQL = $pdo->prepare("INSERT INTO calendario(title,descripcion,color,textColor,start,end) VALUES(:title,:descripcion,:color,:textColor,:start,:end)");

@@ -88,7 +88,7 @@ $nombreUsuario = $_SESSION['usuario'];
   </nav>
 
   <br>
-<div class="container">
+<div class="container" style="background-color: rgba(0, 0, 0, .550);">
   
     <form action="guardar_acre.php" method="post">
 

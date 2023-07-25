@@ -53,7 +53,7 @@ $nombreUsuario = $_SESSION['usuario'];
     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
      <div class="offcanvas-body">
-        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+        <ul class="navbar-nav justify-content-right flex-grow-1 pe-3">
           <li class="nav-item">
           <a class="nav-link" aria-current="page" href="../calendario.php">Calendario</a>
           </li>
@@ -89,7 +89,8 @@ $nombreUsuario = $_SESSION['usuario'];
 </nav>
 
 <br>
-<div class="container" style="color:white">
+<div class="container"style="color:whitesmoke;background-color: rgba(0, 0, 0, .550);
+    box-shadow: 0 4px 5px rgba(10, 2, 1, 55);text-align:left;color:white">
     <h1 class="text-center">Especificacion Carta</h1>
     <hr>
     <form action="car_rar.php" method="post">
@@ -122,23 +123,23 @@ echo "</select>";
 ?>
 <div class="mb-3">
   <label for="p_price" class="form-label">Ingresar Link De Price</label>
-  <input type="text" name="p_price" class="form-control" id="exampleFormControlInput1" placeholder="Link Price" require>
+  <input type="text" name="p_price" class="form-control" id="exampleFormControlInput1" placeholder="Link Price" required>
 </div>
 <div class="mb-3">
   <label for="p_tcg" class="form-label">Ingresar Link De Tcg</label>
-  <input type="text" name="p_tcg" class="form-control" id="exampleFormControlInput1" placeholder="Link Tcg" require>
+  <input type="text" name="p_tcg" class="form-control" id="exampleFormControlInput1" placeholder="Link Tcg" required>
 </div>
 <div class="mb-3">
   <label for="p_beto" class="form-label">Ingresar Precio En Tienda</label>
-  <input type="text" name="p_beto" class="form-control" id="exampleFormControlInput1" placeholder="Precio Local" require>
+  <input type="text" name="p_beto" class="form-control" id="exampleFormControlInput1" placeholder="Precio Local" required>
 </div>
 <div class="mb-3">
   <label for="codigo" class="form-label">Ingresar Codigo</label>
-  <input type="text" name="codigo" class="form-control" id="exampleFormControlInput1" placeholder="Codigo" require>
+  <input type="text" name="codigo" class="form-control" id="exampleFormControlInput1" placeholder="Codigo" required>
 </div>
 <div class="mb-3">
   <label for="cantidad" class="form-label">Ingresar Cantidad</label>
-  <input type="text" name="cantidad" class="form-control" id="exampleFormControlInput1" placeholder="Cantidad" require>
+  <input type="text" name="cantidad" class="form-control" id="exampleFormControlInput1" placeholder="Cantidad" required>
 </div>
 <div class="col-12">
     <button type="submit" value="Enviar" class="btn btn-primary">Guardar Registro</button>
