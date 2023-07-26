@@ -30,6 +30,7 @@ $nombreUsuario = $_SESSION['usuario'];
     <script src="js/moment.min.js"></script>
     <link rel="stylesheet" href="../../css/bootstrap.min.css">
     <link rel="stylesheet" href="../../css/index2.css">
+    
     <!-- esto hace que los dropdown jalen pero los modal del calendario se estropean-->
     <!--<script src="../../js/bootstrap.bundle.min.js"></script>-->
 
