@@ -46,7 +46,7 @@ if (isset($_SESSION['usuario'])) {
             <div class="form-outline mb-3">
               <input type="password" class="form-control form-control-lg"
                name="contraseña"  placeholder="Ingresa tu contraseña. . ." required/>
-              <label class="form-label" for="" style="color:red"><b>Contraseña</b></label>
+              <label class="form-label" for="" style="color:red" ><b>Contraseña</b></label>
             </div>
 
             <div class="text-center text-lg-start mt-4 pt-2">

@@ -114,6 +114,8 @@ if (isset($_POST['filtro_inactivos'])) {
             <li><a class="dropdown-item" href="acreedores.php"><b>Mis Acreedores</b></a></li>
             <li><a class="dropdown-item" href="deudores_cartas.php"><b>Mis Deudores Cartas</b></a></li>
             <li><a class="dropdown-item" href="deudores_productos.php"><b>Mis Deudores Productos</b></a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="funciones/agregar_cliente.php">Agregar Cliente</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
@@ -246,11 +248,11 @@ if (isset($_POST['filtro_inactivos'])) {
      </div>
      <div class="col-12">
      <label>
-  <input type="radio" name="estado" value="1">ACTIVO
+  <input type="radio" name="estado" value="1">Activo
 </label>
 <br>
 <label>
-  <input type="radio" name="estado" value="0">inactivo
+  <input type="radio" name="estado" value="0">Inactivo
 </label>
      </div>
      <div class="col-12 d-grid gap-2">
@@ -304,11 +306,16 @@ if (isset($_POST['filtro_inactivos'])) {
   <tbody>
     <?php foreach ($resultado as $fila): ?>
       <tr>
-        <td scope="row" style="color:whitesmoke;"><?php echo $fila['nombre_user'] ?></td>
-        <td style="color:whitesmoke;"><?php echo $fila['apellidos_user'] ?></td>
-        <td style="color:whitesmoke;"><?php echo $fila['f_nacimiento'] ?></td>
-        <td style="color:whitesmoke;"><?php echo $fila['tel_user'] ?></td>
-        <td style="color:whitesmoke;"><?php echo $fila['direccion_user'] ?></td>
+        <td scope="row" style="color:whitesmoke;background-color: rgba(0, 0, 0, .550);
+    box-shadow: 0 2px 4px rgba(10, 2, 1, 55);"><?php echo $fila['nombre_user'] ?></td>
+        <td style="color:whitesmoke;background-color: rgba(0, 0, 0, .550);
+    box-shadow: 0 2px 4px rgba(10, 2, 1, 55);"><?php echo $fila['apellidos_user'] ?></td>
+        <td style="color:whitesmoke;background-color: rgba(0, 0, 0, .550);
+    box-shadow: 0 2px 4px rgba(10, 2, 1, 55);"><?php echo $fila['f_nacimiento'] ?></td>
+        <td style="color:whitesmoke;background-color: rgba(0, 0, 0, .550);
+    box-shadow: 0 2px 4px rgba(10, 2, 1, 55);"><?php echo $fila['tel_user'] ?></td>
+        <td style="color:whitesmoke;background-color: rgba(0, 0, 0, .550);
+    box-shadow: 0 2px 4px rgba(10, 2, 1, 55);"><?php echo $fila['direccion_user'] ?></td>
       </tr>
     <?php endforeach; ?>
   </tbody>

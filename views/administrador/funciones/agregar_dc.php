@@ -1,4 +1,3 @@
- 
 <?php
 session_start();
 
@@ -12,6 +11,7 @@ if (!isset($_SESSION['usuario'])) {
 $nombreUsuario = $_SESSION['usuario'];
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,7 +22,27 @@ $nombreUsuario = $_SESSION['usuario'];
     <link rel="stylesheet" href="../../../css/index2.css">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
+<style>
+  /* Custom CSS for the transparent navigation bar with shadow */
+  .navbar {
+    background-color: transparent !important;
+    box-shadow: 0 10px 6px rgba(0, 0, 0, 0.1);
+  }
+  /* Adjust the color of the offcanvas menu content */
+  .offcanvas-header {
+    background-color: #333; /* Change this to your desired color */
+  }
+
+  /* Set the text color to black */
+  .navbar-dark .navbar-nav .nav-link {
+    color: whitesmoke;
+    font-size: 20px;
+    font-family: 'Times New Roman', Times, serif;
+  }
+</style>
+    <header>
+  <!-- Fixed navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
     <div class="container-fluid">
       <a class="navbar-brand" href="../index.php">WorkStack</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2" aria-controls="offcanvasNavbar2" aria-label="Toggle navigation">
@@ -34,7 +54,7 @@ $nombreUsuario = $_SESSION['usuario'];
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
-          <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+          <ul class="navbar-nav justify-content-right flex-grow-1 pe-3">
             <li class="nav-item">
               <a class="nav-link " aria-current="page" href="../calendario.php"><b>Calendario</b></a>
             </li>
@@ -60,6 +80,8 @@ $nombreUsuario = $_SESSION['usuario'];
             <li><a class="dropdown-item" href="../acreedores.php"><b>Mis Acreedores</b></a></li>
             <li><a class="dropdown-item" href="../deudores_cartas.php"><b>Mis Deudores Cartas</b></a></li>
             <li><a class="dropdown-item" href="../deudores_productos.php"><b>Mis Deudores Productos</b></a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="agregar_cliente.php">Agregar Cliente</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
@@ -73,13 +95,18 @@ $nombreUsuario = $_SESSION['usuario'];
             <li><a class="dropdown-item" href="../bitacoras/upd_dp.php"><b>Reporte Deuda Productos</b></a></li>
           </ul>
         </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <?php $nombreUsuario = $_SESSION['usuario']; echo "$nombreUsuario";?>
+          </a>
+          <ul class="dropdown-menu">
+          <a href="../../config/cerrarSesion.php" class="dropdown-item">Cerrar Sesion</a>
           </ul>
-          <b>
-        <?php echo "$nombreUsuario"; ?>
-      </b>
-          <form class="d-flex mt-3 mt-lg-0" role="search">
-            <a href="../../config/cerrarSesion.php" class="btn btn-outline-success">Cerrar Sesion</a>
-          </form>
+      </li>
+          </ul>
+  
+       
         </div>
       </div>
     </div>

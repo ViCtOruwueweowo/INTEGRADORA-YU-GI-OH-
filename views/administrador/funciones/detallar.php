@@ -1,4 +1,3 @@
-
 <?php
 session_start();
 
@@ -11,6 +10,7 @@ if (!isset($_SESSION['usuario'])) {
 
 $nombreUsuario = $_SESSION['usuario'];
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -55,7 +55,7 @@ $nombreUsuario = $_SESSION['usuario'];
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
-          <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+          <ul class="navbar-nav justify-content-right flex-grow-1 pe-3">
             <li class="nav-item">
               <a class="nav-link " aria-current="page" href="../calendario.php"><b>Calendario</b></a>
             </li>
@@ -81,6 +81,8 @@ $nombreUsuario = $_SESSION['usuario'];
             <li><a class="dropdown-item" href="../acreedores.php"><b>Mis Acreedores</b></a></li>
             <li><a class="dropdown-item" href="../deudores_cartas.php"><b>Mis Deudores Cartas</b></a></li>
             <li><a class="dropdown-item" href="../deudores_productos.php"><b>Mis Deudores Productos</b></a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="agregar_cliente.php">Agregar Cliente</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
@@ -94,6 +96,7 @@ $nombreUsuario = $_SESSION['usuario'];
             <li><a class="dropdown-item" href="../bitacoras/upd_dp.php"><b>Reporte Deuda Productos</b></a></li>
           </ul>
         </li>
+
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
           <?php $nombreUsuario = $_SESSION['usuario']; echo "$nombreUsuario";?>
@@ -103,11 +106,13 @@ $nombreUsuario = $_SESSION['usuario'];
           </ul>
       </li>
           </ul>
-        
+  
+       
         </div>
       </div>
     </div>
   </nav>
+
 <?php
     include 'date.php';
     $conexion = new database();

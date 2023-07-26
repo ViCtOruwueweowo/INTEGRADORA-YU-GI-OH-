@@ -67,7 +67,7 @@ $nombreUsuario = $_SESSION['usuario'];
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
-          <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+          <ul class="navbar-nav justify-content-right flex-grow-1 pe-3">
             <li class="nav-item">
               <a class="nav-link " aria-current="page" href="../calendario.php"><b>Calendario</b></a>
             </li>
