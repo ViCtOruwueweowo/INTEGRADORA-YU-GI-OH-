@@ -166,9 +166,14 @@ $nombreUsuario = $_SESSION['usuario'];
 
 
              },
-             events: 'http://localhost/inte_proto/views/administrador/eventos.php',
+            // ESTE SOLO SIRVE PARA VICTOR: events: 'http://localhost/inte_proto/views/administrador/eventos.php',
 
-            // ESTE SOLO SIRVE PARA RICARDO: events:'http://localhost/INTEGRAL/INTEGRADORA-YU-GI-OH-/views/administrador/eventos.php',
+           // events:'http://localhost/INTEGRAL/INTEGRADORA-YU-GI-OH-/views/administrador/eventos.php',
+
+           // events: './eventos.php',
+           
+           events: '../../views/administrador/eventos.php',
+
 
 
            eventClick:function(calEvent,jsEvent,view){
