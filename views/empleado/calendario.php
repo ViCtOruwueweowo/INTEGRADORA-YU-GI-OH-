@@ -30,6 +30,7 @@ $nombreUsuario = $_SESSION['usuario'];
     <script src="js/moment.min.js"></script>
     <link rel="stylesheet" href="../../css/bootstrap.min.css">
     <link rel="stylesheet" href="../../css/index3.css">
+    <link rel="stylesheet" href="../../js/bootstrap.bundle.min.js">
     <!--  Full Calendar -->
     <link rel="stylesheet" href="css/fullcalendar.min.css">
     <script src="js/fullcalendar.min.js"></script>
@@ -72,7 +73,7 @@ $nombreUsuario = $_SESSION['usuario'];
      <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-right flex-grow-1 pe-3">
           <li class="nav-item">
-          <a type="button" class="nav-link" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+          <a type="button" class="nav-link" href="calendario.php" data-bs-target="#staticBackdrop">
  Calendario
 </a>
 
