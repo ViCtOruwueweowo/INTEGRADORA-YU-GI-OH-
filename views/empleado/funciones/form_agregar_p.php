@@ -105,16 +105,12 @@ $nombreUsuario = $_SESSION['usuario'];
     <input type="text" class="form-control col-lg-6" id="precio" name="precio" placeholder="Ingresar Precio. . ." required>
     </div>
     <div class="col-12">
-    <label  class="form-label">Ingresar Nombre De La Imagen:</label>
-    <input type="text" class="form-control col-lg-6" id="imagen_p" name="imagen_p" placeholder="Nombre De La Imagen. . ." required>
-    </div>
-    <div class="col-12">
     <label  class="form-label">Ingresar Descripcion Del Producto:</label>
     <input type="text" class="form-control col-lg-6" id="notas_prod" name="notas_prod" placeholder="Detalles. . ." required>
     </div>
     <div class="col-12">
     <label  class="form-label">Ingresar Archivo</label><br>
-    <input type="file" name="imagen" accept="image/webp" required>
+    <input type="file" name="imagen" required>
     </div>
     
     <div class="col-12">

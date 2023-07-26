@@ -116,7 +116,7 @@ nombre_c, imagen_c
 FROM 
 cartas inner join car_rar on
 cartas.id_car=car_rar.id_carar inner join rareza on
-car_rar.id_rar=rareza.id_ra where rareza.id_ra>='4' ;");
+car_rar.id_rar=rareza.id_ra where rareza.id_ra>='2' ;");
 $sql->execute();
 $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
 ?>

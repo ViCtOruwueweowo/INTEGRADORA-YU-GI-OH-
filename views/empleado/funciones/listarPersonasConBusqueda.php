@@ -196,27 +196,28 @@ if ($busqueda === null) {
 			<tr>
         
       <td style="color:whitesmoke;background-color: rgba(0, 0, 0, .550); box-shadow: 0 4px 5px rgba(10, 2, 1, 55); text-align:center">
-  <?php
-  $imagenPath = "../../../imagenes/productos/" . $resultado->imagen_c;
-  
-  // Verifica si el archivo existe con varias extensiones
-  $extensionesPermitidas = array('jpg', 'jpeg', 'png', 'gif');
-  $imagenEncontrada = false;
-  foreach ($extensionesPermitidas as $ext) {
-    if (file_exists($imagenPath . "." . $ext)) {
-      $imagen = $imagenPath . "." . $ext;
-      $imagenEncontrada = true;
-      break;
-    }
-  }
+                <?php
+                $imagenPath = "../../../imagenes/productos/" . $resultado->imagen_c;
+                
+                // Verifica si el archivo existe con varias extensiones
+                $extensionesPermitidas = array('jpg', 'jpeg', 'png', 'gif');
+                $imagenEncontrada = false;
+                foreach ($extensionesPermitidas as $ext) {
+                    if (file_exists($imagenPath . "." . $ext)) {
+                        $imagen = $imagenPath . "." . $ext;
+                        $imagenEncontrada = true;
+                        break;
+                    }
+                }
 
-  // Si no se encuentra ninguna imagen, utiliza una imagen predeterminada
-  if (!$imagenEncontrada) {
-    $imagen = "../../../imagenes/no image.png";
-  }
-  ?>
+                // Si no se encuentra ninguna imagen, utiliza una imagen predeterminada
+                if (!$imagenEncontrada) {
+                    $imagen = "../../../imagenes/no_image.png";
+                }
+                ?>
 
-  <img src="<?php echo $imagen; ?>" style="width: 100px;">
+                <img src="<?php echo $imagen; ?>" style="width: 100px;">
+            </td>
 </td>        <td style="color:whitesmoke;background-color: rgba(0, 0, 0, .550);
     box-shadow: 0 4px 5px rgba(10, 2, 1, 55);text-align:center"><?php echo $resultado->nombre_c ?></td>
 				<td style="color:whitesmoke;background-color: rgba(0, 0, 0, .550);
