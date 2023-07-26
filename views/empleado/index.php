@@ -122,31 +122,44 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 g-4 ">
 
-        <?php foreach($resultado as $row) { ?>
-        <div class="col">
-          <div class="card shadow-sm " style=" background-color: rgba(0, 0, 0, .550);
-    box-shadow: 0 2px 4px rgba(10, 2, 1, 55);">
-            <?php
-            $id =$row[('imagen_c')];
-            $imagen = "../../imagenes/productos/".$id.".jpg";
-            if(!file_exists($imagen)){
-              $imagen="imagenes/no image.png";
-            }
-            ?>
-            <img src="<?php echo $imagen; ?>" class="img-fluid" alt="...">
-            <div class="card-body" >
-              <h6 class="card-title text-center" style="color:white; font-size:20px;    font-family: 'Times New Roman', Times, serif;"><?php echo $row ['nombre_c']; ?></h6>
-              <div  class="d-flex justify-content-between align-items-center">
-              
-              </div>
-            
-              </div>
-            
-          </div>
-        </div>
-        <?php 
+<?php foreach ($resultado as $row) { ?>
+  <div class="col">
+    <div class="card shadow-sm " style="background-color: rgba(0, 0, 0, .550); box-shadow: 0 2px 4px rgba(10, 2, 1, 55);">
+      <?php
+      $id = $row['imagen_c'];
+      $imagePath = "../../imagenes/productos/" . $id;
       
-           } $db->desconectarDB();  ?>   
+      // Verifica si el archivo existe con varias extensiones
+      $extensionesPermitidas = array('jpg', 'jpeg', 'png', 'gif');
+      $imagenEncontrada = false;
+      foreach ($extensionesPermitidas as $ext) {
+        if (file_exists($imagePath . "." . $ext)) {
+          $imagen = $imagePath . "." . $ext;
+          $imagenEncontrada = true;
+          break;
+        }
+      }
+
+      // Si no se encuentra ninguna imagen, utiliza una imagen predeterminada
+      if (!$imagenEncontrada) {
+        $imagen = "imagenes/no image.png";
+      }
+      ?>
+      <img src="<?php echo $imagen; ?>" class="img-fluid" alt="...">
+      <div class="card-body">
+        <h6 class="card-title text-center" style="color:white; font-size:20px; font-family: 'Times New Roman', Times, serif;"><?php echo $row['nombre_c']; ?></h6>
+        <div class="d-flex justify-content-between align-items-center">
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+<?php
+}
+$db->desconectarDB();
+?>
     </div> 
 </div>
 

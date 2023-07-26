@@ -30,6 +30,8 @@ $nombreUsuario = $_SESSION['usuario'];
     <script src="js/moment.min.js"></script>
     <link rel="stylesheet" href="../../css/bootstrap.min.css">
     <link rel="stylesheet" href="../../css/index2.css">
+    <script src="../../js/bootstrap.bundle.min.js"></script>
+
     <!--  Full Calendar -->
     <link rel="stylesheet" href="css/fullcalendar.min.css">
     <script src="js/fullcalendar.min.js"></script>
