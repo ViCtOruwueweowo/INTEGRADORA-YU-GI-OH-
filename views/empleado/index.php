@@ -116,7 +116,7 @@ nombre_c, imagen_c
 FROM 
 cartas inner join car_rar on
 cartas.id_car=car_rar.id_carar inner join rareza on
-car_rar.id_rar=rareza.id_ra where rareza.id_ra>='2' ;");
+car_rar.id_rar=rareza.id_ra where rareza.id_ra>='4' ;");
 $sql->execute();
 $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
 ?>
@@ -130,7 +130,7 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
       $imagePath = "../../imagenes/productos/" . $id;
       
       // Verifica si el archivo existe con varias extensiones
-      $extensionesPermitidas = array('jpg', 'jpeg', 'png', 'gif');
+      $extensionesPermitidas = array('jpg', 'jpeg', 'png', 'gif', 'webp');
       $imagenEncontrada = false;
       foreach ($extensionesPermitidas as $ext) {
         if (file_exists($imagePath . "." . $ext)) {
@@ -211,5 +211,11 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
   </div>
 </div>
   </div>
+  <br>
+<footer class="footer mt-auto py-3 bg-dark">
+<div class="container text-center">
+<span class="text-center" style="color:white">Aplicacion Desarrollada Unicamente Para Fines De Venta Y Distribucion De Menores.</span>
+</div>
+</footer>
 </body>
 </html>

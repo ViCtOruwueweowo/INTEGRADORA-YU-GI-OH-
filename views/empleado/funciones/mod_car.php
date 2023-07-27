@@ -106,43 +106,58 @@ if (isset($_POST['depa'])) {
     box-shadow: 0 4px 5px rgba(10, 2, 1, 55);text-align:center;color:white">
     <h1 style="text-align: center;">Actualizar Datos</h1>
 <br>
-    <form class="row g-3" method="POST">
-        <div class="col-auto">
-            <h2 class="form-label">Selecciona la carta a modificar:</h2>
-        </div>
-        <div class="col-auto">
-            <select class="form-select" name="depa" aria-label="Default select example">
-                <?php
-                foreach ($tabla as $registro) {
-                    $selected = '';
-                    if (isset($_POST['depa']) && $_POST['depa'] == $registro->id_cr) {
-                        $selected = 'selected';
-                    }
-                    echo "<option value='" . $registro->id_cr . "' $selected>" . $registro->nombre . "</option>";
+<form class="row g-3" method="POST" onsubmit="return validateForm()">
+    <div class="col-auto">
+        <h2 class="form-label">Selecciona la carta a modificar:</h2>
+    </div>
+    <div class="col-auto">
+        <select class="form-select" name="depa" aria-label="Default select example">
+            <?php
+            foreach ($tabla as $registro) {
+                $selected = '';
+                if (isset($_POST['depa']) && $_POST['depa'] == $registro->id_cr) {
+                    $selected = 'selected';
                 }
-                ?>
-            </select>
-        </div>
-        <div class="col-auto">
-            <button type="submit" class="btn btn-primary mb-3">Filtrar</button>
-        </div>
-
-        <?php
-        // Mostrar los campos dentro del formulario principal
-        if (isset($tablaf)) {
-            foreach ($tablaf as $registro) {
-                echo "<input type='hidden' name='id_cr' 'required' required value='$registro->id_cr'> ";
-                echo "<label for='cantidad'>cantidad</label>";
-                echo "<input class='form-control' name='cantidad' 'required'  value='$registro->cantidad'> ";
+                echo "<option value='" . $registro->id_cr . "' $selected>" . $registro->nombre . "</option>";
             }
-        }
-        ?>
+            ?>
+        </select>
+    </div>
+    <div class="col-auto">
+        <button type="submit" class="btn btn-primary mb-3">Filtrar</button>
+    </div>
 
-        <!-- Botón para enviar los datos al archivo car_rar.php -->
-        <div class="col-12">
-            <button type="submit" formaction="mod_car2.php" class="btn btn-primary" >Enviar Datos</button>
-        </div>
-    </form>
+    <?php
+    // Mostrar los campos dentro del formulario principal
+    if (isset($tablaf)) {
+        foreach ($tablaf as $registro) {
+            echo "<input type='hidden' name='id_cr' 'required' required value='$registro->id_cr'> ";
+            echo "<label for='cantidad'>cantidad</label>";
+            echo "<input class='form-control' name='cantidad' 'required'  value='$registro->cantidad'> ";
+        }
+    }
+    ?>
+
+    <!-- Botón para enviar los datos al archivo car_rar.php -->
+    <div class="col-12">
+        <button type="submit" formaction="mod_car2.php" class="btn btn-primary">Enviar Datos</button>
+    </div>
+</form>
+
+<script>
+    function validateForm() {
+        var selectElement = document.querySelector("select[name='depa']");
+        var selectedValue = selectElement.value;
+        
+        if (selectedValue === "") {
+            alert("Por favor, selecciona una opción antes de continuar.");
+            return false; // Impide que el formulario se envíe si no hay opción seleccionada.
+        }
+        
+        return true; // Permite enviar el formulario si se ha seleccionado una opción.
+    }
+</script>
+
 </div>
 </body>
 </html>

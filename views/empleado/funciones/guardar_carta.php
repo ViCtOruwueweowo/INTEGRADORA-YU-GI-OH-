@@ -1,3 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../../css/index3.css">
+    <script src="../../../js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+<style>
+        #contendor{
+            width: 40%;
+            margin: auto;
+        }
+        body{
+            margin-top: 250px;
+        }
+    </style>
 <?php
 // Establecer la conexión a la base de datos
 $host = "localhost";
@@ -23,13 +43,14 @@ if (isset($_FILES['imagen'])) {
     $rutaDestino = "../../../imagenes/productos/" . $nombreArchivo;
 
     if (move_uploaded_file($archivoTemp, $rutaDestino)) {
-        echo "<div class='alert alert-success'>Carta Guardada Con Éxito</div>";
-        header("refresh:1 ;agregar_rar.php");
+        header("refresh:0 ;agregar_rar.php");
     } else {
         echo "Hubo un error al guardar la imagen.";
+        header("refresh:1 ;listarPersonasConBusqueda.php");
     }
 } else {
     echo "No se ha seleccionado ninguna imagen.";
+    header("refresh:1 ;listarPersonasConBusqueda.php");
     exit; // O puedes manejar el flujo del programa según tu necesidad.
 }
 
@@ -45,9 +66,25 @@ try {
     $stmt = $pdo->prepare("INSERT INTO cartas (nombre_c, imagen_c, tipo_c) VALUES (?, ?, ?)");
     $stmt->execute([$nombre_c, $imagen_c, $tipo_c]);
 } catch (PDOException $e) {
-    echo "Error al agregar los datos: " . $e->getMessage();
+    echo "<div class='container' id='contenedor'>
+    <div class='alert alert-danger text-center' role='alert'>
+   <h1 style='text-aling:center'>¡Ups, Algo Salio Mal!</h1>
+   <br>
+   <div class='spinner-border text-dark' role='status'>
+<span class='visually-hidden'>Loading...</span>
+</div>
+<br>
+   <h6>Espera Estas Siendo Redirigido</h6>
+  </div>";
+
+  echo " </div>     ";
+  header("refresh:1 ;listarPersonasConBusqueda.php");
+
 }
 
 // Cerrar la conexión a la base de datos
 $pdo = null;
 ?>
+
+</body>
+</html>

@@ -110,7 +110,7 @@ $nombreUsuario = $_SESSION['usuario'];
     </div>
     <div class="col-12">
     <label  class="form-label">Ingresar Archivo</label><br>
-    <input type="file" name="imagen" required>
+    <input type="file" name="imagen" accept="image/*" required>
     </div>
     
     <div class="col-12">

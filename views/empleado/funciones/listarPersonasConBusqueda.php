@@ -116,7 +116,8 @@ if (isset($_GET["busqueda"])) {
     FROM cartas
     INNER JOIN car_rar ON cartas.id_car = car_rar.id_carar
     LEFT JOIN rareza ON car_rar.id_rar = rareza.id_ra
-    WHERE cartas.nombre_c LIKE ? ;
+    WHERE cartas.nombre_c LIKE ?;
+    
     ";
 }
 # Preparar sentencia e indicar que vamos a usar un cursor
@@ -200,7 +201,7 @@ if ($busqueda === null) {
                 $imagenPath = "../../../imagenes/productos/" . $resultado->imagen_c;
                 
                 // Verifica si el archivo existe con varias extensiones
-                $extensionesPermitidas = array('jpg', 'jpeg', 'png', 'gif');
+                $extensionesPermitidas = array('jpg', 'jpeg', 'png', 'gif', 'webp');
                 $imagenEncontrada = false;
                 foreach ($extensionesPermitidas as $ext) {
                     if (file_exists($imagenPath . "." . $ext)) {
