@@ -109,7 +109,7 @@ $nombreUsuario = $_SESSION['usuario'];
           <?php $nombreUsuario = $_SESSION['usuario']; echo "$nombreUsuario";?>
           </a>
           <ul class="dropdown-menu">
-          <a href="../../config/cerrarSesion.php" class="dropdown-item">Cerrar Sesion</a>
+          <a href="../../../config/cerrarSesion.php" class="dropdown-item">Cerrar Sesion</a>
           </ul>
       </li>
           </ul>
@@ -167,24 +167,30 @@ br
         if (isset($tablaf)) {
             foreach ($tablaf as $registro) {
                 echo "<input type='hidden' name='id_usr' value='$registro->id_usr'> ";
-                echo "<label for='tel_user'>telefono</label>";
+                echo "<label for='tel_user'>Teléfono</label>";
                 echo "<input class='form-control' name='tel_user' value='$registro->tel_user'> ";
-                echo "<label for='direccion_user'>direccion</label>";
+                echo "<label for='direccion_user'>Dirección</label>";
                 echo "<input class='form-control' name='direccion_user' value='$registro->direccion_user'> ";
-                echo "<label for='estado'>estado</label>";
+                echo "<label for='estado'>Estado</label>";
                 echo "<select class='form-control' name='estado'>";
                 echo "<option value='0' " . ($registro->estado == 0 ? 'selected' : '') . ">Inactivo</option>";
                 echo "<option value='1' " . ($registro->estado == 1 ? 'selected' : '') . ">Activo</option>";
                 echo "</select>";
                 
             }
+            //         <!-- Botón para enviar los datos al archivo car_rar.php -->
+            echo "<div class='col-12'>
+          <button type='submit' formaction='editar_empleado.php' class='btn btn-primary'>Enviar Datos</button>
+            </div>";
+        } else {
+          echo "<div class='col-12'>
+          <button type='submit' formaction='editar_empleado.php' class='btn btn-primary disabled'>Enviar Datos</button>
+            </div>";
         }
+
         ?>
 
-        <!-- Botón para enviar los datos al archivo car_rar.php -->
-        <div class="col-12">
-            <button type="submit" formaction="editar_empleado.php" class="btn btn-primary">Enviar Datos</button>
-        </div>
+
     </form>
 </div>
 
