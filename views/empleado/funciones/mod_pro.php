@@ -146,13 +146,19 @@ if (isset($_POST['depa'])) {
                 echo "<label for='existencias'>Existencias</label>";
                 echo "<input class='form-control' name='existencias' value='$registro->existencias' required> ";
             }
-        }
-        ?>
+     
+         //   <!-- Botón para enviar los datos al archivo car_rar.php -->
+         echo "<div class='col-12'>
+         <button type='submit' formaction='car_rar2.php' class='btn btn-primary'>Enviar Datos</button>
+         </div>";
+     } else {
+       echo "<div class='col-12'>
+       <button type='submit' formaction='car_rar2.php' class='btn btn-primary disabled'>Enviar Datos</button>
+       </div>";
+     }
+     ?>
 
-        <!-- Botón para enviar los datos al archivo car_rar.php -->
-        <div class="col-12">
-            <button type="submit" formaction="mod_pro2.php" class="btn btn-primary">Enviar Datos</button>
-        </div>
+
     </form>
 
 </div>
