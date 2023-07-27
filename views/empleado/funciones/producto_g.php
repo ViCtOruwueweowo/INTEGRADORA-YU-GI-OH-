@@ -22,17 +22,26 @@ $notas_prod = $_POST['notas_prod'];
 if (isset($_FILES['imagen'])) {
     $nombreArchivo = $_FILES['imagen']['name'];
     $archivoTemp = $_FILES['imagen']['tmp_name'];
-    $rutaDestino = "../../../imagenes/productos_2/" . $nombreArchivo;
+    $rutaDestino = "../../../imagenes/productos/" . $nombreArchivo;
+
+    // Verificar si el archivo es una imagen
+    $infoImagen = getimagesize($archivoTemp);
+    if ($infoImagen === false) {
+        echo "Error: El archivo seleccionado no es una imagen válida.";
+        header("refresh:1 ;listarPersonasConBusqueda.php");
+        exit;
+    }
 
     if (move_uploaded_file($archivoTemp, $rutaDestino)) {
-        echo "<div class='alert alert-success'>Carta Guardada Con Éxito</div>";
-        header("refresh:1; listarPersonasConBusqueda2.php");
+        header("refresh:0 ;agregar_rar.php");
     } else {
         echo "Hubo un error al guardar la imagen.";
+        header("refresh:1 ;listarPersonasConBusqueda.php");
     }
 } else {
     echo "No se ha seleccionado ninguna imagen.";
-    exit; // O puedes manejar el flujo del programa según tu necesidad.
+    header("refresh:1 ;listarPersonasConBusqueda.php");
+    exit;
 }
 
 // Eliminar la extensión del nombre del archivo

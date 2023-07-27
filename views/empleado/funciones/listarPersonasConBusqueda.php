@@ -1,24 +1,3 @@
-<?php
-session_start();
-
-// Verificar si el usuario no ha iniciado sesión
-if (!isset($_SESSION['usuario'])) {
-    echo "Inicia sesión primero por favor :D";
-    header("refresh:5 ../../index.php");  // Redireccionamos al archivo de inicio de sesión
-    exit();
-}
-
-// Verificar si el tipo de usuario no es 1 (Tipo de usuario que puede acceder a esta página, osea el admin)
-if ($_SESSION['tipo_usuario'] !== "2") { 
-      echo "Acceso no autorizado. Por favor, inicia sesión con una cuenta válida.";
-    header("refresh:5 ../../index.php");  // Redireccionamos al archivo de inicio de sesión
-    exit();
-}
-
-$nombreUsuario = $_SESSION['usuario'];
-?>
-
-
 <!DOCTYPE html>
 <html lang="es" class="h-100">
   <head>
@@ -50,6 +29,41 @@ $nombreUsuario = $_SESSION['usuario'];
     font-family: 'Times New Roman', Times, serif;
   }
 </style>
+<style>
+        #contendor{
+            width: 80%;
+            margin: auto;
+        }
+    </style>
+<?php
+session_start();
+
+// Verificar si el usuario no ha iniciado sesión
+if (!isset($_SESSION['usuario'])) {
+    echo "Inicia sesión primero por favor :D";
+    header("refresh:50 ../../index.php");  // Redireccionamos al archivo de inicio de sesión
+    exit();
+}
+
+// Verificar si el tipo de usuario no es 2 (Tipo de usuario que puede acceder a esta página, osea empleado)
+if ($_SESSION['tipo_usuario'] !== "2") {
+  echo "<div class='container' id='contenedor'>
+  <div class='alert alert-danger text-center' role='alert'>
+ <h1 style='text-aling:center'>¡Ups!</h1>
+ <br>
+ <div class='spinner-border text-dark' role='status'>
+<span class='visually-hidden'>Loading...</span>
+</div>
+<br>
+ <h6>Parece ser que no tienes acceso a este lugar, Asegurate de usar una cuenta valida</h6>
+</div>
+</div>   ";   
+    header("refresh:5 ../../index.php");  // Redireccionamos al archivo de inicio de sesión otra vez
+    exit();
+}
+
+$nombreUsuario = $_SESSION['usuario'];
+?>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
   <div class="container-fluid">
     <a class="navbar-brand" href="../index.php" style="  color: whitesmoke;
