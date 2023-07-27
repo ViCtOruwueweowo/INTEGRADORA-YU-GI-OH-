@@ -195,7 +195,7 @@ if (isset($_POST['filtro_inactivos'])) {
   </div>
   <div class="col-6">
   <label for="contraseña" class="form-label ">Contraseña</label>
-  <input type="password" class="form-control col-lg-6" id="contraseña" name="contraseña"placeholder="Ingresar nueva contraseña">
+  <input type="password" class="form-control col-lg-6" id="contraseña" name="contraseña"placeholder="Ingresar nueva contraseña" required>
   </div>
  </div>
       </div>
