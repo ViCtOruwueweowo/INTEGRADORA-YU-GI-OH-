@@ -14,6 +14,7 @@ if ($_SESSION['tipo_usuario'] !== "1") {
 }
 $nombreUsuario = $_SESSION['usuario'];
 ?>
+
 <?php
 require '../../config/database.php';
 $db = new Database ;

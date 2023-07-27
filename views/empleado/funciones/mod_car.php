@@ -137,7 +137,7 @@ if (isset($_POST['depa'])) {
     </div>
     <div class="col-auto">
         <select class="form-select" name="depa" aria-label="Default select example" required>
-        <option >Selecciona Una Carta</option>
+  
             <?php
             foreach ($tabla as $registro) {
                 $selected = '';
@@ -161,13 +161,17 @@ if (isset($_POST['depa'])) {
             echo "<label for='cantidad'>cantidad</label>";
             echo "<input class='form-control' name='cantidad' 'required'  value='$registro->cantidad'> ";
         }
-    }
-    ?>
 
-    <!-- Botón para enviar los datos al archivo car_rar.php -->
-    <div class="col-12">
-        <button type="submit" formaction="mod_car2.php" class="btn btn-primary">Enviar Datos</button>
-    </div>
+         //   <!-- Botón para enviar los datos al archivo car_rar.php -->
+         echo "<div class='col-12'>
+         <button type='submit' formaction='car_rar2.php' class='btn btn-primary'>Enviar Datos</button>
+         </div>";
+     } else {
+       echo "<div class='col-12'>
+       <button type='submit' formaction='car_rar2.php' class='btn btn-primary disabled'>Enviar Datos</button>
+       </div>";
+     }
+     ?>
 </form>
 
 <script>
