@@ -50,7 +50,7 @@ $estado = 1;
 
 // Insertar los datos en la base de datos
 try {
-    $stmt = $pdo->prepare("INSERT INTO usuarios(nombre_user, apellidos_user, tel_user, f_nacimiento, direccion_user, usuario, contraseña, tipo_usuario, estado) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt = $pdo->prepare("INSERT INTO usuarios(nombre_user, apellidos_user, tel_user, f_nacimiento, direccion_user, usuario, password, tipo_usuario, estado) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
     $stmt->execute([$nombre_user, $apellidos_user, $tel_user, $f_nacimiento, $direccion_user, $usuario, $hash, $tipo_usuario, $estado]);
     
     echo "<div class='container' id='contenedor'>

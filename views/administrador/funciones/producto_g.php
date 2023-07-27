@@ -1,23 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="../../../css/bootstrap.min.css">
-    <link rel="stylesheet" href="../../../css/index2.css">
-    <script src="../../../js/bootstrap.bundle.min.js"></script>
-</head>
-<body>
-<style>
-        #contendor{
-            width: 40%;
-            margin: auto;
-        }
-        body{
-            margin-top: 250px;
-        }
-    </style>
 <?php
 // Establecer la conexión a la base de datos
 $servername = "localhost";
@@ -44,15 +24,24 @@ if (isset($_FILES['imagen'])) {
     $archivoTemp = $_FILES['imagen']['tmp_name'];
     $rutaDestino = "../../../imagenes/productos_2/" . $nombreArchivo;
 
+    // Verificar si el archivo es una imagen
+    $infoImagen = getimagesize($archivoTemp);
+    if ($infoImagen === false) {
+        echo "Error: El archivo seleccionado no es una imagen válida.";
+        header("refresh:1 ;listarPersonasConBusqueda.php");
+        exit;
+    }
+
     if (move_uploaded_file($archivoTemp, $rutaDestino)) {
-     
-        header("refresh:1; listarPersonasConBusqueda2.php");
+        header("refresh:0 ;agregar_rar.php");
     } else {
         echo "Hubo un error al guardar la imagen.";
+        header("refresh:1 ;listarPersonasConBusqueda.php");
     }
 } else {
     echo "No se ha seleccionado ninguna imagen.";
-    exit; // O puedes manejar el flujo del programa según tu necesidad.
+    header("refresh:1 ;listarPersonasConBusqueda.php");
+    exit;
 }
 
 // Eliminar la extensión del nombre del archivo
@@ -72,29 +61,9 @@ try {
     <h1 class='text-center'>Datos Actualizados Correctamente</h1></div>";
     header("refresh:1; listarPersonasConBusqueda2.php");
 } catch (PDOException $e) {
-    // Obtén el mensaje de la excepción sin el código SQLSTATE
-    $errorMessage = $e->getMessage();
-    $errorMessage = preg_replace('/SQLSTATE\[[0-9]+\]:\s+/', '', $errorMessage);
-
-    // Muestra el mensaje de error personalizado sin el código SQLSTATE
-    echo "<div class='container' id='contenedor'>
-            <div class='alert alert-danger text-center' role='alert'>
-                <h1 style='text-align:center'>¡Ups!</h1>
-                <h2>Parece ser que algo salió mal</h2>
-                <div class='spinner-border text-dark' role='status'>
-                    <span class='visually-hidden'>Loading...</span>
-                </div>
-                <br>
-                <h6>Error:$errorMessage</h6>
-            </div>
-        </div>";
+    echo "Error al agregar los datos: " . $e->getMessage();
 }
-
-  header("refresh:1 ;form_agregar_p.php");
-
 
 // Cerrar la conexión a la base de datos
 $pdo = null;
 ?>
-</body>
-</html>
