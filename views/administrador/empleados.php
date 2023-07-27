@@ -209,8 +209,8 @@ if (isset($_POST['filtro_inactivos'])) {
     </div>
 
     <div class="col">
-    <button type="button" class="btn btn-outline-warning btn-lg" data-bs-toggle="modal" data-bs-target="#exampleModal">
- Editar Empleados
+<a href="funciones/empleado.php" class="btn btn-outline-warning btn-lg"> Editar Empleados</a>
+
 </button>
 
 <!-- Modal -->

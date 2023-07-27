@@ -12,16 +12,32 @@
 
     <script src="js/bootstrap.js">  </script>
 </head>
-
+<style>
+        #contendor{
+            width: 40%;
+            margin: auto;
+        }
+    </style>
 <body>
-  <?php
+<?php
 session_start();
 
 if (isset($_SESSION['usuario'])) {
   $nombreUsuario = $_SESSION['usuario'];
 
-    echo "Error, ya existe una sesión activa para el usuario: $nombreUsuario.";
-    echo "<a href='config/cerrarSesion.php'>[Cerrar sesión]</a>";
+  echo "<div class='container' id='contenedor'>
+  <div class='alert alert-warning text-center' role='alert'>
+ <h1 style='text-aling:center'>¡Ups, Parece Ser Que Ya Existe Una Sesion Activo!</h1>
+ <br>
+ <div class='spinner-border text-dark' role='status'>
+<span class='visually-hidden'>Loading...</span>
+</div>
+<br>
+ <h6>Usuario En Linea: $nombreUsuario</h6>
+ <a class='btn btn-outline-danger' href='config/cerrarSesion.php'>[Cerrar sesión]</a>
+</div>
+</div>   ";    
+
     exit();
 }
 ?>
