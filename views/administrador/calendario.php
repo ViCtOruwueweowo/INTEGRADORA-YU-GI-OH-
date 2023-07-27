@@ -24,24 +24,44 @@ $nombreUsuario = $_SESSION['usuario'];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Calendario Web</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <title>Calendario Web</title>    
+
     <script src="js/jquery.min.js"></script>
-    <script src="js/moment.min.js"></script>
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
     <link rel="stylesheet" href="../../css/bootstrap.min.css">
+    
     <link rel="stylesheet" href="../../css/index2.css">
     
-    <!-- esto hace que los dropdown jalen pero los modal del calendario se estropean-->
-    <!--<script src="../../js/bootstrap.bundle.min.js"></script>-->
+    <link rel="stylesheet" href="css/bootstrap-clockpicker.css">
+    
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
+    <script src="js/bootstrap-clockpicker.js"></script>
+    
     <!--  Full Calendar -->
     <link rel="stylesheet" href="css/fullcalendar.min.css">
-    <script src="js/fullcalendar.min.js"></script>
-    <script src="js/es.js"></script>
-    <script src="js/bootstrap-clockpicker.js"></script>
-    <link rel="stylesheet" href="css/bootstrap-clockpicker.css">
+    
+   
+        
+
+    <script src="js/moment.min.js"></script>
+
+
+    <!-- esto hace que los dropdown jalen pero los modal del calendario se estropean-->
+   <!--         <script src="../../js/bootstrap.bundle.min.js"></script>      -->
+
+
+<!-- esto es de fullcalendar -->
+<script src="js/fullcalendar.min.js"></script>
+<script src="js/es.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+ 
+    
+
+    
     <style>
   /* Custom CSS for the transparent navigation bar with shadow */
   .navbar {
@@ -60,7 +80,9 @@ $nombreUsuario = $_SESSION['usuario'];
     font-family: 'Times New Roman', Times, serif;
   }
 </style>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
     <div class="container-fluid" >
       <a class="navbar-brand" href="index.php">WorkStack</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2" aria-controls="offcanvasNavbar2" aria-label="Toggle navigation" >
@@ -80,7 +102,7 @@ $nombreUsuario = $_SESSION['usuario'];
               <a class="nav-link " aria-current="page" href="empleados.php"><b>Empleados</b></a>
             </li> 
             <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
             <b>Inventario</b>
           </a>
           <ul class="dropdown-menu">
@@ -91,7 +113,7 @@ $nombreUsuario = $_SESSION['usuario'];
           </ul>
         </li>
             <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
             <b>Agenda</b>
           </a>
           <ul class="dropdown-menu">
@@ -103,7 +125,7 @@ $nombreUsuario = $_SESSION['usuario'];
           </ul>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
             <b>Registro</b>
           </a>
           <ul class="dropdown-menu">
@@ -114,7 +136,7 @@ $nombreUsuario = $_SESSION['usuario'];
           </ul>
         </li>
         <li class="nav-item dropdown responsive">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
           <?php $nombreUsuario = $_SESSION['usuario']; echo "$nombreUsuario";?>
           </a>
           <ul class="dropdown-menu dropdown-responsive">
