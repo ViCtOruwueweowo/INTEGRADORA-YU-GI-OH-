@@ -115,26 +115,23 @@ $nombreUsuario = $_SESSION['usuario'];
 <br>
 
 <!---->
-   <div class="container" style="color: white;background-color: rgba(0, 0, 0, .550);">
+<div class="container" style="color:whitesmoke;background-color: rgba(0, 0, 0, .550);
+    box-shadow: 0 4px 5px rgba(10, 2, 1, 55);text-align:left;color:white">
 <h1 style="text-align: center;">Agregar Carta</h1>
 <hr>
 <form action="guardar_carta.php" method="post" enctype="multipart/form-data">
 <div class="row">
     <div class="col-12">
     <label  class="form-label">Ingresar Nombre De La Carta:</label>
-    <input type="text" class="form-control col-lg-6" id="nom_p" name="nombre_c" placeholder="Nombre Carta. . ." require>
-    </div>
-    <div class="col-12">
-    <label  class="form-label">Ingresar Nombre De La Imagen:</label>
-    <input type="text" class="form-control col-lg-6"  name="imagen_c" placeholder="Nombre Imagen. . ." require>
+    <input type="text" class="form-control col-lg-6" id="nom_p" name="nombre_c" placeholder="Nombre Carta. . ." required>
     </div>
     <div class="col-12">
     <label  class="form-label">Ingresar Tipo De Carta:</label>
-    <input type="text"  class="form-control" name="tipo_c" placeholder="Magia, Trampa, Monstruo. . ." require>
+    <input type="text"  class="form-control" name="tipo_c" placeholder="Magia, Trampa, Monstruo. . ." required>
     </div>
     <div class="col-12">
     <label  class="form-label">Ingresar Archivo</label><br>
-    <input type="file" name="imagen" accept=".jpg">
+    <input type="file" name="imagen" accept="image/*" required>
     </div>
     
     <div class="col-12">

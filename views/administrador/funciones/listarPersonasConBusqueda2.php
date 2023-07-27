@@ -206,8 +206,29 @@ $nombreUsuario = $_SESSION['usuario'];
 	
     <?php while ($resultado = $sentencia->fetchObject()) {?>
   <tr>
-  <td style="color:whitesmoke;background-color: rgba(0, 0, 0, .550);
-    box-shadow: 0 4px 5px rgba(10, 2, 1, 55);"><?php echo "<img src='../../../imagenes/productos_2/$resultado->imagen_p.webp' style='width:100px'> " ?></td>
+  <td style="color:whitesmoke;background-color: rgba(0, 0, 0, .550); box-shadow: 0 4px 5px rgba(10, 2, 1, 55); text-align:center">
+                <?php
+                $imagenPath = "../../../imagenes/productos_2/" . $resultado->imagen_p;
+                
+                // Verifica si el archivo existe con varias extensiones
+                $extensionesPermitidas = array('jpg', 'jpeg', 'png', 'gif', 'webp');
+                $imagenEncontrada = false;
+                foreach ($extensionesPermitidas as $ext) {
+                    if (file_exists($imagenPath . "." . $ext)) {
+                        $imagen = $imagenPath . "." . $ext;
+                        $imagenEncontrada = true;
+                        break;
+                    }
+                }
+
+                // Si no se encuentra ninguna imagen, utiliza una imagen predeterminada
+                if (!$imagenEncontrada) {
+                    $imagen = "../../../imagenes/no_image.png";
+                }
+                ?>
+
+                <img src="<?php echo $imagen; ?>" style="width: 100px;">
+            </td>
   <td style="color:whitesmoke;background-color: rgba(0, 0, 0, .550);
     box-shadow: 0 4px 5px rgba(10, 2, 1, 55);"><?php echo $resultado->nom_p ?></td>
     <td style="color:whitesmoke;background-color: rgba(0, 0, 0, .550);

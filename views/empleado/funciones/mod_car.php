@@ -111,14 +111,15 @@ if (isset($_POST['depa'])) {
         <h2 class="form-label">Selecciona la carta a modificar:</h2>
     </div>
     <div class="col-auto">
-        <select class="form-select" name="depa" aria-label="Default select example">
+        <select class="form-select" name="depa" aria-label="Default select example" required>
+        <option >Selecciona Una Carta</option>
             <?php
             foreach ($tabla as $registro) {
                 $selected = '';
                 if (isset($_POST['depa']) && $_POST['depa'] == $registro->id_cr) {
                     $selected = 'selected';
                 }
-                echo "<option value='" . $registro->id_cr . "' $selected>" . $registro->nombre . "</option>";
+                echo "<option ari value='" . $registro->id_cr . "' $selected>" . $registro->nombre . "</option>";
             }
             ?>
         </select>

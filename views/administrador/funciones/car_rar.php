@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guardar Carta Detallada</title>
     <link rel="stylesheet" href="../../../css/bootstrap.min.css">
-    <link rel="stylesheet" href="../../../css/index2.css">
-
+    <link rel="stylesheet" href="../../../css/index3.css">
+    <script src="../../../js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
 <style>
@@ -48,18 +48,38 @@ try {
 
     echo "<div class='container' id='contenedor'>
     <div class='alert alert-success text-center' role='alert'>
-   <h1 style='text-aling:center'>¡Exito, La Accion Fue Realizada Sin Problemas, Buen Trabajo!</h1>
+   <h1 style='text-aling:center'>¡Hecho!</h1>
+   <h2>Accion Realizada De Forma Exitosa
    <br>
    <div class='spinner-border text-dark' role='status'>
 <span class='visually-hidden'>Loading...</span>
 </div>
 <br>
-   <h6>Espera Estas Siendo Redirigido</h6>
+   <h6>Espera Estas Siendo Redirigido, Vuelve Pronto</h6>
   </div>
-  </div>   ";      header("refresh:1 ;listarPersonasConBusqueda.php");
-} catch (PDOException $e) {
-    echo "Error al agregar los datos: " . $e->getMessage();
+  </div>   "; 
+    header("refresh:2 ;listarPersonasConBusqueda.php");
+}  catch (PDOException $e) {
+    // Obtén el mensaje de la excepción sin el código SQLSTATE
+    $errorMessage = $e->getMessage();
+    $errorMessage = preg_replace('/SQLSTATE\[[0-9]+\]:\s+/', '', $errorMessage);
+
+    // Muestra el mensaje de error personalizado sin el código SQLSTATE
+    echo "<div class='container' id='contenedor'>
+            <div class='alert alert-danger text-center' role='alert'>
+                <h1 style='text-align:center'>¡Ups!</h1>
+                <h2>Parece ser que algo salió mal</h2>
+                <div class='spinner-border text-dark' role='status'>
+                    <span class='visually-hidden'>Loading...</span>
+                </div>
+                <br>
+                <h6>Error:$errorMessage</h6>
+            </div>
+        </div>";
 }
+
+  header("refresh:1 ;agregar_rar.php");
+
 
 // Cerrar la conexión a la base de datos
 $pdo = null;
@@ -67,3 +87,4 @@ $pdo = null;
 
 </body>
 </html>
+
