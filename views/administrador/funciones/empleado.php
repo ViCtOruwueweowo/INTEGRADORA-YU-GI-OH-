@@ -126,7 +126,7 @@ $conexion = new database();
 $conexion->conectarDB();
 
 // Obtener la lista de departamentos para el filtro
-$consulta = "SELECT CONCAT(usuarios.nombre_user, ' ', usuarios.apellidos_user) as nombre, usuarios.id_usr, usuarios.tel_user, usuarios.direccion_user, usuarios.estado FROM usuarios";
+$consulta = "SELECT CONCAT(usuarios.nombre_user, ' ', usuarios.apellidos_user) as nombre, usuarios.id_usr, usuarios.tel_user, usuarios.direccion_user, usuarios.estado FROM usuarios WHERE tipo_usuario='2'";
 $tabla = $conexion->seleccionar($consulta);
 
 // Filtrar el departamento seleccionado
@@ -168,9 +168,12 @@ br
             foreach ($tablaf as $registro) {
                 echo "<input type='hidden' name='id_usr' value='$registro->id_usr'> ";
                 echo "<label for='tel_user'>Teléfono</label>";
-                echo "<input class='form-control' name='tel_user' value='$registro->tel_user'> ";
+                
+             // Utilizamos el atributo pattern para permitir solo números y el atributo title para mostrar un mensaje al usuario si no se cumple el patrón
+        echo "<input type='tel' class='form-control' name='tel_user' value='$registro->tel_user' pattern='[0-9]{10}' title='El teléfono debe contener 10 dígitos.' maxlength='10' minlength='10' required> ";
+        
                 echo "<label for='direccion_user'>Dirección</label>";
-                echo "<input class='form-control' name='direccion_user' value='$registro->direccion_user'> ";
+                echo "<input class='form-control' name='direccion_user' value='$registro->direccion_user' required> ";
                 echo "<label for='estado'>Estado</label>";
                 echo "<select class='form-control' name='estado'>";
                 echo "<option value='0' " . ($registro->estado == 0 ? 'selected' : '') . ">Inactivo</option>";

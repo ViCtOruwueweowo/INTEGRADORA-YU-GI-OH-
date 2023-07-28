@@ -128,13 +128,13 @@ $conexion = new database();
 $conexion->conectarDB();
 
 // Obtener la lista de departamentos para el filtro
-$consulta = "SELECT clientes.nom_cli as nombre, acreedor.id_acreedor, acreedor.descuento, acreedor.f_finalacreed, acreedor.notas_ac from acreedor inner join clientes on acreedor.id_clientu=clientes.id_cli";
+$consulta = "SELECT clientes.nom_cli as nombre, acreedor.id_acreedor, acreedor.descuento, acreedor.f_finalacreed, acreedor.notas_ac from acreedor inner join clientes on acreedor.id_clientu=clientes.id_cli WHERE acreedor.f_finalacreed > now() ";
 $tabla = $conexion->seleccionar($consulta);
 
 // Filtrar el departamento seleccionado
 if (isset($_POST['depa'])) {
     $depa = $_POST['depa'];
-    $consultaf = "SELECT clientes.nom_cli as nombre, acreedor.id_acreedor, acreedor.descuento, acreedor.f_finalacreed, acreedor.notas_ac from acreedor inner join clientes on acreedor.id_clientu=clientes.id_cli WHERE id_acreedor ='$depa'";
+    $consultaf = "SELECT clientes.nom_cli as nombre, acreedor.id_acreedor, acreedor.descuento, acreedor.f_inicioacreed, acreedor.f_finalacreed, acreedor.notas_ac from acreedor inner join clientes on acreedor.id_clientu=clientes.id_cli WHERE id_acreedor ='$depa' ";
     $tablaf = $conexion->seleccionar($consultaf);
 }
 ?>
@@ -167,23 +167,31 @@ if (isset($_POST['depa'])) {
         // Mostrar los campos dentro del formulario principal
         if (isset($tablaf)) {
             foreach ($tablaf as $registro) {
+
                 echo "<input type='hidden' name='id_acreedor' value='$registro->id_acreedor'> ";
                 echo "<label for='descuento'>descuento</label>";
                 echo "<input class='form-control' name='descuento' value='$registro->descuento'> ";
+
+                echo "<label for='f_inicioacreed'>Fecha inicio de credito</label>";
+                echo "<input class='-form-control col-md-6' type='date' name='f_inicioacreed' value='$registro->f_inicioacreed' readonly> ";
+
                 echo "<label for='f_finalacreed'>Fecha final de credito</label>";
-                echo "<input class='-form-control' type='date' name='f_finalacreed' value='$registro->f_finalacreed'> ";
+                echo "<input class='-form-control col-md-6' type='date' name='f_finalacreed' value='$registro->f_finalacreed'> ";
                 echo "<label for='notas_ac'>Notas</label>";
                 echo "<input class='form-control' name='notas_ac' value='$registro->notas_ac'> ";
                 
-                
             }
+           // <!-- Botón para enviar los datos al archivo car_rar.php -->
+            echo "<div class='col-12'>
+                <button type='submit' formaction='mod_acre.php' class='btn btn-primary'>Enviar Datos</button>
+            </div>";
+        } else {
+          echo "<div class='col-12'>
+          <button type='submit' formaction='mod_acre.php' class='btn btn-primary disabled'>Enviar Datos</button>
+      </div>";
         }
         ?>
 
-        <!-- Botón para enviar los datos al archivo car_rar.php -->
-        <div class="col-12">
-            <button type="submit" formaction="mod_acre.php" class="btn btn-primary">Enviar Datos</button>
-        </div>
     </form>
 </div>
 

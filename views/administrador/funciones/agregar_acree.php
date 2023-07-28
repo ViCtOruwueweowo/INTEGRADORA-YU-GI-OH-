@@ -142,14 +142,34 @@ $nombreUsuario = $_SESSION['usuario'];
       echo "</select>";
       ?>
 
-    <div class="mb-3">
-      <label for="descuento" class="form-label">Ingresar descuento</label>
-      <input type="text" name="descuento" class="form-control" id="exampleFormControlInput1" placeholder="descuento">
-    </div>
+<div class="mb-3">
+  <label for="descuento" class="form-label">Ingresar descuento</label>
+  <input type="text" inputmode="numeric" pattern="[0-9]+" maxlength="2" name="descuento" class="form-control" id="exampleFormControlInput1" placeholder="Descuento (solo números por favor :D)" required>
+  <div id="descuentoError" style="color: white; display: none;">¿Enserio creíste que ibamos a confiar en que no ibas a usar letras? Usa números, campeón.</div>
+</div>
+
+<script>
+  const descuentoInput = document.querySelector('input[name="descuento"]');
+  const descuentoError = document.getElementById('descuentoError');
+
+  descuentoInput.addEventListener('input', function () {
+    const inputValue = this.value;
+    if (isNaN(inputValue)) {
+      descuentoError.style.display = 'block';
+    } else {
+      descuentoError.style.display = 'none';
+    }
+  });
+</script>
+
     <div class="mb-3">
       <label for="f_finalacreed" class="form-label">Fecha final</label>
-      <input type="date" name="f_finalacreed" class="form-control" id="exampleFormControlInput1" placeholder="Fecha final">
-    </div>
+      <?php
+  // Obtenemos la fecha actual en formato ISO 8601 (YYYY-MM-DD)
+  $fechaActual = date("Y-m-d");
+  ?>
+  <input type="date" name="f_finalacreed" class="form-control" min="<?= $fechaActual ?>" placeholder="Fecha final" required>
+</div>
     <div class="mb-3">
       <label for="notas_ac" class="form-label">Notas</label>
       <input type="text" name="notas_ac" class="form-control" id="exampleFormControlInput1" placeholder="Notas">
