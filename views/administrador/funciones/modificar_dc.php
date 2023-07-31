@@ -132,7 +132,7 @@ $conexion->conectarDB();
 // $tabla = $conexion->seleccionar($consulta);
 
 // Obtener la lista de departamentos para el filtro
-$consulta = "SELECT clientes.nom_cli as nombre, deuda_c.id_dc, deuda_c.cantidad_c, deuda_c.precio_c, deuda_c.notas, deuda_c.abono_c FROM deuda_c INNER JOIN clientes ON deuda_c.id_clientec = clientes.id_cli INNER JOIN car_rar ON car_rar.id_cr = deuda_c.cr_fk inner join cartas on car_rar.id_carar=cartas.id_car inner join rareza on car_rar.id_rar=rareza.id_ra";
+$consulta = "SELECT id_cli, nom_cli as nombre FROM clientes";
 $tabla = $conexion->seleccionar($consulta);
 
 
