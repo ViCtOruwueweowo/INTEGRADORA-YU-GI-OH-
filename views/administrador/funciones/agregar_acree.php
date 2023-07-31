@@ -1,17 +1,23 @@
- 
+
 <?php
 session_start();
 
 // Verificar si el usuario no ha iniciado sesión
 if (!isset($_SESSION['usuario'])) {
-  echo "Inicia sesión primero por favor :D";
-  header("refresh:2 ../../index.php");  // Redireccionamos al archivo de inicio de sesión
-  exit();
+    echo "Inicia sesión primero por favor :D";
+    header("refresh:5 ../../index.php");  // Redireccionamos al archivo de inicio de sesión
+    exit();
+}
+
+// Verificar si el tipo de usuario no es 1 (Tipo de usuario que puede acceder a esta página, osea el admin)
+if ($_SESSION['tipo_usuario'] !== "1") { 
+      echo "Acceso no autorizado. Por favor, inicia sesión con una cuenta válida.";
+    header("refresh:5 ../../index.php");  // Redireccionamos al archivo de inicio de sesión
+    exit();
 }
 
 $nombreUsuario = $_SESSION['usuario'];
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -104,7 +110,7 @@ $nombreUsuario = $_SESSION['usuario'];
           <?php $nombreUsuario = $_SESSION['usuario']; echo "$nombreUsuario";?>
           </a>
           <ul class="dropdown-menu">
-          <a href="../../config/cerrarSesion.php" class="dropdown-item">Cerrar Sesion</a>
+          <a href="../../../config/cerrarSesion.php" class="dropdown-item">Cerrar Sesion</a>
           </ul>
       </li>
           </ul>
@@ -136,14 +142,34 @@ $nombreUsuario = $_SESSION['usuario'];
       echo "</select>";
       ?>
 
+<div class="mb-3">
+  <label for="descuento" class="form-label">Ingresar descuento</label>
+  <input type="text" inputmode="numeric" pattern="[0-9]+" maxlength="2" name="descuento" class="form-control" id="exampleFormControlInput1" placeholder="Descuento (solo números por favor :D)" required>
+  <div id="descuentoError" style="color: white; display: none;">¿Enserio creíste que ibamos a confiar en que no ibas a usar letras? Usa números, campeón.</div>
+</div>
+
+<script>
+  const descuentoInput = document.querySelector('input[name="descuento"]');
+  const descuentoError = document.getElementById('descuentoError');
+
+  descuentoInput.addEventListener('input', function () {
+    const inputValue = this.value;
+    if (isNaN(inputValue)) {
+      descuentoError.style.display = 'block';
+    } else {
+      descuentoError.style.display = 'none';
+    }
+  });
+</script>
+
     <div class="mb-3">
-      <label for="descuento" class="form-label" style="color: white;">Ingresar descuento</label>
-      <input type="text" name="descuento" class="form-control" id="exampleFormControlInput1" placeholder="descuento">
-    </div>
-    <div class="mb-3">
-      <label for="f_finalacreed" class="form-label" style="color: white;">Fecha final</label>
-      <input type="date" name="f_finalacreed" class="form-control" id="exampleFormControlInput1" placeholder="Fecha final">
-    </div>
+      <label for="f_finalacreed" class="form-label">Fecha final</label>
+      <?php
+  // Obtenemos la fecha actual en formato ISO 8601 (YYYY-MM-DD)
+  $fechaActual = date("Y-m-d");
+  ?>
+  <input type="date" name="f_finalacreed" class="form-control" min="<?= $fechaActual ?>" placeholder="Fecha final" required>
+</div>
     <div class="mb-3">
       <label for="notas_ac" class="form-label" style="color: white;">Notas</label>
       <input type="text" name="notas_ac" class="form-control" id="exampleFormControlInput1" placeholder="Notas">

@@ -37,7 +37,7 @@ if($_POST)
     if ($usuario && $usuario["estado"] == 1) {
         // Usuario válido y estado es igual a 1
         // Verificar la contraseña proporcionada con la almacenada en la base de datos
-        if (password_verify($p, $usuario["contraseña"])) {
+        if (password_verify($p, $usuario["password"])) {
             session_start();
         $_SESSION['usuario'] = $usuario["usuario"];
 

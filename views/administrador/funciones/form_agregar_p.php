@@ -4,13 +4,21 @@ session_start();
 
 // Verificar si el usuario no ha iniciado sesión
 if (!isset($_SESSION['usuario'])) {
-  echo "Inicia sesión primero por favor :D";
-  header("refresh:2 ../../index.php");  // Redireccionamos al archivo de inicio de sesión
-  exit();
+    echo "Inicia sesión primero por favor :D";
+    header("refresh:5 ../../index.php");  // Redireccionamos al archivo de inicio de sesión
+    exit();
+}
+
+// Verificar si el tipo de usuario no es 1 (Tipo de usuario que puede acceder a esta página, osea el admin)
+if ($_SESSION['tipo_usuario'] !== "1") { 
+      echo "Acceso no autorizado. Por favor, inicia sesión con una cuenta válida.";
+    header("refresh:5 ../../index.php");  // Redireccionamos al archivo de inicio de sesión
+    exit();
 }
 
 $nombreUsuario = $_SESSION['usuario'];
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -119,14 +127,22 @@ $nombreUsuario = $_SESSION['usuario'];
     <label  class="form-label">Ingresar Nombre Del Producto:</label>
     <input type="text" class="form-control col-lg-6" id="nom_p" name="nom_p" placeholder="Nombre Producto. . ." required>
     </div>
+
     <div class="col-12">
-    <label  class="form-label">Ingresar Existencias Del Producto:</label>
-    <input type="text" class="form-control col-lg-6" id="existencias" name="existencias" placeholder="Ingresar Existencias. . ." required>
-    </div>
+    <label class="form-label">Ingresar Existencias Del Producto:</label>
+    <input type="number" class="form-control col-lg-6" id="existencias" name="existencias" placeholder="Ingresar Existencias. . ." pattern="[0-9]+" inputmode="numeric" min="1" required
+        oninvalid="setCustomValidity('Por favor ingresa solo números enteros.')"
+        oninput="setCustomValidity('')">
+</div>
+
+
     <div class="col-12">
     <label  class="form-label">Ingresar Precio Del Producto:</label>
-    <input type="text" class="form-control col-lg-6" id="precio" name="precio" placeholder="Ingresar Precio. . ." required>
+    <input type="number" class="form-control col-lg-6" id="precio" name="precio" placeholder="Ingresar Precio. . ." pattern="[0-9]+" inputmode="numeric" min="1" required
+        oninvalid="setCustomValidity('No se permiten números negativos.')"
+        oninput="setCustomValidity('')">
     </div>
+
     <div class="col-12">
     <label  class="form-label">Ingresar Descripcion Del Producto:</label>
     <input type="text" class="form-control col-lg-6" id="notas_prod" name="notas_prod" placeholder="Detalles. . ." required>

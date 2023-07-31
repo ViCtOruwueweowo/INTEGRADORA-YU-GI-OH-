@@ -1,11 +1,19 @@
+
 <?php
 session_start();
 
 // Verificar si el usuario no ha iniciado sesión
 if (!isset($_SESSION['usuario'])) {
-  echo "Inicia sesión primero por favor :D";
-  header("refresh:2 ../../index.php");  // Redireccionamos al archivo de inicio de sesión
-  exit();
+    echo "Inicia sesión primero por favor :D";
+    header("refresh:5 ../../index.php");  // Redireccionamos al archivo de inicio de sesión
+    exit();
+}
+
+// Verificar si el tipo de usuario no es 1 (Tipo de usuario que puede acceder a esta página, osea el admin)
+if ($_SESSION['tipo_usuario'] !== "1") { 
+      echo "Acceso no autorizado. Por favor, inicia sesión con una cuenta válida.";
+    header("refresh:5 ../../index.php");  // Redireccionamos al archivo de inicio de sesión
+    exit();
 }
 
 $nombreUsuario = $_SESSION['usuario'];
@@ -144,25 +152,31 @@ foreach ($tabla as $row)
 echo "</select>";
 
 ?>
+
 <div class="mb-3">
   <label for="p_price" class="form-label">Ingresar Link De Price</label>
-  <input type="text" name="p_price" class="form-control" id="exampleFormControlInput1" placeholder="Link Price" require>
+  <input type="text" name="p_price" class="form-control" id="exampleFormControlInput1" placeholder="Link Price">
 </div>
 <div class="mb-3">
   <label for="p_tcg" class="form-label">Ingresar Link De Tcg</label>
-  <input type="text" name="p_tcg" class="form-control" id="exampleFormControlInput1" placeholder="Link Tcg" require>
+  <input type="text" name="p_tcg" class="form-control" id="exampleFormControlInput1" placeholder="Link Tcg">
 </div>
+
 <div class="mb-3">
   <label for="p_beto" class="form-label">Ingresar Precio En Tienda</label>
-  <input type="text" name="p_beto" class="form-control" id="exampleFormControlInput1" placeholder="Precio Local" require>
+  <input type="number" name="p_beto" class="form-control" id="exampleFormControlInput1" placeholder="Precio Local" pattern="[0-9]+" inputmode="numeric" required
+        oninvalid="setCustomValidity('Por favor, ingresa números y no dejes vacío este espacio.')"
+        oninput="setCustomValidity('')">
 </div>
+
+
 <div class="mb-3">
   <label for="codigo" class="form-label">Ingresar Codigo</label>
-  <input type="text" name="codigo" class="form-control" id="exampleFormControlInput1" placeholder="Codigo" require>
+  <input type="text" name="codigo" maxlength="10" class="form-control" id="exampleFormControlInput1" placeholder="Codigo" required>
 </div>
 <div class="mb-3">
   <label for="cantidad" class="form-label">Ingresar Cantidad</label>
-  <input type="text" name="cantidad" type="number" min="0" step="1" class="form-control" id="exampleFormControlInput1" placeholder="Cantidad" require>
+  <input type="text" name="cantidad" type="number" min="0" step="1" class="form-control" id="exampleFormControlInput1" placeholder="Cantidad" required>
 </div>
 <div class="col-12">
     <button type="submit" value="Enviar" class="btn btn-primary">Guardar Registro</button>

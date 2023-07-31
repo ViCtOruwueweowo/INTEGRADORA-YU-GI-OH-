@@ -42,6 +42,24 @@ if (isset($_FILES['imagen'])) {
     $archivoTemp = $_FILES['imagen']['tmp_name'];
     $rutaDestino = "../../../imagenes/productos/" . $nombreArchivo;
 
+    // Verificar si el archivo es una imagen
+    $infoImagen = getimagesize($archivoTemp);
+    if ($infoImagen === false) {
+        echo "<div class='container' id='contenedor'>
+        <div class='alert alert-danger text-center' role='alert'>
+       <h1 style='text-aling:center'>¡Ups, Algo Salio Mal!</h1>
+       <br>
+       <div class='spinner-border text-dark' role='status'>
+    <span class='visually-hidden'>Loading...</span>
+    </div>
+    <br>
+       <h6>Espera Estas Siendo Redirigido</h6>
+      </div>";
+    
+        header("refresh:2 ;listarPersonasConBusqueda.php");
+        exit;
+    }
+
     if (move_uploaded_file($archivoTemp, $rutaDestino)) {
         header("refresh:0 ;agregar_rar.php");
     } else {
@@ -51,7 +69,7 @@ if (isset($_FILES['imagen'])) {
 } else {
     echo "No se ha seleccionado ninguna imagen.";
     header("refresh:1 ;listarPersonasConBusqueda.php");
-    exit; // O puedes manejar el flujo del programa según tu necesidad.
+    exit;
 }
 
 // Eliminar la extensión del nombre del archivo

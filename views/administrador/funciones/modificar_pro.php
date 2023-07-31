@@ -35,7 +35,7 @@ notas_prod = '$notas_prod'
 if ($conn->query($sql) === TRUE) {
     echo "<div class='alert alert-success'>
               <h1 class='text-center'>Datos Actualizados Correctamente</h1>";
-        header("refresh:1; listarPersonasConBusqueda2.php");
+        header("refresh:2; listarPersonasConBusqueda2.php");
 } else {
     echo "Error al agregar los datos: " . $conn->error;
 }

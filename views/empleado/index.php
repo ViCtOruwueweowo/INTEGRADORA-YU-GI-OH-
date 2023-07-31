@@ -148,7 +148,7 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
       $imagePath = "../../imagenes/productos/" . $id;
       
       // Verifica si el archivo existe con varias extensiones
-      $extensionesPermitidas = array('jpg', 'jpeg', 'png', 'gif', 'webp');
+      $extensionesPermitidas = array('jpg', 'jpeg', 'png', 'webp');
       $imagenEncontrada = false;
       foreach ($extensionesPermitidas as $ext) {
         if (file_exists($imagePath . "." . $ext)) {

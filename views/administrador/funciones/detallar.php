@@ -1,11 +1,19 @@
+
 <?php
 session_start();
 
 // Verificar si el usuario no ha iniciado sesión
 if (!isset($_SESSION['usuario'])) {
-  echo "Inicia sesión primero por favor :D";
-  header("refresh:2 ../../index.php");  // Redireccionamos al archivo de inicio de sesión
-  exit();
+    echo "Inicia sesión primero por favor :D";
+    header("refresh:5 ../../index.php");  // Redireccionamos al archivo de inicio de sesión
+    exit();
+}
+
+// Verificar si el tipo de usuario no es 1 (Tipo de usuario que puede acceder a esta página, osea el admin)
+if ($_SESSION['tipo_usuario'] !== "1") { 
+      echo "Acceso no autorizado. Por favor, inicia sesión con una cuenta válida.";
+    header("refresh:5 ../../index.php");  // Redireccionamos al archivo de inicio de sesión
+    exit();
 }
 
 $nombreUsuario = $_SESSION['usuario'];
@@ -160,46 +168,66 @@ $nombreUsuario = $_SESSION['usuario'];
 
     <hr>
 
-    <?php
 
-    
-        if (!empty($depa)) {
-            foreach($tablaf as $registro) {
-                echo "<div class='row' style='text-aling:center;background-color: rgba(0, 0, 0, .550);
-                box-shadow: 0 4px 5px rgba(10, 2, 1, 55); color: white'>";
-                echo "<div class='col-6 row-cols-sm-2 row-cols-md-4 g-4'>";            
-                echo "</div>";
-                echo "<div class='col-6 col-md-6 col-lg-6'>";
-                echo "<h3 class='text-center'>Nombre</h3>";
-                echo "<h4>$registro->nombre_c</h4>";
-                echo "<br>";
-                echo "<h3 class='text-center'>Rareza</h3>";
-                echo "<h4>$registro->rareza</h4>";
-                echo "<br>";
-                echo "<h3 class='text-center'>Precio</h3>";
-                echo "<h4>$$registro->p_beto</h4>";
-                echo "<br>";
-                echo "<div class='row'>";
-                echo "<div class='col-6 col-md-6 col-lg-6'>";
-                echo "<h3 class='text-center'>Precio En TCG</h3>";
-                echo "<div class='d-grid gap-2'>";
-                echo "<a href='$registro->p_tcg' class='btn btn-danger'>Consultar Tcg</a>";
-                echo "</div>";
-                echo "</div>";
-                echo "<div class='col-6 col-md-6 col-lg-6'>";
-                echo "<h3 class='text-center'>Precio En Price</h3>";
-                echo "<div class='d-grid gap-2'>";
-                echo "<a href='$registro->p_price' class='btn btn-danger'>Consultar Price</a>";
-                echo "</div>";
-                echo "</div>";
-                echo "</div>";
-                echo "</div>";
-                echo "</div>";
-                echo "<br>";
+    <?php
+if (!empty($depa)) {
+    foreach ($tablaf as $registro) {
+        echo "<div class='row' style='text-align:center;background-color: rgba(0, 0, 0, .550); box-shadow: 0 4px 5px rgba(10, 2, 1, 55); color: white'>";
+        echo "<div class='col-6 row-cols-sm-2 row-cols-md-4 g-4'>";
+
+        // Movemos la obtención de la imagen aquí, dentro del bucle
+        $imagen_c = $registro->imagen_c;
+        $imagePath = "../../../imagenes/productos/" . $imagen_c;
+
+        // Verifica si el archivo existe con varias extensiones
+        $extensionesPermitidas = array('jpg', 'jpeg', 'png', 'webp');
+        $imagenEncontrada = false;
+        foreach ($extensionesPermitidas as $ext) {
+            if (file_exists($imagePath . "." . $ext)) {
+                $imagen = $imagePath . "." . $ext;
+                $imagenEncontrada = true;
+                break;
             }
         }
-    ?>
-</div>
 
+        // Si no se encuentra ninguna imagen, utiliza una imagen predeterminada
+        if (!$imagenEncontrada) {
+            $imagen = "../../imagenes/no image.png";
+        }
+
+        echo "<img src='$imagen' class='img-fluid' alt='...' style='width: 250px;'>";
+        echo "</div>";
+        echo "<div class='col-6 col-md-6 col-lg-6'>";
+        echo "<h3 class='text-center'>Nombre</h3>";
+        echo "<h4>" . $registro->nombre_c . "</h4>";
+        echo "<br>";
+        echo "<h3 class='text-center'>Rareza</h3>";
+        echo "<h4>" . $registro->rareza . "</h4>";
+        echo "<br>";
+        echo "<h3 class='text-center'>Precio</h3>";
+        echo "<h4>$$registro->p_beto</h4>";
+        echo "<br>";
+        echo "<div class='row'>";
+        echo "<div class='col-6 col-md-6 col-lg-6'>";
+        echo "<h3 class='text-center'>Precio En TCG</h3>";
+        echo "<div class='d-grid gap-2'>";
+        echo "<a href='$registro->p_tcg' class='btn btn-danger'>Consultar Tcg</a>";
+        echo "</div>";
+        echo "</div>";
+        echo "<div class='col-6 col-md-6 col-lg-6'>";
+        echo "<h3 class='text-center'>Precio En Price</h3>";
+        echo "<div class='d-grid gap-2'>";
+        echo "<a href='$registro->p_price' class='btn btn-danger'>Consultar Price</a>";
+        echo "</div>";
+        echo "</div>";
+        echo "</div>";
+        echo "</div>";
+        echo "</div>";
+        echo "<br>";
+    }
+}
+?>
+
+</div>
 </body>
 </html>

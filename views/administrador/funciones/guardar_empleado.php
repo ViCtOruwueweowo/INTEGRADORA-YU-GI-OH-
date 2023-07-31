@@ -50,7 +50,7 @@ $estado = 1;
 
 // Insertar los datos en la base de datos
 try {
-    $stmt = $pdo->prepare("INSERT INTO usuarios(nombre_user, apellidos_user, tel_user, f_nacimiento, direccion_user, usuario, contraseña, tipo_usuario, estado) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt = $pdo->prepare("INSERT INTO usuarios(nombre_user, apellidos_user, tel_user, f_nacimiento, direccion_user, usuario, password, tipo_usuario, estado) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
     $stmt->execute([$nombre_user, $apellidos_user, $tel_user, $f_nacimiento, $direccion_user, $usuario, $hash, $tipo_usuario, $estado]);
     
     echo "<div class='container' id='contenedor'>
@@ -66,7 +66,18 @@ try {
   </div>   ";     
     header("refresh:2 ; ../empleados.php");
 } catch (PDOException $e) {
-    echo "Error al agregar los datos: " . $e->getMessage();
+    echo "<div class='container' id='contenedor'>
+    <div class='alert alert-danger text-center' role='alert'>
+   <h1 style='text-aling:center'>¡Ups,Lo Sentimos Parece Que Hubo Un Error!</h1>
+   <br>
+   <div class='spinner-border text-dark' role='status'>
+<span class='visually-hidden'>Loading...</span>
+</div>
+<br>
+   <h6>Revisa que el usuario o telefono no esten registrados anteriormente</h6>
+  </div>
+  </div>   ";    
+  header("refresh:2 ; ../empleados.php");
 }
 
 // Cerrar la conexión a la base de datos

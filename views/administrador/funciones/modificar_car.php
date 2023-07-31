@@ -4,13 +4,21 @@ session_start();
 
 // Verificar si el usuario no ha iniciado sesión
 if (!isset($_SESSION['usuario'])) {
-  echo "Inicia sesión primero por favor :D";
-  header("refresh:2 ../../index.php");  // Redireccionamos al archivo de inicio de sesión
-  exit();
+    echo "Inicia sesión primero por favor :D";
+    header("refresh:5 ../../../index.php");  // Redireccionamos al archivo de inicio de sesión
+    exit();
+}
+
+// Verificar si el tipo de usuario no es 1 (Tipo de usuario que puede acceder a esta página, osea el admin)
+if ($_SESSION['tipo_usuario'] !== "1") { 
+      echo "Acceso no autorizado. Por favor, inicia sesión con una cuenta válida.";
+    header("refresh:5 ../../../index.php");  // Redireccionamos al archivo de inicio de sesión
+    exit();
 }
 
 $nombreUsuario = $_SESSION['usuario'];
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -19,7 +27,8 @@ $nombreUsuario = $_SESSION['usuario'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../../css/bootstrap.min.css">
     <link rel="stylesheet" href="../../../css/index2.css">
-    <script src="../../../js/bootstrap.min.js"></script>
+    <script src="../../../js/bootstrap.bundle.min.js"></script>
+
     <title>Document</title>
 </head>
 <body>
@@ -101,7 +110,7 @@ $nombreUsuario = $_SESSION['usuario'];
           <?php $nombreUsuario = $_SESSION['usuario']; echo "$nombreUsuario";?>
           </a>
           <ul class="dropdown-menu">
-          <a href="../../config/cerrarSesion.php" class="dropdown-item">Cerrar Sesion</a>
+          <a href="../../../config/cerrarSesion.php" class="dropdown-item">Cerrar Sesion</a>
           </ul>
       </li>
           </ul>
@@ -119,13 +128,13 @@ $conexion = new database();
 $conexion->conectarDB();
 
 // Obtener la lista de departamentos para el filtro
-$consulta = "SELECT CONCAT(cartas.nombre_c, ' ', rareza.rareza) as nombre, car_rar.id_cr, car_rar.p_beto, car_rar.p_tcg, car_rar.p_price, car_rar.cantidad FROM car_rar INNER JOIN cartas ON car_rar.id_carar = cartas.id_car INNER JOIN rareza ON car_rar.id_rar = rareza.id_ra";
+$consulta = "SELECT CONCAT(cartas.nombre_c, ' ', rareza.rareza) as nombre, car_rar.id_cr, car_rar.p_beto, car_rar.p_tcg, car_rar.p_price, car_rar.cantidad FROM car_rar INNER JOIN cartas ON car_rar.id_carar = cartas.id_car INNER JOIN rareza ON car_rar.id_rar = rareza.id_ra ORDER BY cartas.nombre_c ASC";
 $tabla = $conexion->seleccionar($consulta);
 
 // Filtrar el departamento seleccionado
 if (isset($_POST['depa'])) {
     $depa = $_POST['depa'];
-    $consultaf = "SELECT CONCAT(cartas.nombre_c, ' ', rareza.rareza) as nombre, car_rar.id_cr, car_rar.p_beto, car_rar.p_tcg, car_rar.p_price, car_rar.cantidad FROM car_rar INNER JOIN cartas ON car_rar.id_carar = cartas.id_car INNER JOIN rareza ON car_rar.id_rar = rareza.id_ra WHERE id_carar ='$depa'";
+    $consultaf = "SELECT CONCAT(cartas.nombre_c, ' ', rareza.rareza) as nombre, car_rar.id_cr, car_rar.p_beto, car_rar.p_tcg, car_rar.p_price, car_rar.cantidad FROM car_rar INNER JOIN cartas ON car_rar.id_carar = cartas.id_car INNER JOIN rareza ON car_rar.id_rar = rareza.id_ra WHERE id_cr ='$depa'";
     $tablaf = $conexion->seleccionar($consultaf);
 }
 ?>
@@ -168,13 +177,19 @@ if (isset($_POST['depa'])) {
                 echo "<label for='cantidad'>Cantidad</label>";
                 echo "<input class='form-control' name='cantidad'  value='$registro->cantidad'> ";
             }
+
+         //   <!-- Botón para enviar los datos al archivo car_rar.php -->
+            echo "<div class='col-12'>
+            <button type='submit' formaction='car_rar2.php' class='btn btn-primary'>Enviar Datos</button>
+            </div>";
+        } else {
+          echo "<div class='col-12'>
+          <button type='submit' formaction='car_rar2.php' class='btn btn-primary disabled'>Enviar Datos</button>
+          </div>";
         }
         ?>
 
-        <!-- Botón para enviar los datos al archivo car_rar.php -->
-        <div class="col-12">
-            <button type="submit" formaction="car_rar2.php" class="btn btn-primary">Enviar Datos</button>
-        </div>
+
     </form>
 </div>
 

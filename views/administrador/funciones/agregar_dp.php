@@ -3,13 +3,21 @@ session_start();
 
 // Verificar si el usuario no ha iniciado sesión
 if (!isset($_SESSION['usuario'])) {
-  echo "Inicia sesión primero por favor :D";
-  header("refresh:2 ../../index.php");  // Redireccionamos al archivo de inicio de sesión
-  exit();
+    echo "Inicia sesión primero por favor :D";
+    header("refresh:5 ../../index.php");  // Redireccionamos al archivo de inicio de sesión
+    exit();
+}
+
+// Verificar si el tipo de usuario no es 1 (Tipo de usuario que puede acceder a esta página, osea el admin)
+if ($_SESSION['tipo_usuario'] !== "1") { 
+      echo "Acceso no autorizado. Por favor, inicia sesión con una cuenta válida.";
+    header("refresh:5 ../../index.php");  // Redireccionamos al archivo de inicio de sesión
+    exit();
 }
 
 $nombreUsuario = $_SESSION['usuario'];
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -20,6 +28,7 @@ $nombreUsuario = $_SESSION['usuario'];
     <link rel="stylesheet" href="../../../css/bootstrap.min.css">
     <link rel="stylesheet" href="../../../css/index2.css">
     <script src="../../../js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 <style>
@@ -121,6 +130,15 @@ $nombreUsuario = $_SESSION['usuario'];
       $conexion = new Database();
       $conexion->conectarDB();
 
+
+
+
+
+
+
+
+      
+
       $consulta = "SELECT clientes.nom_cli as nombre, clientes.id_cli from clientes";
       $tabla = $conexion->seleccionar($consulta);
       echo "<select id='id_cli' name='id_cli' class='form-select'>";
@@ -143,26 +161,32 @@ echo "<label class='form-label' style='color: white;'>Seleccionar Producto</labe
       }
       echo "</select>";
       
-      ?>
       
+      ?>
+       
     <div class="mb-3">
-      <label for="cantidad_p" class="form-label" style="color: white;">cantidad</label>
-      <input type="text" name="cantidad_p" class="form-control" id="exampleFormControlInput1" placeholder="cantidad">
+      <label for="cantidad_p" class="form-label">cantidad</label>
+      <input type="number" min="1" name="cantidad_p" class="form-control" id="exampleFormControlInput1" placeholder="cantidad" required>
     </div>
+
     <div class="mb-3">
-      <label for="abono_p" class="form-label" style="color: white;">Abono</label>
-      <input type="text" name="abono_p" class="form-control" id="exampleFormControlInput1" placeholder="Abono">
-    </div>
+    <label for="abono_p" class="form-label">Abono</label>
+    <input type="number" name="abono_p" class="form-control" id="exampleFormControlInput1" placeholder="Abono" pattern="[0-9]+" inputmode="numeric" required
+        oninvalid="setCustomValidity('Por favor no dejes vacío este espacio.')"
+        oninput="setCustomValidity('')">
+</div>
+
+
     <div class="mb-3">
       <label for="notas" class="form-label" style="color: white;">Notas</label>
       <input type="text" name="notas" class="form-control" id="exampleFormControlInput1" placeholder="Notas">
     </div>
     <label>
-  <input type="radio" name="concepto"  value="ENCARGO">ENCARGO
+  <input type="radio" name="concepto" value="ENCARGO" required>ENCARGO
 </label>
 <br>
 <label>
-  <input type="radio" name="concepto" value="DEUDA" >DEUDA
+  <input type="radio" name="concepto" value="DEUDA" required>DEUDA
 </label>
 
     

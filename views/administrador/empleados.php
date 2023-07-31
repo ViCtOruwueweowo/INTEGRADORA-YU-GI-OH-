@@ -179,8 +179,38 @@ if (isset($_POST['filtro_inactivos'])) {
   </div>
   <div class="col-6">
   <label for="telefono" class="form-label ">Telefono</label>
-  <input type="text" class="form-control col-lg-6" id="telefono" name="telefono" placeholder="Ingresar telefono.." required>
+  <input type="tel" maxlength="10" minlength="10" class="form-control col-lg-6" id="telefono" name="telefono" placeholder="Ingresar telefono.." required>
   </div>
+<!-- ... -->
+<script>
+    function validarNumero(input) {
+        // Eliminar caracteres que no sean dígitos del valor del input
+        input.value = input.value.replace(/\D/g, '');
+    }
+
+    // Agregar el evento oninput para llamar a la función validarNumero
+    document.getElementById('telefono').addEventListener('input', function() {
+        validarNumero(this);
+    });
+
+    // Agregar el evento keyup para validar la longitud del teléfono
+    document.getElementById('telefono').addEventListener('keyup', function() {
+        const telefonoInput = this.value;
+        const telefonoLength = telefonoInput.length;
+        const maxTelefonoLength = parseInt(this.getAttribute('maxlength'));
+
+        // Si la longitud del teléfono es menor que el máximo permitido,
+        // deshabilitar el botón de enviar (tipo submit)
+        if (telefonoLength < maxTelefonoLength) {
+            document.querySelector('[type="submit"]').disabled = true;
+        } else {
+            document.querySelector('[type="submit"]').disabled = false;
+        }
+    });
+</script>
+<!-- ... -->
+
+
   <div class="col-6">
   <label for="fechan" class="form-label ">Fecha De Nacimiento</label>
   <input type="date" class="form-control col-lg-6" id="fechan" max="2023-01-01" name="fechan" required>
@@ -195,7 +225,7 @@ if (isset($_POST['filtro_inactivos'])) {
   </div>
   <div class="col-6">
   <label for="contraseña" class="form-label ">Contraseña</label>
-  <input type="password" class="form-control col-lg-6" id="contraseña" name="contraseña"placeholder="Ingresar nueva contraseña">
+  <input type="password" class="form-control col-lg-6" id="contraseña" name="contraseña"placeholder="Ingresar nueva contraseña" required>
   </div>
  </div>
       </div>
@@ -209,8 +239,8 @@ if (isset($_POST['filtro_inactivos'])) {
     </div>
 
     <div class="col">
-    <button type="button" class="btn btn-outline-warning btn-lg" data-bs-toggle="modal" data-bs-target="#exampleModal">
- Editar Empleados
+<a href="funciones/empleado.php" class="btn btn-outline-warning btn-lg"> Editar Empleados</a>
+
 </button>
 
 <!-- Modal -->
