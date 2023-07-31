@@ -163,7 +163,7 @@ echo "<label class='form-label'>Seleccionar Producto</label>";
       
       
       ?>
-      
+       
     <div class="mb-3">
       <label for="cantidad_p" class="form-label">cantidad</label>
       <input type="number" min="1" name="cantidad_p" class="form-control" id="exampleFormControlInput1" placeholder="cantidad" required>
@@ -172,11 +172,9 @@ echo "<label class='form-label'>Seleccionar Producto</label>";
     <div class="mb-3">
     <label for="abono_p" class="form-label">Abono</label>
     <input type="number" name="abono_p" class="form-control" id="exampleFormControlInput1" placeholder="Abono" pattern="[0-9]+" inputmode="numeric" required
-        oninvalid="setCustomValidity('Por favor, ingresa números y no dejes vacío este espacio.')"
+        oninvalid="setCustomValidity('Por favor no dejes vacío este espacio.')"
         oninput="setCustomValidity('')">
-
 </div>
-
 
 
     <div class="mb-3">
