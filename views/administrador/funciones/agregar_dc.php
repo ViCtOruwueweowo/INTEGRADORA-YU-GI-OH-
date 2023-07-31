@@ -124,7 +124,7 @@ $nombreUsuario = $_SESSION['usuario'];
 <div class="container" style="background-color: rgba(0, 0, 0, .550);">
     <form action="insert_dc.php" method="post">
 
-    <label for="id_cr" class="form-label">Seleccionar cliente:</label>
+    <label for="id_cr" class="form-label" style="color: white;">Seleccionar cliente:</label>
     <?php
       include 'date.php';
       $conexion = new Database();
@@ -132,13 +132,14 @@ $nombreUsuario = $_SESSION['usuario'];
 
       $consulta = "SELECT clientes.nom_cli as nombre, clientes.id_cli from clientes";
       $tabla = $conexion->seleccionar($consulta);
-      echo "<select id='id_cli' name='id_cli' class='form-select'>";
+      echo "<select id='id_cli' name='id_cli' class='form-select'> ";
       foreach ($tabla as $row)
       {
           echo "<option name='id_cli' value='".$row->id_cli."'>".$row->nombre."</option>";
       }
-      echo "</select>";
-      echo "Selecciona Una Carta:";
+      echo "</select> ";
+      echo "<div style='color: white;'>Selecciona Una Carta:</div>";
+
 echo "<br>";
       //carta
       $consulta = "SELECT CONCAT(cartas.nombre_c, ' ', rareza.rareza) as nombre, car_rar.id_cr FROM workstack.deuda_c inner join car_rar on deuda_c.cr_fk=car_rar.id_cr inner join rareza on car_rar.id_rar=rareza.id_ra inner join cartas on car_rar.id_carar=cartas.id_car;";
@@ -154,17 +155,17 @@ echo "<br>";
       ?>
       
     <div class="mb-3">
-      <label for="cantidad_c" class="form-label">cantidad</label>
+      <label for="cantidad_c" class="form-label" style="color: white;">cantidad</label>
       <input type="text" name="cantidad_c" class="form-control" id="exampleFormControlInput1" placeholder="descuento">
     </div>
     
     
     <div class="mb-3">
-      <label for="abono_c" class="form-label">Abono</label>
+      <label for="abono_c" class="form-label" style="color: white;">Abono</label>
       <input type="text" name="abono_c" class="form-control" id="exampleFormControlInput1" placeholder="Notas">
     </div>
     <div class="mb-3">
-      <label for="notas" class="form-label">Notas</label>
+      <label for="notas" class="form-label" style="color: white;">Notas</label>
       <input type="text" name="notas" class="form-control" id="exampleFormControlInput1" placeholder="Notas">
     </div>
     <label>

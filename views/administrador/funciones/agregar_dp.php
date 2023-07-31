@@ -124,7 +124,7 @@ $nombreUsuario = $_SESSION['usuario'];
 <div class="container" style="background-color: rgba(0, 0, 0, .550);">
     <form action="insert_dp.php" method="post">
 
-    <label for="id_cr" class="form-label">Seleccionar cliente:</label>
+    <label for="id_cr" class="form-label" style="color: white;">Seleccionar cliente:</label>
     <?php
       include 'date.php';
       $conexion = new Database();
@@ -150,7 +150,7 @@ $nombreUsuario = $_SESSION['usuario'];
 
 echo "<br>";
 
-echo "<label class='form-label'>Seleccionar Producto</label>";
+echo "<label class='form-label' style='color: white;'>Seleccionar Producto</label>";
       //carta
       $consulta = "SELECT productos.nom_p as nombre, productos.id_pro from productos";
       $tabla = $conexion->seleccionar($consulta);
@@ -178,7 +178,7 @@ echo "<label class='form-label'>Seleccionar Producto</label>";
 
 
     <div class="mb-3">
-      <label for="notas" class="form-label">Notas</label>
+      <label for="notas" class="form-label" style="color: white;">Notas</label>
       <input type="text" name="notas" class="form-control" id="exampleFormControlInput1" placeholder="Notas">
     </div>
     <label>
