@@ -139,7 +139,8 @@ if (isset($_POST['depa'])) {
 }
 ?>
 
-<div class="container">
+<div class="container" style="color:whitesmoke;background-color: rgba(0, 0, 0, .550);
+    box-shadow: 0 4px 5px rgba(10, 2, 1, 55);text-align:left;color:white">
 
 
     <form class="row g-3" method="POST">

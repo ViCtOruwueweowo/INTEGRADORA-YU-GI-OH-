@@ -1,3 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <link rel="stylesheet" href="../../../css/index2.css">
+    <link rel="stylesheet" href="../../../css/bootstrap.min.css">
+    <script src="../../../js/bootstrap.bundle.min.js"></script>
+    <style>
+        #contendor{
+            width: 40%;
+            margin: auto;
+        }
+        body{
+            margin-top: 250px;
+        }
+    </style>
 <?php
 // Establecer la conexión a la base de datos con PDO
 $servername = "localhost";
@@ -38,9 +58,18 @@ try {
     
     // Ejecutar la consulta
     if ($stmt->execute()) {
-        echo "<div class='alert alert-success'>
-              <h1 class='text-center'>Datos Actualizados Correctamente</h1>";
-        header("refresh:1; listarPersonasConBusqueda.php");
+        echo "<div class='container' id='contenedor'>
+        <div class='alert alert-success text-center' role='alert'>
+       <h1 style='text-aling:center'>¡Hecho!</h1>
+       <h2>La Accion Fue Realizada Con Exito, Vuelve Pronto.</h2>
+       <br>
+       <div class='spinner-border text-dark' role='status'>
+    <span class='visually-hidden'>Loading...</span>
+  </div>
+ 
+      </div>
+      </div>   "; 
+        header("refresh:2; listarPersonasConBusqueda.php");
     } else {
         echo "Error al actualizar los datos.";
     }
@@ -51,3 +80,6 @@ try {
 // Cerrar la conexión a la base de datos
 $conn = null;
 ?>
+
+</body>
+</html>

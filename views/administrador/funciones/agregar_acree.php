@@ -122,8 +122,9 @@ $nombreUsuario = $_SESSION['usuario'];
   </nav>
 
   <br>
-<div class="container" style="background-color: rgba(0, 0, 0, .550);">
-  
+  <div class="container" style="color:whitesmoke;background-color: rgba(0, 0, 0, .550);
+    box-shadow: 0 4px 5px rgba(10, 2, 1, 55);text-align:left;color:white">
+    <h1 style="text-align: center;">Agregar Nuevo Acreedor</h1>
     <form action="guardar_acre.php" method="post">
 
     <label for="id_cr" class="form-label">Seleccionar cliente:</label>
