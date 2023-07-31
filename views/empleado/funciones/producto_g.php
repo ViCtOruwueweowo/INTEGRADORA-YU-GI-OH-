@@ -1,3 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../../css/index3.css">
+    <script src="../../../js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+<style>
+        #contendor{
+            width: 40%;
+            margin: auto;
+        }
+        body{
+            margin-top: 250px;
+        }
+    </style>
 <?php
 // Establecer la conexión a la base de datos
 $servername = "localhost";
@@ -22,13 +42,23 @@ $notas_prod = $_POST['notas_prod'];
 if (isset($_FILES['imagen'])) {
     $nombreArchivo = $_FILES['imagen']['name'];
     $archivoTemp = $_FILES['imagen']['tmp_name'];
-    $rutaDestino = "../../../imagenes/productos/" . $nombreArchivo;
+    $rutaDestino = "../../../imagenes/productos_2/" . $nombreArchivo;
 
     // Verificar si el archivo es una imagen
     $infoImagen = getimagesize($archivoTemp);
     if ($infoImagen === false) {
-        echo "Error: El archivo seleccionado no es una imagen válida.";
-        header("refresh:1 ;listarPersonasConBusqueda.php");
+        echo "<div class='container' id='contenedor'>
+        <div class='alert alert-warning text-center' role='alert'>
+       <h1 style='text-aling:center'>¡Ups, Archivo Ingresado No Es Valido!</h1>
+       <br>
+       <div class='spinner-border text-dark' role='status'>
+    <span class='visually-hidden'>Loading...</span>
+  </div>
+  <br>
+       <h6>Espera Estas Siendo Redirigido</h6>
+      </div>
+      </div>   ";
+        header("refresh:1 ;listarPersonasConBusqueda2.php");
         exit;
     }
 
@@ -36,11 +66,11 @@ if (isset($_FILES['imagen'])) {
         header("refresh:0 ;agregar_rar.php");
     } else {
         echo "Hubo un error al guardar la imagen.";
-        header("refresh:1 ;listarPersonasConBusqueda.php");
+        header("refresh:1 ;listarPersonasConBusqueda2.php");
     }
 } else {
     echo "No se ha seleccionado ninguna imagen.";
-    header("refresh:1 ;listarPersonasConBusqueda.php");
+    header("refresh:1 ;listarPersonasConBusqueda2.php");
     exit;
 }
 
@@ -57,8 +87,17 @@ try {
     $stmt->execute([$nombre_p, $existencias, $precio, $notas_prod, $imagen_c]);
 
     // Redireccionar después de la inserción exitosa
-    echo "<div class='alert alert-success'>
-    <h1 class='text-center'>Datos Actualizados Correctamente</h1></div>";
+    echo "<div class='container' id='contenedor'>
+    <div class='alert alert-success text-center' role='alert'>
+   <h1 style='text-aling:center'>¡Exito, Accion Realizada Sin Problemas!</h1>
+   <br>
+   <div class='spinner-border text-dark' role='status'>
+<span class='visually-hidden'>Loading...</span>
+</div>
+<br>
+   <h6>Espera Estas Siendo Redirigido</h6>
+  </div>
+  </div>   ";
     header("refresh:1; listarPersonasConBusqueda2.php");
 } catch (PDOException $e) {
     echo "Error al agregar los datos: " . $e->getMessage();
@@ -67,3 +106,6 @@ try {
 // Cerrar la conexión a la base de datos
 $pdo = null;
 ?>
+
+</body>
+</html>
