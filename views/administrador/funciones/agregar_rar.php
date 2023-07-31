@@ -169,14 +169,13 @@ echo "</select>";
         oninput="setCustomValidity('')">
 </div>
 
-
 <div class="mb-3">
   <label for="codigo" class="form-label">Ingresar Codigo</label>
   <input type="text" name="codigo" maxlength="10" class="form-control" id="exampleFormControlInput1" placeholder="Codigo" required>
 </div>
 <div class="mb-3">
   <label for="cantidad" class="form-label">Ingresar Cantidad</label>
-  <input type="text" name="cantidad" type="number" min="0" step="1" class="form-control" id="exampleFormControlInput1" placeholder="Cantidad" required>
+  <input name="cantidad" type="number" min="1" step="1" class="form-control" id="exampleFormControlInput1" placeholder="Cantidad" required>
 </div>
 <div class="col-12">
     <button type="submit" value="Enviar" class="btn btn-primary">Guardar Registro</button>

@@ -139,23 +139,25 @@ echo "</select>";
 ?>
 <div class="mb-3">
   <label for="p_price" class="form-label">Ingresar Link De Price</label>
-  <input type="text" name="p_price" class="form-control" id="exampleFormControlInput1" placeholder="Link Price" required>
+  <input type="text" name="p_price" class="form-control" id="exampleFormControlInput1" placeholder="Link Price">
 </div>
 <div class="mb-3">
   <label for="p_tcg" class="form-label">Ingresar Link De Tcg</label>
-  <input type="text" name="p_tcg" class="form-control" id="exampleFormControlInput1" placeholder="Link Tcg" required>
+  <input type="text" name="p_tcg" class="form-control" id="exampleFormControlInput1" placeholder="Link Tcg">
 </div>
 <div class="mb-3">
   <label for="p_beto" class="form-label">Ingresar Precio En Tienda</label>
-  <input type="text" name="p_beto" class="form-control" id="exampleFormControlInput1" placeholder="Precio Local" required>
+  <input type="number" name="p_beto" class="form-control" id="exampleFormControlInput1" placeholder="Precio Local" pattern="[0-9]+" inputmode="numeric" required
+        oninvalid="setCustomValidity('Por favor, ingresa números y no dejes vacío este espacio.')"
+        oninput="setCustomValidity('')">
 </div>
 <div class="mb-3">
   <label for="codigo" class="form-label">Ingresar Codigo</label>
-  <input type="text" name="codigo" class="form-control" id="exampleFormControlInput1" placeholder="Codigo" required>
+  <input type="text" name="codigo" maxlength="10" class="form-control" id="exampleFormControlInput1" placeholder="Codigo" required>
 </div>
 <div class="mb-3">
   <label for="cantidad" class="form-label">Ingresar Cantidad</label>
-  <input type="text" name="cantidad" class="form-control" id="exampleFormControlInput1" placeholder="Cantidad" required>
+  <input name="cantidad" type="number" min="1" step="1" class="form-control" id="exampleFormControlInput1" placeholder="Cantidad" required>
 </div>
 <div class="col-12">
     <button type="submit" value="Enviar" class="btn btn-primary">Guardar Registro</button>
