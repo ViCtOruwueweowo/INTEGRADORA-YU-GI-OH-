@@ -165,7 +165,7 @@ if (isset($_POST['depa'])) {
                 echo "<input class='form-control' name='p_tcg' value='$registro->p_tcg'> ";
                 echo "<label for='p_price'>p_price</label>";
                 echo "<input class='form-control' name='p_price' value='$registro->p_price'> ";
-                echo "<label for='cantidad'>cantidad</label>";
+                echo "<label for='cantidad'>Cantidad</label>";
                 echo "<input class='form-control' name='cantidad'  value='$registro->cantidad'> ";
             }
         }

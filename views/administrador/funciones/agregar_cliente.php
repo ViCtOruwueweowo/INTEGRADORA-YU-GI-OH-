@@ -117,7 +117,7 @@ $nombreUsuario = $_SESSION['usuario'];
     <hr>
     <form action="update_cliente.php" method="post">
 
-    <label for="id_cr" class="form-label">Agregar cliente:</label>
+    <label for="id_cr" class="form-label" style='color: white;'>Agregar cliente:</label>
     <?php
       include 'date.php';
       $conexion = new Database();
@@ -125,12 +125,12 @@ $nombreUsuario = $_SESSION['usuario'];
       ?>
       
     <div class="mb-3">
-      <label for="nom_cli" class="form-label">Nombre</label>
+      <label for="nom_cli" class="form-label" style='color: white;'>Nombre</label>
       <input type="text" name="nom_cli" class="form-control" id="exampleFormControlInput1" placeholder="Nombre">
     </div>
     
     <div class="mb-3">
-      <label for="tel_cli" class="form-label">Telefono</label>
+      <label for="tel_cli" class="form-label" style='color: white;'>Telefono</label>
       <input type="text" name="tel_cli" class="form-control" id="exampleFormControlInput1" placeholder="Telefono">
     </div>
     

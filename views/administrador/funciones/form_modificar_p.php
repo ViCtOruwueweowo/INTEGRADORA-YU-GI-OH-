@@ -156,9 +156,9 @@ if (isset($_POST['depa'])) {
         if (isset($tablaf)) {
             foreach ($tablaf as $registro) {
                 echo "<input type='hidden' name='id_pro' value='$registro->id_pro'> ";
-                echo "<label for='existencias'>existencias</label>";
+                echo "<label for='existencias'>Existencias</label>";
                 echo "<input class='form-control' name='existencias' value='$registro->existencias'> ";
-                echo "<label for='precio'>precio</label>";
+                echo "<label for='precio'>Precio</label>";
                 echo "<input class='form-control' name='precio' value='$registro->precio'> ";
                 echo "<label for='notas_prod'>Notas</label>";
                 echo "<input class='form-control' name='notas_prod' value='$registro->notas_prod'> ";

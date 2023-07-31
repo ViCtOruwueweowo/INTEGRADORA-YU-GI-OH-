@@ -115,7 +115,7 @@ $nombreUsuario = $_SESSION['usuario'];
 <div class="container" style="background-color: rgba(0, 0, 0, .550);">
     <form action="insert_dp.php" method="post">
 
-    <label for="id_cr" class="form-label">Seleccionar cliente:</label>
+    <label for="id_cr" class="form-label" style="color: white;">Seleccionar cliente:</label>
     <?php
       include 'date.php';
       $conexion = new Database();
@@ -132,7 +132,7 @@ $nombreUsuario = $_SESSION['usuario'];
 
 echo "<br>";
 
-echo "<label class='form-label'>Seleccionar Producto</label>";
+echo "<label class='form-label' style='color: white;'>Seleccionar Producto</label>";
       //carta
       $consulta = "SELECT productos.nom_p as nombre, productos.id_pro from productos";
       $tabla = $conexion->seleccionar($consulta);
@@ -146,23 +146,23 @@ echo "<label class='form-label'>Seleccionar Producto</label>";
       ?>
       
     <div class="mb-3">
-      <label for="cantidad_p" class="form-label">cantidad</label>
+      <label for="cantidad_p" class="form-label" style="color: white;">cantidad</label>
       <input type="text" name="cantidad_p" class="form-control" id="exampleFormControlInput1" placeholder="cantidad">
     </div>
     <div class="mb-3">
-      <label for="abono_p" class="form-label">Abono</label>
+      <label for="abono_p" class="form-label" style="color: white;">Abono</label>
       <input type="text" name="abono_p" class="form-control" id="exampleFormControlInput1" placeholder="Abono">
     </div>
     <div class="mb-3">
-      <label for="notas" class="form-label">Notas</label>
+      <label for="notas" class="form-label" style="color: white;">Notas</label>
       <input type="text" name="notas" class="form-control" id="exampleFormControlInput1" placeholder="Notas">
     </div>
     <label>
-  <input type="radio" name="concepto" value="ENCARGO">ENCARGO
+  <input type="radio" name="concepto"  value="ENCARGO">ENCARGO
 </label>
 <br>
 <label>
-  <input type="radio" name="concepto" value="DEUDA">DEUDA
+  <input type="radio" name="concepto" value="DEUDA" >DEUDA
 </label>
 
     

@@ -120,7 +120,7 @@ $nombreUsuario = $_SESSION['usuario'];
   
     <form action="guardar_acre.php" method="post">
 
-    <label for="id_cr" class="form-label">Seleccionar cliente:</label>
+    <label for="id_cr" class="form-label" style="color: white;">Seleccionar cliente:</label>
     <?php
       include 'date.php';
       $conexion = new Database();
@@ -137,15 +137,15 @@ $nombreUsuario = $_SESSION['usuario'];
       ?>
 
     <div class="mb-3">
-      <label for="descuento" class="form-label">Ingresar descuento</label>
+      <label for="descuento" class="form-label" style="color: white;">Ingresar descuento</label>
       <input type="text" name="descuento" class="form-control" id="exampleFormControlInput1" placeholder="descuento">
     </div>
     <div class="mb-3">
-      <label for="f_finalacreed" class="form-label">Fecha final</label>
+      <label for="f_finalacreed" class="form-label" style="color: white;">Fecha final</label>
       <input type="date" name="f_finalacreed" class="form-control" id="exampleFormControlInput1" placeholder="Fecha final">
     </div>
     <div class="mb-3">
-      <label for="notas_ac" class="form-label">Notas</label>
+      <label for="notas_ac" class="form-label" style="color: white;">Notas</label>
       <input type="text" name="notas_ac" class="form-control" id="exampleFormControlInput1" placeholder="Notas">
     </div>
     <div class="col-12">
