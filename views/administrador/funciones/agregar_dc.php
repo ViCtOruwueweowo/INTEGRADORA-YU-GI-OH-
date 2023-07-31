@@ -168,11 +168,11 @@ echo "<br>";
       <label for="notas" class="form-label" style="color: white;">Notas</label>
       <input type="text" name="notas" class="form-control" id="exampleFormControlInput1" placeholder="Notas">
     </div>
-    <label>
+    <label style="color: white;" >
   <input type="radio" name="concepto" value="ENCARGO">ENCARGO
 </label>
 <br>
-<label>
+<label style="color: white;" >
   <input type="radio" name="concepto" value="DEUDA">DEUDA
 </label>
 
