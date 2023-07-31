@@ -28,6 +28,7 @@ $nombreUsuario = $_SESSION['usuario'];
     <link rel="stylesheet" href="../../../css/bootstrap.min.css">
     <link rel="stylesheet" href="../../../css/index2.css">
     <script src="../../../js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 <style>
@@ -129,6 +130,15 @@ $nombreUsuario = $_SESSION['usuario'];
       $conexion = new Database();
       $conexion->conectarDB();
 
+
+
+
+
+
+
+
+      
+
       $consulta = "SELECT clientes.nom_cli as nombre, clientes.id_cli from clientes";
       $tabla = $conexion->seleccionar($consulta);
       echo "<select id='id_cli' name='id_cli' class='form-select'>";
@@ -151,26 +161,34 @@ echo "<label class='form-label'>Seleccionar Producto</label>";
       }
       echo "</select>";
       
+      
       ?>
       
     <div class="mb-3">
       <label for="cantidad_p" class="form-label">cantidad</label>
-      <input type="text" name="cantidad_p" class="form-control" id="exampleFormControlInput1" placeholder="cantidad">
+      <input type="number" min="1" name="cantidad_p" class="form-control" id="exampleFormControlInput1" placeholder="cantidad" required>
     </div>
+
     <div class="mb-3">
-      <label for="abono_p" class="form-label">Abono</label>
-      <input type="text" name="abono_p" class="form-control" id="exampleFormControlInput1" placeholder="Abono">
-    </div>
+    <label for="abono_p" class="form-label">Abono</label>
+    <input type="number" name="abono_p" class="form-control" id="exampleFormControlInput1" placeholder="Abono" pattern="[0-9]+" inputmode="numeric" required
+        oninvalid="setCustomValidity('Por favor, ingresa números y no dejes vacío este espacio.')"
+        oninput="setCustomValidity('')">
+
+</div>
+
+
+
     <div class="mb-3">
       <label for="notas" class="form-label">Notas</label>
       <input type="text" name="notas" class="form-control" id="exampleFormControlInput1" placeholder="Notas">
     </div>
     <label>
-  <input type="radio" name="concepto" value="ENCARGO">ENCARGO
+  <input type="radio" name="concepto" value="ENCARGO" required>ENCARGO
 </label>
 <br>
 <label>
-  <input type="radio" name="concepto" value="DEUDA">DEUDA
+  <input type="radio" name="concepto" value="DEUDA" required>DEUDA
 </label>
 
     

@@ -28,7 +28,7 @@ try {
     $concepto = $_POST['concepto'];
 
     // Insertar los datos en la base de datos con consulta preparada
-    $sql = "INSERT INTO deuda_p (id_clientep, cantidad_p, notas, id_p, abono_p, concepto)
+    $sql = "INSERT INTO deuda_p (id_clientep, cantidad_p, notas, id_p, abono_p, concept)
             VALUES (:id_cli, :cantidad_p, :notas, :id_pro, :abono_p, :concepto)";
 
     $stmt = $conn->prepare($sql);
@@ -42,7 +42,7 @@ try {
     if ($stmt->execute()) {
         echo "<div class='alert alert-success'>
               <h1 class='text-center'>Datos Actualizados Correctamente</h1>";
-        header("refresh:1; deudores_productos.php");
+        header("refresh:1; ../deudores_productos.php");
     } else {
         echo "Error al agregar los datos";
     }

@@ -169,8 +169,32 @@ if (isset($_POST['depa'])) {
             foreach ($tablaf as $registro) {
 
                 echo "<input type='hidden' name='id_acreedor' value='$registro->id_acreedor'> ";
-                echo "<label for='descuento'>descuento</label>";
-                echo "<input class='form-control' name='descuento' value='$registro->descuento'> ";
+
+                //echo "<label for='descuento'>descuento</label>";
+                //echo "<input class='form-control' name='descuento' value='$registro->descuento'> ";
+
+                echo "<label for='descuento'>Descuento</label>";
+                echo "<input type='text' inputmode='numeric' pattern='[0-9]+' maxlength='2' class='form-control' name='descuento' placeholder='Descuento (solo números por favor :D)' value='$registro->descuento' required>";
+                
+                // este es el div de arriba
+                echo "<div id='descuentoError' style='color: white; display: none;'>Tal vez fue muy difícil para ti, va de nuevo, números sí, letras no, tú puedes :D.</div>";
+
+
+                // Este ayuda a ver que si pone letras le manda el mensaje del div de arriba, salta cuando ve que lo que se desea ingresar no entra en los parámetros dados por el input, si no es lo que es lo bloquea, si sí, pasa 
+                echo 
+                "<script>
+                const descuentoInput = document.querySelector('input[name=\"descuento\"]');
+                const descuentoError = document.getElementById('descuentoError');
+
+                descuentoInput.addEventListener('input', function () {
+                const inputValue = this.value;
+                if (isNaN(inputValue)) {
+                descuentoError.style.display = 'block';
+                } else {
+                descuentoError.style.display = 'none';
+                  }
+                });
+                </script>";
 
                 echo "<label for='f_inicioacreed'>Fecha inicio de credito</label>";
                 echo "<input class='-form-control col-md-6' type='date' name='f_inicioacreed' value='$registro->f_inicioacreed' readonly> ";
