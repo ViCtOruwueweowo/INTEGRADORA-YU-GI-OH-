@@ -24,28 +24,35 @@ try {
     $cantidad_p = $_POST['cantidad_p'];
     $abono_p = $_POST['abono_p'];
     $notas = $_POST['notas'];
-    $concepto = $_POST['concepto'];
+    $estado_p = $_POST['estado_p'];
 
     // Preparar la consulta para actualizar los datos en la base de datos
     $sql = "UPDATE deuda_p SET 
             cantidad_p = :cantidad,
-            abono_p = :abono,
+            abono_p = abono_p+:abono_p,
             notas = :notas,
-            concepto = :concepto
-            WHERE id_dp = :id";
+            estado_p = estado_p
+            WHERE id_dp = :id;
+
+
+            UPDATE productos SET 
+        existencias = existencias - :cantidad
+        WHERE id_pro = (SELECT id_p FROM deuda_p WHERE id_dp = :id);";
+
+            
 
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(':cantidad', $cantidad_p);
-    $stmt->bindParam(':abono', $abono_p);
+    $stmt->bindParam(':abono_p', $abono_p);
     $stmt->bindParam(':notas', $notas);
-    $stmt->bindParam(':concepto', $concepto);
+    $stmt->bindParam(':estado_p', $estado_p);
     $stmt->bindParam(':id', $id_dp);
 
     // Ejecutar la consulta
     if ($stmt->execute()) {
         echo "<div class='alert alert-success'>
         <h1 class='text-center'>Datos Actualizados Correctamente</h1>";
-  header("refresh:1; deudores_productos.php");
+  header("refresh:1; ../deudores_productos.php");
     } else {
         echo "Error al agregar los datos";
     }
@@ -53,6 +60,7 @@ try {
     die("Error de conexión a la base de datos: " . $e->getMessage());
 }
 ?>
+
 
 </body>
 </html>

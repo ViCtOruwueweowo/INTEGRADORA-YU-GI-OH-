@@ -128,25 +128,28 @@ $conexion = new database();
 $conexion->conectarDB();
 
 // Obtener la lista de departamentos para el filtro
-$consulta = "SELECT CONCAT('Cliente:', ' ',clientes.nom_cli,'. ', 'Prodcuto:',' ', productos.nom_p, '.') as nombre, deuda_p.id_dp, deuda_p.cantidad_p, deuda_p.precio_p, deuda_p.notas, deuda_p.abono_p FROM deuda_p INNER JOIN clientes ON deuda_p.id_clientep = clientes.id_cli INNER JOIN productos ON productos.id_pro = deuda_p.id_p";
+$consulta = "SELECT CONCAT('Cliente:', ' ',clientes.nom_cli,'. ', 'Prodcuto:',' ', productos.nom_p, '.') as nombre, deuda_p.id_dp, deuda_p.cantidad_p,productos.existencias, deuda_p.concept,deuda_p.precio_p, deuda_p.notas, deuda_p.abono_p FROM deuda_p INNER JOIN clientes ON deuda_p.id_clientep = clientes.id_cli INNER JOIN productos ON productos.id_pro = deuda_p.id_p";
 $tabla = $conexion->seleccionar($consulta);
 
 // Filtrar el departamento seleccionado
 if (isset($_POST['depa'])) {
     $depa = $_POST['depa'];
-    $consultaf = "SELECT CONCAT('Cliente:', ' ',clientes.nom_cli,'. ', 'Prodcuto:',' ', productos.nom_p, '.') as nombre, deuda_p.id_dp, deuda_p.cantidad_p, deuda_p.precio_p, deuda_p.notas, deuda_p.abono_p  FROM deuda_p INNER JOIN clientes ON deuda_p.id_clientep = clientes.id_cli INNER JOIN productos ON productos.id_pro = deuda_p.id_p WHERE id_dp ='$depa'";
+    $consultaf = "SELECT CONCAT('Cliente:', ' ',clientes.nom_cli,'. ', 'Prodcuto:',' ', productos.nom_p, '.') as nombre, deuda_p.id_dp, deuda_p.cantidad_p, productos.existencias, deuda_p.concept, deuda_p.precio_p, deuda_p.notas, deuda_p.abono_p  FROM deuda_p INNER JOIN clientes ON deuda_p.id_clientep = clientes.id_cli INNER JOIN productos ON productos.id_pro = deuda_p.id_p WHERE id_dp ='$depa'";
     $tablaf = $conexion->seleccionar($consultaf);
 }
 ?>
 
-<div class="container">
-
-    <form class="row g-3" method="POST">
+<div class="container" style="color:whitesmoke;background-color: rgba(0, 0, 0, .550); box-shadow: 0 4px 5px rgba(10, 2, 1, 55); text-align:left">
+<h1 style="text-align: center;">Modificar Deudores Productos</h1>
+          
+<form class="row g-3" method="POST">
         <div class="col-auto">
-          <h2>Selecciona Una Deuda:</h2>
+       
+        <h3>Selecciona Una Deuda:</h3>
         </div>
+
         <div class="col-auto">
-            <select class="form-select" name="depa" aria-label="Default select example">
+               <select class="form-select" name="depa" aria-label="Default select example">
                 <?php
                 foreach ($tabla as $registro) {
                     $selected = '';
@@ -162,30 +165,103 @@ if (isset($_POST['depa'])) {
             <button type="submit" class="btn btn-primary mb-3">Filtrar</button>
         </div>
 
-        <?php
+       <div class="row">
+       <?php
         // Mostrar los campos dentro del formulario principal
         if (isset($tablaf)) {
             foreach ($tablaf as $registro) {
-                echo "<input type='hidden' name='id_dp' value='$registro->id_dp'> ";
-                echo "<label for='cantidad_p'>cantidad</label>";
-                echo "<input class='form-control' name='cantidad_p' value='$registro->cantidad_p'> ";
-                echo "<label for='notas'>Notas</label>";
+
+
+              echo "<input type='hidden' name='id_dp' value='$registro->id_dp'> ";
+              echo "<div class='col-3 col-lg-12'>";
+              echo "<h3 for='cantidad_c'>Cantidad:</h3>";
+              echo "</div>"; 
+              
+                
+       
+              echo "<div class='col-9 col-lg-12'>";
+              echo "<input class='form-control' name='existencias' value='$registro->existencias'> ";
+              echo "</div>"; 
+                
+       
+
+              echo "<div class='col-2 col-lg-12'>";
+              echo "<h3 for='notas'>Cantidad:</h3>";
+              echo "</div>"; 
+
+              echo "<div class='col-10 col-lg-12'>";
+              echo "<input class='form-control' name='cantidad_p' value='$registro->cantidad_p'> ";
+              echo "</div>"; 
+
+                
+       
+
+                echo "<div class='col-2 col-lg-12'>";
+                echo "<h3 for='notas'>Notas:</h3>";
+                echo "</div>"; 
+
+                echo "<div class='col-10 col-lg-12'>";
                 echo "<input class='form-control' name='notas' value='$registro->notas'> ";
-                echo "<label for='abono_p'>abono</label>";
-                echo "<input class='form-control' name='abono_p' value='$registro->abono_p'> ";
-                echo "<select class='form-control' name='concepto'>";
-echo "<option value='ENCARGO' " . ($registro->estado == 'ENCARGO' ? 'selected' : '') . ">ENCARGO</option>";
-echo "<option value='DEUDA' " . ($registro->estado == 'DEUDA' ? 'selected' : '') . ">DEUDA</option>";
-echo "</select>";
+                echo "</div>"; 
+
+                
+       
+
+                echo "<div class='col-4 col-lg-12'>";
+                echo "<h3 for='notas'>Nuevo Abono:</h3>";
+                echo "</div>"; 
+
+
+                echo "<div class='col-7 col-lg-12'>";
+                echo "<input class='form-control' name='abono_p' > ";
+                echo "</div>"; 
+                
+                
+                echo "<div class='col-4 col-lg-12'>";
+                echo "<h3 for='notas'>Estado Deuda:</h3>";
+                echo "</div>"; 
+
+
+                echo "<div class='col-6 col-lg-12'>";
+                echo "<select class='form-control' name='estado_p'>";
+                echo "<option value='ACTIVO' " . ($registro->estado == 'ACTIVO' ? 'selected' : '') . ">ACTIVO</option>";
+                echo "<option value='CANCELADO' " . ($registro->estado == 'CANCELADO' ? 'selected' : '') . ">CANCELAR</option>";
+                echo "</select>";
+                echo "</div>"; 
+
+                echo "<div class='col-4 col-lg-12'>";
+                echo "<h3 for='notas' style='text-align:center'>Detalles Deuda</h3>";
+                echo "</div>";
 
 
 
-                
-                
-                
+                echo "<div class='col-4 col-lg-3'>";
+                echo "<h3 for='notas'>Precio Carta:</h3>";
+                echo "</div>"; 
+
+                echo "<div class='col-4 col-lg-3'>";
+                echo "<label for='abono_p' value=>$registro->precio_p</label>";
+                echo "</div>"; 
+
+
+    
+                echo "<div class='col-4 col-lg-3'>";
+                echo "<h3 for='notas'>Abono:</h3>";
+                echo "</div>"; 
+              
+
+
+
+                echo "<div class='col-6 col-lg-3'>";
+                echo "<label for='abono_c' value=>$registro->abono_p</label>";
+               echo "</div>"; 
+
+
+             
             }
         }
         ?>
+       </div>
 
         <!-- Botón para enviar los datos al archivo car_rar.php -->
         <div class="col-12">

@@ -22,22 +22,28 @@ try {
     $cantidad_c = $_POST['cantidad_c'];
     $abono_c = $_POST['abono_c'];
     $notas = $_POST['notas'];
-    $concepto = $_POST['concepto'];
+    $estado_c = $_POST['estado_c'];
 
     // Preparar la consulta para actualizar los datos en la base de datos
     $sql = "UPDATE deuda_c SET 
-            cantidad_c = :cantidad,
-            abono_c = :abono,
-            notas = :notas,
-            concepto = :concepto
-            WHERE id_dc = :id";
+    cantidad_c = :cantidad,
+    abono_c = abono_c+:abono_c,
+    notas = :notas,
+    estado_c = :estado_c
+    WHERE id_dc = :id;
+    
+    UPDATE car_rar SET 
+    cantidad = cantidad - :cantidad
+    WHERE id_cr = :id";
+    
 
-    $stmt = $conn->prepare($sql);
-    $stmt->bindParam(':cantidad', $cantidad_c);
-    $stmt->bindParam(':abono', $abono_c);
-    $stmt->bindParam(':notas', $notas);
-    $stmt->bindParam(':concepto', $concepto);
-    $stmt->bindParam(':id', $id_dc);
+$stmt = $conn->prepare($sql);
+$stmt->bindParam(':cantidad', $cantidad_c);
+$stmt->bindParam(':abono_c', $abono_c);
+$stmt->bindParam(':notas', $notas);
+
+$stmt->bindParam(':estado_c', $estado_c);
+$stmt->bindParam(':id', $id_dc);
 
     // Ejecutar la consulta
     if ($stmt->execute()) {
