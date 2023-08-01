@@ -28,6 +28,9 @@ $nombreUsuario = $_SESSION['usuario'];
     <title>Document</title>
     <link rel="stylesheet" href="../../../css/bootstrap.min.css">
     <link rel="stylesheet" href="../../../css/index2.css">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </head>
 <body>
 <style>
@@ -142,7 +145,7 @@ $nombreUsuario = $_SESSION['usuario'];
 
 echo "<br>";
       //carta
-      $consulta = "SELECT CONCAT(cartas.nombre_c, ' ', rareza.rareza) as nombre, car_rar.id_cr FROM workstack.deuda_c inner join car_rar on deuda_c.cr_fk=car_rar.id_cr inner join rareza on car_rar.id_rar=rareza.id_ra inner join cartas on car_rar.id_carar=cartas.id_car;";
+      $consulta = "SELECT CONCAT(cartas.nombre_c,' ', rareza.rareza) as nombre, car_rar.id_cr FROM cartas INNER JOIN car_rar ON cartas.id_car=car_rar.id_carar INNER JOIN rareza ON car_rar.id_rar=rareza.id_ra ORDER BY cartas.nombre_c ASC";
       $tabla = $conexion->seleccionar($consulta);
       echo "<select id='id_cr' name='id_cr' class='form-select'>";
       foreach ($tabla as $row)
@@ -153,27 +156,57 @@ echo "<br>";
       
       
       ?>
+
+
+
+<script>
+  function obtenerCantidadActual() {
+    var id_cr = $("#id_cr").val();
+
+    $.ajax({
+      type: "POST",
+      url: "obtener_cantidad.php",
+      data: {
+        id_cr: id_cr
+      },
+      success: function (data) {
+        $("#cantidad_actual").val(data); // Colocar el resultado en el campo "Cantidad actual"
+      }
+    });
+  }
+
+</script>
+
+
+<br>
+
+<div class="mb-3">
+  <label for="cantidad_c" class="form-label" style="color: white;">Cantidad actual</label>
+  <input type="number" min="1" name="cantidad_c" class="form-control" id="cantidad_actual" readonly required>
+</div>
+
+
       
     <div class="mb-3">
-      <label for="cantidad_c" class="form-label" style="color: white;">cantidad</label>
-      <input type="text" name="cantidad_c" class="form-control" id="exampleFormControlInput1" placeholder="descuento">
+      <label for="cantidad_c" class="form-label" style="color: white;">Cantidad</label>
+      <input type="number" min="1" name="cantidad_c" class="form-control" id="exampleFormControlInput1" required>
     </div>
-    
     
     <div class="mb-3">
-      <label for="abono_c" class="form-label" style="color: white;">Abono</label>
-      <input type="text" name="abono_c" class="form-control" id="exampleFormControlInput1" placeholder="Notas">
-    </div>
+    <label for="abono_c" class="form-label" style="color: white;">Abono</label>
+    <input type="text" name="abono_c" class="form-control" id="exampleFormControlInput1" required pattern="[0-9]+">
+</div>
+
     <div class="mb-3">
       <label for="notas" class="form-label" style="color: white;">Notas</label>
-      <input type="text" name="notas" class="form-control" id="exampleFormControlInput1" placeholder="Notas">
+      <input type="text" name="notas" class="form-control" id="exampleFormControlInput1">
     </div>
     <label style="color: white;" >
-  <input type="radio" name="concepto" value="ENCARGO">ENCARGO
+  <input type="radio" name="concepto" value="ENCARGO" required>ENCARGO
 </label>
 <br>
 <label style="color: white;" >
-  <input type="radio" name="concepto" value="DEUDA">DEUDA
+  <input type="radio" name="concepto" value="DEUDA" required>DEUDA
 </label>
 
     
