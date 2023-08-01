@@ -128,13 +128,16 @@ $conexion = new database();
 $conexion->conectarDB();
 
 // Obtener la lista de departamentos para el filtro
-$consulta = "SELECT CONCAT('Cliente:', ' ',clientes.nom_cli,'. ', 'Carta:',' ', cartas.nombre_c, ' ', rareza.rareza) as nombre, deuda_c.id_dc, deuda_c.precio_c, deuda_c.cantidad_c, deuda_c.precio_c, deuda_c.notas, deuda_c.abono_c,car_rar.cantidad FROM deuda_c INNER JOIN clientes ON deuda_c.id_clientec = clientes.id_cli INNER JOIN car_rar ON car_rar.id_cr = deuda_c.cr_fk inner join cartas on car_rar.id_carar=cartas.id_car inner join rareza on car_rar.id_rar=rareza.id_ra";
+$consulta = "SELECT CONCAT('Cliente:', ' ',clientes.nom_cli,'. ', 'Carta:',' ', cartas.nombre_c, ' ', rareza.rareza) as nombre, deuda_c.id_dc, deuda_c.precio_c,
+ deuda_c.cantidad_c, deuda_c.precio_c, deuda_c.notas, deuda_c.abono_c,car_rar.cantidad FROM deuda_c INNER JOIN clientes ON deuda_c.id_clientec = clientes.id_cli 
+ INNER JOIN car_rar ON car_rar.id_cr = deuda_c.cr_fk inner join cartas on car_rar.id_carar=cartas.id_car inner join rareza on car_rar.id_rar=rareza.id_ra  GROUP BY nombre";
 $tabla = $conexion->seleccionar($consulta);
 
 // Filtrar el departamento seleccionado
 if (isset($_POST['depa'])) {
     $depa = $_POST['depa'];
-    $consultaf = "SELECT CONCAT('Cliente:', ' ',clientes.nom_cli,'. ', 'Carta:',' ', cartas.nombre_c, ' ', rareza.rareza) as nombre, deuda_c.id_dc, deuda_c.precio_c,deuda_c.cantidad_c, deuda_c.precio_c, deuda_c.notas, deuda_c.abono_c,car_rar.cantidad FROM deuda_c INNER JOIN clientes ON deuda_c.id_clientec = clientes.id_cli INNER JOIN car_rar ON car_rar.id_cr = deuda_c.cr_fk inner join cartas on car_rar.id_carar=cartas.id_car inner join rareza on car_rar.id_rar=rareza.id_ra WHERE id_dc ='$depa'";
+    $consultaf = "SELECT CONCAT('Cliente:', ' ',clientes.nom_cli,'. ', 'Carta:',' ', cartas.nombre_c, ' ', rareza.rareza) as nombre, deuda_c.id_dc, deuda_c.precio_c,deuda_c.cantidad_c, deuda_c.precio_c, deuda_c.notas, deuda_c.abono_c,car_rar.cantidad FROM deuda_c INNER JOIN clientes ON deuda_c.id_clientec = clientes.id_cli INNER JOIN car_rar ON car_rar.id_cr = deuda_c.cr_fk 
+    inner join cartas on car_rar.id_carar=cartas.id_car inner join rareza on car_rar.id_rar=rareza.id_ra WHERE id_dc ='$depa' ";
     $tablaf = $conexion->seleccionar($consultaf);
 }
 ?>

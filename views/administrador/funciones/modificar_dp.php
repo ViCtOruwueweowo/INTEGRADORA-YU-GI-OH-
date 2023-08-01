@@ -128,8 +128,13 @@ $conexion = new database();
 $conexion->conectarDB();
 
 // Obtener la lista de departamentos para el filtro
-$consulta = "SELECT CONCAT('Cliente:', ' ',clientes.nom_cli,'. ', 'Prodcuto:',' ', productos.nom_p, '.') as nombre, deuda_p.id_dp, deuda_p.cantidad_p,productos.existencias, deuda_p.concept,deuda_p.precio_p, deuda_p.notas, deuda_p.abono_p FROM deuda_p INNER JOIN clientes ON deuda_p.id_clientep = clientes.id_cli INNER JOIN productos ON productos.id_pro = deuda_p.id_p";
+$consulta = "SELECT CONCAT('Cliente:', ' ',clientes.nom_cli,'. ', 'Prodcuto:',' ', productos.nom_p, '.') as nombre, deuda_p.id_dp, deuda_p.cantidad_p,productos.existencias, deuda_p.concept,deuda_p.precio_p, deuda_p.notas, deuda_p.abono_p 
+            FROM deuda_p 
+            INNER JOIN clientes ON deuda_p.id_clientep = clientes.id_cli 
+            INNER JOIN productos ON productos.id_pro = deuda_p.id_p 
+            GROUP BY nombre";
 $tabla = $conexion->seleccionar($consulta);
+
 
 // Filtrar el departamento seleccionado
 if (isset($_POST['depa'])) {
