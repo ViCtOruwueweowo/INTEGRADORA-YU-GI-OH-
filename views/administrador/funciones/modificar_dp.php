@@ -264,14 +264,21 @@ if (isset($_POST['depa'])) {
 
              
             }
+            //         <!-- Botón para enviar los datos al archivo car_rar.php -->
+
+            echo "        <div class='col-12'>
+            <button type='submit' formaction='update_dp.php' class='btn btn-primary'>Enviar Datos</button>
+        </div>";
+
+        } else {
+          echo "        <div class='col-12'>
+          <button type='submit' formaction='update_dp.php' class='btn btn-primary disabled'>Enviar Datos</button>
+      </div>";
         }
         ?>
        </div>
 
-        <!-- Botón para enviar los datos al archivo car_rar.php -->
-        <div class="col-12">
-            <button type="submit" formaction="update_dp.php" class="btn btn-primary">Enviar Datos</button>
-        </div>
+
     </form>
 </div>
 
