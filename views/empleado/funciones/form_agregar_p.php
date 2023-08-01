@@ -123,12 +123,13 @@ $nombreUsuario = $_SESSION['usuario'];
     </div>
     <div class="col-12">
     <label  class="form-label">Ingresar Existencias Del Producto:</label>
-    <input type="text" class="form-control col-lg-6" id="existencias" name="existencias" placeholder="Ingresar Existencias. . ." required>
+    <input type="number" min="1" class="form-control col-lg-6" id="existencias" name="existencias" placeholder="Ingresar Existencias. . ." required>
     </div>
     <div class="col-12">
-    <label  class="form-label">Ingresar Precio Del Producto:</label>
-    <input type="text" class="form-control col-lg-6" id="precio" name="precio" placeholder="Ingresar Precio. . ." required>
-    </div>
+    <label class="form-label">Ingresar Precio Del Producto:</label>
+    <input type="text" class="form-control col-lg-6" id="precio" name="precio" placeholder="Ingresar Precio. . ." required pattern="[0-9]+(\.[0-9]+)?">
+</div>
+
     <div class="col-12">
     <label  class="form-label">Ingresar Descripcion Del Producto:</label>
     <input type="text" class="form-control col-lg-6" id="notas_prod" name="notas_prod" placeholder="Detalles. . ." required>

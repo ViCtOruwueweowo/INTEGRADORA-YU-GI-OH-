@@ -116,13 +116,13 @@ $conexion = new database();
 $conexion->conectarDB();
 
 // Obtener la lista de departamentos para el filtro
-$consulta = "SELECT CONCAT(cartas.nombre_c, ' ', rareza.rareza) as nombre, car_rar.id_cr, car_rar.cantidad FROM car_rar INNER JOIN cartas ON car_rar.id_carar = cartas.id_car INNER JOIN rareza ON car_rar.id_rar = rareza.id_ra";
+$consulta = "SELECT CONCAT(cartas.nombre_c, ' ', rareza.rareza) as nombre, car_rar.id_cr, car_rar.cantidad FROM car_rar INNER JOIN cartas ON car_rar.id_carar = cartas.id_car INNER JOIN rareza ON car_rar.id_rar = rareza.id_ra ORDER BY cartas.nombre_c ASC";
 $tabla = $conexion->seleccionar($consulta);
 
 // Filtrar el departamento seleccionado
 if (isset($_POST['depa'])) {
     $depa = $_POST['depa'];
-    $consultaf = "SELECT CONCAT(cartas.nombre_c, ' ', rareza.rareza) as nombre, car_rar.id_cr, car_rar.cantidad FROM car_rar INNER JOIN cartas ON car_rar.id_carar = cartas.id_car INNER JOIN rareza ON car_rar.id_rar = rareza.id_ra WHERE id_carar ='$depa'";
+    $consultaf = "SELECT CONCAT(cartas.nombre_c, ' ', rareza.rareza) as nombre, car_rar.id_cr, car_rar.cantidad FROM car_rar INNER JOIN cartas ON car_rar.id_carar = cartas.id_car INNER JOIN rareza ON car_rar.id_rar = rareza.id_ra WHERE id_cr ='$depa' ";
     $tablaf = $conexion->seleccionar($consultaf);
 }
 ?>

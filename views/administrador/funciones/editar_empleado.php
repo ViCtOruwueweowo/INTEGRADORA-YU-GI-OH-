@@ -34,6 +34,7 @@ estado = '$estado'
  where id_usr='$id_usr'";
 if ($conn->query($sql) === TRUE) {
     echo "Datos agregados correctamente";
+    header("refresh:3 ../../administrador/empleados.php");
 } else {
     echo "Error al agregar los datos: " . $conn->error;
 }

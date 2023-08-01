@@ -1,23 +1,3 @@
-<?php
-session_start();
-
-// Verificar si el usuario no ha iniciado sesión
-if (!isset($_SESSION['usuario'])) {
-    echo "Inicia sesión primero por favor :D";
-    header("refresh:5 ../../index.php");  // Redireccionamos al archivo de inicio de sesión
-    exit();
-}
-
-// Verificar si el tipo de usuario no es 1 (Tipo de usuario que puede acceder a esta página, osea el admin)
-if ($_SESSION['tipo_usuario'] !== "1") { 
-      echo "Acceso no autorizado. Por favor, inicia sesión con una cuenta válida.";
-    header("refresh:5 ../../index.php");  // Redireccionamos al archivo de inicio de sesión
-    exit();
-}
-
-$nombreUsuario = $_SESSION['usuario'];
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,6 +7,19 @@ $nombreUsuario = $_SESSION['usuario'];
     <link rel="stylesheet" href="../../../css/index2.css">
     <link rel="stylesheet" href="../../../css/bootstrap.min.css">
     <script src="../../../js/bootstrap.bundle.min.js"></script>
+    <?php
+session_start();
+
+// Verificar si el usuario no ha iniciado sesión
+if (!isset($_SESSION['usuario'])) {
+  echo "Inicia sesión primero por favor :D";
+  header("refresh:2 ../../index.php");  // Redireccionamos al archivo de inicio de sesión
+  exit();
+}
+
+$nombreUsuario = $_SESSION['usuario'];
+?>
+
 </head>
 <body>
 <style>
@@ -124,7 +117,7 @@ $nombreUsuario = $_SESSION['usuario'];
     <hr>
     <form action="update_cliente.php" method="post">
 
-    <label for="id_cr" class="form-label">Agregar cliente:</label>
+    <label for="id_cr" class="form-label" style='color: white;'>Agregar cliente:</label>
     <?php
       include 'date.php';
       $conexion = new Database();
@@ -132,12 +125,12 @@ $nombreUsuario = $_SESSION['usuario'];
       ?>
       
     <div class="mb-3">
-      <label for="nom_cli" class="form-label">Nombre</label>
+      <label for="nom_cli" class="form-label" style='color: white;'>Nombre</label>
       <input type="text" name="nom_cli" class="form-control" id="exampleFormControlInput1" placeholder="Nombre">
     </div>
     
     <div class="mb-3">
-      <label for="tel_cli" class="form-label">Telefono</label>
+      <label for="tel_cli" class="form-label" style='color: white;'>Telefono</label>
       <input type="text" name="tel_cli" class="form-control" id="exampleFormControlInput1" placeholder="Telefono">
     </div>
     

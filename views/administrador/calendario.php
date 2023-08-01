@@ -475,5 +475,3 @@ function EnviarInformacion(accion,objEvento,modal){
 
 </body>
 </html>
-
-
