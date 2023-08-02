@@ -23,8 +23,8 @@ require '../../../config/database.php';
 $db = new Database();
 $con = $db->conectar();
 $sql = $con->prepare
-("SELECT * FROM reporte_actualizacion_acreedor left join clientes
-on reporte_actualizacion_acreedor.registro=clientes.id_cli");
+("SELECT clientes.nom_cli, reporte_actualizacion_acreedor.descuento, reporte_actualizacion_acreedor.upd_descuento, 
+reporte_actualizacion_acreedor.fecha_inicio, reporte_actualizacion_acreedor.fecha_finalizacion FROM reporte_actualizacion_acreedor INNER JOIN acreedor ON reporte_actualizacion_acreedor.registro=acreedor.id_acreedor INNER JOIN clientes ON acreedor.id_clientu=clientes.id_cli;");
 $sql->execute();
 $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
 ?>
