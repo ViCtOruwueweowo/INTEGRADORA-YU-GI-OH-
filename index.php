@@ -1,3 +1,19 @@
+<?php
+require 'config/config.php';
+require 'config/database.php';
+$db = new Database(); 
+$con = $db->conectar();
+$sql = $con->prepare("SELECT DISTINCT cartas.id_car, nombre_c, imagen_c, rareza.rareza,car_rar.p_beto
+FROM cartas
+INNER JOIN car_rar ON cartas.id_car = car_rar.id_carar
+INNER JOIN rareza ON car_rar.id_rar = rareza.id_ra
+WHERE rareza.id_ra >= '4'
+LIMIT 8;
+ ;");
+$sql->execute();
+$resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,9 +27,12 @@
     <!--Contenido De La Cabecera-->
 
     <style>
+        body{
+            background-color: rgba(237,237,237,255);
+        }
   /* Custom CSS for the transparent navigation bar with shadow */
   .navbar {
-    background-color: red !important;
+    background-color: rgba(14,14,14,255)!important;
     box-shadow: 0 10px 6px rgba(0, 0, 0, 0.1);
   }
   /* Adjust the color of the offcanvas menu content */
@@ -55,7 +74,79 @@
       </div>
     </div>
   </nav>
+      <!--Final Contenido De La Cabecera-->
 
-    <!--Final Contenido De La Cabecera-->
+<br>
+<div class="container" style="background-color:#212529;border-radius:10px">
+
+
+      <div class="container">
+      <h3 style="color: white;">Mira Todo Lo Nuevo Que Tenemos:</h3>
+      <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 g-4 ">
+
+        <?php foreach($resultado as $row) { ?>
+        <div class="col">
+        <div class="card shadow-sm " style=" background-color: rgba(0, 0, 0, .550);
+    box-shadow: 0 2px 4px rgba(10, 2, 1, 55);">
+      <?php
+      $id = $row['imagen_c'];
+      $imagePath = "imagenes/productos/" . $id;
+      
+      // Verifica si el archivo existe con varias extensiones
+      $extensionesPermitidas = array('jpg', 'jpeg', 'png', 'webp');
+      $imagenEncontrada = false;
+      foreach ($extensionesPermitidas as $ext) {
+        if (file_exists($imagePath . "." . $ext)) {
+          $imagen = $imagePath . "." . $ext;
+          $imagenEncontrada = true;
+          break;
+        }
+      }
+
+      // Si no se encuentra ninguna imagen, utiliza una imagen predeterminada
+      if (!$imagenEncontrada) {
+        $imagen = "imagenes/no image.png";
+      }
+      ?>
+      <img src="<?php echo $imagen; ?>" class="img-fluid" alt="...">
+            <div class="card-body" >
+              <h6 class="card-title text-center"  style="color:white; font-size:19px; font-family: 'Times New Roman', Times, serif;"><?php echo $row ['nombre_c']; ?></h6>
+              <div  class="d-flex justify-content-between align-items-center">
+              
+  <h6  style="color:white; font-size:15px; "> <?php echo $row ['rareza']; ?></h6>
+  <h6  style="color:white; font-size:15px; "> <?php echo $row ['p_beto']; ?></h6>
+
+              </div>
+
+              </div>
+            
+          </div>
+        </div>
+        <?php }?>   
+    </div>     
+    </div>
+<br>
+<h4 style="text-align: end;color:white">Conoce Mas Acerca De Nuestros Productos:</h4>
+<div class="d-grid gap-2">
+  <button class="btn btn-outline-warning" type="button">Buscar Cartas</button>
+  <button class="btn btn-outline-warning" type="button">Buscar Productos</button>
+</div>
+<br>
+
+<h3 style="color: white;">¿Quienes Somos?</h3>
+    </div>  
+
+
+</div>
+<br>
+<footer class="footer mt-auto py-3 bg-dark">
+<div class="container text-center">
+<span class="text-center" style="color:white">Aplicacion Desarrollada Unicamente Para Fines De Venta Y Distribucion De Menores.</span>
+</div>
+<!--Final Contenido De Cartas--->
+
+
+</div>
+
 </body>
 </html>
