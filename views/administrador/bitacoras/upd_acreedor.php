@@ -23,10 +23,8 @@ require '../../../config/database.php';
 $db = new Database();
 $con = $db->conectar();
 $sql = $con->prepare
-("SELECT * FROM reporte_actualizacion_deuda_p inner join 
-productos on reporte_actualizacion_deuda_p.id=productos.id_pro inner join deuda_p
-on productos.id_pro=deuda_p.id_p INNER JOIN clientes ON deuda_p.id_clientep = clientes.id_cli
-");
+("SELECT * FROM reporte_actualizacion_acreedor left join clientes
+on reporte_actualizacion_acreedor.registro=clientes.id_cli");
 $sql->execute();
 $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
 ?>
@@ -129,32 +127,28 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
 <br>
 <!--Creacion De La Tabla-->
 <div class="container" style="color: white;">
-<h1 class="text-center">Reporte Deuda Productos</h1>
+<h1 class="text-center">Reporte De Acreedores</h1>
 <hr>
 
 <div class="table-responsive">
 <table class="table table-dark table-striped">
 <thead>
     <tr>
-      <th scope="col">Fecha Actualizacion</th>
-      <th scope="col">Deudor</th>
-      <th scope="col">Producto</th>
-      <th scope="col">Precio</th>
-      <th scope="col">Abono</th>
-      <th scope="col">Nuevos Abonos</th>
-      <th scope="col">Estado Deudor</th>
+      <th scope="col">Cliente</th>
+      <th scope="col">Descuento</th>
+      <th scope="col">Nuevo Descuento</th>
+      <th scope="col">Fecha Inicio</th>
+      <th scope="col">Fecha Final</th>
     </tr>
   </thead>
   <tbody>
   <?php foreach($resultado as $fila): ?>
     <tr>
-      <td scope="col" style="color:whitesmoke;"> <?php echo $fila ['fecha_actualizacion'] ?></td>
-      <td style="color:whitesmoke;"><?php echo $fila ['nom_cli'] ?></td>
-      <td style="color:whitesmoke;"><?php echo $fila ['nom_p'] ?></td>
-      <td style="color:whitesmoke;"><?php echo $fila ['precio'] ?></td>
-      <td style="color:whitesmoke;"><?php echo $fila ['abono'] ?></td>
-      <td style="color:whitesmoke;"><?php echo $fila ['upd_abono'] ?></td>
-      <td style="color:whitesmoke;"><?php echo $fila ['upd_estado'] ?></td>
+      <td scope="col" style="color:whitesmoke;"> <?php echo $fila ['nom_cli'] ?></td>
+      <td style="color:whitesmoke;"><?php echo $fila ['descuento'] ?></td>
+      <td style="color:whitesmoke;"><?php echo $fila ['upd_descuento'] ?></td>
+      <td style="color:whitesmoke;"><?php echo $fila ['fecha_inicio'] ?></td>
+      <td style="color:whitesmoke;"><?php echo $fila ['fecha_finalizacion'] ?></td>
 </td>
     </tr>
       <?php endforeach; ?>

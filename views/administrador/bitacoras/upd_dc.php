@@ -24,7 +24,10 @@ $db = new Database();
 $con = $db->conectar();
 $sql = $con->prepare
 ("SELECT * FROM reporteactdeuda_c inner join cartas on
-reporteactdeuda_c.id=cartas.id_car;");
+reporteactdeuda_c.id=cartas.id_car inner join car_rar 
+on cartas.id_car=car_rar.id_carar inner join deuda_c 
+on car_rar.id_cr=deuda_c.cr_fk inner join clientes on
+deuda_c.id_clientec=clientes.id_cli");
 $sql->execute();
 $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
 ?>
@@ -135,6 +138,7 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
 <thead>
     <tr>
       <th scope="col">Fecha Actualizacion</th>
+      <th scope="col">Deudor</th>
       <th scope="col">Carta</th>
       <th scope="col">Cantidad</th>
       <th scope="col">Precio</th>
@@ -147,6 +151,7 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
   <?php foreach($resultado as $fila): ?>
     <tr>
       <td style="color:whitesmoke;"> <?php echo $fila ['fecha_actualizada'] ?></td>
+      <td  style="color:whitesmoke;"> <?php echo $fila ['nom_cli'] ?></td>
       <td  style="color:whitesmoke;"> <?php echo $fila ['nombre_c'] ?></td>
       <td style="color:whitesmoke;"><?php echo $fila ['cantidad'] ?></td>
       <td style="color:whitesmoke;"><?php echo $fila ['precio'] ?></td>

@@ -9,7 +9,7 @@
 </head>
 <body>
 <style>
-        #contendor{
+        .contendor{
             width: 40%;
             margin: auto;
         }
@@ -59,9 +59,19 @@ try {
   </div>   ";
   header("refresh:3 ;../index.php");
 } catch(PDOException $e) {
-    echo "Error al agregar los datos: " . $e->getMessage();
+    echo "<div class='container' id='contenedor'>
+    <div class='alert alert-danger text-center' role='alert'>
+   <h1 style='text-aling:center'>¡Ups!</h1>
+   <br>
+   <div class='spinner-border text-dark' role='status'>
+<span class='visually-hidden'>Loading...</span>
+</div>
+<br>
+   <h6>Algo salio mal, verifica los datos ingresados.</h6>
+  </div>
+  </div>   ";
 }
-
+header("refresh:3 ;../index.php");
 // Cerrar la conexión a la base de datos
 $conn = null;
 ?>

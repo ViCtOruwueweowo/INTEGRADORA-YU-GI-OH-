@@ -181,10 +181,11 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
         <?php } ?>   
     </div>     
     </div>
-    <hr>
-    <h4 class="text-center"  style="color: white;font-size:25px;font-family:'Times New Roman', Times, serif" >Todos Mis Atajos</h4>
+<hr>
+   
+   <div class="row" style="color:whitesmoke;background-color: rgba(0, 0, 0, .550); box-shadow: 0 4px 5px rgba(10, 2, 1, 55);">
+   <h4 class="text-center"  style="color: white;font-size:25px;font-family:'Times New Roman', Times, serif" >Todos Mis Atajos</h4>
     <hr style="border:solid;border-color:white">
-   <div class="row">
     <div class="col-12 col-sm-12 col-lg-6">
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
     <script>

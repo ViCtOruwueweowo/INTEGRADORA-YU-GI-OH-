@@ -178,7 +178,7 @@ echo "</select>";
   <input name="cantidad" type="number" min="1" step="1" class="form-control" id="exampleFormControlInput1" placeholder="Cantidad" required>
 </div>
 <div class="col-12">
-    <button type="submit" value="Enviar" class="btn btn-primary">Guardar Registro</button>
+    <button type="submit" value="Enviar" class="btn btn-outline-warning btn-g">Registrar Rareza</button>
   </div>
     </form>
 </div>

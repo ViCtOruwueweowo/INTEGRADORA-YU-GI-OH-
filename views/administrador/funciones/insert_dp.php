@@ -8,6 +8,16 @@
     <link rel="stylesheet" href="../../../css/index2.css.">
 </head>
 <body>
+<style>
+    .contendor {
+        width: 40%;
+        margin: auto;
+    }
+
+    body {
+        margin-top: 250px;
+    }
+</style>
 <?php
 // Establecer la conexión a la base de datos con PDO
 $servername = "localhost";
@@ -40,14 +50,34 @@ try {
     $stmt->bindParam(':concepto', $concepto);
 
     if ($stmt->execute()) {
-        echo "<div class='alert alert-success'>
-              <h1 class='text-center'>Datos Actualizados Correctamente</h1>";
+        echo "<div class='container' id='contenedor'>
+                <div class='alert alert-success text-center' role='alert'>
+                    <h1>¡Éxito!</h1>
+                    <br>
+                    <div class='spinner-border text-dark' role='status'>
+                        <span class='visually-hidden'>Loading...</span>
+                    </div>
+                    <br>
+                    <h6>¡Todos los cambios fueron realizados de forma exitosa, buen trabajo!</h6>
+                </div>
+            </div>";
         header("refresh:1; ../deudores_productos.php");
     } else {
         echo "Error al agregar los datos";
     }
 } catch (PDOException $e) {
-    die("Error de conexión a la base de datos: " . $e->getMessage());
+    echo "<div class='container' id='contenedor'>
+    <div class='alert alert-danger text-center' role='alert'>
+        <h1>¡Ups!</h1>
+        <br>
+        <div class='spinner-border text-dark' role='status'>
+            <span class='visually-hidden'>Loading...</span>
+        </div>
+        <br>
+        <h6>Algo salió mal, verifica los datos ingresados.</h6>
+    </div>
+</div>";
+header("refresh:1; ../deudores_productos.php");
 }
 
 // Cerrar la conexión a la base de datos (opcional, ya que PDO lo cierra automáticamente al final del script)

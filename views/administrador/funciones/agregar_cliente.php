@@ -112,12 +112,12 @@ $nombreUsuario = $_SESSION['usuario'];
     </div>
   </nav>
 <br>
-<div class="container" style="background-color: rgba(0, 0, 0, .550);">
+<div class="container"style="color:whitesmoke;background-color: rgba(0, 0, 0, .550);
+    box-shadow: 0 4px 5px rgba(10, 2, 1, 55);">
     <h1 class="text-center">Cliente</h1>
     <hr>
     <form action="update_cliente.php" method="post">
 
-    <label for="id_cr" class="form-label" style='color: white;'>Agregar cliente:</label>
     <?php
       include 'date.php';
       $conexion = new Database();

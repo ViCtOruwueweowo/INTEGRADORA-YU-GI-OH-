@@ -121,23 +121,15 @@ $nombreUsuario = $_SESSION['usuario'];
     </div>
   </nav>
 <br>
-<div class="container" style="background-color: rgba(0, 0, 0, .550);">
+<div class="container" style="color:whitesmoke;background-color: rgba(0, 0, 0, .550); box-shadow: 0 4px 5px rgba(10, 2, 1, 55);">
+<h1 style="text-align: center;">Agregar Nuevos Deudores</h1>
     <form action="insert_dp.php" method="post">
 
-    <label for="id_cr" class="form-label" style="color: white;">Seleccionar cliente:</label>
+    <h4>Seleccionar Cliente:</h4>
     <?php
       include 'date.php';
       $conexion = new Database();
       $conexion->conectarDB();
-
-
-
-
-
-
-
-
-      
 
       $consulta = "SELECT clientes.nom_cli as nombre, clientes.id_cli from clientes";
       $tabla = $conexion->seleccionar($consulta);
@@ -148,9 +140,9 @@ $nombreUsuario = $_SESSION['usuario'];
       }
       echo "</select>";
 
-echo "<br>";
 
-echo "<label class='form-label' style='color: white;'>Seleccionar Producto</label>";
+
+echo "<h4>Seleccionar Producto:</h4>";
       //carta
       $consulta = "SELECT productos.nom_p as nombre, productos.id_pro from productos";
       $tabla = $conexion->seleccionar($consulta);
@@ -164,21 +156,21 @@ echo "<label class='form-label' style='color: white;'>Seleccionar Producto</labe
       
       ?>
        
-    <div class="mb-3">
-      <label for="cantidad_p" class="form-label">cantidad</label>
+    <div class="">
+    <h4>Cantidad:</h4>
       <input type="number" min="1" name="cantidad_p" class="form-control" id="exampleFormControlInput1" placeholder="cantidad" required>
     </div>
 
-    <div class="mb-3">
-    <label for="abono_p" class="form-label">Abono</label>
+    <div class="">
+    <h4>Abono:</h4>
     <input type="number" name="abono_p" class="form-control" id="exampleFormControlInput1" placeholder="Abono" pattern="[0-9]+" inputmode="numeric" required
         oninvalid="setCustomValidity('Por favor no dejes vacío este espacio.')"
         oninput="setCustomValidity('')">
 </div>
 
 
-    <div class="mb-3">
-      <label for="notas" class="form-label" style="color: white;">Notas</label>
+    <div class="">
+     <h4>Notas:</h4>
       <input type="text" name="notas" class="form-control" id="exampleFormControlInput1" placeholder="Notas">
     </div>
     <label>
