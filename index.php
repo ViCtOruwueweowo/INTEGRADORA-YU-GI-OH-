@@ -1,85 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-<head> 
+<head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <!--Links-->
-    <link rel="stylesheet" href="css/index.css">
-    <link rel="stylesheet" href="css/estilo.css">
+    <title>Inicio</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
-
-    <script src="js/bootstrap.js">  </script>
+    <script src="js/bootstrap.bundle.min.js"></script>
 </head>
-<style>
-        #contendor{
-            width: 40%;
-            margin: auto;
-        }
-    </style>
 <body>
-<?php
-session_start();
+    <!--Contenido De La Cabecera-->
 
-if (isset($_SESSION['usuario'])) {
-  $nombreUsuario = $_SESSION['usuario'];
+    <style>
+  /* Custom CSS for the transparent navigation bar with shadow */
+  .navbar {
+    background-color: red !important;
+    box-shadow: 0 10px 6px rgba(0, 0, 0, 0.1);
+  }
+  /* Adjust the color of the offcanvas menu content */
+  .offcanvas-header {
+    background-color: #333; /* Change this to your desired color */
+  }
 
-  echo "<div class='container' id='contenedor'>
-  <div class='alert alert-warning text-center' role='alert'>
- <h1 style='text-aling:center'>¡Ups, Parece Ser Que Ya Existe Una Sesion Activo!</h1>
- <br>
- <div class='spinner-border text-dark' role='status'>
-<span class='visually-hidden'>Loading...</span>
-</div>
-<br>
- <h6>Usuario En Linea: $nombreUsuario</h6>
- <a class='btn btn-outline-danger' href='config/cerrarSesion.php'>[Cerrar sesión]</a>
-</div>
-</div>   ";    
-
-    exit();
-}
-?>
-
-  <section class="vh-100">
-    <div class="container-fluid h-custom"> 
-      <div class="row d-flex justify-content-center align-items-center h-100">
-        <div class="col-md-9 col-lg-6 col-xl-5">
-          <img src="img/puto.png"   class="img-fluid" alt="Sample image">
+  /* Set the text color to black */
+  .navbar-dark .navbar-nav .nav-link {
+    color: whitesmoke;
+    font-size: 20px;
+    font-family: 'Times New Roman', Times, serif;
+  }
+</style>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
+    <div class="container-fluid" >
+      <a class="navbar-brand" href="index.php">WorkStack</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2" aria-controls="offcanvasNavbar2" aria-label="Toggle navigation" >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasNavbar2" aria-labelledby="offcanvasNavbar2Label" >
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasNavbar2Label"><b>Mis Atajos</b></h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
-        <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-            <!--Recuerda todo va dentro de un formulario-->
-          <!-- <form action="views/administrador/index.php" method="post"> -->
-          <form action="config/validar_login.php" method="post">
-            <!-- Parte del usuario -->
-            <div class="form-outline mb-4">
-              <input type="text" class="form-control form-control-lg"
-                name="usuario" placeholder="Ingresa tu usuario. . ." required/>
-              <label class="form-label" for="" style="color:red"><b>Usuario</b></label>
-            </div>
-            <!-- Parte de la contraseña -->
-            <div class="form-outline mb-3">
-              <input type="password" class="form-control form-control-lg"
-               name="contraseña"  placeholder="Ingresa tu contraseña. . ." required/>
-              <label class="form-label" for="" style="color:red" ><b>Contraseña</b></label>
-            </div>
-
-            <div class="text-center text-lg-start mt-4 pt-2">
-
-            <input type="submit" class="btn btn-2 btn-outline-danger btn-lg" style="padding-left: 2.5rem; padding-right: 2.5rem;" value="Iniciar sesión"></input>
-
-            </div>
-          </form>
+        <div class="offcanvas-body"  >
+          <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+            <li class="nav-item">
+              <a class="nav-link " aria-current="page" href="cartas.php">Cartas</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link " aria-current="page" href="productos.php">Productos</a>
+            </li> 
+            <li class="nav-item">
+              <a class="nav-link " aria-current="page" href="index2.php">Iniciar</a>
+            </li> 
+          </ul>
         </div>
       </div>
     </div>
-   
-  </section>
+  </nav>
 
+    <!--Final Contenido De La Cabecera-->
 </body>
 </html>
-
-
-
-
