@@ -145,7 +145,7 @@ $nombreUsuario = $_SESSION['usuario'];
     
     <div class="col-12">
         <br>
-    <input type="submit" class="btn btn-primary btn-lg" value="Subir imagen">
+    <input type="submit" class="btn btn-primary btn-lg" value="Guardar">
     </div>
 </div>
 </form>

@@ -5,14 +5,14 @@ session_start();
 // Verificar si el usuario no ha iniciado sesión
 if (!isset($_SESSION['usuario'])) {
     echo "Inicia sesión primero por favor :D";
-    header("refresh:5 ../../index.php");  // Redireccionamos al archivo de inicio de sesión
+    header("refresh:5 ../../../index.php");  // Redireccionamos al archivo de inicio de sesión
     exit();
 }
 
 // Verificar si el tipo de usuario no es 1 (Tipo de usuario que puede acceder a esta página, osea el admin)
 if ($_SESSION['tipo_usuario'] !== "1") { 
       echo "Acceso no autorizado. Por favor, inicia sesión con una cuenta válida.";
-    header("refresh:5 ../../index.php");  // Redireccionamos al archivo de inicio de sesión
+    header("refresh:5 ../../../index.php");  // Redireccionamos al archivo de inicio de sesión
     exit();
 }
 
@@ -110,7 +110,7 @@ $nombreUsuario = $_SESSION['usuario'];
           <?php $nombreUsuario = $_SESSION['usuario']; echo "$nombreUsuario";?>
           </a>
           <ul class="dropdown-menu">
-          <a href="../../config/cerrarSesion.php" class="dropdown-item">Cerrar Sesion</a>
+          <a href="../../../config/cerrarSesion.php" class="dropdown-item">Cerrar Sesion</a>
           </ul>
       </li>
           </ul>
@@ -182,7 +182,7 @@ if (isset($_POST['depa'])) {
                 
                 
                 echo "<div class='col-9 col-lg-12'>";
-                echo "<input class='form-control' name='cantidad_c' value='$registro->cantidad_c'> ";
+                echo "<input type='number' class='form-control' name='cantidad_c' value='$registro->cantidad_c' required readonly> ";
                 echo "</div>"; 
 
                 echo "<div class='col-2 col-lg-12'>";
@@ -190,18 +190,24 @@ if (isset($_POST['depa'])) {
                 echo "</div>"; 
 
                 echo "<div class='col-10 col-lg-12'>";
-                echo "<input class='form-control' name='notas' value='$registro->notas'> ";
+                echo "<input class='form-control' name='notas' value='$registro->notas' required> ";
                 echo "</div>"; 
 
 
+
+
+                
                 echo "<div class='col-4 col-lg-12'>";
                 echo "<h3 for='notas'>Nuevo Abono:</h3>";
-                echo "</div>"; 
-
-
+                echo "</div>";
+                
                 echo "<div class='col-7 col-lg-12'>";
-                echo "<input class='form-control' name='abono_c' > ";
-                echo "</div>"; 
+                echo "<input class='form-control' name='abono_c' oninput='this.value = this.value.replace(/[^0-9.]/g, \"\")'>";
+                echo "</div>";
+            
+                
+                
+
 
 
                 echo "<div class='col-4 col-lg-12'>";
@@ -250,6 +256,21 @@ if (isset($_POST['depa'])) {
              
                 
             }
+
+
+            echo "<script>
+            function validateForm() {
+                var nuevoAbono = document.getElementsByName('abono_c')[0].value;
+                if (nuevoAbono.trim() === '') {
+                    alert('El campo Nuevo Abono no puede estar vacío.');
+                    return false;
+                }
+                return true;
+            }
+            </script>";
+        
+
+
             echo "<div class='col-12'>
             <button type='submit' formaction='editar_dc.php' class='btn btn-primary'>Enviar Datos</button>
         </div>";
@@ -260,6 +281,18 @@ if (isset($_POST['depa'])) {
       </div>";
         }
         ?>
+
+        
+<script>
+function validateForm() {
+    var nuevoAbono = document.getElementsByName('abono_c')[0].value;
+    if (nuevoAbono.trim() === '') {
+        alert('El campo Nuevo Abono no puede estar vacío.');
+        return false;
+    }
+    return true;
+}
+</script>
 
 </div>
 

@@ -28,6 +28,22 @@ $nombreUsuario = $_SESSION['usuario'];
     <link rel="stylesheet" href="../../../css/bootstrap.min.css">
     <link rel="stylesheet" href="../../../css/index2.css">
 <script src="../../../js/bootstrap.bundle.min.js"></script>
+
+
+<script>
+  function verificarFechas() {
+    const fechaInicio = new Date(document.querySelector('input[name="f_inicioacreed"]').value);
+    const fechaFinal = new Date(document.querySelector('input[name="f_finalacreed"]').value);
+
+    if (fechaFinal < fechaInicio) {
+      alert('La fecha final debe ser mayor o igual a la fecha de inicio de crédito.');
+      return false;
+    }
+    return true;
+  }
+</script>
+
+
     <title>Document</title>
 </head>
 <body>
@@ -192,7 +208,7 @@ if (isset($_POST['depa'])) {
                 if (isNaN(inputValue)) {
                 descuentoError.style.display = 'block';
                 } else {
-                descuentoError.style.display = 'none';
+                descuentoError.style.display = 'none'; 
                   }
                 });
                 </script>";
@@ -200,8 +216,14 @@ if (isset($_POST['depa'])) {
                 echo "<label for='f_inicioacreed'>Fecha inicio de credito</label>";
                 echo "<input class='-form-control col-md-6' type='date' name='f_inicioacreed' value='$registro->f_inicioacreed' readonly> ";
 
-                echo "<label for='f_finalacreed'>Fecha final de credito</label>";
-                echo "<input class='-form-control col-md-6' type='date' name='f_finalacreed' value='$registro->f_finalacreed'> ";
+         // Calcular la fecha límite permitida (f_inicioacreed + 1 día)
+         $fechaInicio = new DateTime($registro->f_inicioacreed);
+         $fechaLimite = $fechaInicio->modify('+1 day')->format('Y-m-d');
+ 
+         // Mostrar el campo de fecha con la fecha límite permitida
+         echo "<label for='f_finalacreed'>Fecha final de crédito</label>";
+         echo "<input class='-form-control col-md-6' type='date' min='$fechaLimite' name='f_finalacreed' value='$registro->f_finalacreed'> ";
+ 
                 echo "<label for='notas_ac'>Notas</label>";
                 echo "<input class='form-control' name='notas_ac' value='$registro->notas_ac'> ";
                 

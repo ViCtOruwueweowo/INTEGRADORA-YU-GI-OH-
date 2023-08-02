@@ -169,13 +169,13 @@ if (isset($_POST['depa'])) {
             foreach ($tablaf as $registro) {
                 echo "<input type='hidden' name='id_cr' value='$registro->id_cr'> ";
                 echo "<label for='p_beto'>Precio</label>";
-                echo "<input class='form-control' name='p_beto' value='$registro->p_beto'> ";
+                echo "<input class='form-control' name='p_beto' value='$registro->p_beto' pattern='^[0-9]+(\.[0-9]+)?$' title='Ingrese un número válido' required> ";
                 echo "<label for='p_tcg'>p_tcg</label>";
                 echo "<input class='form-control' name='p_tcg' value='$registro->p_tcg'> ";
                 echo "<label for='p_price'>p_price</label>";
                 echo "<input class='form-control' name='p_price' value='$registro->p_price'> ";
                 echo "<label for='cantidad'>Cantidad</label>";
-                echo "<input class='form-control' name='cantidad'  value='$registro->cantidad'> ";
+                echo "<input type='number' min='1' class='form-control' name='cantidad'  value='$registro->cantidad' required> ";
             }
 
          //   <!-- Botón para enviar los datos al archivo car_rar.php -->

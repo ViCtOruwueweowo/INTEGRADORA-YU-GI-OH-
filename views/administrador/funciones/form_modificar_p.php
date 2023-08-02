@@ -166,11 +166,11 @@ if (isset($_POST['depa'])) {
             foreach ($tablaf as $registro) {
                 echo "<input type='hidden' name='id_pro' value='$registro->id_pro'> ";
                 echo "<label for='existencias'>Existencias</label>";
-                echo "<input class='form-control' name='existencias' value='$registro->existencias'> ";
+                echo "<input type='number' min='0' class='form-control' name='existencias' value='$registro->existencias' required> ";
                 echo "<label for='precio'>Precio</label>";
-                echo "<input class='form-control' name='precio' value='$registro->precio'> ";
+                echo "<input class='form-control' name='precio' value='$registro->precio' pattern='^[0-9]+(\.[0-9]+)?$' title='Ingrese un número válido' oninput='this.value = this.value.replace(/[^0-9.]/g, \"\");' required> ";
                 echo "<label for='notas_prod'>Notas</label>";
-                echo "<input class='form-control' name='notas_prod' value='$registro->notas_prod'> ";
+                echo "<input class='form-control' name='notas_prod' value='$registro->notas_prod' required> ";
                 
                 
             }
