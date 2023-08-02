@@ -28,6 +28,22 @@ $nombreUsuario = $_SESSION['usuario'];
     <link rel="stylesheet" href="../../../css/bootstrap.min.css">
     <link rel="stylesheet" href="../../../css/index2.css">
 <script src="../../../js/bootstrap.bundle.min.js"></script>
+
+
+<script>
+  function verificarFechas() {
+    const fechaInicio = new Date(document.querySelector('input[name="f_inicioacreed"]').value);
+    const fechaFinal = new Date(document.querySelector('input[name="f_finalacreed"]').value);
+
+    if (fechaFinal < fechaInicio) {
+      alert('La fecha final debe ser mayor o igual a la fecha de inicio de crédito.');
+      return false;
+    }
+    return true;
+  }
+</script>
+
+
     <title>Document</title>
 </head>
 <body>
@@ -48,10 +64,15 @@ $nombreUsuario = $_SESSION['usuario'];
     font-size: 20px;
     font-family: 'Times New Roman', Times, serif;
   }
+
 </style>
+    </head>
+    <body>
+    
     <header>
   <!-- Fixed navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
     <div class="container-fluid">
       <a class="navbar-brand" href="../index.php">WorkStack</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2" aria-controls="offcanvasNavbar2" aria-label="Toggle navigation">
@@ -102,6 +123,8 @@ $nombreUsuario = $_SESSION['usuario'];
             <li><a class="dropdown-item" href="../bitacoras/upd_productos.php"><b>Actualizaciones En Productos</b></a></li>
             <li><a class="dropdown-item" href="../bitacoras/upd_dc.php"><b>Reporte Deuda Cartas</b></a></li>
             <li><a class="dropdown-item" href="../bitacoras/upd_dp.php"><b>Reporte Deuda Productos</b></a></li>
+            <li><a class="dropdown-item" href="../bitacoras/upd_dp.php"><b>Reporte Acreedores</b></a></li>
+
           </ul>
         </li>
 
@@ -192,7 +215,7 @@ if (isset($_POST['depa'])) {
                 if (isNaN(inputValue)) {
                 descuentoError.style.display = 'block';
                 } else {
-                descuentoError.style.display = 'none';
+                descuentoError.style.display = 'none'; 
                   }
                 });
                 </script>";
@@ -200,8 +223,14 @@ if (isset($_POST['depa'])) {
                 echo "<label for='f_inicioacreed'>Fecha inicio de credito</label>";
                 echo "<input class='-form-control col-md-6' type='date' name='f_inicioacreed' value='$registro->f_inicioacreed' readonly> ";
 
-                echo "<label for='f_finalacreed'>Fecha final de credito</label>";
-                echo "<input class='-form-control col-md-6' type='date' name='f_finalacreed' value='$registro->f_finalacreed'> ";
+         // Calcular la fecha límite permitida (f_inicioacreed + 1 día)
+         $fechaInicio = new DateTime($registro->f_inicioacreed);
+         $fechaLimite = $fechaInicio->modify('+1 day')->format('Y-m-d');
+ 
+         // Mostrar el campo de fecha con la fecha límite permitida
+         echo "<label for='f_finalacreed'>Fecha final de crédito</label>";
+         echo "<input class='-form-control col-md-6' type='date' min='$fechaLimite' name='f_finalacreed' value='$registro->f_finalacreed'> ";
+ 
                 echo "<label for='notas_ac'>Notas</label>";
                 echo "<input class='form-control' name='notas_ac' value='$registro->notas_ac'> ";
                 

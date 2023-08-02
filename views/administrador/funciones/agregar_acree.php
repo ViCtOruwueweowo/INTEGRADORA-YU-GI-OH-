@@ -29,6 +29,19 @@ $nombreUsuario = $_SESSION['usuario'];
     <link rel="stylesheet" href="../../../css/bootstrap.min.css">
     <script src="../../../js/bootstrap.bundle.min.js"></script>
     <title>Document</title>
+
+
+    <script>
+        // Función para obtener la fecha máxima permitida (fecha actual más 1 año)
+        function obtenerFechaMaxima() {
+            const fechaActual = new Date();
+            fechaActual.setFullYear(fechaActual.getFullYear() + 1); // Añadir 1 año a la fecha actual
+            const fechaMaxima = fechaActual.toISOString().split('T')[0]; // Formato YYYY-MM-DD
+            return fechaMaxima;
+        }
+    </script>
+
+
 </head>
 <body>
 <style>
@@ -48,10 +61,15 @@ $nombreUsuario = $_SESSION['usuario'];
     font-size: 20px;
     font-family: 'Times New Roman', Times, serif;
   }
+
 </style>
+    </head>
+    <body>
+    
     <header>
   <!-- Fixed navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
     <div class="container-fluid">
       <a class="navbar-brand" href="../index.php">WorkStack</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2" aria-controls="offcanvasNavbar2" aria-label="Toggle navigation">
@@ -102,6 +120,8 @@ $nombreUsuario = $_SESSION['usuario'];
             <li><a class="dropdown-item" href="../bitacoras/upd_productos.php"><b>Actualizaciones En Productos</b></a></li>
             <li><a class="dropdown-item" href="../bitacoras/upd_dc.php"><b>Reporte Deuda Cartas</b></a></li>
             <li><a class="dropdown-item" href="../bitacoras/upd_dp.php"><b>Reporte Deuda Productos</b></a></li>
+            <li><a class="dropdown-item" href="../bitacoras/upd_dp.php"><b>Reporte Acreedores</b></a></li>
+
           </ul>
         </li>
 
@@ -110,7 +130,7 @@ $nombreUsuario = $_SESSION['usuario'];
           <?php $nombreUsuario = $_SESSION['usuario']; echo "$nombreUsuario";?>
           </a>
           <ul class="dropdown-menu">
-          <a href="../../../config/cerrarSesion.php" class="dropdown-item">Cerrar Sesion</a>
+          <a href="../../config/cerrarSesion.php" class="dropdown-item">Cerrar Sesion</a>
           </ul>
       </li>
           </ul>
@@ -171,6 +191,13 @@ $nombreUsuario = $_SESSION['usuario'];
   ?>
   <input type="date" name="f_finalacreed" class="form-control" min="<?= $fechaActual ?>" placeholder="Fecha final" required>
 </div>
+
+<script>
+        // Establecer la fecha máxima permitida en el campo de entrada
+        const fechaFinalInput = document.querySelector('input[name="f_finalacreed"]');
+        fechaFinalInput.max = obtenerFechaMaxima();
+    </script>
+
     <div class="mb-3">
       <label for="notas_ac" class="form-label" style="color: white;">Notas</label>
       <input type="text" name="notas_ac" class="form-control" id="exampleFormControlInput1" placeholder="Notas">

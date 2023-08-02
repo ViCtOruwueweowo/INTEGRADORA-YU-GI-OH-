@@ -46,7 +46,7 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
     <script src="../../js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-<!----><style>
+<style>
   /* Custom CSS for the transparent navigation bar with shadow */
   .navbar {
     background-color: transparent !important;
@@ -65,24 +65,24 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
   }
 </style>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
-    <div class="container-fluid">
+    <div class="container-fluid" >
       <a class="navbar-brand" href="index.php">WorkStack</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2" aria-controls="offcanvasNavbar2" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2" aria-controls="offcanvasNavbar2" aria-label="Toggle navigation" >
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasNavbar2" aria-labelledby="offcanvasNavbar2Label">
+      <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasNavbar2" aria-labelledby="offcanvasNavbar2Label" >
         <div class="offcanvas-header">
           <h5 class="offcanvas-title" id="offcanvasNavbar2Label"><b>Mis Atajos</b></h5>
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
-        <div class="offcanvas-body">
-          <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+        <div class="offcanvas-body"  >
+          <ul class="navbar-nav justify-content-right flex-grow-1 pe-3">
             <li class="nav-item">
               <a class="nav-link " aria-current="page" href="calendario.php"><b>Calendario</b></a>
             </li>
             <li class="nav-item">
               <a class="nav-link " aria-current="page" href="empleados.php"><b>Empleados</b></a>
-            </li>
+            </li> 
             <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             <b>Inventario</b>
@@ -102,6 +102,8 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
             <li><a class="dropdown-item" href="acreedores.php"><b>Mis Acreedores</b></a></li>
             <li><a class="dropdown-item" href="deudores_cartas.php"><b>Mis Deudores Cartas</b></a></li>
             <li><a class="dropdown-item" href="deudores_productos.php"><b>Mis Deudores Productos</b></a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="funciones/agregar_cliente.php">Agregar Cliente</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
@@ -113,20 +115,22 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
             <li><a class="dropdown-item" href="bitacoras/upd_productos.php"><b>Actualizaciones En Productos</b></a></li>
             <li><a class="dropdown-item" href="bitacoras/upd_dc.php"><b>Reporte Deuda Cartas</b></a></li>
             <li><a class="dropdown-item" href="bitacoras/upd_dp.php"><b>Reporte Deuda Productos</b></a></li>
+            <li><a class="dropdown-item" href="bitacoras/upd_acreedor.php"><b>Reporte Acreedores</b></a></li>
+
           </ul>
         </li>
-        <li class="nav-item dropdown">
+        <li class="nav-item dropdown responsive">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
           <?php $nombreUsuario = $_SESSION['usuario']; echo "$nombreUsuario";?>
           </a>
-          <ul class="dropdown-menu">
-          <a href="../../config/cerrarSesion.php" class="dropdown-item">Cerrar Sesion</a>
+          <ul class="dropdown-menu dropdown-responsive">
+          <a href="../../config/cerrarSesion.php" class="dropdown-item dropdown-responsive">Cerrar Sesion</a>
           </ul>
       </li>
           </ul>
         </div>
       </div>
-    </div> 
+    </div>
   </nav>
 <!--FIN DEL NAVEGADOR POR AMOR DE DIOS-->
 <br>

@@ -50,10 +50,15 @@ $nombreUsuario = $_SESSION['usuario'];
     font-size: 20px;
     font-family: 'Times New Roman', Times, serif;
   }
+
 </style>
+    </head>
+    <body>
+    
     <header>
   <!-- Fixed navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
     <div class="container-fluid">
       <a class="navbar-brand" href="../index.php">WorkStack</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2" aria-controls="offcanvasNavbar2" aria-label="Toggle navigation">
@@ -104,6 +109,8 @@ $nombreUsuario = $_SESSION['usuario'];
             <li><a class="dropdown-item" href="../bitacoras/upd_productos.php"><b>Actualizaciones En Productos</b></a></li>
             <li><a class="dropdown-item" href="../bitacoras/upd_dc.php"><b>Reporte Deuda Cartas</b></a></li>
             <li><a class="dropdown-item" href="../bitacoras/upd_dp.php"><b>Reporte Deuda Productos</b></a></li>
+            <li><a class="dropdown-item" href="../bitacoras/upd_dp.php"><b>Reporte Acreedores</b></a></li>
+
           </ul>
         </li>
 
@@ -112,7 +119,7 @@ $nombreUsuario = $_SESSION['usuario'];
           <?php $nombreUsuario = $_SESSION['usuario']; echo "$nombreUsuario";?>
           </a>
           <ul class="dropdown-menu">
-          <a href="../../../config/cerrarSesion.php" class="dropdown-item">Cerrar Sesion</a>
+          <a href="../../config/cerrarSesion.php" class="dropdown-item">Cerrar Sesion</a>
           </ul>
       </li>
           </ul>
@@ -124,10 +131,12 @@ $nombreUsuario = $_SESSION['usuario'];
   </nav>
 
 <br>
-<div class="container" style="background-color: rgba(0, 0, 0, .550);">
-    <form action="insert_dc.php" method="post">
+<div class="container" style="color:whitesmoke;background-color: rgba(0, 0, 0, .550); box-shadow: 0 4px 5px rgba(10, 2, 1, 55); text-align:left">
+<h1 style="text-align: center;">Agregar Nuevo Deudor</h1>
 
-    <label for="id_cr" class="form-label" style="color: white;">Seleccionar cliente:</label>
+<form action="insert_dc.php" method="post">
+
+<h4>Seleccionar Cliente:</h4>
     <?php
       include 'date.php';
       $conexion = new Database();
@@ -141,9 +150,7 @@ $nombreUsuario = $_SESSION['usuario'];
           echo "<option name='id_cli' value='".$row->id_cli."'>".$row->nombre."</option>";
       }
       echo "</select> ";
-      echo "<div style='color: white;'>Selecciona Una Carta:</div>";
-
-echo "<br>";
+      echo "<h4 style='color: white;'>Selecciona Carta:</h4>";
       //carta
       $consulta = "SELECT CONCAT(cartas.nombre_c,' ', rareza.rareza) as nombre, car_rar.id_cr FROM cartas INNER JOIN car_rar ON cartas.id_car=car_rar.id_carar INNER JOIN rareza ON car_rar.id_rar=rareza.id_ra ORDER BY cartas.nombre_c ASC";
       $tabla = $conexion->seleccionar($consulta);
@@ -181,32 +188,30 @@ echo "<br>";
 <br>
 
 <div class="mb-3">
-  <label for="cantidad_c" class="form-label" style="color: white;">Cantidad actual</label>
+<h4>Cantidad En Stock:</h4>
   <input type="number" min="1" name="cantidad_c" class="form-control" id="cantidad_actual" readonly required>
 </div>
 
 
       
     <div class="mb-3">
-      <label for="cantidad_c" class="form-label" style="color: white;">Cantidad</label>
+    <h4>Cantidad Solicitada:</h4>     
       <input type="number" min="1" name="cantidad_c" class="form-control" id="exampleFormControlInput1" required>
     </div>
     
     <div class="mb-3">
-    <label for="abono_c" class="form-label" style="color: white;">Abono</label>
-    <input type="text" name="abono_c" class="form-control" id="exampleFormControlInput1" required pattern="[0-9]+">
+    <h4>Abono:</h4>     <input type="text" name="abono_c" class="form-control" id="exampleFormControlInput1" required pattern="[0-9]+">
 </div>
 
     <div class="mb-3">
-      <label for="notas" class="form-label" style="color: white;">Notas</label>
-      <input type="text" name="notas" class="form-control" id="exampleFormControlInput1">
+    <h4>Notas:</h4>       <input type="text" name="notas" class="form-control" id="exampleFormControlInput1">
     </div>
     <label style="color: white;" >
-  <input type="radio" name="concepto" value="ENCARGO" required>ENCARGO
+  <input type="radio" name="concepto" value="ENCARGO" required>Encargo
 </label>
 <br>
 <label style="color: white;" >
-  <input type="radio" name="concepto" value="DEUDA" required>DEUDA
+  <input type="radio" name="concepto" value="DEUDA" required>Deuda
 </label>
 
     

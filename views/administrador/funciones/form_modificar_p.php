@@ -48,10 +48,15 @@ $nombreUsuario = $_SESSION['usuario'];
     font-size: 20px;
     font-family: 'Times New Roman', Times, serif;
   }
+
 </style>
+    </head>
+    <body>
+    
     <header>
   <!-- Fixed navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
     <div class="container-fluid">
       <a class="navbar-brand" href="../index.php">WorkStack</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2" aria-controls="offcanvasNavbar2" aria-label="Toggle navigation">
@@ -102,6 +107,8 @@ $nombreUsuario = $_SESSION['usuario'];
             <li><a class="dropdown-item" href="../bitacoras/upd_productos.php"><b>Actualizaciones En Productos</b></a></li>
             <li><a class="dropdown-item" href="../bitacoras/upd_dc.php"><b>Reporte Deuda Cartas</b></a></li>
             <li><a class="dropdown-item" href="../bitacoras/upd_dp.php"><b>Reporte Deuda Productos</b></a></li>
+            <li><a class="dropdown-item" href="../bitacoras/upd_dp.php"><b>Reporte Acreedores</b></a></li>
+
           </ul>
         </li>
 
@@ -110,7 +117,7 @@ $nombreUsuario = $_SESSION['usuario'];
           <?php $nombreUsuario = $_SESSION['usuario']; echo "$nombreUsuario";?>
           </a>
           <ul class="dropdown-menu">
-          <a href="../../../config/cerrarSesion.php" class="dropdown-item">Cerrar Sesion</a>
+          <a href="../../config/cerrarSesion.php" class="dropdown-item">Cerrar Sesion</a>
           </ul>
       </li>
           </ul>
@@ -166,11 +173,11 @@ if (isset($_POST['depa'])) {
             foreach ($tablaf as $registro) {
                 echo "<input type='hidden' name='id_pro' value='$registro->id_pro'> ";
                 echo "<label for='existencias'>Existencias</label>";
-                echo "<input class='form-control' name='existencias' value='$registro->existencias'> ";
+                echo "<input type='number' min='0' class='form-control' name='existencias' value='$registro->existencias' required> ";
                 echo "<label for='precio'>Precio</label>";
-                echo "<input class='form-control' name='precio' value='$registro->precio'> ";
+                echo "<input class='form-control' name='precio' value='$registro->precio' pattern='^[0-9]+(\.[0-9]+)?$' title='Ingrese un número válido' oninput='this.value = this.value.replace(/[^0-9.]/g, \"\");' required> ";
                 echo "<label for='notas_prod'>Notas</label>";
-                echo "<input class='form-control' name='notas_prod' value='$registro->notas_prod'> ";
+                echo "<input class='form-control' name='notas_prod' value='$registro->notas_prod' required> ";
                 
                 
             }

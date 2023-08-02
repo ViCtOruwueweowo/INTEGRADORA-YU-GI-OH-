@@ -133,6 +133,7 @@ $nombreUsuario = $_SESSION['usuario'];
             <li><a class="dropdown-item" href="bitacoras/upd_productos.php"><b>Actualizaciones En Productos</b></a></li>
             <li><a class="dropdown-item" href="bitacoras/upd_dc.php"><b>Reporte Deuda Cartas</b></a></li>
             <li><a class="dropdown-item" href="bitacoras/upd_dp.php"><b>Reporte Deuda Productos</b></a></li>
+            <li><a class="dropdown-item" href="bitacoras/upd_acreedores.php"><b>Reporte Acreedores</b></a></li>
           </ul>
         </li>
         <li class="nav-item dropdown responsive">

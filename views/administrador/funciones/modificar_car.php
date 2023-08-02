@@ -50,8 +50,15 @@ $nombreUsuario = $_SESSION['usuario'];
     font-size: 20px;
     font-family: 'Times New Roman', Times, serif;
   }
+
 </style>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
+    </head>
+    <body>
+    
+    <header>
+  <!-- Fixed navbar -->
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
     <div class="container-fluid">
       <a class="navbar-brand" href="../index.php">WorkStack</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2" aria-controls="offcanvasNavbar2" aria-label="Toggle navigation">
@@ -102,6 +109,8 @@ $nombreUsuario = $_SESSION['usuario'];
             <li><a class="dropdown-item" href="../bitacoras/upd_productos.php"><b>Actualizaciones En Productos</b></a></li>
             <li><a class="dropdown-item" href="../bitacoras/upd_dc.php"><b>Reporte Deuda Cartas</b></a></li>
             <li><a class="dropdown-item" href="../bitacoras/upd_dp.php"><b>Reporte Deuda Productos</b></a></li>
+            <li><a class="dropdown-item" href="../bitacoras/upd_dp.php"><b>Reporte Acreedores</b></a></li>
+
           </ul>
         </li>
 
@@ -110,7 +119,7 @@ $nombreUsuario = $_SESSION['usuario'];
           <?php $nombreUsuario = $_SESSION['usuario']; echo "$nombreUsuario";?>
           </a>
           <ul class="dropdown-menu">
-          <a href="../../../config/cerrarSesion.php" class="dropdown-item">Cerrar Sesion</a>
+          <a href="../../config/cerrarSesion.php" class="dropdown-item">Cerrar Sesion</a>
           </ul>
       </li>
           </ul>
@@ -120,7 +129,6 @@ $nombreUsuario = $_SESSION['usuario'];
       </div>
     </div>
   </nav>
-
 
 <?php
 include 'date.php';
@@ -169,13 +177,13 @@ if (isset($_POST['depa'])) {
             foreach ($tablaf as $registro) {
                 echo "<input type='hidden' name='id_cr' value='$registro->id_cr'> ";
                 echo "<label for='p_beto'>Precio</label>";
-                echo "<input class='form-control' name='p_beto' value='$registro->p_beto'> ";
+                echo "<input class='form-control' name='p_beto' value='$registro->p_beto' pattern='^[0-9]+(\.[0-9]+)?$' title='Ingrese un número válido' required> ";
                 echo "<label for='p_tcg'>p_tcg</label>";
                 echo "<input class='form-control' name='p_tcg' value='$registro->p_tcg'> ";
                 echo "<label for='p_price'>p_price</label>";
                 echo "<input class='form-control' name='p_price' value='$registro->p_price'> ";
                 echo "<label for='cantidad'>Cantidad</label>";
-                echo "<input class='form-control' name='cantidad'  value='$registro->cantidad'> ";
+                echo "<input type='number' min='1' class='form-control' name='cantidad'  value='$registro->cantidad' required> ";
             }
 
          //   <!-- Botón para enviar los datos al archivo car_rar.php -->

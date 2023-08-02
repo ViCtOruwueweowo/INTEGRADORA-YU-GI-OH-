@@ -48,10 +48,15 @@ $nombreUsuario = $_SESSION['usuario'];
     font-size: 20px;
     font-family: 'Times New Roman', Times, serif;
   }
+
 </style>
+    </head>
+    <body>
+    
     <header>
   <!-- Fixed navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
     <div class="container-fluid">
       <a class="navbar-brand" href="../index.php">WorkStack</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2" aria-controls="offcanvasNavbar2" aria-label="Toggle navigation">
@@ -102,6 +107,8 @@ $nombreUsuario = $_SESSION['usuario'];
             <li><a class="dropdown-item" href="../bitacoras/upd_productos.php"><b>Actualizaciones En Productos</b></a></li>
             <li><a class="dropdown-item" href="../bitacoras/upd_dc.php"><b>Reporte Deuda Cartas</b></a></li>
             <li><a class="dropdown-item" href="../bitacoras/upd_dp.php"><b>Reporte Deuda Productos</b></a></li>
+            <li><a class="dropdown-item" href="../bitacoras/upd_dp.php"><b>Reporte Acreedores</b></a></li>
+
           </ul>
         </li>
 
@@ -177,16 +184,7 @@ if (isset($_POST['depa'])) {
             foreach ($tablaf as $registro) {
 
 
-              echo "<input type='hidden' name='id_dp' value='$registro->id_dp'> ";
-              echo "<div class='col-3 col-lg-12'>";
-              echo "<h3 for='cantidad_c'>Cantidad:</h3>";
-              echo "</div>"; 
-              
-                
-       
-              echo "<div class='col-9 col-lg-12'>";
-              echo "<input class='form-control' name='existencias' value='$registro->existencias'> ";
-              echo "</div>"; 
+         
                 
        
 
@@ -195,7 +193,7 @@ if (isset($_POST['depa'])) {
               echo "</div>"; 
 
               echo "<div class='col-10 col-lg-12'>";
-              echo "<input class='form-control' name='cantidad_p' value='$registro->cantidad_p'> ";
+              echo "<input type='number' min='0' class='form-control' name='cantidad_p' value='$registro->cantidad_p' required> ";
               echo "</div>"; 
 
                 
@@ -206,7 +204,7 @@ if (isset($_POST['depa'])) {
                 echo "</div>"; 
 
                 echo "<div class='col-10 col-lg-12'>";
-                echo "<input class='form-control' name='notas' value='$registro->notas'> ";
+                echo "<input class='form-control' name='notas' value='$registro->notas' required> ";
                 echo "</div>"; 
 
                 
@@ -214,12 +212,11 @@ if (isset($_POST['depa'])) {
 
                 echo "<div class='col-4 col-lg-12'>";
                 echo "<h3 for='notas'>Nuevo Abono:</h3>";
-                echo "</div>"; 
-
-
+                echo "</div>";
+                
                 echo "<div class='col-7 col-lg-12'>";
-                echo "<input class='form-control' name='abono_p' > ";
-                echo "</div>"; 
+                echo "<input class='form-control' min='1' name='abono_p' type='text' pattern='[0-9]+' required>";
+                echo "</div>";
                 
                 
                 echo "<div class='col-4 col-lg-12'>";
@@ -228,7 +225,7 @@ if (isset($_POST['depa'])) {
 
 
                 echo "<div class='col-6 col-lg-12'>";
-                echo "<select class='form-control' name='estado_p'>";
+                echo "<select class='form-control' name='estado_p' >";
                 echo "<option value='ACTIVO' " . ($registro->estado == 'ACTIVO' ? 'selected' : '') . ">ACTIVO</option>";
                 echo "<option value='CANCELADO' " . ($registro->estado == 'CANCELADO' ? 'selected' : '') . ">CANCELAR</option>";
                 echo "</select>";

@@ -71,7 +71,7 @@ try {
   </div>
   </div>   ";
 }
-header("refresh:3 ;../index.php");
+header("refresh:3 ;agregar_cliente.php");
 // Cerrar la conexión a la base de datos
 $conn = null;
 ?>

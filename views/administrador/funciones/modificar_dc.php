@@ -5,14 +5,14 @@ session_start();
 // Verificar si el usuario no ha iniciado sesión
 if (!isset($_SESSION['usuario'])) {
     echo "Inicia sesión primero por favor :D";
-    header("refresh:5 ../../index.php");  // Redireccionamos al archivo de inicio de sesión
+    header("refresh:5 ../../../index.php");  // Redireccionamos al archivo de inicio de sesión
     exit();
 }
 
 // Verificar si el tipo de usuario no es 1 (Tipo de usuario que puede acceder a esta página, osea el admin)
 if ($_SESSION['tipo_usuario'] !== "1") { 
       echo "Acceso no autorizado. Por favor, inicia sesión con una cuenta válida.";
-    header("refresh:5 ../../index.php");  // Redireccionamos al archivo de inicio de sesión
+    header("refresh:5 ../../../index.php");  // Redireccionamos al archivo de inicio de sesión
     exit();
 }
 
@@ -48,10 +48,15 @@ $nombreUsuario = $_SESSION['usuario'];
     font-size: 20px;
     font-family: 'Times New Roman', Times, serif;
   }
+
 </style>
+    </head>
+    <body>
+    
     <header>
   <!-- Fixed navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
     <div class="container-fluid">
       <a class="navbar-brand" href="../index.php">WorkStack</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2" aria-controls="offcanvasNavbar2" aria-label="Toggle navigation">
@@ -102,6 +107,8 @@ $nombreUsuario = $_SESSION['usuario'];
             <li><a class="dropdown-item" href="../bitacoras/upd_productos.php"><b>Actualizaciones En Productos</b></a></li>
             <li><a class="dropdown-item" href="../bitacoras/upd_dc.php"><b>Reporte Deuda Cartas</b></a></li>
             <li><a class="dropdown-item" href="../bitacoras/upd_dp.php"><b>Reporte Deuda Productos</b></a></li>
+            <li><a class="dropdown-item" href="../bitacoras/upd_dp.php"><b>Reporte Acreedores</b></a></li>
+
           </ul>
         </li>
 
@@ -182,7 +189,7 @@ if (isset($_POST['depa'])) {
                 
                 
                 echo "<div class='col-9 col-lg-12'>";
-                echo "<input class='form-control' name='cantidad_c' value='$registro->cantidad_c'> ";
+                echo "<input type='number' class='form-control' name='cantidad_c' value='$registro->cantidad_c' required readonly> ";
                 echo "</div>"; 
 
                 echo "<div class='col-2 col-lg-12'>";
@@ -190,18 +197,24 @@ if (isset($_POST['depa'])) {
                 echo "</div>"; 
 
                 echo "<div class='col-10 col-lg-12'>";
-                echo "<input class='form-control' name='notas' value='$registro->notas'> ";
+                echo "<input class='form-control' name='notas' value='$registro->notas' required> ";
                 echo "</div>"; 
 
 
+
+
+                
                 echo "<div class='col-4 col-lg-12'>";
                 echo "<h3 for='notas'>Nuevo Abono:</h3>";
-                echo "</div>"; 
-
-
+                echo "</div>";
+                
                 echo "<div class='col-7 col-lg-12'>";
-                echo "<input class='form-control' name='abono_c' > ";
-                echo "</div>"; 
+                echo "<input class='form-control' name='abono_c' oninput='this.value = this.value.replace(/[^0-9.]/g, \"\")'>";
+                echo "</div>";
+            
+                
+                
+
 
 
                 echo "<div class='col-4 col-lg-12'>";
@@ -250,6 +263,21 @@ if (isset($_POST['depa'])) {
              
                 
             }
+
+
+            echo "<script>
+            function validateForm() {
+                var nuevoAbono = document.getElementsByName('abono_c')[0].value;
+                if (nuevoAbono.trim() === '') {
+                    alert('El campo Nuevo Abono no puede estar vacío.');
+                    return false;
+                }
+                return true;
+            }
+            </script>";
+        
+
+
             echo "<div class='col-12'>
             <button type='submit' formaction='editar_dc.php' class='btn btn-primary'>Enviar Datos</button>
         </div>";
@@ -260,6 +288,18 @@ if (isset($_POST['depa'])) {
       </div>";
         }
         ?>
+
+        
+<script>
+function validateForm() {
+    var nuevoAbono = document.getElementsByName('abono_c')[0].value;
+    if (nuevoAbono.trim() === '') {
+        alert('El campo Nuevo Abono no puede estar vacío.');
+        return false;
+    }
+    return true;
+}
+</script>
 
 </div>
 
