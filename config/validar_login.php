@@ -22,7 +22,7 @@ if($_POST)
 {
     require('database.php');
     $u = $_POST['usuario'];
-    $p = $_POST['contraseña'];
+    $p = $_POST['password'];
 
     $conexion = new Database();
     $pdo = $conexion->conectar();

@@ -9,7 +9,6 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/moment.min.js"></script>
     <link rel="stylesheet" href="../../css/bootstrap.min.css">
-    <link rel="stylesheet" href="../../css/index3.css">
 
     <!--  Full Calendar -->
     <link rel="stylesheet" href="css/fullcalendar.min.css">
@@ -19,24 +18,8 @@
     <link rel="stylesheet" href="css/bootstrap-clockpicker.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <style>
-  /* Custom CSS for the transparent navigation bar with shadow */
-  .navbar {
-    background-color: transparent !important;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  /* Adjust the color of the offcanvas menu content */
-  .offcanvas-header {
-    background-color: #333; /* Change this to your desired color */
-  }
+    <body style="background-color: rgba(235,235,235,255);">
 
-  /* Set the text color to black */
-  .navbar-dark .navbar-nav .nav-link {
-    color: whitesmoke;
-    font-size: 20px;
-    font-family: 'Times New Roman', Times, serif;
-  }
-</style>
 <style>
         #contendor{
             width: 80%;
@@ -81,23 +64,24 @@ $nombreUsuario = $_SESSION['usuario'];
     <span class="navbar-toggler-icon"></span>
     </button>
     <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasNavbar2" aria-labelledby="offcanvasNavbar2Label">
-    <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="offcanvasNavbar2Label">Mis Atajos</h5>
+    <div class="offcanvas-header" >
+    <h5 class="offcanvas-title" id="offcanvasNavbar2Label" >Mis Atajos</h5>
     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
      <div class="offcanvas-body">
-        <ul class="navbar-nav justify-content-right flex-grow-1 pe-3">
-          <li class="nav-item">
+        <ul class="navbar-nav justify-content-center flex-grow-1 pe-3">
+        <li class="nav-item">
           <a type="button" class="nav-link" href="calendario.php" data-bs-target="#staticBackdrop">
- Calendario
+ Calendario 
 </a>
 
           </li>
           <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style=" background-color: transparent !important;
+">
         Mi Inventario
           </a>
-          <ul class="dropdown-menu">
+          <ul class="dropdown-menu" >
           <a href="funciones/listarPersonasConBusqueda.php" class="dropdown-item">Cartas</a>
           <a href="funciones/listarPersonasConBusqueda2.php" class="dropdown-item">Productos</a>
           </ul>
@@ -120,13 +104,14 @@ $nombreUsuario = $_SESSION['usuario'];
           <a href="../../config/cerrarSesion.php" class="dropdown-item">Cerrar Sesion</a>
           </ul>
       </li>
+        </ul>
     </div>
   </div>
 </nav>
     <div class="container">
 
         
-            <div> <br/><br/> <div id="CalendarioWeb" style=" background-color: rgba(0, 0, 0, 0.500);; ;color:white ;font-size:25px" class="fc fc-media-screen fc-direction-ltr  "  ></div></div>
+            <div> <br/> <div id="CalendarioWeb" style=" background-color: rgba(0, 0, 0, 0.500);; ;color:white ;font-size:25px" class="fc fc-media-screen fc-direction-ltr  "  ></div></div>
           
     </div>
    
@@ -392,6 +377,12 @@ function EnviarInformacion(accion,objEvento,modal){
 
 </script>
 <script src="../../js/bootstrap.bundle.min.js"></script>
+<br>
+<footer class="footer mt-auto py-3 bg-dark">
+<div class="container text-center">
+<span class="text-center" style="color:white">Aplicacion Desarrollada Unicamente Para Fines De Venta Y Distribucion De Menores.</span>
+</div>
+</footer>
 </body>
 </html>
 

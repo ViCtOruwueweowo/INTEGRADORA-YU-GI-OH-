@@ -6,28 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../../../css/bootstrap.min.css">
-    <link rel="stylesheet" href="../../../css/index3.css">
     <script src="../../../js/bootstrap.bundle.min.js"></script>
 </head>
-<body>
-<style>
-  /* Custom CSS for the transparent navigation bar with shadow */
-  .navbar {
-    background-color: transparent !important;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  /* Adjust the color of the offcanvas menu content */
-  .offcanvas-header {
-    background-color: #333; /* Change this to your desired color */
-  }
+<body style="background-color: rgba(235,235,235,255);">
 
-  /* Set the text color to black */
-  .navbar-dark .navbar-nav .nav-link {
-    color: whitesmoke;
-    font-size: 20px;
-    font-family: 'Times New Roman', Times, serif;
-  }
-</style>
 <style>
         #contendor{
             width: 80%;
