@@ -218,7 +218,7 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
       <br>
     <a class="btn btn-warning" type="button" href="funciones/listarPersonasConBusqueda.php">Mi Inventario</a>
     <br>
-    <a class="btn btn-warning" type="button" href="acreedores.php">Mi Agenda</a>
+    <a class="btn btn-warning" type="button" href="acreedores.php">Acreedores</a>
     <br>
     <a class="btn btn-warning" type="button" href="empleados.php">Mis Empleados</a>
     <br>

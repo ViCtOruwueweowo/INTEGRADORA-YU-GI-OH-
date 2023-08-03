@@ -175,9 +175,8 @@ br
             foreach ($tablaf as $registro) {
                 echo "<input type='hidden' name='id_usr' value='$registro->id_usr'> ";
                 echo "<label for='tel_user'>Teléfono</label>";
-                
-             // Utilizamos el atributo pattern para permitir solo números y el atributo title para mostrar un mensaje al usuario si no se cumple el patrón
-        echo "<input type='tel' class='form-control' name='tel_user' value='$registro->tel_user' pattern='[0-9]{10}' title='El teléfono debe contener 10 dígitos.' maxlength='10' minlength='10' required> ";
+echo "<input type='tel' class='form-control' name='tel_user' value='$registro->tel_user' pattern='[0-9]{10}' title='El teléfono debe contener 10 dígitos numéricos.' maxlength='10' minlength='10' required>";
+
         
                 echo "<label for='direccion_user'>Dirección</label>";
                 echo "<input class='form-control' name='direccion_user' value='$registro->direccion_user' required> ";
