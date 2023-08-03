@@ -8,12 +8,7 @@ FROM cartas
 INNER JOIN car_rar ON cartas.id_car = car_rar.id_carar
 INNER JOIN rareza ON car_rar.id_rar = rareza.id_ra
 ORDER BY rand()
-<<<<<<< HEAD
 LIMIT 4;");
-=======
-LIMIT 8;
- ;");
->>>>>>> 9d84b2f47e359ada4b7fca6badd72ba648192d95
 $sql->execute();
 $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
 ?>
