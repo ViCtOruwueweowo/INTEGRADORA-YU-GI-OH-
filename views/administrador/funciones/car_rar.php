@@ -56,8 +56,10 @@ try {
 </div>
 <br>
    <h6>Espera Estas Siendo Redirigido, Vuelve Pronto</h6>
+   
   </div>
   </div>   "; 
+  
     header("refresh:2 ;listarPersonasConBusqueda.php");
 }  catch (PDOException $e) {
     // Obtén el mensaje de la excepción sin el código SQLSTATE

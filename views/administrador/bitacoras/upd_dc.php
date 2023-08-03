@@ -108,7 +108,7 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
             <li><a class="dropdown-item" href="../deudores_cartas.php"><b>Mis Deudores Cartas</b></a></li>
             <li><a class="dropdown-item" href="../deudores_productos.php"><b>Mis Deudores Productos</b></a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="agregar_cliente.php">Agregar Cliente</a></li>
+            <li><a class="dropdown-item" href="../funciones/agregar_cliente.php">Agregar Cliente</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">

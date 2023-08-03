@@ -8,7 +8,7 @@ FROM cartas
 INNER JOIN car_rar ON cartas.id_car = car_rar.id_carar
 INNER JOIN rareza ON car_rar.id_rar = rareza.id_ra
 ORDER BY rand()
-LIMIT 4;");
+LIMIT 8;");
 $sql->execute();
 $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
 ?>
@@ -25,6 +25,16 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
 </head>
 <body bgcolor="#ededed">
   
+<body>
+  <style>
+    @media only screen and (max-width: 600px) { 
+	body { 
+    background-repeat: no-repeat;
+		background-image: url(img/mbi8yz4o8ni81.png);
+    background-attachment: fixed; 
+	}   
+}
+  </style>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
   <div class="container-fluid">
     <a class="navbar-brand" href="index.php" style="  color: whitesmoke;
@@ -65,13 +75,12 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
 <div class="p-4 p-md-5 mb-4 rounded text-body-emphasis bg-body-secondary">
     <div class="col-lg-6 px-0">
       <h1 class="display-4 fst-italic">¡Bienvenido!</h1>
-      <p class="lead my-3">Bienvenido a WorkStack tu tienda de compra de cartas, aqui podras encontrar cartas de yugioh, ademas de playmat's, micas, dados, entre muchos otros productos, visitanos cuando gustes en plaza de la tecnologia.</p>
-      <p class="lead mb-0"><a href="#" class="text-body-emphasis fw-bold">Atte WorkStack...</a></p>
+      <p class="lead my-3">Bienvenido a WorkStack, tu tienda de compra de cartas, aqui podras encontrar cartas de yugioh, ademas de playmat's, micas, dados, entre muchos otros productos, visitanos cuando gustes en plaza de la tecnologia.</p>
     </div>
   </div>
 
-  <p class="lead mb-0" style="text-align: center;"><a href="#" class="text-body-emphasis fw-bold">¡No Te La Oportunidad De Mejorar Con esto!</a></p>
-  <p class="lead mb-0" style="text-align: center;">¿No sabes que estas buscando?, Tranquilo tenemos algunas recomandaciones para ti, pero si no es lo que buscas asegurate de buscarlo justo <a class="text-body-emphasis fw-bold" href="cartas.php">aqui</a> </p>
+  <p class="lead mb-0" style="text-align: center;"><a href="#" class="text-body-emphasis fw-bold">¡No Te Pierdas De Esta Selección De Cartas Para Ti!</a></p>
+  <p class="lead mb-0" style="text-align: center;">¿No sabes que estas buscando? Mira lo que tenemos en venta, también puedes ver más <a class="text-body-emphasis fw-bold" href="cartas.php">aquí</a> </p>
   <br>
   <div class="container">
   <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 g-4 ">
@@ -102,6 +111,8 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
       <img style="width: 100%;height: 350px;"src="<?php echo $imagen; ?>" class="img-fluid" alt="...">
       <div class="card-body">
         <h6 class="card-title text-center" style="color:white; font-size:20px; font-family: 'Times New Roman', Times, serif;"><?php echo $row['nombre_c']; ?></h6>
+        <h6 class="card-title text-center" style="color:white; font-size:20px; font-family: 'Times New Roman', Times, serif;"><?php echo $row['rareza']; ?></h6>
+        <h6 class="card-title text-center" style="color:white; font-size:20px; font-family: 'Times New Roman', Times, serif;">$<?php echo $row['p_beto']; ?></h6>
         <div class="d-flex justify-content-between align-items-center">
 
         </div>
@@ -121,18 +132,18 @@ $db->desconectarDB();
     <div class="col-md-12">
       <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
         <div class="col p-4 d-flex flex-column position-static">
-          <h3 class="mb-0">Encuentranos En Esta Ubicacion:</h3>
-          <p class="card-text mb-auto">Plaza de la Tecnología Torreón, Av Hidalgo 1334, Primitivo Centro, 27000 Torreón, Coah. Segundo piso Local #288, Aqui tienes una imagen de referencia.</p>
-          <img src="img/beto.jpeg" style="width: 250px;text-align:end" alt=""> 
+          <h3 class="mb-0">Encuentranos Aquí:</h3>
+          <p class="card-text mb-auto">Plaza de la Tecnología Torreón, Av Hidalgo 1334, Primitivo Centro, 27000 Torreón, Coah. Segundo piso, Local #288. ¡Justo aquí!</p>
+          <img src="img/beto.jpeg" style="width: 450px;text-align:end" alt=""> 
         </div>
         <div class="col-auto d-none d-lg-block">
-<img src="img/pngegg.png" style="width: 313px;" alt=""> 
+<img src="img/pngegg.png" style="width: 430px;" alt=""> 
        </div>
       </div>
     </div>
   </div> 
-  <p class="lead mb-0" style="text-align: center;"><a href="#" class="text-body-emphasis fw-bold">¡Se El Mejor Duelista Con Estos Productos!</a></p>
-  <p class="lead mb-0" style="text-align: center;">Mira mas de estos productos fabulosos y cuida tu deck solo da clic justo <a class="text-body-emphasis fw-bold" href="productos.php">aqui</a> </p>
+  <p class="lead mb-0" style="text-align: center;"><a href="#" class="text-body-emphasis fw-bold">¡Sé El Mejor Duelista Con Estos Productos!</a></p>
+  <p class="lead mb-0" style="text-align: center;">Mira más de estos increíbles productos y cuida tu deck haciendo clic <a class="text-body-emphasis fw-bold" href="productos.php">aquí</a> </p>
 <br>
   <?php
 
@@ -172,6 +183,7 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
       <img style="width: 100%;height: 350px;"src="<?php echo $imagen; ?>" class="img-fluid" alt="...">
       <div class="card-body">
         <h6 class="card-title text-center" style="color:white; font-size:15px; font-family: 'Times New Roman', Times, serif;"><?php echo $row['nom_p']; ?></h6>
+        <h6 class="card-title text-center" style="color:white; font-size:15px; font-family: 'Times New Roman', Times, serif;"><?php echo $row['precio']; ?></h6>
         <div class="d-flex justify-content-between align-items-center">
 
         </div>
@@ -197,8 +209,10 @@ $db->desconectarDB();
 </svg> 871-33-44-172</a></p>
     </div>
   </div>
+
   </div>
 <br>
+
   <footer class="footer mt-auto py-3 bg-dark">
 <div class="container text-center">
 <span class="text-center" style="color:white">Aplicacion Desarrollada Unicamente Para Fines De Venta Y Distribucion De Menores.</span><br>

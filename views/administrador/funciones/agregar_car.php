@@ -139,13 +139,16 @@ $nombreUsuario = $_SESSION['usuario'];
     <div class="col-12">
     <label  class="form-label">Ingresar Nombre De La Carta:</label>
     <input type="text" class="form-control col-lg-6" id="nom_p" name="nombre_c" placeholder="Nombre Carta. . ." required>
+    </div><br><br><br>
+    <div style="margin-top: 10px" class="col-12">
+    <select class="form-control" name="tipo_c" id="tipo_c" required>
+  <option value="MAGIA">MAGIA</option>
+  <option value="TRAMPA">TRAMPA</option>
+  <option value="MONSTRUO">MONSTRUO</option>
+</select>
     </div>
     <div class="col-12">
-    <label  class="form-label">Ingresar Tipo De Carta:</label>
-    <input type="text"  class="form-control" name="tipo_c" placeholder="Magia, Trampa, Monstruo. . ." required>
-    </div>
-    <div class="col-12">
-    <label  class="form-label">Ingresar Archivo</label><br>
+    <label  class="form-label">Ingresar imagen</label><br>
     <input type="file" name="imagen" accept="image/*" required>
     </div>
     
