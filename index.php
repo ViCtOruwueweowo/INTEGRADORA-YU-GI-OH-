@@ -17,13 +17,13 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Inicio</title>
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/bootstrap.bundle.js"></script>
   <script src="js/bootstrap.min.js"></script>
 </head>
-<body>
+<body bgcolor="#ededed">
   
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
   <div class="container-fluid">
@@ -126,7 +126,7 @@ $db->desconectarDB();
           <img src="img/beto.jpeg" style="width: 250px;text-align:end" alt=""> 
         </div>
         <div class="col-auto d-none d-lg-block">
-<img src="img/guia.webp" alt=""> 
+<img src="img/pngegg.png" style="width: 313px;" alt=""> 
        </div>
       </div>
     </div>
@@ -201,7 +201,9 @@ $db->desconectarDB();
 <br>
   <footer class="footer mt-auto py-3 bg-dark">
 <div class="container text-center">
-<span class="text-center" style="color:white">Aplicacion Desarrollada Unicamente Para Fines De Venta Y Distribucion De Menores.</span>
+<span class="text-center" style="color:white">Aplicacion Desarrollada Unicamente Para Fines De Venta Y Distribucion De Menores.</span><br>
+<span class="text-center" style="color:white">Plaza de la Tecnología Torreón, Av Hidalgo 1334, Primitivo Centro, 27000 Torreón, Coah. Segundo piso Local #288</span><br>
+<span class="text-center  fw-bold" style="color:white">Cel. 871-33-44-172</span>
 </div>
 </footer>
 </body>
