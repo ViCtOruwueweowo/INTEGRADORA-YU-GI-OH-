@@ -30,6 +30,7 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
         body{
             background-color: rgba(237,237,237,255);
         }
+
   /* Custom CSS for the transparent navigation bar with shadow */
   .navbar {
     background-color: rgba(14,14,14,255)!important;
