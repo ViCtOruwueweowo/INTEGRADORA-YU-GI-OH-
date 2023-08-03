@@ -152,13 +152,9 @@ $nombreUsuario = $_SESSION['usuario'];
       echo "</select> ";
       echo "<h4 style='color: white;'>Selecciona Carta:</h4>";
       //carta
-<<<<<<< HEAD
-      $consulta = "SELECT CONCAT(cartas.nombre_c,' ', rareza.rareza) as nombre, car_rar.id_cr,car_rar.cantidad FROM cartas INNER JOIN car_rar ON cartas.id_car=car_rar.id_carar INNER JOIN rareza ON car_rar.id_rar=rareza.id_ra ORDER BY cartas.nombre_c ASC";
-=======
       $consulta = "SELECT CONCAT(cartas.nombre_c,' ', rareza.rareza) as nombre, car_rar.id_cr, car_rar.cantidad, car_rar.p_beto FROM cartas 
       INNER JOIN car_rar ON cartas.id_car=car_rar.id_carar INNER JOIN rareza ON car_rar.id_rar=rareza.id_ra ORDER BY 
       cartas.nombre_c ASC";
->>>>>>> e363ddf327b5f693095acab3ece609274747e0ba
       $tabla = $conexion->seleccionar($consulta);
       echo "<select id='id_cr' name='id_cr' class='form-select'>";
       foreach ($tabla as $row)

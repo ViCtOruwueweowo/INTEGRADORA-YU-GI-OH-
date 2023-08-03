@@ -138,7 +138,7 @@ $nombreUsuario = $_SESSION['usuario'];
     
     <div class="mb-3">
     <label for="tel_cli" class="form-label" style='color: white;'>Telefono</label>
-<input type="text" name="tel_cli" class="form-control" id="exampleFormControlInput1" placeholder="Telefono" pattern="^[0-9]{10}$" title="Ingrese 10 dígitos por favor" oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="10" required>
+<input type="text" name="tel_cli" class="form-control" id="exampleFormControlInput1" placeholder="Telefono" pattern="^[0-9]{10}$" title="Ingrese 10 dígitos por favor" oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="10">
 
     </div>
     
