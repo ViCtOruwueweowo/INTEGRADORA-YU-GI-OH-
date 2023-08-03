@@ -152,9 +152,13 @@ $nombreUsuario = $_SESSION['usuario'];
       echo "</select> ";
       echo "<h4 style='color: white;'>Selecciona Carta:</h4>";
       //carta
+<<<<<<< HEAD
+      $consulta = "SELECT CONCAT(cartas.nombre_c,' ', rareza.rareza) as nombre, car_rar.id_cr,car_rar.cantidad FROM cartas INNER JOIN car_rar ON cartas.id_car=car_rar.id_carar INNER JOIN rareza ON car_rar.id_rar=rareza.id_ra ORDER BY cartas.nombre_c ASC";
+=======
       $consulta = "SELECT CONCAT(cartas.nombre_c,' ', rareza.rareza) as nombre, car_rar.id_cr, car_rar.cantidad, car_rar.p_beto FROM cartas 
       INNER JOIN car_rar ON cartas.id_car=car_rar.id_carar INNER JOIN rareza ON car_rar.id_rar=rareza.id_ra ORDER BY 
       cartas.nombre_c ASC";
+>>>>>>> e363ddf327b5f693095acab3ece609274747e0ba
       $tabla = $conexion->seleccionar($consulta);
       echo "<select id='id_cr' name='id_cr' class='form-select'>";
       foreach ($tabla as $row)
@@ -190,10 +194,17 @@ $nombreUsuario = $_SESSION['usuario'];
 <br>
 
 <div class="mb-3">
+<<<<<<< HEAD
+
+    <h4>Cantidad En Stock:</h4>
+    <!-- Aquí mostramos el valor de $cantidad_actual en el atributo value del input -->
+    <input type="number" min="1" name="cantidad_stock" class="form-control" id="cantidad_actual" readonly required value="<?php echo $cantidad_actual; ?>">
+=======
 <h4>Cantidad En Stock:</h4>
   <input type="number" min="1" name="cantidad_c" class="form-control" id="cantidad_actual" placeholder="Aquí quiero que se vea la cantidad actual de la carta que ponga en el filtro pero no me sale aaaaa" readonly required> 
 
 
+>>>>>>> e363ddf327b5f693095acab3ece609274747e0ba
 </div>
 
 
