@@ -258,7 +258,7 @@ if (isset($_POST['depa'])) {
 
 
                echo "<div class='col-4 col-lg-3'>";
-               echo "<label for='cantidad_c'>cantidad en stock:$registro->cantidad</label>";
+               echo "<label for='cantidad_c'>cantidad en stock: $registro->cantidad</label>";
                echo "</div>"; 
              
                 
