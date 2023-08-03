@@ -190,10 +190,10 @@ $nombreUsuario = $_SESSION['usuario'];
 <br>
 
 <div class="mb-3">
+<h4>Cantidad En Stock:</h4>
+  <input type="number" min="1" name="cantidad_c" class="form-control" id="cantidad_actual" placeholder="Aquí quiero que se vea la cantidad actual de la carta que ponga en el filtro pero no me sale aaaaa" readonly required> 
 
-    <h4>Cantidad En Stock:</h4>
-    <!-- Aquí mostramos el valor de $cantidad_actual en el atributo value del input -->
-    <input type="number" min="1" name="cantidad_stock" class="form-control" id="cantidad_actual" readonly required value="<?php echo $cantidad_actual; ?>">
+
 </div>
 
 
