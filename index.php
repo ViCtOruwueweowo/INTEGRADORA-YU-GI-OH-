@@ -7,7 +7,7 @@ $sql = $con->prepare("SELECT DISTINCT cartas.id_car, nombre_c, imagen_c, rareza.
 FROM cartas
 INNER JOIN car_rar ON cartas.id_car = car_rar.id_carar
 INNER JOIN rareza ON car_rar.id_rar = rareza.id_ra
-WHERE rareza.id_ra >= '4'
+ORDER BY rand()
 LIMIT 8;
  ;");
 $sql->execute();
