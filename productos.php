@@ -115,7 +115,7 @@ if ($busqueda === null) {
       $imagenPath = "imagenes/productos_2/" . $resultado->imagen_p;
       
       // Verifica si el archivo existe con varias extensiones
-      $extensionesPermitidas = array('jpg', 'jpeg', 'png', 'gif', 'webp');
+      $extensionesPermitidas = array('jpg', 'jpeg', 'png', 'webp');
       $imagenEncontrada = false;
       foreach ($extensionesPermitidas as $ext) {
           if (file_exists($imagenPath . "." . $ext)) {

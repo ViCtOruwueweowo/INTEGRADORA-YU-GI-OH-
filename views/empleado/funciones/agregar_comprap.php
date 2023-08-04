@@ -1,50 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="../../../css/bootstrap.min.css">   
-    <script src="../../../js/bootstrap.bundle.min.js"></script>
-</head>
-<body style="background-color: rgba(235,235,235,255);">
 
-
-<style>
-        #contendor{
-            width: 80%;
-            margin: auto;
-        }
-    </style>
 <?php
 session_start();
 
 // Verificar si el usuario no ha iniciado sesión
 if (!isset($_SESSION['usuario'])) {
     echo "Inicia sesión primero por favor :D";
-    header("refresh:50 ../../index.php");  // Redireccionamos al archivo de inicio de sesión
+    header("refresh:5 ../../index.php");  // Redireccionamos al archivo de inicio de sesión
     exit();
 }
 
-// Verificar si el tipo de usuario no es 2 (Tipo de usuario que puede acceder a esta página, osea empleado)
-if ($_SESSION['tipo_usuario'] !== "2") {
-  echo "<div class='container' id='contenedor'>
-  <div class='alert alert-danger text-center' role='alert'>
- <h1 style='text-aling:center'>¡Ups!</h1>
- <br>
- <div class='spinner-border text-dark' role='status'>
-<span class='visually-hidden'>Loading...</span>
-</div>
-<br>
- <h6>Parece ser que no tienes acceso a este lugar, Asegurate de usar una cuenta valida</h6>
-</div>
-</div>   ";   
-    header("refresh:5 ../../index.php");  // Redireccionamos al archivo de inicio de sesión otra vez
+// Verificar si el tipo de usuario no es 1 (Tipo de usuario que puede acceder a esta página, osea el admin)
+if ($_SESSION['tipo_usuario'] !== "2") { 
+      echo "Acceso no autorizado. Por favor, inicia sesión con una cuenta válida.";
+    header("refresh:5 ../../index.php");  // Redireccionamos al archivo de inicio de sesión
     exit();
 }
 
 $nombreUsuario = $_SESSION['usuario'];
 ?>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../../css/bootstrap.min.css">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
   <div class="container-fluid">
     <a class="navbar-brand" href="../index.php" style="color: whitesmoke; font-size: 20px; font-family: 'Times New Roman', Times, serif;">
@@ -103,41 +89,74 @@ $nombreUsuario = $_SESSION['usuario'];
   </div>
 </nav>
 
-<br>
-<div class="container" class="container" style="color:whitesmoke;background-color: rgba(0, 0, 0, .550);
-    box-shadow: 0 4px 5px rgba(10, 2, 1, 55);text-align:left;color:white">
-<h1 style="text-align: center;">Agregar Producto</h1>
-<hr>
-<form action="producto_g.php" method="post" enctype="multipart/form-data">
-<div class="row">
-    <div class="col-12">
-    <label  class="form-label">Ingresar Nombre Del Producto:</label>
-    <input type="text" class="form-control col-lg-6" id="nom_p" name="nom_p" placeholder="Nombre Producto. . ." required>
-    </div>
-    <div class="col-12">
-    <label  class="form-label">Ingresar Existencias Del Producto:</label>
-    <input type="number" min="1" class="form-control col-lg-6" id="existencias" name="existencias" placeholder="Ingresar Existencias. . ." required>
-    </div>
-    <div class="col-12">
-    <label class="form-label">Ingresar Precio Del Producto:</label>
-    <input type="text" class="form-control col-lg-6" id="precio" name="precio" placeholder="Ingresar Precio. . ." required pattern="[0-9]+(\.[0-9]+)?">
-</div>
 
-    <div class="col-12">
-    <label  class="form-label">Ingresar Descripcion Del Producto:</label>
-    <input type="text" class="form-control col-lg-6" id="notas_prod" name="notas_prod" placeholder="Detalles. . ." required>
-    </div>
-    <div class="col-12">
-    <label  class="form-label">Ingresar Archivo</label><br>
-    <input type="file" name="imagen" accept="image/*" required>
+
+<br>
+<div class="container" style="color:whitesmoke;background-color: rgba(0, 0, 0, .550); box-shadow: 0 4px 5px rgba(10, 2, 1, 55); text-align:left">
+<h1 style="text-align: center;">Agregar Nuevo Deudor</h1>
+
+<form action="insertarven_dp.php" method="post">
+
+<h4>Seleccionar Cliente:</h4>
+    <?php
+      include 'date.php';
+      $conexion = new Database();
+      $conexion->conectarDB();
+
+      $consulta = "SELECT clientes.nom_cli as nombre, clientes.id_cli from clientes";
+      $tabla = $conexion->seleccionar($consulta);
+      echo "<select id='id_cli' name='id_cli' class='form-select'> ";
+      foreach ($tabla as $row)
+      {
+          echo "<option name='id_cli' value='".$row->id_cli."'>".$row->nombre."</option>";
+      }
+      echo "</select> ";
+      
+      echo "<h4 style='color: white;'>Selecciona Producto:</h4>";
+      //carta
+      $consulta = "SELECT * FROM PRODUCTOS ORDER BY 
+      productos.nom_p ASC";
+      $tabla = $conexion->seleccionar($consulta);
+      echo "<select id='id_pro' name='id_pro' class='form-select'>";
+      foreach ($tabla as $row)
+      {
+          echo "<option name='id_pro' value='".$row->id_pro."'>".$row->nom_p."</option>";
+      }
+      echo "</select>";
+      
+       
+      ?>
+
+
+<br>
+      
+    <div class="mb-3">
+    <h4>Cantidad Solicitada:</h4>     
+      <input type="number" min="1" name="cantidad_p" class="form-control" id="exampleFormControlInput1" required>
     </div>
     
-    <div class="col-12">
-        <br>
-    <input type="submit" class="btn btn-primary btn-lg" value="Subir imagen">
-    </div>
+    <div class="mb-3">
+    <h4>Abono:</h4>     <input type="text" name="abono_p" class="form-control" id="exampleFormControlInput1" required pattern="[0-9]+">
 </div>
-</form>
-   </div>
+
+    <div class="mb-3">
+    <h4>Notas:</h4>       <input type="text" name="notas" class="form-control" id="exampleFormControlInput1">
+    </div>
+    <div class="mb-3">
+
+<input type="hidden" name="concepto" class="form-control" id="exampleFormControlInput1" value="COMPRA" readonly>
+</div>
+
+    
+    <div class="col-12">
+      <button type="submit" value="Enviar" class="btn btn-primary">Guardar Registro</button>
+    </div>
+
+    </form>
+</div>
+
+<script src="../../../js/bootstrap.min.js"></script> 
+<script src="../../../js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>
