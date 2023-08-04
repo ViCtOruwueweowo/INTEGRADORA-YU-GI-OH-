@@ -107,7 +107,7 @@ $nombreUsuario = $_SESSION['usuario'];
       <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-lg p-3 mb-5  h-md-200 position-relative" style="background-color: white;">
         <div class="col p-4 d-flex flex-column position-static">
           <h3 class="mb-0">¡Bienvenido           <?php $nombreUsuario = $_SESSION['usuario']; echo "$nombreUsuario";?>!</h3>
-          <p class="card-text mb-auto">Aqui Tenemos Algunas De Las Cartas Mas Vistas Por Los Visitantes</p>
+          <p class="card-text mb-auto">Aquí Tenemos Algunas De Las Cartas Más Vistas Por Los Visitantes</p>
         </div>
         <div class="col-auto d-none  d-lg-block">
 <img src="../../img/guia.webp" style="width: 150px;" alt="">
@@ -126,7 +126,7 @@ $sql = $con->prepare("SELECT DISTINCT cartas.id_car, nombre_c, imagen_c, rareza.
 FROM cartas
 INNER JOIN car_rar ON cartas.id_car = car_rar.id_carar
 INNER JOIN rareza ON car_rar.id_rar = rareza.id_ra ORDER BY rand()
-LIMIT 4;");
+LIMIT 8;");
 $sql->execute();
 $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
 ?>
@@ -246,7 +246,7 @@ $sql = $con->prepare("SELECT nombre_user, f_nacimiento, apellidos_user, tel_user
 $sql->execute();
 $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
 ?>
-          <h2><?php $nombreUsuario = $_SESSION['usuario']; echo "$nombreUsuario";?>, aqui estan todos tus empleados.</h2>
+          <h2><?php $nombreUsuario = $_SESSION['usuario']; echo "$nombreUsuario";?>, aquí están todos tus empleados.</h2>
           <p>    <?php foreach ($resultado as $fila): ?>
             <ul class="list-group list-group-flush" style="background-color: transparent;">
   <li class="list-group-item" style="background-color: transparent;color:white"><?php echo $fila['nombre_user'] ?> <?php echo $fila['apellidos_user'] ?></li>
@@ -265,7 +265,7 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
 ?>
       <div class="col-md-6">
         <div class="h-100 p-5 bg-light border rounded-3">
-          <h2><?php $nombreUsuario = $_SESSION['usuario']; echo "$nombreUsuario";?>,parece ser que necesitas rellenar.</h2>
+          <h2><?php $nombreUsuario = $_SESSION['usuario']; echo "$nombreUsuario";?>, parece ser que necesitas rellenar.</h2>
           <p>    <?php foreach ($resultado as $fila): ?>
             <ul class="list-group list-group-flush" style="background-color: transparent;">
   <li class="list-group-item" style="background-color: transparent;"><?php echo $fila['nom_p'] ?> </li>
