@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agregar Cliente</title>
-    <link rel="stylesheet" href="../../../css/index2.css">
     <link rel="stylesheet" href="../../../css/bootstrap.min.css">
     <script src="../../../js/bootstrap.bundle.min.js"></script>
     <?php
@@ -22,31 +21,8 @@ $nombreUsuario = $_SESSION['usuario'];
 
 </head>
 <body>
-<style>
-  /* Custom CSS for the transparent navigation bar with shadow */
-  .navbar {
-    background-color: transparent !important;
-    box-shadow: 0 10px 6px rgba(0, 0, 0, 0.1);
-  }
-  /* Adjust the color of the offcanvas menu content */
-  .offcanvas-header {
-    background-color: #333; /* Change this to your desired color */
-  }
 
-  /* Set the text color to black */
-  .navbar-dark .navbar-nav .nav-link {
-    color: whitesmoke;
-    font-size: 20px;
-    font-family: 'Times New Roman', Times, serif;
-  }
-
-</style>
     </head>
-    <body>
-    
-    <header>
-  <!-- Fixed navbar -->
-    <!-- Fixed navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
     <div class="container-fluid">
       <a class="navbar-brand" href="../index.php">WorkStack</a>
@@ -55,50 +31,53 @@ $nombreUsuario = $_SESSION['usuario'];
       </button>
       <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasNavbar2" aria-labelledby="offcanvasNavbar2Label">
         <div class="offcanvas-header">
-          <h5 class="offcanvas-title" id="offcanvasNavbar2Label"><b>Mis Atajos</b></h5>
+          <h5 class="offcanvas-title" id="offcanvasNavbar2Label">Mis Atajos</h5>
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
-          <ul class="navbar-nav justify-content-right flex-grow-1 pe-3">
+          <ul class="navbar-nav justify-content-center flex-grow-1 pe-3">
             <li class="nav-item">
-              <a class="nav-link " aria-current="page" href="../calendario.php"><b>Calendario</b></a>
+              <a class="nav-link " aria-current="page" href="../calendario.php">Calendario</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link " aria-current="page" href="../empleados.php"><b>Empleados</b></a>
+              <a class="nav-link " aria-current="page" href="../empleados.php">Empleados</a>
             </li>
             <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <b>Inventario</b>
+            Inventario
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="listarPersonasConBusqueda.php"><b>Inventario Carta</b></a></li>
-            <li><a class="dropdown-item" href="listarPersonasConBusqueda2.php"><b>Inventario Productos</b></a></li>
+            <li><a class="dropdown-item" href="listarPersonasConBusqueda.php">Inventario Carta</a></li>
+            <li><a class="dropdown-item" href="listarPersonasConBusqueda2.php">Inventario Productos</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="detallar.php">Detalle Carta</a></li>
           </ul>
         </li>
             <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <b>Agenda</b>
+            Agenda
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="../acreedores.php"><b>Mis Acreedores</b></a></li>
-            <li><a class="dropdown-item" href="../deudores_cartas.php"><b>Mis Deudores Cartas</b></a></li>
-            <li><a class="dropdown-item" href="../deudores_productos.php"><b>Mis Deudores Productos</b></a></li>
+            <li><a class="dropdown-item" href="../acreedores.php">Mis Acreedores</a></li>
+            <li><a class="dropdown-item" href="../deudores_cartas.php">Mis Deudores Cartas</a></li>
+            <li><a class="dropdown-item" href="../deudores_productos.php">Mis Deudores Productos</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="agregar_cliente.php">Agregar Cliente</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="agregar_comprac.php">Venta Cartas</a></li>
+            <li><a class="dropdown-item" href="agregar_comprap.php">Venta Productos</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <b>Registro</b>
+            Registro
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="../bitacoras/upd_cartas.php"><b>Actualizaciones En Cartas</b></a></li>
-            <li><a class="dropdown-item" href="../bitacoras/upd_productos.php"><b>Actualizaciones En Productos</b></a></li>
-            <li><a class="dropdown-item" href="../bitacoras/upd_dc.php"><b>Reporte Deuda Cartas</b></a></li>
-            <li><a class="dropdown-item" href="../bitacoras/upd_dp.php"><b>Reporte Deuda Productos</b></a></li>
-            <li><a class="dropdown-item" href="../bitacoras/upd_dp.php"><b>Reporte Acreedores</b></a></li>
+            <li><a class="dropdown-item" href="../bitacoras/upd_cartas.php">Actualizaciones En Cartas</a></li>
+            <li><a class="dropdown-item" href="../bitacoras/upd_productos.php">Actualizaciones En Productos</a></li>
+            <li><a class="dropdown-item" href="../bitacoras/upd_dc.php">Reporte Deuda Cartas</a></li>
+            <li><a class="dropdown-item" href="../bitacoras/upd_dp.php">Reporte Deuda Productos</a></li>
+            <li><a class="dropdown-item" href="../bitacoras/upd_dp.php">Reporte Acreedores</a></li>
 
           </ul>
         </li>
