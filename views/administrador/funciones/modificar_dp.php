@@ -114,18 +114,23 @@ $conexion = new database();
 $conexion->conectarDB();
 
 // Obtener la lista de departamentos para el filtro
-$consulta = "SELECT CONCAT('Cliente:', ' ',clientes.nom_cli,'. ', 'Prodcuto:',' ', productos.nom_p, '.') as nombre, deuda_p.id_dp, deuda_p.cantidad_p,productos.existencias, deuda_p.concept,deuda_p.precio_p, deuda_p.notas, deuda_p.abono_p 
-            FROM deuda_p 
-            INNER JOIN clientes ON deuda_p.id_clientep = clientes.id_cli 
-            INNER JOIN productos ON productos.id_pro = deuda_p.id_p 
-            GROUP BY nombre";
+$consulta = "SELECT CONCAT('Cliente:', ' ',clientes.nom_cli,'. ', 'Prodcuto:',' ', productos.nom_p, '.') as nombre, deuda_p.id_dp, deuda_p.cantidad_p, productos.existencias, deuda_p.concept, deuda_p.precio_p, deuda_p.notas, deuda_p.abono_p, deuda_p.estado_p 
+FROM clientes 
+INNER JOIN deuda_p ON deuda_p.id_clientep = clientes.id_cli 
+INNER JOIN productos ON productos.id_pro = deuda_p.id_p 
+WHERE estado_p = 'ACTIVO'";
 $tabla = $conexion->seleccionar($consulta);
 
 
 // Filtrar el departamento seleccionado
 if (isset($_POST['depa'])) {
     $depa = $_POST['depa'];
-    $consultaf = "SELECT CONCAT('Cliente:', ' ',clientes.nom_cli,'. ', 'Prodcuto:',' ', productos.nom_p, '.') as nombre, deuda_p.id_dp, deuda_p.cantidad_p, productos.existencias, deuda_p.concept, deuda_p.precio_p, deuda_p.notas, deuda_p.abono_p  FROM deuda_p INNER JOIN clientes ON deuda_p.id_clientep = clientes.id_cli INNER JOIN productos ON productos.id_pro = deuda_p.id_p WHERE id_dp ='$depa'";
+    $consultaf = "SELECT CONCAT('Cliente:', ' ',clientes.nom_cli,'. ', 'Prodcuto:',' ', productos.nom_p, '.') as nombre, deuda_p.id_dp, deuda_p.cantidad_p, productos.existencias, deuda_p.concept, deuda_p.precio_p, deuda_p.notas, deuda_p.abono_p, deuda_p.estado_p 
+    FROM clientes 
+    INNER JOIN deuda_p ON deuda_p.id_clientep = clientes.id_cli 
+    INNER JOIN productos ON productos.id_pro = deuda_p.id_p 
+    WHERE id_dp = '$depa';
+    ";
     $tablaf = $conexion->seleccionar($consultaf);
 }
 ?>
@@ -175,9 +180,6 @@ if (isset($_POST['depa'])) {
               echo "<input type='number' min='0' class='form-control' name='cantidad_p' value='$registro->cantidad_p' required> ";
               echo "</div>"; 
 
-                
-       
-
                 echo "<div class='col-2 col-lg-12'>";
                 echo "<h3 for='notas'>Notas:</h3>";
                 echo "</div>"; 
@@ -186,15 +188,12 @@ if (isset($_POST['depa'])) {
                 echo "<input class='form-control' name='notas' value='$registro->notas' required> ";
                 echo "</div>"; 
 
-                
-       
-
                 echo "<div class='col-4 col-lg-12'>";
                 echo "<h3 for='notas'>Nuevo Abono:</h3>";
                 echo "</div>";
                 
                 echo "<div class='col-7 col-lg-12'>";
-                echo "<input class='form-control' min='1' name='abono_p' type='text' pattern='[0-9]+' required>";
+                echo "<input class='form-control' min='1' name='abono_p' type='text' pattern='[0-9]+'>";
                 echo "</div>";
                 
                 
@@ -253,7 +252,7 @@ if (isset($_POST['depa'])) {
         }
         ?>
        </div>
-
+       <input type="hidden" name="id_dp" value="<?php echo $registro->id_dp; ?>">
 
     </form>
 </div>

@@ -131,6 +131,7 @@ $nombreUsuario = $_SESSION['usuario'];
       }
       echo "</select> ";
       echo "<h4 style='color: white;'>Selecciona Carta:</h4>";
+
       //carta
       $consulta = "SELECT CONCAT(cartas.nombre_c,' ', rareza.rareza) as nombre, car_rar.id_cr, car_rar.cantidad, car_rar.p_beto FROM cartas 
       INNER JOIN car_rar ON cartas.id_car=car_rar.id_carar INNER JOIN rareza ON car_rar.id_rar=rareza.id_ra ORDER BY 
@@ -146,39 +147,8 @@ $nombreUsuario = $_SESSION['usuario'];
        
       ?>
 
-
-
-<script>
-  function obtenerCantidadActual() {
-    var id_cr = $("#id_cr").val();
-
-    $.ajax({
-      type: "POST",
-      url: "obtener_cantidad.php",
-      data: {
-        id_cr: id_cr
-      },
-      success: function (data) {
-        $("#cantidad_actual").val(data); // Colocar el resultado en el campo "Cantidad actual"
-      }
-    });
-  }
-
-</script>
-
-
 <br>
 
-<div class="mb-3">
-<h4>Cantidad En Stock:</h4>
-  <input type="number" min="1" name="cantidad_c" class="form-control" id="cantidad_actual" placeholder="Aquí quiero que se vea la cantidad actual de la carta que ponga en el filtro pero no me sale aaaaa" readonly required> 
-
-
-</div>
-
-
-
-      
     <div class="mb-3">
     <h4>Cantidad Solicitada:</h4>     
       <input type="number" min="1" name="cantidad_c" class="form-control" id="exampleFormControlInput1" required>

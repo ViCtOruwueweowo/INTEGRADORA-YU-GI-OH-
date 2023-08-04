@@ -50,7 +50,7 @@ try {
 } catch (PDOException $e) {
     echo "<div class='alert alert-danger'> " . $e->getMessage();
     echo "</div> "; 
-    header("refresh:1;../acreedores.php");
+    header("refresh:10;../acreedores.php");
 }
 
 // Cerrar la conexión a la base de datos
