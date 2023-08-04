@@ -42,36 +42,35 @@ if (isset($_POST['id_cli'], $_POST['cantidad_c'], $_POST['notas'], $_POST['id_cr
         $stmt->bindParam(':id_cr', $id_cr);
         $stmt->bindParam(':abono_c', $abono_c);
         $stmt->bindParam(':concepto', $concepto);
-if ($stmt->execute()) {
-    echo "<div class='container' id='contenedor'>
-            <div class='alert alert-success text-center' role='alert'>
-                <h1>¡Éxito!</h1>
-                <br>
-                <div class='spinner-border text-dark' role='status'>
-                    <span class='visually-hidden'>Loading...</span>
-                </div>
-                <br>
-                <h6>¡Todos los cambios fueron realizados de forma exitosa, buen trabajo!</h6>
-            </div>
-        </div>";
-    header("refresh:3 ../../administrador/empleados.php");
-} else {
-    echo "<div class='container' id='contenedor'>
-            <div class='alert alert-danger text-center' role='alert'>
-                <h1>¡Ups!</h1>
-                <br>
-                <div class='spinner-border text-dark' role='status'>
-                    <span class='visually-hidden'>Loading...</span>
-                </div>
-                <br>
-                <h6>Algo salió mal, verifica los datos ingresados.</h6>
-            </div>
-        </div>";
-    header("refresh:3 ../../administrador/empleados.php");
-}
+        $stmt->execute();
+        echo "<div class='container' id='contenedor'>
+        <div class='alert alert-success text-center' role='alert'>
+       <h1 style='text-aling:center'>¡Exito, Todos Los Cambios Fueron Realizados De Forma Exitosa, Buen Trabajo!</h1>
+       <br>
+       <div class='spinner-border text-dark' role='status'>
+    <span class='visually-hidden'>Loading...</span>
+    </div>
+    <br>
+       <h6>Espera Estas Siendo Redirigido</h6>
+      </div>
+      </div>   ";
+      header("refresh:3 ;../index.php");
+    } catch(PDOException $e) {
+        echo "<div class='container' id='contenedor'>
+        <div class='alert alert-danger text-center' role='alert'>
+       <h1 style='text-aling:center'>¡Ups!</h1>
+       <br>
+       <div class='spinner-border text-dark' role='status'>
+    <span class='visually-hidden'>Loading...</span>
+    </div>
+    <br>
+       <h6>Algo salio mal, verifica los datos ingresados.</h6>
+      </div>
+      </div>   ";
     }
+    header("refresh:3 ;agregar_comprac.php");
 }
-        
+
 
 // Cerrar la conexión a la base de datos
 $conn = null;
