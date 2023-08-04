@@ -200,7 +200,7 @@ $nombreUsuario = $_SESSION['usuario'];
 <h3 class="mb-0" style="text-align: end;"><?php echo $resultado->nom_p ?></h3>
 <hr>
 <h5 class="card-text mb-auto" style="text-align: start;">Precio: </h5><p class="card-text mb-auto"><?php echo $resultado->precio ?></p>
-<h5 class="card-text mb-auto" style="text-align: start;">Precio: </h5><p class="card-text mb-auto"><?php echo $resultado->existencias ?></p>
+<h5 class="card-text mb-auto" style="text-align: start;">Cantidad: </h5><p class="card-text mb-auto"><?php echo $resultado->existencias ?></p>
 <h5 class="card-text mb-auto" style="text-align: start;">Descripcion: </h5><p class="card-text mb-auto"><?php echo $resultado->notas_prod ?></p>
 </div>
 <div class="col-auto d-none d-lg-block">

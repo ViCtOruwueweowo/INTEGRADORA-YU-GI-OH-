@@ -226,12 +226,13 @@ if ($busqueda === null) {
 <hr>
 <h5 class="card-text mb-auto" style="text-align: end;">Rareza: <?php echo $resultado->rareza ?></h5>
 <h5 class="card-text mb-auto" style="text-align: end;">Precio: <?php echo $resultado->p_beto ?></h5>
+<h5 class="card-text mb-auto" style="text-align: end;">Cantidad: <?php echo $resultado->cantidad?></h5>
 <h5 class="card-text mb-auto" style="text-align: end;"><a href="<?php echo $resultado->p_tcg ?>">Visitar Tcg</a></h5>
 <h5 class="card-text mb-auto" style="text-align: end;"><a href="<?php echo $resultado->p_price ?>">Visitar Price</a></h5>
 
 </div>
 <div class="col-auto d-none d-lg-block">
-<img src="<?php echo $imagen; ?>" style="width: 150px;" alt=""> 
+<img src="<?php echo $imagen; ?>" style="width: 180px;" alt=""> 
 </div>
 </div>
 </div>
