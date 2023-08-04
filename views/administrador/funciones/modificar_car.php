@@ -165,7 +165,7 @@ if (isset($_POST['depa'])) {
                 echo "<label for='p_price'>p_price</label>";
                 echo "<input class='form-control' name='p_price' value='$registro->p_price'> ";
                 echo "<label for='cantidad'>Cantidad</label>";
-                echo "<input type='number' min='1' class='form-control' name='cantidad'  value='$registro->cantidad' required> ";
+                echo "<input type='number' min='0' class='form-control' name='cantidad'  value='$registro->cantidad' required> ";
             }
 
          //   <!-- Botón para enviar los datos al archivo car_rar.php -->

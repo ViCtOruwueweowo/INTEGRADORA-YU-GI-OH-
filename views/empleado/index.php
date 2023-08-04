@@ -75,9 +75,14 @@ $nombreUsuario = $_SESSION['usuario'];
         Mi Agenda
           </a>
           <ul class="dropdown-menu">
-          <a href="ac.php" class="dropdown-item">Acreedores</a>
-          <a href="deuda_c.php" class="dropdown-item">Deudores Cartas</a>
-          <a href="deuda_p.php" class="dropdown-item">Deudores Productos</a>
+          <li><a href="ac.php" class="dropdown-item">Acreedores</a></li>
+          <li><a href="deuda_c.php" class="dropdown-item">Deudores Cartas</a></li>
+          <li><a href="deuda_p.php" class="dropdown-item">Deudores Productos</a></li>
+          <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="funciones/agregar_cliente.php">Agregar Cliente</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="funciones/agregar_comprac.php">Venta Cartas</a></li>
+            <li><a class="dropdown-item" href="funciones/agregar_comprap.php">Venta Productos</a></li>
           </ul>
       </li>
      <li class="nav-item dropdown">
@@ -120,7 +125,7 @@ FROM cartas
 INNER JOIN car_rar ON cartas.id_car = car_rar.id_carar
 INNER JOIN rareza ON car_rar.id_rar = rareza.id_ra
 ORDER BY rand()
-LIMIT 4;");
+LIMIT 8;");
 $sql->execute();
 $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
 ?>

@@ -79,10 +79,15 @@ $nombreUsuario = $_SESSION['usuario'];
               Mi Agenda
             </a>
             <ul class="dropdown-menu">
-              <li><a href="../ac.php" class="dropdown-item">Acreedores</a></li>
-              <li><a href="../deuda_c.php" class="dropdown-item">Deudores Cartas</a></li>
-              <li><a href="../deuda_p.php" class="dropdown-item">Deudores Productos</a></li>
-            </ul>
+          <li><a href="../ac.php" class="dropdown-item">Acreedores</a></li>
+          <li><a href="../deuda_c.php" class="dropdown-item">Deudores Cartas</a></li>
+          <li><a href="../deuda_p.php" class="dropdown-item">Deudores Productos</a></li>
+          <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="funciones/agregar_cliente.php">Agregar Cliente</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="funciones/agregar_comprac.php">Venta Cartas</a></li>
+            <li><a class="dropdown-item" href="funciones/agregar_comprap.php">Venta Productos</a></li>
+          </ul>
           </li>
           <li class="nav-item dropdown" >
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -147,7 +152,7 @@ if (isset($_POST['depa'])) {
         foreach ($tablaf as $registro) {
             echo "<input type='hidden' name='id_cr' 'required' required value='$registro->id_cr'> ";
             echo "<label for='cantidad'>cantidad</label>";
-            echo "<input class='form-control' name='cantidad' 'required'  value='$registro->cantidad'> ";
+            echo "<input type='number' min='0' class='form-control' name='cantidad' 'required'  value='$registro->cantidad' required> ";
         }
 
          //   <!-- Botón para enviar los datos al archivo car_rar.php -->

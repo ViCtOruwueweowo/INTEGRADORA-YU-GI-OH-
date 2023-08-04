@@ -138,7 +138,7 @@ if (isset($_POST['filtro_inactivos'])) {
 <br>
   <div class="row">
     <div class="col">
-    <button type="button" class="btn btn-outline-warning  btn-lg" data-bs-toggle="modal" data-bs-target="#Agregar">
+    <button type="button" class="btn btn-outline-primary  btn-lg" data-bs-toggle="modal" data-bs-target="#Agregar">
   Agregar Empleado
 </button>
 
@@ -225,7 +225,7 @@ if (isset($_POST['filtro_inactivos'])) {
     </div>
 
     <div class="col">
-<a href="funciones/empleado.php" class="btn btn-outline-warning btn-lg"> Editar Empleados</a>
+<a href="funciones/empleado.php" class="btn btn-outline-primary btn-lg"> Editar Empleados</a>
 
 </button>
 
@@ -289,13 +289,13 @@ if (isset($_POST['filtro_inactivos'])) {
    <div class="col">
       <!-- Formulario para que amarre el filtro -->
 <form id="filtroEmpleadosInactivosForm" method="post">
-  <button name="filtro_inactivos" type="submit" type="button" class="btn btn-outline-warning  btn-lg">Empleados inactivos</button>
+  <button name="filtro_inactivos" type="submit" type="button" class="btn btn-outline-primary  btn-lg">Empleados inactivos</button>
 </form>
 </div>
 
 <div class="col">
 <form id="filtroEmpleadosActivosForm" method="post">
-  <button name="filtro_activos" type="submit" class="btn btn-outline-warning  btn-lg">Empleados activos</button>
+  <button name="filtro_activos" type="submit" class="btn btn-outline-primary  btn-lg">Empleados activos</button>
 </form>
 </div>
 
