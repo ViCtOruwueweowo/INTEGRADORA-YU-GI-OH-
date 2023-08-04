@@ -52,7 +52,7 @@ try {
     if ($stmt->execute()) {
         echo "<div class='alert alert-success'>
         <h1 class='text-center'>Datos Actualizados Correctamente</h1>";
-  header("refresh:1; ../deudores_productos.php");
+  header("refresh:10; ../deudores_productos.php");
     } else {
         echo "Error al agregar los datos";
     }
