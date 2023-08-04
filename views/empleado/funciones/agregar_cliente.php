@@ -3,49 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="../../../css/bootstrap.min.css">   
+    <title>Agregar Cliente</title>
+    <link rel="stylesheet" href="../../../css/bootstrap.min.css">
     <script src="../../../js/bootstrap.bundle.min.js"></script>
-</head>
-<body style="background-color: rgba(235,235,235,255);">
-
-
-<style>
-        #contendor{
-            width: 80%;
-            margin: auto;
-        }
-    </style>
-<?php
+    <?php
 session_start();
 
 // Verificar si el usuario no ha iniciado sesión
 if (!isset($_SESSION['usuario'])) {
-    echo "Inicia sesión primero por favor :D";
-    header("refresh:50 ../../index.php");  // Redireccionamos al archivo de inicio de sesión
-    exit();
-}
-
-// Verificar si el tipo de usuario no es 2 (Tipo de usuario que puede acceder a esta página, osea empleado)
-if ($_SESSION['tipo_usuario'] !== "2") {
-  echo "<div class='container' id='contenedor'>
-  <div class='alert alert-danger text-center' role='alert'>
- <h1 style='text-aling:center'>¡Ups!</h1>
- <br>
- <div class='spinner-border text-dark' role='status'>
-<span class='visually-hidden'>Loading...</span>
-</div>
-<br>
- <h6>Parece ser que no tienes acceso a este lugar, Asegurate de usar una cuenta valida</h6>
-</div>
-</div>   ";   
-    header("refresh:5 ../../index.php");  // Redireccionamos al archivo de inicio de sesión otra vez
-    exit();
+  echo "Inicia sesión primero por favor :D";
+  header("refresh:2 ../../index.php");  // Redireccionamos al archivo de inicio de sesión
+  exit();
 }
 
 $nombreUsuario = $_SESSION['usuario'];
 ?>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
+
+</head>
+<body>
+
+    </head>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
   <div class="container-fluid">
     <a class="navbar-brand" href="../index.php" style="color: whitesmoke; font-size: 20px; font-family: 'Times New Roman', Times, serif;">
       WorkStack
@@ -104,40 +82,37 @@ $nombreUsuario = $_SESSION['usuario'];
 </nav>
 
 <br>
-<div class="container" class="container" style="color:whitesmoke;background-color: rgba(0, 0, 0, .550);
-    box-shadow: 0 4px 5px rgba(10, 2, 1, 55);text-align:left;color:white">
-<h1 style="text-align: center;">Agregar Producto</h1>
-<hr>
-<form action="producto_g.php" method="post" enctype="multipart/form-data">
-<div class="row">
-    <div class="col-12">
-    <label  class="form-label">Ingresar Nombre Del Producto:</label>
-    <input type="text" class="form-control col-lg-6" id="nom_p" name="nom_p" placeholder="Nombre Producto. . ." required>
-    </div>
-    <div class="col-12">
-    <label  class="form-label">Ingresar Existencias Del Producto:</label>
-    <input type="number" min="1" class="form-control col-lg-6" id="existencias" name="existencias" placeholder="Ingresar Existencias. . ." required>
-    </div>
-    <div class="col-12">
-    <label class="form-label">Ingresar Precio Del Producto:</label>
-    <input type="text" class="form-control col-lg-6" id="precio" name="precio" placeholder="Ingresar Precio. . ." required pattern="[0-9]+(\.[0-9]+)?">
-</div>
+<div class="container"style="color:whitesmoke;background-color: rgba(0, 0, 0, .550);
+    box-shadow: 0 4px 5px rgba(10, 2, 1, 55);">
+    <h1 class="text-center">Cliente</h1>
+    <hr>
+    <form action="update_cliente.php" method="post">
 
-    <div class="col-12">
-    <label  class="form-label">Ingresar Descripcion Del Producto:</label>
-    <input type="text" class="form-control col-lg-6" id="notas_prod" name="notas_prod" placeholder="Detalles. . ." required>
-    </div>
-    <div class="col-12">
-    <label  class="form-label">Ingresar Archivo</label><br>
-    <input type="file" name="imagen" accept="image/*" required>
+    <?php
+      include 'date.php';
+      $conexion = new Database();
+      $conexion->conectarDB();
+      ?>
+      
+    <div class="mb-3">
+      <label for="nom_cli" class="form-label" style='color: white;'>Nombre</label>
+      <input type="text" name="nom_cli" class="form-control" id="exampleFormControlInput1" placeholder="Nombre" required>
     </div>
     
-    <div class="col-12">
-        <br>
-    <input type="submit" class="btn btn-primary btn-lg" value="Subir imagen">
+    <div class="mb-3">
+    <label for="tel_cli" class="form-label" style='color: white;'>Telefono</label>
+<input type="text" name="tel_cli" class="form-control" id="exampleFormControlInput1" placeholder="Telefono" pattern="^[0-9]{10}$" title="Ingrese 10 dígitos por favor" oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="10">
+
     </div>
+    
+
+    
+    <div class="col-12">
+      <button type="submit" value="Enviar" class="btn btn-primary">Guardar Registro</button>
+    </div>
+
+    </form>
 </div>
-</form>
-   </div>
+
 </body>
 </html>
