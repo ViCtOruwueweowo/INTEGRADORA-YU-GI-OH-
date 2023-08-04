@@ -98,7 +98,7 @@ $nombreUsuario = $_SESSION['usuario'];
           <?php $nombreUsuario = $_SESSION['usuario']; echo "$nombreUsuario";?>
           </a>
           <ul class="dropdown-menu">
-          <a href="../../config/cerrarSesion.php" class="dropdown-item">Cerrar Sesion</a>
+          <a href="../../../config/cerrarSesion.php" class="dropdown-item">Cerrar Sesion</a>
           </ul>
       </li>
           </ul>

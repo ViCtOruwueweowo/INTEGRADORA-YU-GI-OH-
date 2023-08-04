@@ -77,7 +77,7 @@ $nombreUsuario = $_SESSION['usuario'];
 
           </li>
           <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style=" background-color: transparent !important;
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false" style=" background-color: transparent !important;
 ">
         Mi Inventario
           </a>
@@ -87,7 +87,7 @@ $nombreUsuario = $_SESSION['usuario'];
           </ul>
       </li>
       <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
         Mi Agenda
           </a>
           <ul class="dropdown-menu">
@@ -101,8 +101,8 @@ $nombreUsuario = $_SESSION['usuario'];
             <li><a class="dropdown-item" href="funciones/agregar_comprap.php">Venta Productos</a></li>
           </ul>
       </li>
-     <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+     <li class="nav-item dropdown"> 
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
           <?php $nombreUsuario = $_SESSION['usuario']; echo "$nombreUsuario";?>
           </a>
           <ul class="dropdown-menu">
@@ -145,25 +145,14 @@ $nombreUsuario = $_SESSION['usuario'];
                 right:'month, basicWeek'
             
             },
-             dayClick:function(date,jsEvent,view){
 
-              $('#btnAgregar').prop("disabled",false);
-              $('#btnModificar').prop("disabled",true);
-              $('#btnEliminar').prop("disabled",true);
-
-              limpiarModal();
-              $('#txtFecha').val(date.format());
-              $("#ModalEventos").modal();
-
-
-             },
             // events: 'http://localhost/inte_proto/views/administrador/eventos.php',
 
             events:'http://localhost/INTEGRAL/INTEGRADORA-YU-GI-OH-/views/administrador/eventos.php',
 
 
            eventClick:function(calEvent,jsEvent,view){
-            console.log('Evento clickeado', calEvent);
+            $('#ModalEventos').modal('show');
             if (calEvent.id === selectedEventId) {
         // El clic proviene de la misma cintilla de color, mostrar información del evento
 
@@ -182,7 +171,7 @@ $nombreUsuario = $_SESSION['usuario'];
 
             limpiarModal();
 
-            $('#btnAgregar').prop("disabled",true);
+            $('#btnAgregar').prop("disabled",false);
               $('#btnModificar').prop("disabled",false);
               $('#btnEliminar').prop("disabled",false);
 
