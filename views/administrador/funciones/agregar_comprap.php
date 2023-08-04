@@ -134,7 +134,7 @@ $nombreUsuario = $_SESSION['usuario'];
 <div class="container" style="color:whitesmoke;background-color: rgba(0, 0, 0, .550); box-shadow: 0 4px 5px rgba(10, 2, 1, 55); text-align:left">
 <h1 style="text-align: center;">Agregar Nuevo Deudor</h1>
 
-<form action="insert_cp.php" method="post">
+<form action="insertarven_dp.php" method="post">
 
 <h4>Seleccionar Cliente:</h4>
     <?php
@@ -167,26 +167,6 @@ $nombreUsuario = $_SESSION['usuario'];
       ?>
 
 
-
-<script>
-  function obtenerCantidadActual() {
-    var id_cr = $("#id_cr").val();
-
-    $.ajax({
-      type: "POST",
-      url: "obtener_cantidad.php",
-      data: {
-        id_cr: id_cr
-      },
-      success: function (data) {
-        $("#cantidad_actual").val(data); // Colocar el resultado en el campo "Cantidad actual"
-      }
-    });
-  }
-
-</script>
-
-
 <br>
       
     <div class="mb-3">
@@ -201,7 +181,10 @@ $nombreUsuario = $_SESSION['usuario'];
     <div class="mb-3">
     <h4>Notas:</h4>       <input type="text" name="notas" class="form-control" id="exampleFormControlInput1">
     </div>
+    <div class="mb-3">
 
+<input type="hidden" name="concepto" class="form-control" id="exampleFormControlInput1" value="COMPRA" readonly>
+</div>
 
     
     <div class="col-12">

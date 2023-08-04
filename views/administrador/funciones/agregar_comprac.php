@@ -132,7 +132,7 @@ $nombreUsuario = $_SESSION['usuario'];
 
 <br>
 <div class="container" style="color:whitesmoke;background-color: rgba(0, 0, 0, .550); box-shadow: 0 4px 5px rgba(10, 2, 1, 55); text-align:left">
-<h1 style="text-align: center;">Agregar Nuevo Deudor</h1>
+<h1 style="text-align: center;">Agregar Nueva venta</h1>
 
 <form action="insert_dc.php" method="post">
 
