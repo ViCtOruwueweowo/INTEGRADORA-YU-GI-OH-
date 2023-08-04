@@ -4,7 +4,7 @@ $db = new Database();
 $con = $db->conectar();
 
 # Por defecto hacemos la consulta de todos los productos
-$consulta = "SELECT * FROM productos LIMIT 0;";
+$consulta = "SELECT * FROM productos ORDER BY rand() LIMIT 5;";
 
 # Vemos si hay búsqueda
 $busqueda = null;
@@ -41,28 +41,9 @@ if ($busqueda === null) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="../../../css/bootstrap.min.css">
-    <link rel="stylesheet" href="../../../css/index3.css">
     <title>Inventario Productos</title>
     </head>
-    <body>
-    <style>
-  /* Custom CSS for the transparent navigation bar with shadow */
-  .navbar {
-    background-color: transparent !important;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  /* Adjust the color of the offcanvas menu content */
-  .offcanvas-header {
-    background-color: #333; /* Change this to your desired color */
-  }
-
-  /* Set the text color to black */
-  .navbar-dark .navbar-nav .nav-link {
-    color: whitesmoke;
-    font-size: 20px;
-    font-family: 'Times New Roman', Times, serif;
-  }
-</style>
+    <body style="background-color: rgba(235,235,235,255);">
 <style>
         #contendor{
             width: 80%;
@@ -112,7 +93,7 @@ $nombreUsuario = $_SESSION['usuario'];
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body">
-        <ul class="navbar-nav justify-content-right flex-grow-1 pe-3">
+        <ul class="navbar-nav justify-content-center flex-grow-1 pe-3">
           <li class="nav-item">
             <a type="button" class="nav-link" href="../calendario.php"  data-bs-target="#staticBackdrop">
               Calendario
@@ -188,110 +169,50 @@ $nombreUsuario = $_SESSION['usuario'];
 </div>
 </form>
 <br>
-<div class="table-responsive">
-<table class="table table-dark table-striped table-hover">
-  <thead >
-			<tr>
-      <th>Imagen</th>
-      <th>Nombre</th>
-      <th>existencias</th>
-				<th>Notas</th>
-				<th>Precio</th>
-			</tr>
-		</thead>
-		<tbody>
-			
-	
-    <?php while ($resultado = $sentencia->fetchObject()) {?>
-  <tr>
-  <td style="color:whitesmoke;background-color: rgba(0, 0, 0, .550); box-shadow: 0 4px 5px rgba(10, 2, 1, 55); text-align:center">
-                <?php
-                $imagenPath = "../../../imagenes/productos_2/" . $resultado->imagen_p;
-                
-                // Verifica si el archivo existe con varias extensiones
-                $extensionesPermitidas = array('jpg', 'jpeg', 'png', 'gif', 'webp');
-                $imagenEncontrada = false;
-                foreach ($extensionesPermitidas as $ext) {
-                    if (file_exists($imagenPath . "." . $ext)) {
-                        $imagen = $imagenPath . "." . $ext;
-                        $imagenEncontrada = true;
-                        break;
-                    }
-                }
+<div class="container">
+<?php while ($resultado = $sentencia->fetchObject()) {?>
+      
+		
+      <?php
+      $imagenPath = "../../../imagenes/productos_2/" . $resultado->imagen_p;
+      
+      // Verifica si el archivo existe con varias extensiones
+      $extensionesPermitidas = array('jpg', 'jpeg', 'png', 'gif', 'webp');
+      $imagenEncontrada = false;
+      foreach ($extensionesPermitidas as $ext) {
+          if (file_exists($imagenPath . "." . $ext)) {
+              $imagen = $imagenPath . "." . $ext;
+              $imagenEncontrada = true;
+              break;
+          }
+      }
 
-                // Si no se encuentra ninguna imagen, utiliza una imagen predeterminada
-                if (!$imagenEncontrada) {
-                    $imagen = "../../../imagenes/no_image.png";
-                }
-                ?>
-
-                <img src="<?php echo $imagen; ?>" style="width: 100px;">
-            </td>  <td style="color:whitesmoke;background-color: rgba(0, 0, 0, .550);
-    box-shadow: 0 4px 5px rgba(10, 2, 1, 55);text-align:center"><?php echo $resultado->nom_p ?></td>
-    <td style="color:whitesmoke;background-color: rgba(0, 0, 0, .550);
-    box-shadow: 0 4px 5px rgba(10, 2, 1, 55);text-align:center"><?php echo $resultado->existencias ?></td>
-    <td style="color:whitesmoke;background-color: rgba(0, 0, 0, .550);
-    box-shadow: 0 4px 5px rgba(10, 2, 1, 55);text-align:center"><?php echo $resultado->notas_prod ?></td>
-    <td style="color:whitesmoke;background-color: rgba(0, 0, 0, .550);
-    box-shadow: 0 4px 5px rgba(10, 2, 1, 55);text-align:center"><?php echo $resultado->precio ?></td>
-  </tr>
-  <?php }  $db->desconectarDB();?>
-		</tbody>
-	</table>
+      // Si no se encuentra ninguna imagen, utiliza una imagen predeterminada
+      if (!$imagenEncontrada) {
+          $imagen = "../../../imagenes/no_image.png";
+      }
+      ?>
+<div class="row mb-2">
+<div class="col-md-12">
+<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+<div class="col p-4 d-flex flex-column position-static" style="color:whitesmoke;background-color: rgba(0, 0, 0, .550);
+    box-shadow: 0 4px 5px rgba(10, 2, 1, 55);">
+<h3 class="mb-0" style="text-align: end;"><?php echo $resultado->nom_p ?></h3>
+<hr>
+<h5 class="card-text mb-auto" style="text-align: start;">Precio: </h5><p class="card-text mb-auto"><?php echo $resultado->precio ?></p>
+<h5 class="card-text mb-auto" style="text-align: start;">Precio: </h5><p class="card-text mb-auto"><?php echo $resultado->existencias ?></p>
+<h5 class="card-text mb-auto" style="text-align: start;">Descripcion: </h5><p class="card-text mb-auto"><?php echo $resultado->notas_prod ?></p>
 </div>
-  
+<div class="col-auto d-none d-lg-block">
+<img src="<?php echo $imagen; ?>" style="width: 200px;" alt=""> 
 </div>
-
- </div>
- </div>
- <!-- Modal -->
-<?php
-
-$db = new Database();
-$con = $db->conectar();
-$sql = $con->prepare("SELECT title, descripcion, color, textColor, start, end
-FROM calendario
-WHERE MONTH(start) = MONTH(CURRENT_DATE) OR 
-      (MONTH(start) < MONTH(CURRENT_DATE) AND MONTH(end) >= MONTH(CURRENT_DATE));");
-$sql->execute();
-$resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
-?>
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="staticBackdropLabel">Eventos Para El Mes</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-      <table class="table table-dark table-striped">
-  <thead>
-    <tr>
-      <th scope="col">Evento</th>
-      <th scope="col">Notas</th>
-      <th scope="col">Inicio</th>
-      <th scope="col">Fin</th>
-    </tr>
-  </thead>
-  <tbody>
-  <?php foreach($resultado as $fila): ?>
-    <tr>
-      <td scope="row" style="color:whitesmoke;"> <?php echo $fila ['title'] ?></td>
-      <td style="color:whitesmoke;"><?php echo $fila ['descripcion'] ?></td>
-      <td style="color:whitesmoke;"><?php echo $fila ['start'] ?></td>
-      <td style="color:whitesmoke;"><?php echo $fila ['end'] ?></td>
-    </tr>
-      <?php endforeach; ?>
-  </tbody>
-</table>
-      </div>
-  
-    </div>
-  </div>
 </div>
- </main>
- 
-<!-- JavaScript -->
+</div>
+</div> 
+
+
+<?php }?>
+</div>
     
 <script src="../../../js/bootstrap.min.js"></script> 
 <script src="../../../js/bootstrap.bundle.min.js"></script>

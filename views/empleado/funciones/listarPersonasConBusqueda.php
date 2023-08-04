@@ -4,31 +4,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="../../../css/bootstrap.min.css">
-    <link rel="stylesheet" href="../../../css/index3.css">
-
+<script src="../../../js/bootstrap.bundle.min.js"></script>
     <title>Inventario</title>
 
     </head>
-    <body>
- 
-    <style>
-  /* Custom CSS for the transparent navigation bar with shadow */
-  .navbar {
-    background-color: transparent !important;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  /* Adjust the color of the offcanvas menu content */
-  .offcanvas-header {
-    background-color: #333; /* Change this to your desired color */
-  }
-
-  /* Set the text color to black */
-  .navbar-dark .navbar-nav .nav-link {
-    color: whitesmoke;
-    font-size: 20px;
-    font-family: 'Times New Roman', Times, serif;
-  }
-</style>
+    <body style="background-color: rgba(235,235,235,255);">
 <style>
         #contendor{
             width: 80%;
@@ -73,22 +53,24 @@ $nombreUsuario = $_SESSION['usuario'];
     <span class="navbar-toggler-icon"></span>
     </button>
     <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasNavbar2" aria-labelledby="offcanvasNavbar2Label">
-    <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="offcanvasNavbar2Label">Mis Atajos</h5>
+    <div class="offcanvas-header" >
+    <h5 class="offcanvas-title" id="offcanvasNavbar2Label" >Mis Atajos</h5>
     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
      <div class="offcanvas-body">
-        <ul class="navbar-nav justify-content-right flex-grow-1 pe-3">
+        <ul class="navbar-nav justify-content-center flex-grow-1 pe-3">
         <li class="nav-item">
           <a type="button" class="nav-link" href="../calendario.php" data-bs-target="#staticBackdrop">
- Calendario
+ Calendario 
 </a>
+
           </li>
           <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style=" background-color: transparent !important;
+">
         Mi Inventario
           </a>
-          <ul class="dropdown-menu">
+          <ul class="dropdown-menu" >
           <a href="listarPersonasConBusqueda.php" class="dropdown-item">Cartas</a>
           <a href="listarPersonasConBusqueda2.php" class="dropdown-item">Productos</a>
           </ul>
@@ -111,6 +93,7 @@ $nombreUsuario = $_SESSION['usuario'];
           <a href="../../../config/cerrarSesion.php" class="dropdown-item">Cerrar Sesion</a>
           </ul>
       </li>
+        </ul>
     </div>
   </div>
 </nav>
@@ -125,8 +108,8 @@ $consulta = "SELECT *
 FROM cartas
 INNER JOIN car_rar ON cartas.id_car = car_rar.id_carar
 LEFT JOIN rareza ON car_rar.id_rar = rareza.id_ra
-ORDER BY cartas.tipo_c DESC
-LIMIT 0;";
+ORDER BY rand() DESC
+LIMIT 5;";
 
 # Vemos si hay búsqueda
 $busqueda = null; 
@@ -200,121 +183,53 @@ if ($busqueda === null) {
     </div>
 </form>
 <br>
-<div class="table-responsive">
-<table class="table table-dark table-striped table-hover">
-  <thead >
-			<tr>
-      <th>Imagen</th>
-      <th>Nombre</th>
-				<th>Tipo</th>
-				<th>Rareza</th>
-        <th>Cantidad</th>
-				<th>Tcg</th>
-				<th>Price</th>
-			</tr>
-		</thead>
-		<tbody>
-			
-			<?php while ($resultado = $sentencia->fetchObject()) {?>
-			<tr>
-        
-      <td style="color:whitesmoke;background-color: rgba(0, 0, 0, .550); box-shadow: 0 4px 5px rgba(10, 2, 1, 55); text-align:center">
-                <?php
-                $imagenPath = "../../../imagenes/productos/" . $resultado->imagen_c;
-                
-                // Verifica si el archivo existe con varias extensiones
-                $extensionesPermitidas = array('jpg', 'jpeg', 'png', 'gif', 'webp');
-                $imagenEncontrada = false;
-                foreach ($extensionesPermitidas as $ext) {
-                    if (file_exists($imagenPath . "." . $ext)) {
-                        $imagen = $imagenPath . "." . $ext;
-                        $imagenEncontrada = true;
-                        break;
-                    }
-                }
 
-                // Si no se encuentra ninguna imagen, utiliza una imagen predeterminada
-                if (!$imagenEncontrada) {
-                    $imagen = "../../../imagenes/no_image.png";
-                }
-                ?>
 
-                <img src="<?php echo $imagen; ?>" style="width: 100px;">
-            </td>
-</td>        <td style="color:whitesmoke;background-color: rgba(0, 0, 0, .550);
-    box-shadow: 0 4px 5px rgba(10, 2, 1, 55);text-align:center"><?php echo $resultado->nombre_c ?></td>
-				<td style="color:whitesmoke;background-color: rgba(0, 0, 0, .550);
-    box-shadow: 0 4px 5px rgba(10, 2, 1, 55);text-align:center"><?php echo $resultado->tipo_c ?></td>
-				<td style="color:whitesmoke;background-color: rgba(0, 0, 0, .550);
-    box-shadow: 0 4px 5px rgba(10, 2, 1, 55);text-align:center"><?php echo $resultado->rareza ?></td>
-        <td style="color:whitesmoke;background-color: rgba(0, 0, 0, .550);
-    box-shadow: 0 4px 5px rgba(10, 2, 1, 55);text-align:center"><?php echo $resultado->cantidad ?></td>
-				<td style="color:whitesmoke;background-color: rgba(0, 0, 0, .550);
-    box-shadow: 0 4px 5px rgba(10, 2, 1, 55);text-align:center"><a href="<?php echo $resultado->p_tcg ?>">Link Directo</a></td>
-				<td style="color:whitesmoke;background-color: rgba(0, 0, 0, .550);
-    box-shadow: 0 4px 5px rgba(10, 2, 1, 55);text-align:center"><a href="<?php echo $resultado->p_price ?>">Link Directo</a></td>
-			</tr>
-			<?php } $db->desconectarDB();?>
-		</tbody>
-	</table>
+<div class="container">
+<?php while ($resultado = $sentencia->fetchObject()) {?>
+      
+		
+      <?php
+      $imagenPath = "../../../imagenes/productos/" . $resultado->imagen_c;
+      
+      // Verifica si el archivo existe con varias extensiones
+      $extensionesPermitidas = array('jpg', 'jpeg', 'png', 'gif', 'webp');
+      $imagenEncontrada = false;
+      foreach ($extensionesPermitidas as $ext) {
+          if (file_exists($imagenPath . "." . $ext)) {
+              $imagen = $imagenPath . "." . $ext;
+              $imagenEncontrada = true;
+              break;
+          }
+      }
+
+      // Si no se encuentra ninguna imagen, utiliza una imagen predeterminada
+      if (!$imagenEncontrada) {
+          $imagen = "../../../imagenes/no_image.png";
+      }
+      ?>
+<div class="row mb-2">
+<div class="col-md-12">
+<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+<div class="col p-4 d-flex flex-column position-static" style="color:whitesmoke;background-color: rgba(0, 0, 0, .550);
+    box-shadow: 0 4px 5px rgba(10, 2, 1, 55);text-align:center">
+<h3 class="mb-0" style="text-align: end;"><?php echo $resultado->nombre_c ?></h3>
+<hr>
+<h5 class="card-text mb-auto" style="text-align: end;">Rareza: <?php echo $resultado->rareza ?></h5>
+<h5 class="card-text mb-auto" style="text-align: end;">Precio: <?php echo $resultado->p_beto ?></h5>
+<h5 class="card-text mb-auto" style="text-align: end;"><a href="<?php echo $resultado->p_tcg ?>">Visitar Tcg</a></h5>
+<h5 class="card-text mb-auto" style="text-align: end;"><a href="<?php echo $resultado->p_price ?>">Visitar Price</a></h5>
+
 </div>
-  
+<div class="col-auto d-none d-lg-block">
+<img src="<?php echo $imagen; ?>" style="width: 150px;" alt=""> 
 </div>
-
- </div>
- </div>
- <!-- Modal -->
-<?php
-
-$db = new Database();
-$con = $db->conectar();
-$sql = $con->prepare("SELECT title, descripcion, color, textColor, start, end
-FROM calendario
-WHERE MONTH(start) = MONTH(CURRENT_DATE) OR 
-      (MONTH(start) < MONTH(CURRENT_DATE) AND MONTH(end) >= MONTH(CURRENT_DATE));");
-$sql->execute();
-$resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
-?>
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="staticBackdropLabel">Eventos Para El Mes</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-      <table class="table table-dark table-striped">
-  <thead>
-    <tr>
-      <th scope="col">Evento</th>
-      <th scope="col">Notas</th>
-      <th scope="col">Inicio</th>
-      <th scope="col">Fin</th>
-
-    </tr>
-  </thead>
-  <tbody>
-  <?php foreach($resultado as $fila): ?>
-    <tr>
-      <td scope="row" style="color:whitesmoke;"> <?php echo $fila ['title'] ?></td>
-      <td style="color:whitesmoke;"><?php echo $fila ['descripcion'] ?></td>
-      <td style="color:whitesmoke;"><?php echo $fila ['start'] ?></td>
-      <td style="color:whitesmoke;"><?php echo $fila ['end'] ?></td>
-    </tr>
-      <?php endforeach; ?>
-  </tbody>
-</table>
-      </div>
-  
-    </div>
-  </div>
 </div>
- </main>
-    <!-- Aquí va el contenido de tu web -->
- 
-    <!-- JavaScript -->
-    
-<script src="../../../js/bootstrap.min.js"></script> 
-<script src="../../../js/bootstrap.bundle.min.js"></script>
+</div>
+</div> 
+
+
+<?php }?>
+</div>
  </body>
 </html>

@@ -1,40 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8"> 
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Inicio</title>
-<link rel="stylesheet" href="../../css/bootstrap.min.css">
-<script src="../../js/bootstrap.bundle.min.js"></script>
-<link rel="stylesheet" href="../../css/index3.css">
-</head>
-<body>
-<style>
-  /* Custom CSS for the transparent navigation bar with shadow */
-  .navbar {
-    background-color: transparent !important;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  /* Adjust the color of the offcanvas menu content */
-  .offcanvas-header {
-    background-color: #333; /* Change this to your desired color */
-  }
-
-  /* Set the text color to black */
-  .navbar-dark .navbar-nav .nav-link {
-    color: whitesmoke;
-    font-size: 20px;
-    font-family: 'Times New Roman', Times, serif;
-  }
-</style>
-
-<style>
-        #contendor{
-            width: 80%;
-            margin: auto;
-        }
-    </style>
 <?php
 session_start();
 
@@ -64,7 +27,18 @@ if ($_SESSION['tipo_usuario'] !== "2") {
 
 $nombreUsuario = $_SESSION['usuario'];
 ?>
-<!--TODO ESTO ES DE LO QUE ES DEL INDEX MIJO--->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"> 
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inicio Empleado</title>
+<link rel="stylesheet" href="../../css/bootstrap.min.css">
+
+<script src="../../js/bootstrap.bundle.min.js"></script>
+</head>
+<body style="background-color: rgba(235,235,235,255);">
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
   <div class="container-fluid">
     <a class="navbar-brand" href="index.php" style="  color: whitesmoke;
@@ -79,10 +53,10 @@ $nombreUsuario = $_SESSION['usuario'];
     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
      <div class="offcanvas-body">
-        <ul class="navbar-nav justify-content-right flex-grow-1 pe-3">
-          <li class="nav-item">
+        <ul class="navbar-nav justify-content-center flex-grow-1 pe-3">
+        <li class="nav-item">
           <a type="button" class="nav-link" href="calendario.php" data-bs-target="#staticBackdrop">
- Calendario
+ Calendario 
 </a>
 
           </li>
@@ -114,37 +88,49 @@ $nombreUsuario = $_SESSION['usuario'];
           <a href="../../config/cerrarSesion.php" class="dropdown-item">Cerrar Sesion</a>
           </ul>
       </li>
+        </ul>
     </div>
   </div>
 </nav>
-
-<!--Contenido Del Index Del EMPLEADO--->
-
 <br>
-
-<!--Todo Mi Apartado De Cartas-->
+<!---->
 <div class="container">
+<div class="row mb-2">
+    <div class="col-md-12">
+      <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-200 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+          <h3 class="mb-0">¡Bienvenido           <?php $nombreUsuario = $_SESSION['usuario']; echo "$nombreUsuario";?>!</h3>
+          <p class="card-text mb-auto">¡Recuerda Que En WorkStack Nos Preocupamos Por Ti!, Si Tienes Dudas Sobre Cuales Eventos Se Estaran Llevando En Todo Este Mes Da Clic Justo Sobre Mi.</p>
+        </div>
+        <div class="col-auto d-none  d-lg-block">
+<a href="calendario.php"><img src="../../img/guia.webp" style="width: 200px;" alt=""> </a>
+       </div>
+      </div>
+    </div>
+  </div> 
+</div>
+<!--Cartas-->
 <?php
 require '../../config/config.php';
 require '../../config/database.php';
 $db = new Database();
 $con = $db->conectar();
-$sql = $con->prepare("SELECT distinct id_car,
-nombre_c, imagen_c
-FROM 
-cartas inner join car_rar on
-cartas.id_car=car_rar.id_carar inner join rareza on
-car_rar.id_rar=rareza.id_ra where rareza.id_ra>='4' ORDER BY rand()
-LIMIT 8;");
+$sql = $con->prepare("SELECT DISTINCT cartas.id_car, nombre_c, imagen_c, rareza.rareza,car_rar.p_beto
+FROM cartas
+INNER JOIN car_rar ON cartas.id_car = car_rar.id_carar
+INNER JOIN rareza ON car_rar.id_rar = rareza.id_ra
+ORDER BY rand()
+LIMIT 4;");
 $sql->execute();
 $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
 ?>
+<div class="container">
 <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 g-4 ">
 
 <?php foreach ($resultado as $row) { ?>
   <div class="col">
     <div class="card shadow-sm " style="background-color: rgba(0, 0, 0, .550); box-shadow: 0 2px 4px rgba(10, 2, 1, 55);">
-      <?php
+    <?php
       $id = $row['imagen_c'];
       $imagePath = "../../imagenes/productos/" . $id;
       
@@ -164,9 +150,10 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
         $imagen = "imagenes/no image.png";
       }
       ?>
-      <img src="<?php echo $imagen; ?>" class="img-fluid" alt="...">
+      <img style="width: 100%;height: 350px;"src="<?php echo $imagen; ?>" class="img-fluid" alt="...">
       <div class="card-body">
         <h6 class="card-title text-center" style="color:white; font-size:20px; font-family: 'Times New Roman', Times, serif;"><?php echo $row['nombre_c']; ?></h6>
+        <h6 class="card-title text-center" style="color:white; font-size:20px; font-family: 'Times New Roman', Times, serif;"><?php echo $row['rareza']; ?></h6>
         <div class="d-flex justify-content-between align-items-center">
 
         </div>
@@ -179,58 +166,84 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
 }
 $db->desconectarDB();
 ?>
+
     </div> 
-</div>
-
-<br>
-
-<!-- Modal -->
-<?php
+    <div class="container">
+    <br>
+  <?php
 
 $db = new Database();
 $con = $db->conectar();
-$sql = $con->prepare("SELECT title, descripcion, color, textColor, start, end
-FROM calendario
-WHERE MONTH(start) = MONTH(CURRENT_DATE) OR 
-      (MONTH(start) < MONTH(CURRENT_DATE) AND MONTH(end) >= MONTH(CURRENT_DATE));");
+$sql = $con->prepare("SELECT * from productos
+ORDER BY rand()
+LIMIT 4;");
 $sql->execute();
 $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
 ?>
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" >
-  <div class="modal-dialog">
-    <div class="modal-content" >
-      <div class="modal-header text-center">
-        <h1 class="modal-title fs-5" id="staticBackdropLabel" style="text-align: center;">Eventos Para El Mes</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 g-4 ">
+
+<?php foreach ($resultado as $row) { ?>
+  <div class="col">
+    <div class="card shadow-sm " style="background-color: rgba(0, 0, 0, .550); box-shadow: 0 2px 4px rgba(10, 2, 1, 55);">
+      <?php
+      $id = $row['imagen_p'];
+      $imagePath = "../../imagenes/productos_2/" . $id;
+      
+      // Verifica si el archivo existe con varias extensiones
+      $extensionesPermitidas = array('jpg', 'jpeg', 'png', 'webp');
+      $imagenEncontrada = false;
+      foreach ($extensionesPermitidas as $ext) {
+        if (file_exists($imagePath . "." . $ext)) {
+          $imagen = $imagePath . "." . $ext;
+          $imagenEncontrada = true;
+          break;
+        }
+      }
+
+      // Si no se encuentra ninguna imagen, utiliza una imagen predeterminada
+      if (!$imagenEncontrada) {
+        $imagen = "imagenes/no image.png";
+      }
+      ?>
+      <img style="width: 100%;height: 350px;"src="<?php echo $imagen; ?>" class="img-fluid" alt="...">
+      <div class="card-body">
+        <h6 class="card-title text-center" style="color:white; font-size:15px; font-family: 'Times New Roman', Times, serif;"><?php echo $row['nom_p']; ?></h6>
+        <h6 class="card-title text-center" style="color:white; font-size:15px; font-family: 'Times New Roman', Times, serif;"><?php echo $row['precio']; ?></h6>
+        <div class="d-flex justify-content-between align-items-center">
+
+        </div>
+
       </div>
-      <div class="modal-body">
-      <table class="table table-dark table-striped" >
-  <thead>
-    <tr>
-      <th scope="col">Evento</th>
-      <th scope="col">Notas</th>
-      <th scope="col">Inicio</th>
-      <th scope="col">Fin</th>
-    </tr>
-  </thead>
-  <tbody>
-  <?php foreach($resultado as $fila): ?>
-    <tr>
-      <td scope="row" style="color:whitesmoke;"> <?php echo $fila ['title'] ?></td>
-      <td style="color:whitesmoke;" ><?php echo $fila ['descripcion'] ?></td>
-      <td style="color:whitesmoke;"><?php echo $fila ['start'] ?></td>
-      <td style="color:whitesmoke;"><?php echo $fila ['end'] ?></td>
-    </tr>
-      <?php endforeach; ?>
-  </tbody>
-</table>
-      </div>
-  
+
     </div>
   </div>
+<?php
+}
+$db->desconectarDB();
+?>
+
+    </div>
+    </div>
+
+    <br>
+    <div class="container">
+    <div class="row mb-2">
+    <div class="col-md-12">
+      <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-200 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+          <h4 class="mb-0"><?php $nombreUsuario = $_SESSION['usuario']; echo "$nombreUsuario";?></h4>
+          <p class="card-text mb-auto">Recuerda Siempre Revisar El Stock En Tienda Y Atender Al Cliente En Lo Que Necesite, ¿Necesitas Un Atajo? Aqui Lo Tienes <a href="funciones/listarPersonasConBusqueda.php" class="btn btn-primary">Visitar Inventario</a></p>
+        </div>
+        <div class="col-auto d-none  d-lg-block">
+<img src="../../img/beto2.png" style="width: 100px;" alt="">
+       </div>
+      </div>
+    </div>
+  </div> 
+    </div>
 </div>
-  </div>
-  <br>
+
+<br>
 <footer class="footer mt-auto py-3 bg-dark">
 <div class="container text-center">
 <span class="text-center" style="color:white">Aplicacion Desarrollada Unicamente Para Fines De Venta Y Distribucion De Menores.</span>
