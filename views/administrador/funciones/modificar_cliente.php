@@ -131,9 +131,10 @@ $nombreUsuario = $_SESSION['usuario'];
       ?>
 
 <div class="mb-3">
-    <h4>Nuevo Telefono:</h4>     
-      <input  name="tel_cli" class="form-control" id="exampleFormControlInput1" required>
-    </div>
+    <h4>Nuevo Teléfono:</h4>     
+    <input name="tel_cli" pattern="[0-9]{10}" maxlength="10" class="form-control" id="exampleFormControlInput1" required title="Ingrese un número de teléfono de 10 dígitos (solo números)">
+</div>
+
 
 
     
