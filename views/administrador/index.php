@@ -17,6 +17,7 @@ if ($_SESSION['tipo_usuario'] !== "1") {
 
 $nombreUsuario = $_SESSION['usuario'];
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

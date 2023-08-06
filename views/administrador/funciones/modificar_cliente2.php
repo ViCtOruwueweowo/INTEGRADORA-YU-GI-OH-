@@ -23,7 +23,8 @@ try {
     $nom_cli = $_POST['nom_cli'];
     $tel_cli = $_POST['tel_cli'];
 
-    $stmt = $conn->prepare("INSERT INTO clientes (nom_cli, tel_cli) VALUES (:nom_cli, :tel_cli)");
+    $stmt = $conn->prepare("UPDATE clientes SET tel_cli=:tel_cli WHERE nom_cli=:nom_cli");
+    
 
     $stmt->bindParam(':nom_cli', $nom_cli);
     $stmt->bindParam(':tel_cli', $tel_cli);

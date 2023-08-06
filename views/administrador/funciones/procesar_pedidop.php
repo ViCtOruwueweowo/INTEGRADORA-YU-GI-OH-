@@ -10,7 +10,7 @@ if (!isset($_SESSION['usuario'])) {
 }
 
 // Verificar si el tipo de usuario no es 1 (Tipo de usuario que puede acceder a esta página, osea el admin)
-if ($_SESSION['tipo_usuario'] !== "2") { 
+if ($_SESSION['tipo_usuario'] !== "1") { 
       echo "Acceso no autorizado. Por favor, inicia sesión con una cuenta válida.";
     header("refresh:5 ../../index.php");  // Redireccionamos al archivo de inicio de sesión
     exit();
@@ -18,7 +18,6 @@ if ($_SESSION['tipo_usuario'] !== "2") {
 
 $nombreUsuario = $_SESSION['usuario'];
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>

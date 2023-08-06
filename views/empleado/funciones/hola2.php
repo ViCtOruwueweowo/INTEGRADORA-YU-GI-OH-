@@ -10,7 +10,7 @@ if (!isset($_SESSION['usuario'])) {
 }
 
 // Verificar si el tipo de usuario no es 1 (Tipo de usuario que puede acceder a esta página, osea el admin)
-if ($_SESSION['tipo_usuario'] !== "1") { 
+if ($_SESSION['tipo_usuario'] !== "2") { 
       echo "Acceso no autorizado. Por favor, inicia sesión con una cuenta válida.";
     header("refresh:5 ../../index.php");  // Redireccionamos al archivo de inicio de sesión
     exit();
@@ -28,7 +28,7 @@ $nombreUsuario = $_SESSION['usuario'];
 <body>
 
 <div class="container mt-5">
-    <form action="procesar_pedidop.php" method="post"> <!-- Nuevo formulario para enviar datos a procesar_pedido.php -->
+    <form action="procesar_pedido2.php" method="post"> <!-- Nuevo formulario para enviar datos a procesar_pedido.php -->
         <?php
         // Conexión a la base de datos (reemplaza con tus propios datos de conexión)
         $servername = "localhost";
@@ -45,7 +45,7 @@ $nombreUsuario = $_SESSION['usuario'];
             $resultClientes = $conn->query($sqlClientes);
 
             // Consulta para obtener los datos de los productos
-            $sqlProductos = "SELECT id_pro, nom_p, precio FROM productos";
+            $sqlProductos = "SELECT CONCAT(cartas.nombre_c,' ', rareza.rareza) AS nombre, car_rar.id_cr, car_rar.p_beto FROM cartas inner join car_rar ON cartas.id_car=car_rar.id_carar INNER JOIN rareza ON car_rar.id_rar=rareza.id_ra ORDER BY cartas.nombre_c ASC";
             $resultProductos = $conn->query($sqlProductos);
         } catch (PDOException $e) {
             die("Conexión fallida: " . $e->getMessage());
@@ -64,11 +64,11 @@ $nombreUsuario = $_SESSION['usuario'];
         </div>
 
         <div class="form-group">
-            <label for="producto">Selecciona un producto:</label>
-            <select class="form-control" name="id_pro" id="id_pro">
+            <label for="producto">Selecciona una carta:</label>
+            <select class="form-control" name="id_cr" id="id_cr">
                 <?php
                 foreach ($resultProductos as $row) {
-                    echo "<option name='id_pro' value='" . $row["id_pro"] . "' precio='" . $row["precio"] . "'>" . $row["nom_p"] . "</option>";
+                    echo "<option name='id_pro' value='" . $row["id_cr"] . "' precio='" . $row["p_beto"] . "'>" . $row["nombre"] . "</option>";
                 }
                 ?>
             </select>
@@ -76,7 +76,7 @@ $nombreUsuario = $_SESSION['usuario'];
 
         <div class="form-group">
             <label for="cantidad">Cantidad:</label>
-            <input type="text" class="form-control" name="cantidad_p" id="cantidad" placeholder="Cantidad">
+            <input type="text" class="form-control" name="cantidad_c" id="cantidad" placeholder="Cantidad">
         </div>
 
         <div class="form-group">
@@ -100,7 +100,7 @@ $nombreUsuario = $_SESSION['usuario'];
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
 var selectClienteElement = document.getElementById("id_cli");
-var selectProductoElement = document.getElementById("id_pro");
+var selectProductoElement = document.getElementById("id_cr");
 var cantidadElement = document.getElementById("cantidad");
 var resultadoElement = document.getElementById("resultado");
 

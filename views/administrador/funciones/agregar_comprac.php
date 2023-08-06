@@ -18,174 +18,121 @@ if ($_SESSION['tipo_usuario'] !== "1") {
 
 $nombreUsuario = $_SESSION['usuario'];
 ?>
-
-
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="../../../css/bootstrap.min.css">
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
+    <title>Selección de Productos</title>
+    <!-- Agregar enlaces a los archivos CSS de Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
 
-    </head>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="../index.php">WorkStack</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2" aria-controls="offcanvasNavbar2" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasNavbar2" aria-labelledby="offcanvasNavbar2Label">
-        <div class="offcanvas-header">
-          <h5 class="offcanvas-title" id="offcanvasNavbar2Label">Mis Atajos</h5>
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+<div class="container mt-5">
+    <form action="procesar_pedidoc.php" method="post"> <!-- Nuevo formulario para enviar datos a procesar_pedido.php -->
+        <?php
+        // Conexión a la base de datos (reemplaza con tus propios datos de conexión)
+        $servername = "localhost";
+        $username = "root";
+        $password = "";
+        $dbname = "workstack";
+
+        try {
+            $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            // Consulta para obtener los datos de los clientes
+            $sqlClientes = "SELECT id_cli, nom_cli FROM clientes";
+            $resultClientes = $conn->query($sqlClientes);
+
+            // Consulta para obtener los datos de los productos
+            $sqlProductos = "SELECT CONCAT(cartas.nombre_c,' ', rareza.rareza) AS nombre, car_rar.id_cr, car_rar.p_beto FROM cartas inner join car_rar ON cartas.id_car=car_rar.id_carar INNER JOIN rareza ON car_rar.id_rar=rareza.id_ra ORDER BY cartas.nombre_c ASC";
+            $resultProductos = $conn->query($sqlProductos);
+        } catch (PDOException $e) {
+            die("Conexión fallida: " . $e->getMessage());
+        }
+        ?>
+
+        <div class="form-group">
+            <label for="cliente">Selecciona un cliente:</label>
+            <select class="form-control" name="id_cli" id="id_cli">
+                <?php
+                foreach ($resultClientes as $row) {
+                    echo "<option name='id_cli' value='" . $row["id_cli"] . "'>" . $row["nom_cli"] . "</option>";
+                }
+                ?>
+            </select>
         </div>
-        <div class="offcanvas-body">
-          <ul class="navbar-nav justify-content-center flex-grow-1 pe-3">
-            <li class="nav-item">
-              <a class="nav-link " aria-current="page" href="../calendario.php">Calendario</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link " aria-current="page" href="../empleados.php">Empleados</a>
-            </li>
-            <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Inventario
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="listarPersonasConBusqueda.php">Inventario Carta</a></li>
-            <li><a class="dropdown-item" href="listarPersonasConBusqueda2.php">Inventario Productos</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="detallar.php">Detalle Carta</a></li>
-          </ul>
-        </li>
-            <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Agenda
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="../acreedores.php">Mis Acreedores</a></li>
-            <li><a class="dropdown-item" href="../deudores_cartas.php">Mis Deudores Cartas</a></li>
-            <li><a class="dropdown-item" href="../deudores_productos.php">Mis Deudores Productos</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="agregar_cliente.php">Agregar Cliente</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="agregar_comprac.php">Venta Cartas</a></li>
-            <li><a class="dropdown-item" href="agregar_comprap.php">Venta Productos</a></li>
-          </ul>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Registro
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="../bitacoras/upd_cartas.php">Actualizaciones En Cartas</a></li>
-            <li><a class="dropdown-item" href="../bitacoras/upd_productos.php">Actualizaciones En Productos</a></li>
-            <li><a class="dropdown-item" href="../bitacoras/upd_dc.php">Reporte Deuda Cartas</a></li>
-            <li><a class="dropdown-item" href="../bitacoras/upd_dp.php">Reporte Deuda Productos</a></li>
-            <li><a class="dropdown-item" href="../bitacoras/upd_dp.php">Reporte Acreedores</a></li>
 
-          </ul>
-        </li>
-
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          <?php $nombreUsuario = $_SESSION['usuario']; echo "$nombreUsuario";?>
-          </a>
-          <ul class="dropdown-menu">
-          <a href="../../../config/cerrarSesion.php" class="dropdown-item">Cerrar Sesion</a>
-          </ul>
-      </li>
-          </ul>
-  
-       
+        <div class="form-group">
+            <label for="producto">Selecciona una carta:</label>
+            <select class="form-control" name="id_cr" id="id_cr">
+                <?php
+                foreach ($resultProductos as $row) {
+                    echo "<option name='id_pro' value='" . $row["id_cr"] . "' precio='" . $row["p_beto"] . "'>" . $row["nombre"] . "</option>";
+                }
+                ?>
+            </select>
         </div>
-      </div>
-    </div>
-  </nav>
-<br>
-<div class="container" style="color:whitesmoke;background-color: rgba(0, 0, 0, .550); box-shadow: 0 4px 5px rgba(10, 2, 1, 55); text-align:left">
-<h1 style="text-align: center;">Agregar Nueva venta</h1>
-<link rel="stylesheet" href="../../../css/index2.css">
 
-<form action="insert_dc.php" method="post">
+        <div class="form-group">
+            <label for="cantidad">Cantidad:</label>
+            <input type="text" class="form-control" name="cantidad_c" id="cantidad" placeholder="Cantidad">
+        </div>
 
-<h4>Seleccionar Cliente:</h4>
-    <?php
-      include 'date.php';
-      $conexion = new Database();
-      $conexion->conectarDB();
+        <div class="form-group">
+            <label for="notas">Notas:</label>
+            <input type="text" class="form-control" name="notas" id="notas">
+        </div>
 
-      $consulta = "SELECT clientes.nom_cli as nombre, clientes.id_cli from clientes";
-      $tabla = $conexion->seleccionar($consulta);
-      echo "<select id='id_cli' name='id_cli' class='form-select'> ";
-      foreach ($tabla as $row)
-      {
-          echo "<option name='id_cli' value='".$row->id_cli."'>".$row->nombre."</option>";
-      }
-      echo "</select> ";
-      echo "<h4 style='color: white;'>Selecciona Carta:</h4>";
-      //carta
-      $consulta = "SELECT CONCAT(cartas.nombre_c,' ', rareza.rareza) as nombre, car_rar.id_cr, car_rar.cantidad, car_rar.p_beto FROM cartas 
-      INNER JOIN car_rar ON cartas.id_car=car_rar.id_carar INNER JOIN rareza ON car_rar.id_rar=rareza.id_ra ORDER BY 
-      cartas.nombre_c ASC";
-      $tabla = $conexion->seleccionar($consulta);
-      echo "<select id='id_cr' name='id_cr' class='form-select'>";
-      foreach ($tabla as $row)
-      {
-          echo "<option name='id_cr' value='".$row->id_cr."'>".$row->nombre."</option>";
-      }
-      echo "</select>";
-      
-       
-      ?>
+        <?php
+    echo '<input type="hidden" name="resultado" id="resultadoHidden">';
+    ?>
 
-
-
-
-<br>
-
-<div class="mb-3">
-
-
-
-      
-    <div class="mb-3">
-    <h4>Cantidad Solicitada:</h4>     
-      <input type="number" min="1" name="cantidad_c" class="form-control" id="exampleFormControlInput1" required>
-    </div>
-    
-    <div class="mb-3">
-    <h4>Abono:</h4>     <input type="text" name="abono_c" class="form-control" id="exampleFormControlInput1" required pattern="[0-9]+">
-</div>
-
-    <div class="mb-3">
-    <h4>Notas:</h4>       <input type="text" name="notas" class="form-control" id="exampleFormControlInput1">
-    </div>
-    <div class="mb-3">
-
-    <input type="hidden" name="concepto" class="form-control" id="exampleFormControlInput1" value="COMPRA" readonly>
-</div>
-
-    
-
-    
-    <div class="col-12">
-      <button type="submit" value="Enviar" class="btn btn-primary">Guardar Registro</button>
-    </div>
-
+        <button type="submit" class="btn btn-primary">Enviar Pedido</button> <!-- Botón para enviar el formulario -->
     </form>
+
+    <div id="resultado" class="mt-3">
+        <!-- Aquí se mostrará el resultado de la multiplicación -->
+    </div>
 </div>
 
-<script src="../../../js/bootstrap.min.js"></script> 
-<script src="../../../js/bootstrap.bundle.min.js"></script>
+<!-- Agregar el script de Bootstrap y el script JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+var selectClienteElement = document.getElementById("id_cli");
+var selectProductoElement = document.getElementById("id_cr");
+var cantidadElement = document.getElementById("cantidad");
+var resultadoElement = document.getElementById("resultado");
 
+selectClienteElement.addEventListener("change", function() {
+    // Puedes acceder al valor seleccionado y utilizarlo en tu lógica
+});
 
+selectProductoElement.addEventListener("change", function() {
+    actualizarResultado();
+});
+
+cantidadElement.addEventListener("input", function() {
+    actualizarResultado();
+});
+
+function actualizarResultado() {
+    var selectedOption = selectProductoElement.options[selectProductoElement.selectedIndex];
+    var precio = parseFloat(selectedOption.getAttribute("precio"));
+
+    var cantidad = parseFloat(cantidadElement.value);
+
+    if (!isNaN(precio) && !isNaN(cantidad)) {
+        var resultado = precio * cantidad;
+        resultadoElement.innerHTML = "Total: $" + resultado.toFixed(2);
+        document.getElementById("resultadoHidden").value = resultado.toFixed(2); // Actualizar el campo oculto
+    } else {
+        resultadoElement.innerHTML = "Total: "; // Dejar el div vacío
+        document.getElementById("resultadoHidden").value = ''; // Dejar el campo oculto en blanco
+    }
+}
+
+</script>
 
 </body>
 </html>

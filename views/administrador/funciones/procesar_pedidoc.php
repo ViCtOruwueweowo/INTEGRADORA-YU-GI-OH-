@@ -10,7 +10,7 @@ if (!isset($_SESSION['usuario'])) {
 }
 
 // Verificar si el tipo de usuario no es 1 (Tipo de usuario que puede acceder a esta página, osea el admin)
-if ($_SESSION['tipo_usuario'] !== "2") { 
+if ($_SESSION['tipo_usuario'] !== "1") { 
       echo "Acceso no autorizado. Por favor, inicia sesión con una cuenta válida.";
     header("refresh:5 ../../index.php");  // Redireccionamos al archivo de inicio de sesión
     exit();
@@ -18,7 +18,6 @@ if ($_SESSION['tipo_usuario'] !== "2") {
 
 $nombreUsuario = $_SESSION['usuario'];
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,22 +41,22 @@ try {
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // Verificar si los datos del formulario fueron enviados
-    if (isset($_POST['id_cli'], $_POST['cantidad_p'],  $_POST['id_pro'], $_POST['resultado'], $_POST['notas'])) {
+    if (isset($_POST['id_cli'], $_POST['cantidad_c'],  $_POST['id_cr'], $_POST['resultado'], $_POST['notas'])) {
         // Obtener los datos del formulario de manera segura
         $id_cli = $_POST['id_cli'];
-        $cantidad_p = $_POST['cantidad_p'];
-        $id_pro = $_POST['id_pro'];
+        $cantidad_c = $_POST['cantidad_c'];
+        $id_cr = $_POST['id_cr'];
         $concepto = 'COMPRA';
         $resultado = $_POST['resultado']; // Obtener el valor del campo oculto "resultado"
         $notas = $_POST['notas'];
 
          // Insertar los datos en la base de datos utilizando consultas preparadas
-    $stmt = $conn->prepare("INSERT INTO deuda_p (id_clientep, cantidad_p, id_p, notas, concept, abono_p) VALUES (:id_cli, :cantidad_p, :id_pro, :notas, :concepto, :resultado)");
+    $stmt = $conn->prepare("INSERT INTO deuda_c (id_clientec, cantidad_c, cr_fk, notas, concepto, abono_c) VALUES (:id_cli, :cantidad_c, :id_cr, :notas, :concepto, :resultado)");
 
 
         $stmt->bindParam(':id_cli', $id_cli);
-        $stmt->bindParam(':cantidad_p', $cantidad_p);
-        $stmt->bindParam(':id_pro', $id_pro);
+        $stmt->bindParam(':cantidad_c', $cantidad_c);
+        $stmt->bindParam(':id_cr', $id_cr);
         $stmt->bindParam(':concepto', $concepto);
         $stmt->bindParam(':resultado', $resultado); // Insertar el valor del resultado en la consulta
         $stmt->bindParam(':notas', $notas);
