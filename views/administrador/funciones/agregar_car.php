@@ -108,6 +108,8 @@ $nombreUsuario = $_SESSION['usuario'];
       </div>
     </div>
   </nav>
+  <link rel="stylesheet" href="../../../css/index2.css">
+
 <br>
 
 <!---->

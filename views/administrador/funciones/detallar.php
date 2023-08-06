@@ -134,6 +134,23 @@ $nombreUsuario = $_SESSION['usuario'];
 ?>
 
 <br>
+<link rel="stylesheet" href="../../../css/index2.css">
+<br>
+<div class="container d-none  d-lg-block">
+<div class="row mb-2">
+    <div class="col-md-12">
+      <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-lg p-3 mb-5  h-md-200 position-relative" style="background-color: white;">
+        <div class="col p-4 d-flex flex-column position-static">
+          <h3 class="mb-0 text-start">¡Sr.<?php $nombreUsuario = $_SESSION['usuario']; echo "$nombreUsuario";?>!</h3>
+          <p class="card-text mb-auto">¿No te gusto el buscador?, aqui tienes uno mas facil de usar sir.</p>
+        </div>
+        <div class="col-auto d-none  d-lg-block">
+<img src="../../../img/labrynth.png" style="width: 150px;" alt="">
+       </div>
+      </div>
+    </div>
+  </div> 
+</div>
 <div class="container" ">
     <form class="row g-3" method="POST">
         <div class="col-auto">

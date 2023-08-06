@@ -31,6 +31,8 @@ $nombreUsuario = $_SESSION['usuario'];
     <link rel="stylesheet" href="css/bootstrap-clockpicker.css">    
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="js/bootstrap-clockpicker.js"></script>
+    <link rel="stylesheet" href="../../img/fondo bonito.jpg">
+
     <!--  Full Calendar -->
     <link rel="stylesheet" href="css/fullcalendar.min.css">
     <script src="js/moment.min.js"></script>
@@ -112,10 +114,28 @@ $nombreUsuario = $_SESSION['usuario'];
       </div>
     </div>
   </nav>
+  <br>
+
+  <div class="container d-none  d-lg-block">
+<div class="row mb-2">
+    <div class="col-md-12">
+      <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-lg p-3 mb-5  h-md-200 position-relative" style="background-color: white;">
+        <div class="col p-4 d-flex flex-column position-static">
+          <h3 class="mb-0">¡Sr.<?php $nombreUsuario = $_SESSION['usuario']; echo "$nombreUsuario";?>!</h3>
+          <p class="card-text mb-auto">Te presentamos tu calendario, aqui podras agendar todos tus eventos proximos a realizar, si llegas a cometer recuerda que puedes modificar el eventos o si ya no te es util simplemente eliminalo. </p>
+        </div>
+        <div class="col-auto d-none  d-lg-block">
+<img src="../../img/ghostrick.png" style="width: 150px;" alt="">
+       </div>
+      </div>
+    </div>
+  </div> 
+</div>
+
     <div class="container">
 
         
-            <div> <br/><br/> <div id="CalendarioWeb" style=" background-color: rgba(0, 0, 0, 0.500);; ;color:white ;font-size:25px" class="fc fc-media-screen fc-direction-ltr  "  ></div></div>
+            <div><div id="CalendarioWeb" style=" background-color: rgba(0, 0, 0, 0.500);; ;color:white ;font-size:25px" class="fc fc-media-screen fc-direction-ltr  "  ></div></div>
           
     </div>
    

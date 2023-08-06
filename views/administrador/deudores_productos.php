@@ -42,6 +42,8 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../img/fondo bonito.jpg">
+
     <script src="../../js/bootstrap.bundle.min.js"></script>
 </head>
 <body style="background-color: rgba(235,235,235,255);">

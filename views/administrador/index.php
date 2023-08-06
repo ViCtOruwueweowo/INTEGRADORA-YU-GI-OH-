@@ -25,6 +25,7 @@ $nombreUsuario = $_SESSION['usuario'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio</title>
     <link rel="stylesheet" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../img/fondo bonito.jpg">
 </head>
 <body style="background-color: rgba(235,235,235,255);">
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
@@ -69,6 +70,7 @@ $nombreUsuario = $_SESSION['usuario'];
             <li><a class="dropdown-item" href="deudores_productos.php">Mis Deudores Productos</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="funciones/agregar_cliente.php">Agregar Cliente</a></li>
+            <li><a class="dropdown-item" href="funciones/modificar_cliente.php">Modificar Cliente</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="funciones/agregar_comprac.php">Venta Cartas</a></li>
             <li><a class="dropdown-item" href="funciones/agregar_comprap.php">Venta Productos</a></li>

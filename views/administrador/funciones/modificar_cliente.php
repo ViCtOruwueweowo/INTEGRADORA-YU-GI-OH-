@@ -1,5 +1,4 @@
- 
-<?php
+ <?php
 session_start();
 
 // Verificar si el usuario no ha iniciado sesión
@@ -18,25 +17,23 @@ if ($_SESSION['tipo_usuario'] !== "1") {
 
 $nombreUsuario = $_SESSION['usuario'];
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
     <link rel="stylesheet" href="../../../css/bootstrap.min.css">
     <script src="../../../js/bootstrap.bundle.min.js"></script>
-  
+      
     <link rel="stylesheet" href="../../../css/index2.css">
-    <title>Document</title>
 </head>
 <body>
-
-    </head>
-    <body>
+<body style="background-color: rgba(235,235,235,255);">
     
     <header>
+  <!-- Fixed navbar -->
+    <!-- Fixed navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
     <div class="container-fluid">
       <a class="navbar-brand" href="../index.php">WorkStack</a>
@@ -104,85 +101,47 @@ $nombreUsuario = $_SESSION['usuario'];
           <a href="../../config/cerrarSesion.php" class="dropdown-item">Cerrar Sesion</a>
           </ul>
       </li>
-          </ul>
-  
-       
+          </ul>         
         </div>
       </div>
     </div>
   </nav>
+    
 
-<?php
-include 'date.php';
-$conexion = new database();
-$conexion->conectarDB();
 
-// Obtener la lista de departamentos para el filtro
-$consulta = "SELECT CONCAT(cartas.nombre_c, ' ', rareza.rareza) as nombre, car_rar.id_cr, car_rar.p_beto, car_rar.p_tcg, car_rar.p_price, car_rar.cantidad FROM car_rar INNER JOIN cartas ON car_rar.id_carar = cartas.id_car INNER JOIN rareza ON car_rar.id_rar = rareza.id_ra ORDER BY cartas.nombre_c ASC";
-$tabla = $conexion->seleccionar($consulta);
+  <div class="container" style="color:whitesmoke;background-color: rgba(0, 0, 0, .550); box-shadow: 0 4px 5px rgba(10, 2, 1, 55); text-align:left">
+<h1 style="text-align: center;">Agregar Nueva venta</h1>
 
-// Filtrar el departamento seleccionado
-if (isset($_POST['depa'])) {
-    $depa = $_POST['depa'];
-    $consultaf = "SELECT CONCAT(cartas.nombre_c, ' ', rareza.rareza) as nombre, car_rar.id_cr, car_rar.p_beto, car_rar.p_tcg, car_rar.p_price, car_rar.cantidad FROM car_rar INNER JOIN cartas ON car_rar.id_carar = cartas.id_car INNER JOIN rareza ON car_rar.id_rar = rareza.id_ra WHERE id_cr ='$depa'";
-    $tablaf = $conexion->seleccionar($consultaf);
-}
-?>
-<br>
-<div class="container" style="color:whitesmoke;background-color: rgba(0, 0, 0, .550);
-    box-shadow: 0 4px 5px rgba(10, 2, 1, 55);text-align:left;color:white">
+<form action="modificar_cliente2.php" method="post">
 
-<br>
-    <form class="row g-3" method="POST">
-        <div class="col-auto">
-           <H2 style="text-align: center;">Seleccionar Carta</H2>
-        </div>
-        <div class="col-auto">
-            <select class="form-select" name="depa" aria-label="Default select example">
-                <?php
-                foreach ($tabla as $registro) {
-                    $selected = '';
-                    if (isset($_POST['depa']) && $_POST['depa'] == $registro->id_cr) {
-                        $selected = 'selected';
-                    }
-                    echo "<option value='" . $registro->id_cr . "' $selected>" . $registro->nombre . "</option>";
-                }
-                ?>
-            </select>
-        </div>
-        <div class="col-auto">
-            <button type="submit" class="btn btn-primary mb-3">Filtrar</button>
-        </div>
+<h4>Seleccionar Cliente:</h4>
+    <?php
+      include 'date.php';
+      $conexion = new Database();
+      $conexion->conectarDB();
 
-        <?php
-        // Mostrar los campos dentro del formulario principal
-        if (isset($tablaf)) {
-            foreach ($tablaf as $registro) {
-                echo "<input type='hidden' name='id_cr' value='$registro->id_cr'> ";
-                echo "<label for='p_beto'>Precio</label>";
-                echo "<input class='form-control' name='p_beto' value='$registro->p_beto' pattern='^[0-9]+(\.[0-9]+)?$' title='Ingrese un número válido' required> ";
-                echo "<label for='p_tcg'>p_tcg</label>";
-                echo "<input class='form-control' name='p_tcg' value='$registro->p_tcg'> ";
-                echo "<label for='p_price'>p_price</label>";
-                echo "<input class='form-control' name='p_price' value='$registro->p_price'> ";
-                echo "<label for='cantidad'>Cantidad</label>";
-                echo "<input type='number' min='0' class='form-control' name='cantidad'  value='$registro->cantidad' required> ";
-            }
+      $consulta = "SELECT clientes.nom_cli as nombre, clientes.id_cli from clientes";
+      $tabla = $conexion->seleccionar($consulta);
+      echo "<select id='nom_cli' name='nom_cli' class='form-select'> ";
+      foreach ($tabla as $row)
+      {
+          echo "<option name='nom_cli' value='".$row->nombre."'>".$row->nombre."</option>";
+      }
+      echo "</select> ";      
+      ?>
 
-         //   <!-- Botón para enviar los datos al archivo car_rar.php -->
-            echo "<div class='col-12'>
-            <button type='submit' formaction='car_rar2.php' class='btn btn-primary'>Enviar Datos</button>
-            </div>";
-        } else {
-          echo "<div class='col-12'>
-          <button type='submit' formaction='car_rar2.php' class='btn btn-primary disabled'>Enviar Datos</button>
-          </div>";
-        }
-        ?>
+<div class="mb-3">
+    <h4>Nuevo Telefono:</h4>     
+      <input  name="tel_cli" class="form-control" id="exampleFormControlInput1" required>
+    </div>
 
+
+    
+    <div class="col-12">
+      <button type="submit" value="Enviar" class="btn btn-primary">Guardar Registro</button>
+    </div>
 
     </form>
 </div>
-
 </body>
 </html>

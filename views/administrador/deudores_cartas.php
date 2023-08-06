@@ -40,6 +40,7 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Deudores</title>
 </head>
+<link rel="stylesheet" href="../../img/fondo bonito.jpg">
 
 <link rel="stylesheet" href="../../css/bootstrap.min.css">
 <body style="background-color: rgba(235,235,235,255);">

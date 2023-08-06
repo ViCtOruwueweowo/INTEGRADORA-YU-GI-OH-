@@ -151,7 +151,23 @@ if ($busqueda === null) {
 }
 # Sin importar si hubo búsqueda o no, se nos habrá devuelto un cursor que iteramos más abajo...
 ?>
-
+<link rel="stylesheet" href="../../../css/index2.css">
+<br>
+<div class="container d-none  d-lg-block">
+<div class="row mb-2">
+    <div class="col-md-12">
+      <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-lg p-3 mb-5  h-md-200 position-relative" style="background-color: white;">
+        <div class="col p-4 d-flex flex-column position-static">
+          <h3 class="mb-0 text-start">¡Sr.<?php $nombreUsuario = $_SESSION['usuario']; echo "$nombreUsuario";?>!</h3>
+          <p class="card-text mb-auto">Tu inventario personal de cartas, consulta todas las cartas que haz agregado a tu aplicacion, modificalas en caso de que tengas un error.</p>
+        </div>
+        <div class="col-auto d-none  d-lg-block">
+<img src="../../../img/gay.png" style="width: 150px;" alt="">
+       </div>
+      </div>
+    </div>
+  </div> 
+</div>
 <main role="main" class="flex-shrink-0">
 
 <div class="container">

@@ -31,10 +31,7 @@ $nombreUsuario = $_SESSION['usuario'];
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 </head>
-<body>
-
-    </head>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
   <div class="container-fluid">
     <a class="navbar-brand" href="../index.php" style="color: whitesmoke; font-size: 20px; font-family: 'Times New Roman', Times, serif;">
       WorkStack
@@ -91,12 +88,11 @@ $nombreUsuario = $_SESSION['usuario'];
     </div>
   </div>
 </nav>
-
 <br>
 <div class="container" style="color:whitesmoke;background-color: rgba(0, 0, 0, .550); box-shadow: 0 4px 5px rgba(10, 2, 1, 55); text-align:left">
 <h1 style="text-align: center;">Agregar Nueva venta</h1>
 
-<form action="insert_dc.php" method="post">
+<form  method="post" action="">
 
 <h4>Seleccionar Cliente:</h4>
     <?php
@@ -144,7 +140,7 @@ $nombreUsuario = $_SESSION['usuario'];
     </div>
     
     <div class="mb-3">
-    <h4>Abono:</h4>     <input type="text" name="abono_c" class="form-control" id="exampleFormControlInput1" required pattern="[0-9]+">
+    <h4>Precio:</h4>     <input type="text" name="precio" class="form-control" id="exampleFormControlInput1" required pattern="[0-9]+">
 </div>
 
     <div class="mb-3">
@@ -157,14 +153,39 @@ $nombreUsuario = $_SESSION['usuario'];
 
     
 
-    
-    <div class="col-12">
-      <button type="submit" value="Enviar" class="btn btn-primary">Guardar Registro</button>
-    </div>
+<div class="d-grid gap-2">
+<button type="submit" value="Calcular" class="btn btn-primary">Ver Datos Compra</button>
+</div>
+  
 
     </form>
-</div>
+<br>
+  
+    
+    <?php
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $numero1 = $_POST["precio"];
+        $numero2 = $_POST["cantidad_c"];
+        $notas =$_POST['notas'];
+        $concepto =$_POST['concepto'];
+        $nombre =$_POST['id_cli'];
+        $suma = $numero1 * $numero2;
+        
+        echo "<div class'container'>
+        <h5 class='text-center'>Detalle Compra</5>";
+echo "<br>";
+echo "<br>";
+        echo "<p>El Total Por La Compra Es De: " . $suma . "</p>";
+        echo "<p>Notas Realizadas: " . $notas . "</p>";
+        echo "<p>Concepto De Venta: " . $concepto . "</p>";
 
+
+        echo      " <div class='d-grid gap-2'>";
+echo "<a class='btn btn-danger' href='agregar_comprac.php'>Cancelar Compra</a>";
+echo "</div>";
+        echo "</div>";
+    }
+    ?>
 <script src="../../../js/bootstrap.min.js"></script> 
 <script src="../../../js/bootstrap.bundle.min.js"></script>
 

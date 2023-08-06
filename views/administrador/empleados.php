@@ -54,6 +54,7 @@ if (isset($_POST['filtro_inactivos'])) {
     <title>Empleados</title>
     <link rel="stylesheet" href="../../css/bootstrap.min.css">
     <script src="../../js/bootstrap.min.js"></script>
+    <script src="../../css/index2.css"></script>
   <script src="../../js/bootstrap.bundle.min.js"></script>
 </head>
 <body style="background-color: rgba(235,235,235,255);">
@@ -129,14 +130,30 @@ if (isset($_POST['filtro_inactivos'])) {
     </div>
   </div>
 </nav>
-
-
-
-
-  <br>
-<div class="container text-center">
 <br>
+
+
+
+  
+<div class="container text-center">
+<div class="container d-none  d-lg-block">
+<div class="row mb-2">
+    <div class="col-md-12">
+      <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-lg p-3 mb-5  h-md-200 position-relative" style="background-color: white;">
+        <div class="col p-4 d-flex flex-column position-static">
+          <h3 class="mb-0 text-start">¡Sr.<?php $nombreUsuario = $_SESSION['usuario']; echo "$nombreUsuario";?>!</h3>
+          <p class="card-text mb-auto">Aqui podra tener el control total de tus empleados, agrega a todos los empleados que contrates y corrige su informacion a futuro, ¿Quieres ver quienes ya no trabajan aqui?, prueba los botones que tienes en la parte inferior.</p>
+        </div>
+        <div class="col-auto d-none  d-lg-block">
+<img src="../../img/sapo.webp" style="width: 150px;" alt="">
+       </div>
+      </div>
+    </div>
+  </div> 
+</div>
   <div class="row">
+
+  
     <div class="col">
     <button type="button" class="btn btn-outline-primary  btn-lg" data-bs-toggle="modal" data-bs-target="#Agregar">
   Agregar Empleado

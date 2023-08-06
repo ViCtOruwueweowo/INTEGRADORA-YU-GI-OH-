@@ -92,8 +92,8 @@ $nombreUsuario = $_SESSION['usuario'];
 
 
 <br>
-<div class="container" style="color:whitesmoke;background-color: rgba(0, 0, 0, .550); box-shadow: 0 4px 5px rgba(10, 2, 1, 55); text-align:left">
-<h1 style="text-align: center;">Agregar Nuevo Deudor</h1>
+<div class="container" style="color:whitesmoke;background-color: rgba(0, 0, 0, .650); box-shadow: 0 4px 5px rgba(10, 2, 1, 55); text-align:left">
+<h1 style="text-align: center;">Compra Productos</h1>
 
 <form action="insertarven_dp.php" method="post">
 

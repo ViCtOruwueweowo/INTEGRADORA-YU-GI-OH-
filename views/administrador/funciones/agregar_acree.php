@@ -43,6 +43,7 @@ $nombreUsuario = $_SESSION['usuario'];
 
 </head>
 <body>
+<link rel="stylesheet" href="../../../css/index2.css">
 
     </head>
 

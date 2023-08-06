@@ -6,7 +6,8 @@
     <title>Document</title>
 </head>
 <body>
-    <link rel="stylesheet" href="../../../css/index2.css">
+    <link rel="stylesheet" href="../../../css/index2.css">    <link rel="stylesheet" href="../../../css/index2.css">
+
     <link rel="stylesheet" href="../../../css/bootstrap.min.css">
     <script src="../../../js/bootstrap.bundle.min.js"></script>
     <style>

@@ -146,27 +146,35 @@ $nombreUsuario = $_SESSION['usuario'];
   </nav>
 
 <!-- Begin page content -->
-
+<link rel="stylesheet" href="../../../css/index2.css">
+<br>
+<div class="container d-none  d-lg-block">
+<div class="row mb-2">
+    <div class="col-md-12">
+      <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-lg p-3 mb-5  h-md-200 position-relative" style="background-color: white;">
+        <div class="col p-4 d-flex flex-column position-static">
+          <h3 class="mb-0 text-start">¡Sr.<?php $nombreUsuario = $_SESSION['usuario']; echo "$nombreUsuario";?>!</h3>
+          <p class="card-text mb-auto">Tu inventario personal de productos, mira los structures, cajas, playmats, dados o demas cosas que haz agregado y te gustaria promocionar en la web.</p>
+        </div>
+        <div class="col-auto d-none  d-lg-block">
+<img src="../../../img/tearlament.png" style="width: 150px;" alt="">
+       </div>
+      </div>
+    </div>
+  </div> 
+</div>
 <main role="main" class="flex-shrink-0">
 
 <div class="container">
    
 <div class="row">
  <div class="col-md-12">   
- 
- 
- <br>
 <form class="form-inline" action="listarPersonasConBusqueda2.php" method="GET">
   <div class="form-group mx-sm-3 mb-2">
-    
   <div class="row">
-
 <div class="col col-12 col-lg-6 text-center" >
   <input name="busqueda" type="text" class="form-control"  placeholder="Buscar">
   </div>
-
-
-
   <div class="col col-sm-3 col-lg-2">
   <button type="submit" class="btn btn-warning btn-md">Buscar ahora</button>
   </div>

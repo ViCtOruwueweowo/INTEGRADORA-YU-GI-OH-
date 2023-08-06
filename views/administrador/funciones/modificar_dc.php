@@ -28,6 +28,8 @@ $nombreUsuario = $_SESSION['usuario'];
     <title>Document</title>
     <link rel="stylesheet" href="../../../css/bootstrap.min.css">
     <script src="../../../js/bootstrap.bundle.min.js"></script>
+      
+    <link rel="stylesheet" href="../../../css/index2.css">
 </head>
 <body>
 

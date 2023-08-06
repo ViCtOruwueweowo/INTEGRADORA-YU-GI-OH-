@@ -6,7 +6,8 @@
     <title>Guardar Carta Detallada</title>
     <link rel="stylesheet" href="../../../css/bootstrap.min.css">
     <link rel="stylesheet" href="../../../css/index3.css">
-    <script src="../../../js/bootstrap.bundle.min.js"></script>
+    <script src="../../../js/bootstrap.bundle.min.js"></script>    <link rel="stylesheet" href="../../../css/index2.css">
+
 </head>
 <body>
 <style>
