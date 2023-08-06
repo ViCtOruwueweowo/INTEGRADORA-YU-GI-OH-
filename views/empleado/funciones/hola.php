@@ -34,7 +34,7 @@
 
         <div class="form-group">
             <label for="cliente">Selecciona un cliente:</label>
-            <select class="form-control" name="cliente" id="cliente">
+            <select class="form-control" name="id_cli" id="id_cli">
                 <?php
                 foreach ($resultClientes as $row) {
                     echo "<option name='id_cli' value='" . $row["id_cli"] . "'>" . $row["nom_cli"] . "</option>";
@@ -45,7 +45,7 @@
 
         <div class="form-group">
             <label for="producto">Selecciona un producto:</label>
-            <select class="form-control" name="producto" id="producto">
+            <select class="form-control" name="id_pro" id="id_pro">
                 <?php
                 foreach ($resultProductos as $row) {
                     echo "<option name='id_pro' value='" . $row["id_pro"] . "' precio='" . $row["precio"] . "'>" . $row["nom_p"] . "</option>";
@@ -59,6 +59,15 @@
             <input type="text" class="form-control" name="cantidad_p" id="cantidad" placeholder="Cantidad">
         </div>
 
+        <div class="form-group">
+            <label for="notas">Notas:</label>
+            <input type="text" class="form-control" name="notas" id="notas">
+        </div>
+
+        <?php
+    echo '<input type="hidden" name="resultado" id="resultadoHidden">';
+    ?>
+
         <button type="submit" class="btn btn-primary">Enviar Pedido</button> <!-- Botón para enviar el formulario -->
     </form>
 
@@ -70,8 +79,8 @@
 <!-- Agregar el script de Bootstrap y el script JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
-var selectClienteElement = document.getElementById("cliente");
-var selectProductoElement = document.getElementById("producto");
+var selectClienteElement = document.getElementById("id_cli");
+var selectProductoElement = document.getElementById("id_pro");
 var cantidadElement = document.getElementById("cantidad");
 var resultadoElement = document.getElementById("resultado");
 
@@ -90,15 +99,19 @@ cantidadElement.addEventListener("input", function() {
 function actualizarResultado() {
     var selectedOption = selectProductoElement.options[selectProductoElement.selectedIndex];
     var precio = parseFloat(selectedOption.getAttribute("precio"));
+
     var cantidad = parseFloat(cantidadElement.value);
-    
+
     if (!isNaN(precio) && !isNaN(cantidad)) {
         var resultado = precio * cantidad;
-        resultadoElement.textContent = "Total: $" + resultado.toFixed(2);
+        resultadoElement.innerHTML = "Total: $" + resultado.toFixed(2);
+        document.getElementById("resultadoHidden").value = resultado.toFixed(2); // Actualizar el campo oculto
     } else {
-        resultadoElement.textContent = "Total: ";
+        resultadoElement.innerHTML = "Total: "; // Dejar el div vacío
+        document.getElementById("resultadoHidden").value = ''; // Dejar el campo oculto en blanco
     }
 }
+
 </script>
 
 </body>

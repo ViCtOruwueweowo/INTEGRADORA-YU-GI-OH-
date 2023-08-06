@@ -1,3 +1,6 @@
+<?php
+var_dump($_POST);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,20 +24,25 @@ try {
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // Verificar si los datos del formulario fueron enviados
-    if (isset($_POST['id_cli'], $_POST['cantidad_p'],  $_POST['id_pro'])) {
+    if (isset($_POST['id_cli'], $_POST['cantidad_p'],  $_POST['id_pro'], $_POST['resultado'], $_POST['notas'])) {
         // Obtener los datos del formulario de manera segura
         $id_cli = $_POST['id_cli'];
         $cantidad_p = $_POST['cantidad_p'];
         $id_pro = $_POST['id_pro'];
         $concepto = 'COMPRA';
+        $resultado = $_POST['resultado']; // Obtener el valor del campo oculto "resultado"
+        $notas = $_POST['notas'];
 
-        // Insertar los datos en la base de datos utilizando consultas preparadas
-        $stmt = $conn->prepare("INSERT INTO deuda_p (id_clientep, cantidad_p, id_p, concepto) VALUES (:id_cli, :cantidad_p, :id_pro, :concepto)");
+         // Insertar los datos en la base de datos utilizando consultas preparadas
+    $stmt = $conn->prepare("INSERT INTO deuda_p (id_clientep, cantidad_p, id_p, notas, concept, abono_p) VALUES (:id_cli, :cantidad_p, :id_pro, :notas, :concepto, :resultado)");
+
 
         $stmt->bindParam(':id_cli', $id_cli);
         $stmt->bindParam(':cantidad_p', $cantidad_p);
         $stmt->bindParam(':id_pro', $id_pro);
         $stmt->bindParam(':concepto', $concepto);
+        $stmt->bindParam(':resultado', $resultado); // Insertar el valor del resultado en la consulta
+        $stmt->bindParam(':notas', $notas);
         $stmt->execute();
 
         echo "<div class='container' id='contenedor'>
