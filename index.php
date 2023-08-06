@@ -131,7 +131,7 @@ $db->desconectarDB();
     <br>
     <div class="row mb-2">
     <div class="col-md-12">
-      <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+      <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative" style="background-color: white;">
         <div class="col p-4 d-flex flex-column position-static">
           <h3 class="mb-0">Encuentranos Aquí:</h3>
           <p class="card-text mb-auto">Plaza de la Tecnología Torreón, Av Hidalgo 1334, Primitivo Centro, 27000 Torreón, Coah. Segundo piso, Local #288. ¡Justo aquí!</p>
