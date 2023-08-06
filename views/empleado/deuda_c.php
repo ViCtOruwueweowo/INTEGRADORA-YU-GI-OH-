@@ -43,6 +43,7 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
 <script src="../../js/bootstrap.bundle.min.js"></script>
 </head>
 <body style="background-color: rgba(235,235,235,255);">
+<link rel="stylesheet" href="../../css/index2.css">
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
   <div class="container-fluid">

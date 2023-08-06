@@ -35,10 +35,10 @@ $nombreUsuario = $_SESSION['usuario'];
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Inicio Empleado</title>
 <link rel="stylesheet" href="../../css/bootstrap.min.css">
-
+<link rel="stylesheet" href="../../css/index2.css">
 <script src="../../js/bootstrap.bundle.min.js"></script>
 </head>
-<body style="background-color: rgba(235,235,235,255);">
+<body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
   <div class="container-fluid">
     <a class="navbar-brand" href="index.php" style="  color: whitesmoke;
@@ -100,9 +100,9 @@ $nombreUsuario = $_SESSION['usuario'];
 <br>
 <!---->
 <div class="container">
-<div class="row mb-2">
-    <div class="col-md-12">
-      <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-200 position-relative">
+<div class="row mb-2" >
+    <div class="col-md-12" >
+      <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-200 position-relative" style="background-color: white;">
         <div class="col p-4 d-flex flex-column position-static">
           <h3 class="mb-0">¡Bienvenido           <?php $nombreUsuario = $_SESSION['usuario']; echo "$nombreUsuario";?>!</h3>
           <p class="card-text mb-auto">¡Recuerda Que En WorkStack Nos Preocupamos Por Ti!, Si Tienes Dudas Sobre Cuales Eventos Se Estaran Llevando En Todo Este Mes Da Clic Justo Sobre Mi.</p>
@@ -234,7 +234,7 @@ $db->desconectarDB();
     <div class="container">
     <div class="row mb-2">
     <div class="col-md-12">
-      <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-200 position-relative">
+      <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-200 position-relative" style="background-color: white;">
         <div class="col p-4 d-flex flex-column position-static">
           <h4 class="mb-0"><?php $nombreUsuario = $_SESSION['usuario']; echo "$nombreUsuario";?></h4>
           <p class="card-text mb-auto">Recuerda Siempre Revisar El Stock En Tienda Y Atender Al Cliente En Lo Que Necesite, ¿Necesitas Un Atajo? Aqui Lo Tienes <a href="funciones/listarPersonasConBusqueda.php" class="btn btn-primary">Visitar Inventario</a></p>

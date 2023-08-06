@@ -43,6 +43,8 @@ if ($busqueda === null) {
     <link rel="stylesheet" href="../../../css/bootstrap.min.css">
     <title>Inventario Productos</title>
     </head>
+    <link rel="stylesheet" href="../../../css/index2.css">
+
     <body style="background-color: rgba(235,235,235,255);">
 <style>
         #contendor{

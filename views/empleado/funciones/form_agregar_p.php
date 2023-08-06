@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="../../../css/bootstrap.min.css">   
     <script src="../../../js/bootstrap.bundle.min.js"></script>
 </head>
+<link rel="stylesheet" href="../../../css/index2.css">
+
 <body style="background-color: rgba(235,235,235,255);">
 
 

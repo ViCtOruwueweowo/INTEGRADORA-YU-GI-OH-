@@ -156,6 +156,14 @@ if ($busqueda === null) {
 
 
 <?php }?>
+
+<?php if ($sentencia->rowCount() === 0) { ?>
+        <div class="container text-center" style="border: black;">
+            <h3>¿Que Pasa?</h3>
+            <img src="img/hola.webp" class="d-none d-lg-block" alt="">
+            <h4>¿No encontraste lo que buscabas?, vuelve a intentar cielo, estamos para servirte.</h4>
+        </div>
+    <?php } ?>
 </div>
 <footer class="footer mt-auto py-3 bg-dark">
 <div class="container text-center">
