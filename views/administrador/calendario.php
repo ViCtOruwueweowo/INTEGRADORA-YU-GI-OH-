@@ -121,7 +121,7 @@ $nombreUsuario = $_SESSION['usuario'];
     <div class="col-md-12">
       <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-lg p-3 mb-5  h-md-200 position-relative" style="background-color: white;">
         <div class="col p-4 d-flex flex-column position-static">
-          <h3 class="mb-0">¡Sr.<?php $nombreUsuario = $_SESSION['usuario']; echo "$nombreUsuario";?>!</h3>
+          <h3 class="mb-0">¡Sr. <?php $nombreUsuario = $_SESSION['usuario']; echo "$nombreUsuario";?>!</h3>
           <p class="card-text mb-auto">Te presentamos tu calendario, aqui podras agendar todos tus eventos proximos a realizar, si llegas a cometer recuerda que puedes modificar el eventos o si ya no te es util simplemente eliminalo. </p>
         </div>
         <div class="col-auto d-none  d-lg-block">

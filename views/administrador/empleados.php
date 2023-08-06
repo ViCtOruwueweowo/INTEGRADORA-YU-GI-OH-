@@ -141,7 +141,7 @@ if (isset($_POST['filtro_inactivos'])) {
     <div class="col-md-12">
       <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-lg p-3 mb-5  h-md-200 position-relative" style="background-color: white;">
         <div class="col p-4 d-flex flex-column position-static">
-          <h3 class="mb-0 text-start">¡Sr.<?php $nombreUsuario = $_SESSION['usuario']; echo "$nombreUsuario";?>!</h3>
+          <h3 class="mb-0 text-start">¡Sr. <?php $nombreUsuario = $_SESSION['usuario']; echo "$nombreUsuario";?>!</h3>
           <p class="card-text mb-auto">Aqui podra tener el control total de tus empleados, agrega a todos los empleados que contrates y corrige su informacion a futuro, ¿Quieres ver quienes ya no trabajan aqui?, prueba los botones que tienes en la parte inferior.</p>
         </div>
         <div class="col-auto d-none  d-lg-block">
