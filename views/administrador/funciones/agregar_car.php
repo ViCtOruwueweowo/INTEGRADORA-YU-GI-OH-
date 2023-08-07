@@ -74,6 +74,7 @@ $nombreUsuario = $_SESSION['usuario'];
             <li><a class="dropdown-item" href="../deudores_productos.php">Mis Deudores Productos</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="agregar_cliente.php">Agregar Cliente</a></li>
+            <li><a class="dropdown-item" href="../funciones/modificar_cliente.php">Modificar Cliente</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="agregar_comprac.php">Venta Cartas</a></li>
             <li><a class="dropdown-item" href="agregar_comprap.php">Venta Productos</a></li>
@@ -98,7 +99,7 @@ $nombreUsuario = $_SESSION['usuario'];
           <?php $nombreUsuario = $_SESSION['usuario']; echo "$nombreUsuario";?>
           </a>
           <ul class="dropdown-menu">
-          <a href="../../config/cerrarSesion.php" class="dropdown-item">Cerrar Sesion</a>
+          <a href="../../../config/cerrarSesion.php" class="dropdown-item">Cerrar Sesion</a>
           </ul>
       </li>
           </ul>

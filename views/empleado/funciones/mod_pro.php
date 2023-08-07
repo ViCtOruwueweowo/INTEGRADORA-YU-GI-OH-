@@ -148,7 +148,7 @@ if (isset($_POST['depa'])) {
             foreach ($tablaf as $registro) {
                 echo "<input type='hidden' name='id_pro' value='$registro->id_pro'> ";
                 echo "<label for='existencias'>Existencias</label>";
-                echo "<input class='form-control' name='existencias' value='$registro->existencias' required> ";
+                echo "<input type='number' min='0' class='form-control' name='existencias' value='$registro->existencias' required> ";
             }
      
          //   <!-- Botón para enviar los datos al archivo car_rar.php -->

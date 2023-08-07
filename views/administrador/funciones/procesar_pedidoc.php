@@ -26,7 +26,7 @@ $nombreUsuario = $_SESSION['usuario'];
     <title>Guardar Carta Detallada</title>
     <link rel="stylesheet" href="../../../css/bootstrap.min.css">    <link rel="stylesheet" href="../../../css/index2.css">
 
-</head>
+</head> 
 <body>
 <?php
 // Establecer la conexión a la base de datos con PDO
@@ -73,7 +73,7 @@ try {
             <h6>Espera Estás Siendo Redirigido</h6>
             </div>
         </div>";
-        header("refresh:3; url=../index.php");
+        header("refresh:3; agregar_comprac.php");
     }
 } catch(PDOException $e) {
     echo "<div class='container' id='contenedor'>
@@ -87,7 +87,7 @@ try {
             <h6>Algo salió mal, verifica los datos ingresados.</h6>
         </div>
     </div>";
-    header("refresh:3; url=agregar_comprap.php");
+    header("refresh:3; agregar_comprac.php");
 }
 
 // Cerrar la conexión a la base de datos

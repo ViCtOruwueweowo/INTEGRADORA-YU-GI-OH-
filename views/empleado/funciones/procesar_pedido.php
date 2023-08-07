@@ -74,7 +74,7 @@ try {
             <h6>Espera Estás Siendo Redirigido</h6>
             </div>
         </div>";
-        header("refresh:3; url=../index.php");
+        header("refresh:3; hola.php");
     }
 } catch(PDOException $e) {
     echo "<div class='container' id='contenedor'>
@@ -88,7 +88,7 @@ try {
             <h6>Algo salió mal, verifica los datos ingresados.</h6>
         </div>
     </div>";
-    header("refresh:3; url=agregar_comprap.php");
+    header("refresh:3; hola.php");
 }
 
 // Cerrar la conexión a la base de datos

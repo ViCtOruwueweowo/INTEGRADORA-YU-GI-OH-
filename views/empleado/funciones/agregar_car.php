@@ -53,7 +53,7 @@ $nombreUsuario = $_SESSION['usuario'];
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasNavbar2" aria-labelledby="offcanvasNavbar2Label">
-      <div class="offcanvas-header">
+      <div class="offcanvas-header"> 
         <h5 class="offcanvas-title" id="offcanvasNavbar2Label">Mis Atajos</h5>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
@@ -118,7 +118,12 @@ $nombreUsuario = $_SESSION['usuario'];
     </div>
     <div class="col-12">
     <label  class="form-label">Ingresar Tipo De Carta:</label>
-    <input type="text"  class="form-control" name="tipo_c" placeholder="Magia, Trampa, Monstruo. . ." required>
+    <div style="margin-top: 10px" class="col-12">
+    <select class="form-control" name="tipo_c" id="tipo_c" required>
+  <option value="MAGIA">MAGIA</option>
+  <option value="TRAMPA">TRAMPA</option>
+  <option value="MONSTRUO">MONSTRUO</option>
+</select>
     </div>
     <div class="col-12">
     <label  class="form-label">Ingresar Archivo</label><br>
