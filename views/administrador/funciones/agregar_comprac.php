@@ -27,7 +27,9 @@ $nombreUsuario = $_SESSION['usuario'];
 </head>
 <body>
 
-<div class="container mt-5">
+
+
+<div id="formulariocarta" class="container mt-5">
     <form action="procesar_pedidoc.php" method="post"> <!-- Nuevo formulario para enviar datos a procesar_pedido.php -->
         <?php
         // Conexión a la base de datos (reemplaza con tus propios datos de conexión)
@@ -76,12 +78,12 @@ $nombreUsuario = $_SESSION['usuario'];
 
         <div class="form-group">
             <label for="cantidad">Cantidad:</label>
-            <input type="text" class="form-control" name="cantidad_c" id="cantidad" placeholder="Cantidad">
+            <input type="number" min="1" class="form-control" name="cantidad_c" id="cantidad" placeholder="Cantidad" required>
         </div>
 
         <div class="form-group">
             <label for="notas">Notas:</label>
-            <input type="text" class="form-control" name="notas" id="notas">
+            <input type="text" class="form-control" name="notas" id="notas" value="COMPRA" placeholder="Ingrese notas extra para adjuntar a la orden de compra" required>
         </div>
 
         <?php
@@ -89,8 +91,9 @@ $nombreUsuario = $_SESSION['usuario'];
     ?>
 
         <button type="submit" class="btn btn-primary">Enviar Pedido</button> <!-- Botón para enviar el formulario -->
+        
     </form>
-
+ 
     <div id="resultado" class="mt-3">
         <!-- Aquí se mostrará el resultado de la multiplicación -->
     </div>
@@ -132,6 +135,30 @@ function actualizarResultado() {
     }
 }
 
+</script>
+
+<br><br>
+<div class="container mt-5">
+<button id="agregarFormulario" class="btn btn-primary">Agregar otro pedido</button>
+</div>
+
+<script>
+    // Código JavaScript para repetir el formulario
+    document.getElementById('agregarFormulario').addEventListener('click', function() {
+        // Clonamos el formulario original
+        var formContainer = document.getElementById('formulariocarta');
+        var formOriginal = formContainer.querySelector('form');
+        var formClone = formOriginal.cloneNode(true);
+
+        // Reseteamos los valores de los campos clonados (opcional)
+        var formFields = formClone.querySelectorAll('input');
+        formFields.forEach(function(field) {
+            field.value = '';
+        });
+
+        // Agregamos el formulario clonado al contenedor
+        formContainer.appendChild(formClone);
+    });
 </script>
 
 </body>
