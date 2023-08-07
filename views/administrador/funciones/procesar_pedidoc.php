@@ -26,7 +26,7 @@ $nombreUsuario = $_SESSION['usuario'];
     <title>Guardar Carta Detallada</title>
     <link rel="stylesheet" href="../../../css/bootstrap.min.css">    <link rel="stylesheet" href="../../../css/index2.css">
 
-</head>
+</head> 
 <body>
 <?php
 // Establecer la conexión a la base de datos con PDO
