@@ -23,11 +23,74 @@ $nombreUsuario = $_SESSION['usuario'];
 <head>
     <title>Selección de Productos</title>
     <!-- Agregar enlaces a los archivos CSS de Bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../../css/index2.css">
+    <link rel="stylesheet" href="../../../css/bootstrap.min.css">
+    <script src="../../../js/bootstrap.bundle.min.js"></script>
+
 </head>
 <body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="../index.php" style="  color: whitesmoke;
+    font-size: 20px;
+    font-family: 'Times New Roman', Times, serif;">WorkStack</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2" aria-controls="offcanvasNavbar2" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasNavbar2" aria-labelledby="offcanvasNavbar2Label">
+    <div class="offcanvas-header" >
+    <h5 class="offcanvas-title" id="offcanvasNavbar2Label" >Mis Atajos</h5>
+    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+     <div class="offcanvas-body">
+        <ul class="navbar-nav justify-content-center flex-grow-1 pe-3">
+        <li class="nav-item">
+          <a type="button" class="nav-link" href="../calendario.php" data-bs-target="#staticBackdrop">
+ Calendario 
+</a>
 
-<div id="formulariocarta" class="container mt-5">
+          </li>
+          <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style=" background-color: transparent !important;
+">
+        Mi Inventario
+          </a>
+          <ul class="dropdown-menu" >
+          <a href="listarPersonasConBusqueda.php" class="dropdown-item">Cartas</a>
+          <a href="listarPersonasConBusqueda2.php" class="dropdown-item">Productos</a>
+          </ul>
+      </li>
+      <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Mi Agenda
+          </a>
+          <ul class="dropdown-menu">
+          <li><a href="../ac.php" class="dropdown-item">Acreedores</a></li>
+          <li><a href="../deuda_c.php" class="dropdown-item">Deudores Cartas</a></li>
+          <li><a href="../deuda_p.php" class="dropdown-item">Deudores Productos</a></li>
+          <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="agregar_cliente.php">Agregar Cliente</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="hola2.php">Venta Cartas</a></li>
+            <li><a class="dropdown-item" href="hola.php">Venta Productos</a></li>
+          </ul>
+      </li>
+     <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <?php $nombreUsuario = $_SESSION['usuario']; echo "$nombreUsuario";?>
+          </a>
+          <ul class="dropdown-menu">
+          <a href="../../../config/cerrarSesion.php" class="dropdown-item">Cerrar Sesion</a>
+          </ul>
+      </li>
+        </ul>
+    </div>
+  </div>
+</nav>
+<div class="container mt-5" style="color:whitesmoke;background-color: rgba(0, 0, 0, .550);
+    box-shadow: 0 4px 5px rgba(10, 2, 1, 55);text-align:left;color:white">
+<h4 class="text-center">Registrar Nueva Venta Carta</h4>
+    <br>
     <form action="procesar_pedido2.php" method="post"> <!-- Nuevo formulario para enviar datos a procesar_pedido.php -->
         <?php
         // Conexión a la base de datos (reemplaza con tus propios datos de conexión)
