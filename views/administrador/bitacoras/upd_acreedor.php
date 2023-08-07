@@ -84,6 +84,7 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
             <li><a class="dropdown-item" href="../deudores_productos.php">Mis Deudores Productos</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="../funciones/agregar_cliente.php">Agregar Cliente</a></li>
+            <li><a class="dropdown-item" href="../funciones/modificar_cliente.php">Modificar Cliente</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="../funciones/agregar_comprac.php">Venta Cartas</a></li>
             <li><a class="dropdown-item" href="../funciones/agregar_comprap.php">Venta Productos</a></li>
