@@ -139,6 +139,7 @@ $nombreUsuario = $_SESSION['usuario'];
     $('#txtFechaFin').val('');
   }
 
+  //Botoncillos de donde se ve la fecha de hoy, siguiente mes y así
         $('#CalendarioWeb').fullCalendar({
             header:{
                 left:'today, prev,next', 

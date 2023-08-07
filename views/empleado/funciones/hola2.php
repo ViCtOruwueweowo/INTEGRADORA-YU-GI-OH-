@@ -91,6 +91,7 @@ $nombreUsuario = $_SESSION['usuario'];
     box-shadow: 0 4px 5px rgba(10, 2, 1, 55);text-align:left;color:white">
 <h4 class="text-center">Registrar Nueva Venta Carta</h4>
     <br>
+    <div id="formulariocarta">
     <form action="procesar_pedido2.php" method="post"> <!-- Nuevo formulario para enviar datos a procesar_pedido.php -->
         <?php
         // Conexión a la base de datos (reemplaza con tus propios datos de conexión)
@@ -152,10 +153,11 @@ $nombreUsuario = $_SESSION['usuario'];
     echo '<input type="hidden" name="resultado" id="resultadoHidden">';
     ?>
     </div>
-
+<br>
         <button type="submit" class="btn btn-primary">Enviar Pedido</button> <!-- Botón para enviar el formulario -->
     </form>
-
+    <br>
+    </div>
     <div id="resultado" class="mt-3">
         <!-- Aquí se mostrará el resultado de la multiplicación -->
     </div>
@@ -197,30 +199,6 @@ function actualizarResultado() {
     }
 }
 
-</script>
-
-<br><br>
-<div class="container mt-5">
-<button id="agregarFormulario" class="btn btn-primary">Agregar otro pedido</button>
-</div>
-
-<script>
-    // Código JavaScript para repetir el formulario
-    document.getElementById('agregarFormulario').addEventListener('click', function() {
-        // Clonamos el formulario original
-        var formContainer = document.getElementById('formulariocarta');
-        var formOriginal = formContainer.querySelector('form');
-        var formClone = formOriginal.cloneNode(true);
-
-        // Reseteamos los valores de los campos clonados (opcional)
-        var formFields = formClone.querySelectorAll('input');
-        formFields.forEach(function(field) {
-            field.value = '';
-        });
-
-        // Agregamos el formulario clonado al contenedor
-        formContainer.appendChild(formClone);
-    });
 </script>
 
 </body>

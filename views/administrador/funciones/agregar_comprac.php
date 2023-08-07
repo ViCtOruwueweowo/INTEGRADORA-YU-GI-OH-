@@ -166,11 +166,11 @@ $nombreUsuario = $_SESSION['usuario'];
         <?php
     echo '<input type="hidden" name="resultado" id="resultadoHidden">';
     ?>
-
+<br>
         <button type="submit" class="btn btn-primary">Enviar Pedido</button> <!-- Botón para enviar el formulario -->
         
     </form>
- 
+ <br>
     <div id="resultado" class="mt-3">
         <!-- Aquí se mostrará el resultado de la multiplicación -->
     </div>
@@ -212,30 +212,6 @@ function actualizarResultado() {
     }
 }
 
-</script>
-
-<br><br>
-<div class="container mt-5">
-<button id="agregarFormulario" class="btn btn-primary">Agregar otro pedido</button>
-</div>
-
-<script>
-    // Código JavaScript para repetir el formulario
-    document.getElementById('agregarFormulario').addEventListener('click', function() {
-        // Clonamos el formulario original
-        var formContainer = document.getElementById('formulariocarta');
-        var formOriginal = formContainer.querySelector('form');
-        var formClone = formOriginal.cloneNode(true);
-
-        // Reseteamos los valores de los campos clonados (opcional)
-        var formFields = formClone.querySelectorAll('input');
-        formFields.forEach(function(field) {
-            field.value = '';
-        });
-
-        // Agregamos el formulario clonado al contenedor
-        formContainer.appendChild(formClone);
-    });
 </script>
 
 </body>
