@@ -9,7 +9,7 @@ if (!isset($_SESSION['usuario'])) {
 }
 
 // Verificar si el tipo de usuario no es 1 (Tipo de usuario que puede acceder a esta página, osea el admin)
-if ($_SESSION['tipo_usuario'] !== "2") { 
+if ($_SESSION['tipo_usuario'] !== "1") {
       echo "Acceso no autorizado. Por favor, inicia sesión con una cuenta válida.";
     header("refresh:5 ../../index.php");  // Redireccionamos al archivo de inicio de sesión
     exit();
@@ -24,11 +24,11 @@ $nombreUsuario = $_SESSION['usuario'];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Calendario Web</title>    
-    <script src="js/jquery.min.js"></script>    
+    <title>Calendario Web</title>
+    <script src="js/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../../css/bootstrap.min.css">    
-    <link rel="stylesheet" href="css/bootstrap-clockpicker.css">    
+    <link rel="stylesheet" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-clockpicker.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="js/bootstrap-clockpicker.js"></script>
     <link rel="stylesheet" href="../../img/fondo bonito.jpg">
@@ -36,76 +36,108 @@ $nombreUsuario = $_SESSION['usuario'];
     <!--  Full Calendar -->
     <link rel="stylesheet" href="css/fullcalendar.min.css">
     <script src="js/moment.min.js"></script>
-    
+    <!-- esto hace que los dropdown jalen pero los modal del calendario se estropean-->
+   <!--         <script src="../../js/bootstrap.bundle.min.js"></script>      -->
 <!-- esto es de fullcalendar -->
 <script src="js/fullcalendar.min.js"></script>
 <script src="js/es.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 </head>
 <body style="background-color: rgba(235,235,235,255);">
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">WorkStack</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto justify-content-right" style="text-align: center;">
-      <li class="nav-item active">
-        <a class="nav-link" href="calendario.php">Calendario<span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
-         Inventario
-        </a>
-        <ul class="dropdown-menu" >
-          <a href="funciones/listarPersonasConBusqueda.php" class="dropdown-item">Cartas</a>
-          <a href="funciones/listarPersonasConBusqueda2.php" class="dropdown-item">Productos</a>
-          </ul>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
-       Mi Agenda
-        </a>
-        <ul class="dropdown-menu">
-          <li><a href="ac.php" class="dropdown-item">Acreedores</a></li>
-          <li><a href="deuda_c.php" class="dropdown-item">Deudores Cartas</a></li>
-          <li><a href="deuda_p.php" class="dropdown-item">Deudores Productos</a></li>
-          <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="funciones/agregar_cliente.php">Agregar Cliente</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="funciones/hola2.php">Venta Cartas</a></li>
-            <li><a class="dropdown-item" href="funciones/hola.php">Venta Productos</a></li>
-          </ul>
-      </li>
-      
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
-        <?php echo $nombreUsuario; ?>
-        </a>
-        <div class="dropdown-menu">
-        <a href="../../config/cerrarSesion.php" class="dropdown-item dropdown-responsive">Cerrar Sesión</a>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
+    <div class="container-fluid" >
+      <a class="navbar-brand" href="index.php">WorkStack</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2" aria-controls="offcanvasNavbar2" aria-label="Toggle navigation" >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasNavbar2" aria-labelledby="offcanvasNavbar2Label" >
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasNavbar2Label">Mis Atajos</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
+        <div class="offcanvas-body"  >
+          <ul class="navbar-nav justify-content-center flex-grow-1 pe-3">
+            <li class="nav-item">
+              <a class="nav-link " aria-current="page" href="calendario.php">Calendario</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link " aria-current="page" href="empleados.php">Empleados</a>
+            </li>
+            <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+          Inventario
+   </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="funciones/listarPersonasConBusqueda.php">Inventario Carta</a></li>
+            <li><a class="dropdown-item" href="funciones/listarPersonasConBusqueda2.php">Inventario Productos</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="funciones/detallar.php">Detalle Carta</a></li>
+          </ul>
+        </li>
+            <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+            Agenda
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="acreedores.php">Mis Acreedores</a></li>
+            <li><a class="dropdown-item" href="deudores_cartas.php">Mis Deudores Cartas</a></li>
+            <li><a class="dropdown-item" href="deudores_productos.php">Mis Deudores Productos</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="funciones/agregar_cliente.php">Agregar Cliente</a></li>
+            <li><a class="dropdown-item" href="funciones/modificar_cliente.php">Modificar Cliente</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="funciones/agregar_comprac.php">Venta Cartas</a></li>
+            <li><a class="dropdown-item" href="funciones/agregar_comprap.php">Venta Productos</a></li>
+          </ul>
+  </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+          Registro
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="bitacoras/upd_cartas.php">Actualizaciones En Cartas</a></li>
+            <li><a class="dropdown-item" href="bitacoras/upd_productos.php">Actualizaciones En Productos</a></li>
+            <li><a class="dropdown-item" href="bitacoras/upd_dc.php">Reporte Deuda Cartas</a></li>
+            <li><a class="dropdown-item" href="bitacoras/upd_dp.php">Reporte Deuda Productos</a></li>
+            <li><a class="dropdown-item" href="bitacoras/upd_acreedor.php">Reporte Acreedores</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown responsive">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+          <?php $nombreUsuario = $_SESSION['usuario']; echo "$nombreUsuario";?>
+          </a>
+          <ul class="dropdown-menu dropdown-responsive">
+          <a href="../../config/cerrarSesion.php" class="dropdown-item dropdown-responsive">Cerrar Sesion</a>
+          </ul>
       </li>
-    </ul>
- 
-  </div>
-</nav>
-
-<br>
-
-  </div> 
+          </ul>
+        </div>
 </div>
-
-    <div class="container">
-
-            <div><div id="CalendarioWeb" style=" background-color: rgba(0, 0, 0, 0.500);; ;color:white ;font-size:25px" class="fc fc-media-screen fc-direction-ltr  "  ></div></div>
-          
     </div>
+  </nav>
+  <br>
 
+  <div class="container d-none  d-lg-block">
+<div class="row mb-2">
+    <div class="col-md-12">
+      <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-lg p-3 mb-5  h-md-200 position-relative" style="background-color: white;">
+        <div class="col p-4 d-flex flex-column position-static">
+          <h3 class="mb-0">¡Sr. <?php $nombreUsuario = $_SESSION['usuario']; echo "$nombreUsuario";?>!</h3>
+          <p class="card-text mb-auto">Te presentamos tu calendario, aqui podras agendar todos tus eventos proximos a realizar, si llegas a cometer recuerda que puedes modificar el eventos$
+        </div>
+        <div class="col-auto d-none  d-lg-block">
+<img src="../../img/ghostrick.png" style="width: 150px;" alt="">
+       </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="container">
+            <div><div id="CalendarioWeb" style=" background-color: rgba(0, 0, 0, 0.500);; ;color:white ;font-size:25px" class="fc fc-media-screen fc-direction-ltr  "  ></div></div>
+    </div>
 <script>
     $(document).ready(function(){
-        // Variable global para almacenar el identificador del evento porque luego agarra el que le da su gana o de plano ninguno y así no juego yo eh tampoco vamos a ser maldosos con uno :c
+        // Variable global para almacenar el identificador del evento porque luego agarra el que le da su gana o de plano ninguno y así no juego yo eh tampoco vamos a ser maldosos con uno $
   var selectedEventId = null;
 
         // Función para limpiar los campos del modal
@@ -121,22 +153,29 @@ $nombreUsuario = $_SESSION['usuario'];
 
         $('#CalendarioWeb').fullCalendar({
             header:{
-                left:'today, prev,next', 
+                left:'today, prev,next',
                 center:'title',
                 right:'month, basicWeek'
-            
             },
-  
-            // events:'http://3.80.76.204/views/administrador/eventos.php',
+             dayClick:function(date,jsEvent,view){
+ $('#btnAgregar').prop("disabled",false);
+              $('#btnModificar').prop("disabled",true);
+              $('#btnEliminar').prop("disabled",true);
 
-             events: '../administrador/eventos.php',
+              limpiarModal();
+              $('#txtFecha').val(date.format());
+              $("#ModalEventos").modal();
+
+
+             },
+
+            events: 'eventos.php',
 
            eventClick:function(calEvent,jsEvent,view){
             console.log('Evento clickeado', calEvent);
             if (calEvent.id === selectedEventId) {
         // El clic proviene de la misma cintilla de color, mostrar información del evento
-
-        // Mostrar la fecha de inicio en el modal
+    // Mostrar la fecha de inicio en el modal
         var fechaInicio = moment(calEvent.start).format('YYYY-MM-DD');
         $('#txtFecha').val(fechaInicio);
 
@@ -158,15 +197,14 @@ $nombreUsuario = $_SESSION['usuario'];
 
             // H2
             $('#tituloEvento').html(calEvent.title);
-
-            //Mostrar la info del evento en los inputs
+ //Mostrar la info del evento en los inputs
             $('#txtDescripcion').val(calEvent.descripcion);
             $('#txtID').val(calEvent.id);
             $('#txtTitulo').val(calEvent.title);
             $('#txtColor').val(calEvent.color);
             $('#txtFecha').val(calEvent.start.format());
             $('#txtFechaFin').val(calEvent.end.format());
- 
+
 
             $("#ModalEventos").modal();
 
@@ -182,9 +220,7 @@ $nombreUsuario = $_SESSION['usuario'];
         var newStartDate = calEvent.start.format();
         var newEndDate = calEvent.end.format();
         ActualizarFechasEnDB(calEvent.id, newStartDate, newEndDate);
-
-            
-            $('#txtID').val(calEvent.id);
+   $('#txtID').val(calEvent.id);
             $('#txtTitulo').val(calEvent.title);
             $('#txtColor').val(calEvent.color);
             $('#txtDescripcion').val(calEvent.descripcion);
@@ -193,9 +229,7 @@ $nombreUsuario = $_SESSION['usuario'];
             $('#txtFecha').val(calEvent.start.format());
 
             RecolectarDatosGUI();
-            EnviarInformacion('modificar',NuevoEvento,true); 
-
-
+            EnviarInformacion('modificar',NuevoEvento,true);
 
         }
     });
@@ -211,8 +245,7 @@ $nombreUsuario = $_SESSION['usuario'];
     start: calEvent.start.format(),
     end: calEvent.end.format(),
     };
-
-    // Realizar la solicitud AJAX para actualizar las fechas en la base de datos
+  // Realizar la solicitud AJAX para actualizar las fechas en la base de datos
     $.ajax({
       type: 'POST',
       url: 'eventos.php?accion=modificar', // Reemplaza esto con la URL que maneje la actualización en tu servidor
@@ -234,14 +267,12 @@ $nombreUsuario = $_SESSION['usuario'];
   }
 });
 </script>
-
 <!-- Modal(Agregar, Modificar, Eliminar) -->
 <div class="modal fade" id="ModalEventos" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="tituloEvento"></h5>
-          
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -255,35 +286,37 @@ $nombreUsuario = $_SESSION['usuario'];
           <!-- tal vez agregue otra variable de fecha para la final-->
           <div class="form-group col-md-12">
             <label>Título: </label>
-            <input type="text" id="txtTitulo" class="form-control" placeholder="Título del evento" required readonly>
+            <input type="text" id="txtTitulo" class="form-control" placeholder="Título del evento" required>
           </div>
           <div class="form-group col-md-6">
-            Fecha de inicio: 
-          <input type="date" id="txtFecha" name="txtFecha" readonly>
+            Fecha de inicio:
+  <input type="date" id="txtFecha" name="txtFecha" readonly>
           </div>
           <div class="form-group col-md-6">
-          Fecha Fin: <input type="date" id="txtFechaFin" class="form-control" name="txtFechaFin" required readonly/><br/>
+          Fecha Fin: <input type="date" id="txtFechaFin" class="form-control" name="txtFechaFin" required /><br/>
           </div>
-          
-          
+
         </div>
         <div class="form-group">
         <label>Descripcion: </label>
-        <textarea id="txtDescripcion" rows="3" class="form-control" required readonly></textarea>
+        <textarea id="txtDescripcion" rows="3" class="form-control" required></textarea>
           </div>
           <div class="form-group">
           <label>Color: </label>
-          <input type="color" value="#ff0000" id="txtColor" class="form-control" style="height:36px;" readonly>
+          <input type="color" value="#ff0000" id="txtColor" class="form-control" style="height:36px;">
           </div>
-   
         </div>
         <div class="modal-footer">
 
- 
+            <button type="button" id="btnAgregar" class="btn btn-success" >Agregar</button>
+            <button type="button" id="btnModificar" class="btn btn-success" >Modificar</button>
+            <button type="button" id="btnEliminar" class="btn btn-danger" >Borrar</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
         </div>
-      </div>
+ </div>
     </div>
   </div>
+
 <script>
   function validarCampos() {
   var titulo = $('#txtTitulo').val().trim();
@@ -300,15 +333,14 @@ $nombreUsuario = $_SESSION['usuario'];
 function validarFechas() {
     var fechaInicio = moment($('#txtFecha').val());
     var fechaFin = moment($('#txtFechaFin').val());
-
-    if (fechaFin.isBefore(fechaInicio)) {
+if (fechaFin.isBefore(fechaInicio)) {
       alert('La fecha final no puede ser menor que la fecha de inicio.');
       return false;
     }
 
     return true;
   }
-  
+
   function validarRangoFechas() {
     var fechaInicio = moment($('#txtFecha').val());
     var fechaFin = moment($('#txtFechaFin').val());
@@ -324,13 +356,26 @@ function validarFechas() {
   }
 
 var NuevoEvento;
-
-
+$('#btnAgregar').click(function () {
+    if (validarCampos() && validarFechas() && validarRangoFechas()) {
+      RecolectarDatosGUI();
+      EnviarInformacion('agregar', NuevoEvento);
+    }
+  });
+$('#btnEliminar').click(function(){
+  RecolectarDatosGUI();
+  EnviarInformacion('eliminar',NuevoEvento);
+});
+$('#btnModificar').click(function () {
+    if (validarCampos() && validarFechas() && validarRangoFechas()) {
+      RecolectarDatosGUI();
+      EnviarInformacion('modificar', NuevoEvento);
+    }
+  });
 
 function RecolectarDatosGUI(){
   var fechaInicio = $('#txtFecha').val();
   var fechaFin = $('#txtFechaFin').val();
-
   // Verificar si la fecha de inicio y fin son iguales
   if (fechaInicio === fechaFin) {
     // Sumar un día a la fecha de fin
@@ -348,7 +393,6 @@ function RecolectarDatosGUI(){
     textColor: "#FFFFFF",
   };
 }
-
 function EnviarInformacion(accion,objEvento,modal){
   $.ajax({
     type:'POST',
@@ -378,10 +422,8 @@ function EnviarInformacion(accion,objEvento,modal){
       console.log(error); // Imprimir el error en la consola
       alert("Hay un error en la solicitud, puede ser que el nombre ya esté en uso o que estés insertando en una fecha anterior a este mes...");
     }
-    
-  });  
+  });
 };
-
 </script>
 
 </body>

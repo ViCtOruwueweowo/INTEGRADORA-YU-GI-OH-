@@ -21,41 +21,73 @@ $nombreUsuario = $_SESSION['usuario'];
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Calendario Web</title>    
-    <script src="js/jquery.min.js"></script>    
+    <title>Calendario Web</title>   
+    
+    <!-- SI QUITO ESTE EL CALENDARIO SE VA Y EL OFFCANVAS NO JALA IGUAL -->
+    <script src="js/jquery.min.js"></script>   
+     
+    <!-- SI LO QUITO NO CAMBIA NADA DEL CALENDARIO, OFFCANVAS INUTIL, TODO EXACTAMENTE IGUAL-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../../css/bootstrap.min.css">    
-    <link rel="stylesheet" href="css/bootstrap-clockpicker.css">    
+    
+    <!-- POR ALGUNA RAZÓN, BORRAR ESTE HACE QUE EL OFFCANVAS SE DESHAGA Y MUESTRE LAS OPCIONES DEL NAVBAR, ADEMÁS EL NAVBAR SE MUEVE TODO FEO PERO EL CALENDARIO JALA BIEN AÚN -->
+    <link rel="stylesheet" href="../../css/bootstrap.min.css"> 
+    
+    
+    <!-- NO PASA NADA SI LO QUITO, CREO QUE HAY QUE QUITARLO -->
+    <link rel="stylesheet" href="css/bootstrap-clockpicker.css"> 
+    
+    <!-- LOS NAVBAR YA NO SIRVEN PERO SE VEN, TAMBIÉN EL CALENDARIO, EL OFFCANVAS SIGUE SIN SERVIR SI LO QUITO -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <!-- IGUAL NO PASA NADA SI LO QUITO -->
     <script src="js/bootstrap-clockpicker.js"></script>
+
+    <!-- IGUAL NO PASA NADA SI LO QUITO -->
     <link rel="stylesheet" href="../../img/fondo bonito.jpg">
 
     <!--  Full Calendar -->
+    <!-- NO JALA BIEN EL OFFCANVAS NI EL CALENDARIO -->
     <link rel="stylesheet" href="css/fullcalendar.min.css">
+
+    <!-- NO LO QUITES, BORRA EL CALENDARIO Y DE PASO EL OFFCANVAS NI JALA-->
     <script src="js/moment.min.js"></script>
-    <!-- esto hace que los dropdown jalen pero los modal del calendario se estropean-->
-   <!--         <script src="../../js/bootstrap.bundle.min.js"></script>      -->
+
+    <!-- SI LO PONES NO JALA NADA LITERAL -->
+   <!-- <script src="../../js/bootstrap.bundle.min.js"></script>      -->
+
 <!-- esto es de fullcalendar -->
+<!-- SI QUITAS ESTO NO JALA CALENDARIO NI OFFCANVAS -->
 <script src="js/fullcalendar.min.js"></script>
+
+<!-- NO AFECTA EN NADA, SOLO LO PONE EN ESPAÑOL -->
 <script src="js/es.js"></script>
+
+<!-- SI LO QUITO NO AFECTA -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
 </head>
 <body style="background-color: rgba(235,235,235,255);">
+
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
     <div class="container-fluid" >
       <a class="navbar-brand" href="index.php">WorkStack</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2" aria-controls="offcanvasNavbar2" aria-label="Toggle navigation" >
-        <span class="navbar-toggler-icon"></span>
-      </button>
+
+      <a class="navbar-brand" href="#" data-toggle="modal" data-target="#offcanvasNavbar2" id="btnAbrirOffcanvas">☰</a>
+
+      
       <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasNavbar2" aria-labelledby="offcanvasNavbar2Label" >
         <div class="offcanvas-header">
           <h5 class="offcanvas-title" id="offcanvasNavbar2Label">Mis Atajos</h5>
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          <button type="button" class="btn-close btn-close-white" data-dismiss="offcanvas" aria-label="Close"></button>
         </div>
-        <div class="offcanvas-body"  >
+        <div class="offcanvas-body" style="color: aliceblue;">
+
           <ul class="navbar-nav justify-content-center flex-grow-1 pe-3">
             <li class="nav-item">
               <a class="nav-link " aria-current="page" href="calendario.php">Calendario</a>
@@ -112,9 +144,12 @@ $nombreUsuario = $_SESSION['usuario'];
       </li>
           </ul>
         </div>
+
       </div>
+
     </div>
   </nav>
+
   <br>
 
   <div class="container d-none  d-lg-block">
@@ -457,6 +492,8 @@ function EnviarInformacion(accion,objEvento,modal){
 };
 
 </script>
+
+
 
 </body>
 </html>

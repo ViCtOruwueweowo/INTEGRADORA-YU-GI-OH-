@@ -163,7 +163,7 @@ if ($busqueda === null) {
           <p class="card-text mb-auto">Tu inventario personal de cartas, consulta todas las cartas que haz agregado a tu aplicacion, modificalas en caso de que tengas un error.</p>
         </div>
         <div class="col-auto d-none  d-lg-block">
-<img src="../../../img/gay.png" style="width: 150px;" alt="">
+<img src="../../../img/kas.png" style="width: 150px;" alt="">
        </div>
       </div>
     </div>

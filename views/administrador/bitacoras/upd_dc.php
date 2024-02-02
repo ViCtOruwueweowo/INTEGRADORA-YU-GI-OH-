@@ -23,14 +23,17 @@ require '../../../config/database.php';
 $db = new Database();
 $con = $db->conectar();
 $sql = $con->prepare
-("SELECT * FROM reporteactdeuda_c inner join cartas on
-reporteactdeuda_c.id=cartas.id_car inner join car_rar 
-on cartas.id_car=car_rar.id_carar inner join deuda_c 
-on car_rar.id_cr=deuda_c.cr_fk inner join clientes on
-deuda_c.id_clientec=clientes.id_cli");
+("SELECT SIU.nom_cli, SIU.nombre_c, SIU.rareza, SIU.cantidad_c, SIU.precio_c, reporteactdeuda_c.fecha_actualizada,
+reporteactdeuda_c.act_abono, SIU.concepto, reporteactdeuda_c.act_estado FROM reporteactdeuda_c INNER JOIN
+(SELECT deuda_c.id_dc, clientes.nom_cli, WA.nombre_c, WA.rareza, deuda_c.cantidad_c, deuda_c.precio_c, deuda_c.concepto,
+deuda_c.estado_c FROM clientes inner join deuda_c on clientes.id_cli=deuda_c.id_clientec INNER JOIN
+(select cartas.nombre_c, rareza.rareza, car_rar.id_cr from cartas inner join car_rar on car_rar.id_carar=cartas.id_car inner join
+rareza on rareza.id_ra=car_rar.id_rar) as WA on deuda_c.cr_fk=WA.id_cr) as SIU on SIU.id_dc=reporteactdeuda_c.id order by
+reporteactdeuda_c.fecha_actualizada DESC");
 $sql->execute();
 $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
 ?>
+
  
 
 <!DOCTYPE html>

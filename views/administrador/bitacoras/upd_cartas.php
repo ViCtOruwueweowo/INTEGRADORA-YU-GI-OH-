@@ -16,20 +16,31 @@ if ($_SESSION['tipo_usuario'] !== "1") {
 }
 
 $nombreUsuario = $_SESSION['usuario'];
-?>
 
-<?php
 require '../../../config/database.php';
 $db = new Database();
 $con = $db->conectar();
-$sql = $con->prepare
-("SELECT * FROM bitacora_actualizacion_cartas inner join cartas on
-bitacora_actualizacion_cartas.id_carar=cartas.id_car inner join rareza on
-bitacora_actualizacion_cartas.id_rar=rareza.id_ra");
+
+// Obtén el valor del filtro si está presente en la URL
+$filtroCarta = isset($_GET['filtro_carta']) ? $_GET['filtro_carta'] : null;
+
+$sql = $con->prepare("
+    SELECT * FROM bitacora_actualizacion_cartas
+    INNER JOIN cartas ON bitacora_actualizacion_cartas.id_carar = cartas.id_car
+    INNER JOIN rareza ON bitacora_actualizacion_cartas.id_rar = rareza.id_ra
+    " . ($filtroCarta ? "WHERE cartas.id_car = :filtroCarta" : "") . " 
+    ORDER BY bitacora_actualizacion_cartas.fecha DESC
+");
+
+
+// Si hay un filtro, bindea el valor a la consulta
+if ($filtroCarta) {
+    $sql->bindParam(':filtroCarta', $filtroCarta, PDO::PARAM_INT);
+}
+
 $sql->execute();
 $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -131,7 +142,26 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
 <h1 class="text-center">Reporte Actualizacion Cartas</h1>
 <hr>
 
-<div class="table-responsive">
+<!-- Formulario de filtro -->
+<form method="get">
+<?php
+// Obtén las opciones de carta desde la base de datos
+$sqlOpcionesCarta = $con->prepare("SELECT id_car, nombre_c FROM cartas ORDER BY nombre_c ASC");
+$sqlOpcionesCarta->execute();
+$opcionesCarta = $sqlOpcionesCarta->fetchAll(PDO::FETCH_ASSOC);
+?>
+    <label for="filtro_carta">Filtrar por Carta:</label>
+    <select name="filtro_carta" id="filtro_carta">
+        <?php foreach ($opcionesCarta as $opcion) : ?>
+            <option value="<?php echo $opcion['id_car']; ?>"><?php echo $opcion['nombre_c']; ?></option>
+        <?php endforeach; ?>
+    </select>
+    <button type="submit">Filtrar</button>
+</form>
+<br>
+
+
+<div class="table-responsive"> 
 <table class="table table-dark table-striped">
 <thead>
     <tr>

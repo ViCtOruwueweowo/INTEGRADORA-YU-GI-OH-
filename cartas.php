@@ -3,13 +3,27 @@ require 'config/database.php';
 $db = new Database();
 $con = $db->conectar();
 
-# Por defecto hacemos la consulta de todas las personas
+$cartasPorPagina = 5;
+$paginaActual = isset($_GET['pagina']) ? intval($_GET['pagina']) : 1;
+
+$offset = ($paginaActual - 1) * $cartasPorPagina;
+
 $consulta = "SELECT *
 FROM cartas
 INNER JOIN car_rar ON cartas.id_car = car_rar.id_carar
 LEFT JOIN rareza ON car_rar.id_rar = rareza.id_ra
 ORDER BY rand() DESC 
-LIMIT 5 ;";
+LIMIT :offset, :cartasPorPagina;";
+
+$sentencia = $con->prepare($consulta, [
+  PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL,
+]);
+
+$sentencia->bindParam(':offset', $offset, PDO::PARAM_INT);
+$sentencia->bindParam(':cartasPorPagina', $cartasPorPagina, PDO::PARAM_INT);
+
+$sentencia->execute();
+
 
 # Vemos si hay búsqueda
 $busqueda = null; 
@@ -104,7 +118,7 @@ if ($busqueda === null) {
       <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-200 position-relative">
         <div class="col p-4 d-flex flex-column position-static">
           <h3 class="mb-0">¡Hello Darling!</h3>
-          <p class="card-text mb-auto">¡Usuario!, ¿Buscando una carta en especifico?,¡Bien!, recuerda que debes ingresar el nombre de la carta que estas buscando en especifico, ¿No buscas nada en especifico?, ¡Sin problemas!, Solo ingresa el nombre del arquetipo del cual buscas contenido y te mostraremos todo lo que tenemos.</p>
+          <p class="card-text mb-auto">¿Buscando una carta en especifico?,¡Bien!, recuerda que debes ingresar el nombre de la carta que estas buscando en especifico, ¿No buscas nada en especifico?, ¡Sin problemas!, Solo ingresa el nombre del arquetipo del cual buscas contenido y te mostraremos todo lo que tenemos.</p>
         </div>
         <div class="col-auto d-none  d-lg-block">
 <img src="img/guia.webp" style="width: 200px;" alt=""> 
@@ -116,55 +130,68 @@ if ($busqueda === null) {
 
 
 <div class="container">
-<?php while ($resultado = $sentencia->fetchObject()) {?>
-      
-		
-      <?php
-      $imagenPath = "imagenes/productos/" . $resultado->imagen_c;
-      
-      // Verifica si el archivo existe con varias extensiones
-      $extensionesPermitidas = array('jpg', 'jpeg', 'png', 'gif', 'webp');
-      $imagenEncontrada = false;
-      foreach ($extensionesPermitidas as $ext) {
-          if (file_exists($imagenPath . "." . $ext)) {
-              $imagen = $imagenPath . "." . $ext;
-              $imagenEncontrada = true;
-              break;
-          }
-      }
+    <?php while ($resultado = $sentencia->fetchObject()) { ?>
+        <?php
+        $imagenPath = "imagenes/productos/" . $resultado->imagen_c;
 
-      // Si no se encuentra ninguna imagen, utiliza una imagen predeterminada
-      if (!$imagenEncontrada) {
-          $imagen = "../../../imagenes/no_image.png";
-      }
-      ?>
-<div class="row mb-2">
-<div class="col-md-12">
-<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-<div class="col p-4 d-flex flex-column position-static">
-<h3 class="mb-0" style="text-align: end;"><?php echo $resultado->nombre_c ?></h3>
-<hr>
-<h4 class="card-text mb-auto" style="text-align: end;">Rareza: <?php echo $resultado->rareza ?></h4>
-<h4 class="card-text mb-auto" style="text-align: end;">Precio: <?php echo $resultado->p_beto ?></h4>
-</div>
-<div class="col-auto  d-lg-block">
-<img src="<?php echo $imagen; ?>" style="width: 150px;" alt=""> 
-</div>
-</div>
-</div>
-</div> 
+        // Verifica si el archivo existe con varias extensiones
+        $extensionesPermitidas = array('jpg', 'jpeg', 'png', 'gif', 'webp');
+        $imagenEncontrada = false;
+        foreach ($extensionesPermitidas as $ext) {
+            if (file_exists($imagenPath . "." . $ext)) {
+                $imagen = $imagenPath . "." . $ext;
+                $imagenEncontrada = true;
+                break;
+            }
+        }
 
+        // Si no se encuentra ninguna imagen, utiliza una imagen predeterminada
+        if (!$imagenEncontrada) {
+            $imagen = "../../../imagenes/no_image.png";
+        }
+        ?>
 
-<?php }?>
+        <div class="row mb-2">
+            <div class="col-md-12">
+                <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                    <div class="col p-4 d-flex flex-column position-static">
+                        <h3 class="mb-0" style="text-align: end;"><?php echo $resultado->nombre_c ?></h3>
+                        <hr>
+                        <h4 class="card-text mb-auto" style="text-align: end;">Rareza: <?php echo $resultado->rareza ?></h4>
+                        <h4 class="card-text mb-auto" style="text-align: end;">Precio: <?php echo $resultado->p_beto ?></h4>
+                    </div>
+                    <div class="col-auto  d-lg-block">
+                        <img src="<?php echo $imagen; ?>" style="width: 150px;" alt="">
+                    </div>
+                </div>
+            </div>
+        </div> 
 
-<?php if ($sentencia->rowCount() === 0) { ?>
+    <?php } ?>
+
+    <?php if ($sentencia->rowCount() === 0) { ?>
         <div class="container text-center" style="border: black;">
-            <h3>¿Que Pasa?</h3>
+            <h3>¿Qué pasa?</h3>
             <img src="img/hola.webp" class="d-none d-lg-block" alt="">
-            <h4>¿No encontraste lo que buscabas?, vuelve a intentar cielo, estamos para servirte.</h4>
+            <h4>¿No encontraste lo que buscabas? ¡Vuelve a intentarlo, estamos para servirte!</h4>
         </div>
     <?php } ?>
 </div>
+
+    <div class="container text-center">
+        <ul class="pagination justify-content-center">
+            <?php
+            $totalCartas = $sentencia->rowCount();
+            $totalPaginas = ceil($totalCartas / $cartasPorPagina);
+
+            for ($i = 1; $i <= $totalPaginas; $i++) {
+                echo '<li class="page-item' . ($i === $paginaActual ? ' active' : '') . '"><a class="page-link" href="cartas.php?pagina=' . $i . '">' . $i . '</a></li>';
+            }
+            ?>
+        </ul>
+    </div>
+
+
 <footer class="footer mt-auto py-3 bg-dark">
 <div class="container text-center">
 <span class="text-center" style="color:white">Aplicacion Desarrollada Unicamente Para Fines De Venta Y Distribucion De Menores.</span><br>
